@@ -26,6 +26,7 @@ book:
 format:
   html:
     toc: false
+    number-sections: false
     include-in-header:
       text: |
         <meta name="robots" content="noindex, nofollow">
@@ -35,3 +36,4 @@ format:
   epub:
     css: epub.css
     toc: true
+    number-sections: false

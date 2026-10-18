@@ -7,3 +7,9 @@ body,.content,#quarto-content,#quarto-sidebar,.sidebar-navigation{background:var
 #quarto-sidebar a,#quarto-sidebar .menu-text,.sidebar-title{color:var(--text) !important;font-family:'Noto Sans',system-ui,sans-serif}
 #quarto-sidebar a:hover{color:var(--accent) !important}
 .dates,.sidebar-item,.page-navigation{font-family:'Noto Sans',system-ui,sans-serif}
+.aa-Autocomplete .aa-Form,.aa-Form{background:var(--surface) !important;border-color:var(--rule) !important}
+.aa-Input{color:var(--text) !important}
+.breadcrumb-item,.quarto-page-breadcrumbs a,.breadcrumb{font-family:'Noto Sans',system-ui,sans-serif}
+.quarto-title-meta-heading{color:var(--meta)}
+hr{border-color:var(--rule);opacity:1}
+.sidebar-item-text,.menu-text{color:var(--text)}

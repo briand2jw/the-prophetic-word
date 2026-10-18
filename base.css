@@ -20,3 +20,25 @@ a{color:var(--link)}
 .chapter-grid .off{display:block;text-align:center;padding:.7rem 0;background:var(--tile);color:var(--tile-text);opacity:.4;border-bottom:4px solid var(--tile-bar)}
 .dates{color:var(--meta);font-size:.95rem}
 @media (max-width:640px){.chapter-grid ul{grid-template-columns:repeat(4,1fr)}}
+
+/* ---- Polish ---- */
+.header-section-number,.chapter-number,.chapter-title .chapter-number,.number{display:none !important}
+#quarto-sidebar .sidebar-item .menu-text .chapter-number{display:none !important}
+.quarto-title-meta-heading{font-family:var(--body-font)}
+h2{border-bottom:none !important;margin-top:2.4rem;margin-bottom:.7rem;padding-bottom:0}
+h2.anchored:first-child,.content>section:first-of-type>h2:first-child{margin-top:1.2rem}
+.main-sub{border-bottom:none !important}
+h3.vgroup{border-bottom:1px solid var(--rule) !important;margin:2rem 0 .6rem;padding-bottom:.3rem}
+.overview>:last-child,.cta>:last-child,.stamp>:last-child{margin-bottom:0 !important}
+.stamp,.overview,.cta{margin:1.4rem 0}
+.stamp p,.overview p,.cta p{margin:0}
+p{margin-bottom:1.1rem}
+.dates{margin:0 0 1.4rem}
+#quarto-content main.content{max-width:46rem}
+.whatsnew ul{margin:0}
+.whatsnew li{padding:.8rem 0}
+.sidebar-navigation .sidebar-item{margin-top:.15rem}
+.sidebar-navigation .sidebar-item-section>.sidebar-item-container .menu-text{font-weight:600}
+.quarto-search input,#quarto-search input{border-radius:2px}
+nav.page-navigation{border-top:1px solid var(--rule);margin-top:2.2rem;padding-top:1rem}
+.nav-page-text{font-family:var(--body-font)}
