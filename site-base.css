@@ -87,3 +87,12 @@ nav.page-navigation{border-top:1px solid var(--rule);margin-top:2.2rem;padding-t
 #quarto-sidebar .aa-Input{color:var(--side-search-text) !important;font-family:'Noto Sans',system-ui,sans-serif}
 #quarto-sidebar .aa-SubmitIcon,#quarto-sidebar .aa-SubmitButton svg{color:var(--side-search-icon) !important;fill:var(--side-search-icon) !important}
 #quarto-sidebar .aa-Input::placeholder{color:var(--side-search-icon);opacity:1}
+
+/* Top spacing for article and chapter pages */
+#quarto-content main.content,main.content{padding-top:2.6rem !important}
+#quarto-content .quarto-page-breadcrumbs,.quarto-page-breadcrumbs{margin:0 0 1.6rem !important;padding-top:.4rem}
+#quarto-content .breadcrumb{margin-bottom:0}
+h1.title,.quarto-title h1.title{margin:0 0 1.2rem;line-height:1.25}
+.quarto-title-block,#title-block-header{margin-bottom:1.4rem}
+.dates{margin:.2rem 0 1.8rem}
+@media (max-width:991px){#quarto-content main.content,main.content{padding-top:1.8rem !important}}
