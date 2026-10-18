@@ -2,4 +2,4 @@ project:
   output-dir: _build/design2
 format:
   html:
-    css: [base.css, design2.css]
+    css: [site-base.css, theme2.css]
