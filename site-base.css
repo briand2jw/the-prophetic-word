@@ -96,3 +96,17 @@ h1.title,.quarto-title h1.title{margin:0 0 1.2rem;line-height:1.25}
 .quarto-title-block,#title-block-header{margin-bottom:1.4rem}
 .dates{margin:.2rem 0 1.8rem}
 @media (max-width:991px){#quarto-content main.content,main.content{padding-top:1.8rem !important}}
+
+/* Phone / narrow top bar (menu button, breadcrumb, search) */
+#quarto-header,#quarto-header .quarto-secondary-nav,.quarto-secondary-nav{background:var(--bar-bg) !important;border-bottom:3px solid var(--bar-edge) !important;color:var(--bar-text) !important}
+.quarto-secondary-nav a,.quarto-secondary-nav button,.quarto-secondary-nav .breadcrumb,.quarto-secondary-nav .breadcrumb-item,.quarto-secondary-nav .breadcrumb-item::before,.quarto-secondary-nav i,.quarto-secondary-nav .bi,#quarto-header .aa-DetachedSearchButton,#quarto-header .aa-SubmitIcon{color:var(--bar-text) !important;fill:var(--bar-text) !important;font-family:'Noto Sans',system-ui,sans-serif}
+.quarto-secondary-nav .breadcrumb{font-size:1rem;margin:0}
+.quarto-secondary-nav .quarto-btn-toggle{padding:.4rem .6rem}
+#quarto-header .aa-DetachedSearchButton{background:transparent !important;border:0 !important}
+
+/* Home page: hide the automatic "Published" date (the EPUB box already shows Last updated) */
+.quarto-title-meta{display:none}
+
+/* Landing page grids need air under the title */
+.chapter-grid,.book-grid{margin-top:1.4rem}
+nav.page-navigation a,nav.page-navigation .nav-page-text{color:var(--link) !important}
