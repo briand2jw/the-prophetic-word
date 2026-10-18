@@ -4,4 +4,8 @@ title: "Know the Truth"
 
 Articles are listed by date, with the newest first.
 
-- [Sample Article Title](article-sample.qmd): Posted October 1, 2026
+::: article-list
+- [Sample Article Title](article-sample.qmd)\
+  [Posted October 1, 2026 · Updated October 10, 2026]{.meta}\
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+:::

@@ -1,5 +1,5 @@
 <script>
-document.addEventListener("DOMContentLoaded",function(){
+function nestSidebar(){try{
   var side=document.getElementById("quarto-sidebar"); if(!side) return;
   var links=[].slice.call(side.querySelectorAll("a.sidebar-link"));
   var txt=function(a){var m=a.querySelector(".menu-text");return m?m.textContent.trim():"";};
@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded",function(){
   links.forEach(function(a){landing[txt(a)]=a;});
   links.forEach(function(a){
     var m=txt(a).match(/^(.+?) (\d+)$/); if(!m||!landing[m[1]]) return;
-    var book=landing[m[1]], bli=book.closest("li.sidebar-item"), cli=a.closest("li.sidebar-item");
+    var book=landing[m[1]], bli=book.closest("li"), cli=a.closest("li");
     if(!bli||!cli) return;
     var ul=bli.querySelector("ul.nest");
     if(!ul){
@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded",function(){
     if(a.classList.contains("active")) bli.classList.add("nest-open");
   });
   links.forEach(function(a){
-    if(a.classList.contains("active")){var li=a.closest("li.sidebar-item"); if(li&&li.querySelector("ul.nest")) li.classList.add("nest-open");}
+    if(a.classList.contains("active")){var li=a.closest("li"); if(li&&li.querySelector("ul.nest")) li.classList.add("nest-open");}
   });
-});
+}catch(e){if(window.console)console.warn("sidebar nest failed",e);}}
+if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",nestSidebar);}else{nestSidebar();}
 </script>
