@@ -8,6 +8,7 @@ book:
   language: en
   date: today
   date-format: "MMMM D, YYYY"
+  output-file: "the-truth"
   downloads: [epub]
   search: true
   chapters:

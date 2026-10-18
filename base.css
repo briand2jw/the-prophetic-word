@@ -69,3 +69,6 @@ nav.page-navigation{border-top:1px solid var(--rule);margin-top:2.2rem;padding-t
 
 /* Sidebar: hide individual Bible chapters (they are reached from each book's grid) */
 #quarto-sidebar li.sidebar-item:has(a.sidebar-link[href*="chapters/"]){display:none}
+
+.epub-btn{display:inline-block;margin-top:.5rem;padding:.55rem 1.1rem;border:2px solid var(--text);background:var(--bg);color:var(--text) !important;font-family:var(--body-font);font-weight:600;text-decoration:none !important;border-radius:2px}
+.epub-btn:hover{background:var(--text);color:var(--bg) !important}

@@ -9,6 +9,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ::: stamp
 This EPUB file contains all the information on this website.\
 Last updated: {{< meta date >}}
+
+[Download the EPUB](the-truth.epub){.epub-btn}
 :::
 
 ## What's new
