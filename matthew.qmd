@@ -26,7 +26,7 @@ title: "Matthew"
 - [21]{.off}
 - [22]{.off}
 - [23]{.off}
-- [24](matthew-24.qmd)
+- [24](chapters/matthew-24.qmd)
 - [25]{.off}
 - [26]{.off}
 - [27]{.off}

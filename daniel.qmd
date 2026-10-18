@@ -13,7 +13,7 @@ title: "Daniel"
 - [8]{.off}
 - [9]{.off}
 - [10]{.off}
-- [11](daniel-11.qmd)
+- [11](chapters/daniel-11.qmd)
 - [12]{.off}
 :::
 

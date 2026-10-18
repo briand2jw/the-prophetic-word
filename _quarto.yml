@@ -18,9 +18,9 @@ book:
     - part: prophetic-word.qmd
       chapters:
         - daniel.qmd
-        - daniel-11.qmd
+        - chapters/daniel-11.qmd
         - matthew.qmd
-        - matthew-24.qmd
+        - chapters/matthew-24.qmd
     - part: seek-jehovah.qmd
       chapters:
         - article-sample-2.qmd
@@ -29,7 +29,6 @@ format:
   html:
     toc: false
     number-sections: false
-    include-after-body: sidebar-nest.html
     include-in-header:
       text: |
         <meta name="robots" content="noindex, nofollow">

@@ -14,13 +14,18 @@ Last updated: {{< meta date >}}
 ## What's new
 
 ::: whatsnew
-- **October 17, 2026.** New information posted on [Matthew 24](matthew-24.qmd) and 25.
+- **October 17, 2026.** New information posted on [Matthew 24](chapters/matthew-24.qmd) and 25.
 - **September 15, 2026.** Updated comments posted on [Daniel 4](daniel.qmd).
 - **August 12, 2026.** New article on [Seek Righteousness—Why Important Now?](article-sample-2.qmd)
 :::
 
 ## Browse by section
 
-1. [Know the Truth](know-the-truth.qmd): Sample description of this section.
-2. [The Prophetic Word](prophetic-word.qmd): Sample description of this section.
-3. [Seek Jehovah](seek-jehovah.qmd): Sample description of this section.
+::: section-list
+- [Know the Truth](know-the-truth.qmd)\
+  Sample description of this section.
+- [The Prophetic Word](prophetic-word.qmd)\
+  Sample description of this section.
+- [Seek Jehovah](seek-jehovah.qmd)\
+  Sample description of this section.
+:::

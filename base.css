@@ -51,14 +51,6 @@ nav.page-navigation{border-top:1px solid var(--rule);margin-top:2.2rem;padding-t
 .book-grid .off,.chapter-grid .off{opacity:.38}
 @media (max-width:640px){.book-grid ul{grid-template-columns:repeat(2,1fr)}}
 
-/* Sidebar dropdown for books */
-.nest-toggle{background:none;border:0;color:inherit;cursor:pointer;padding:0 .4rem;font-size:.8rem;float:right}
-.nest-toggle::before{content:"\25B8"}
-.nest-open>.nest-toggle::before{content:"\25BE"}
-ul.nest{list-style:none;margin:.1rem 0 .3rem 1rem;padding:0;display:none}
-.nest-open>ul.nest{display:block}
-ul.nest .sidebar-item{margin:.1rem 0}
-
 /* Article list rows (Know the Truth, Seek Jehovah) */
 .article-list ul{list-style:none;margin:1.4rem 0 0;padding:0;border-bottom:1px solid var(--rule)}
 .article-list li{position:relative;margin:0;padding:1.1rem 0 1.1rem 2.9rem;border-top:1px solid var(--rule);color:var(--text);line-height:1.55}
@@ -68,3 +60,12 @@ ul.nest .sidebar-item{margin:.1rem 0}
 .article-list li a{display:block;font-family:var(--head-font);font-size:1.2rem;font-weight:600;line-height:1.35;margin-bottom:.2rem}
 .article-list li br{display:none}
 .article-list .meta{display:block;color:var(--meta);font-size:.92rem;margin-bottom:.35rem}
+
+/* Browse by section list */
+.section-list ul{list-style:none;margin:1rem 0 0;padding:0;border-bottom:1px solid var(--rule)}
+.section-list li{margin:0;padding:1.3rem 0;border-top:1px solid var(--rule);line-height:1.55}
+.section-list li a{display:block;font-family:var(--head-font);font-size:1.2rem;font-weight:600;margin-bottom:.3rem}
+.section-list li br{display:none}
+
+/* Sidebar: hide individual Bible chapters (they are reached from each book's grid) */
+#quarto-sidebar li.sidebar-item:has(a.sidebar-link[href*="chapters/"]){display:none}
