@@ -3,8 +3,34 @@ title: "Matthew"
 ---
 
 ::: chapter-grid
+- [1]{.off}
+- [2]{.off}
+- [3]{.off}
+- [4]{.off}
+- [5]{.off}
+- [6]{.off}
+- [7]{.off}
+- [8]{.off}
+- [9]{.off}
+- [10]{.off}
+- [11]{.off}
+- [12]{.off}
+- [13]{.off}
+- [14]{.off}
+- [15]{.off}
+- [16]{.off}
+- [17]{.off}
+- [18]{.off}
+- [19]{.off}
+- [20]{.off}
+- [21]{.off}
+- [22]{.off}
+- [23]{.off}
 - [24](matthew-24.qmd)
-- [25](matthew-24.qmd)
+- [25]{.off}
+- [26]{.off}
+- [27]{.off}
+- [28]{.off}
 :::
 
-*(Placeholder: replace with the full 28-chapter grid; unwritten chapters dimmed.)*
+Dimmed chapters have not been written yet.

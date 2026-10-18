@@ -2,9 +2,35 @@
 title: "The Prophetic Word"
 ---
 
-Select a Bible book.
+Select a Bible book. Dimmed books have not been written yet.
 
+## Hebrew-Aramaic Scriptures
+
+::: book-grid
+- [Psalms]{.off}
+- [Isaiah]{.off}
+- [Jeremiah]{.off}
+- [Ezekiel]{.off}
 - [Daniel](daniel.qmd)
-- [Matthew](matthew.qmd)
+- [Joel]{.off}
+- [Amos]{.off}
+- [Micah]{.off}
+- [Nahum]{.off}
+- [Habakkuk]{.off}
+- [Zephaniah]{.off}
+- [Haggai]{.off}
+- [Zechariah]{.off}
+- [Malachi]{.off}
+:::
 
-*(The other books in your list will be added here as you write them.)*
+## Christian Greek Scriptures
+
+::: book-grid
+- [Matthew](matthew.qmd)
+- [Mark]{.off}
+- [Luke]{.off}
+- [John]{.off}
+- [2 Timothy]{.off}
+- [2 Peter]{.off}
+- [Revelation]{.off}
+:::

@@ -1,6 +1,8 @@
 project:
   type: book
 
+number-sections: false
+
 book:
   title: "The Truth"
   language: en
@@ -27,6 +29,7 @@ format:
   html:
     toc: false
     number-sections: false
+    include-after-body: sidebar-nest.html
     include-in-header:
       text: |
         <meta name="robots" content="noindex, nofollow">

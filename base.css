@@ -42,3 +42,19 @@ p{margin-bottom:1.1rem}
 .quarto-search input,#quarto-search input{border-radius:2px}
 nav.page-navigation{border-top:1px solid var(--rule);margin-top:2.2rem;padding-top:1rem}
 .nav-page-text{font-family:var(--body-font)}
+
+/* Book tiles */
+.book-grid ul{list-style:none;padding:0;margin:0 0 1rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(10rem,1fr));gap:.6rem}
+.book-grid li{margin:0}
+.book-grid a,.book-grid .off{display:flex;align-items:center;justify-content:center;min-height:4rem;padding:.6rem;text-align:center;background:var(--tile);color:var(--tile-text) !important;text-decoration:none;font-weight:600;font-family:var(--head-font);border-bottom:5px solid var(--tile-bar)}
+.book-grid a:hover{background:var(--tile-hover)}
+.book-grid .off,.chapter-grid .off{opacity:.38}
+@media (max-width:640px){.book-grid ul{grid-template-columns:repeat(2,1fr)}}
+
+/* Sidebar dropdown for books */
+.nest-toggle{background:none;border:0;color:inherit;cursor:pointer;padding:0 .4rem;font-size:.8rem;float:right}
+.nest-toggle::before{content:"\25B8"}
+.nest-open>.nest-toggle::before{content:"\25BE"}
+ul.nest{list-style:none;margin:.1rem 0 .3rem 1rem;padding:0;display:none}
+.nest-open>ul.nest{display:block}
+ul.nest .sidebar-item{margin:.1rem 0}
