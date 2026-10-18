@@ -1,0 +1,26 @@
+---
+title: "Home"
+---
+
+## Purpose of this Website
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+::: stamp
+This EPUB file contains all the information on this website.\
+Last updated: {{< meta date >}}
+:::
+
+## What's new
+
+::: whatsnew
+- **October 17, 2026.** New information posted on [Matthew 24](matthew-24.qmd) and 25.
+- **September 15, 2026.** Updated comments posted on [Daniel 4](daniel.qmd).
+- **August 12, 2026.** New article on [Seek Righteousness—Why Important Now?](article-sample-2.qmd)
+:::
+
+## Browse by section
+
+1. [Know the Truth](know-the-truth.qmd): Sample description of this section.
+2. [The Prophetic Word](prophetic-word.qmd): Sample description of this section.
+3. [Seek Jehovah](seek-jehovah.qmd): Sample description of this section.

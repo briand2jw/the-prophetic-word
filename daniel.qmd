@@ -1,0 +1,11 @@
+---
+title: "Daniel"
+---
+
+::: chapter-grid
+- [1](daniel-11.qmd)
+- [11](daniel-11.qmd)
+- []{.off} 
+:::
+
+Chapters shown dimmed have not been written yet. *(Placeholder: replace with the full 12-chapter grid.)*

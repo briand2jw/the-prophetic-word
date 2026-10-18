@@ -1,0 +1,10 @@
+---
+title: "The Prophetic Word"
+---
+
+Select a Bible book.
+
+- [Daniel](daniel.qmd)
+- [Matthew](matthew.qmd)
+
+*(The other books in your list will be added here as you write them.)*

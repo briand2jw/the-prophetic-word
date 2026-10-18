@@ -1,0 +1,22 @@
+/* Shared layout for both designs. Colours and fonts come from design1.css / design2.css */
+body{font-family:var(--body-font);color:var(--text);background:var(--bg);line-height:1.65;font-size:1.0625rem}
+h1,h2,h3,h4,.title,.quarto-title h1{font-family:var(--head-font);color:var(--text)}
+a{color:var(--link)}
+.sidebar-title a, .sidebar-title{font-family:var(--head-font);font-weight:700}
+.overview{border:1px solid var(--rule);border-left:5px solid var(--accent);background:var(--surface);padding:1rem 1.2rem;margin:1.2rem 0}
+.overview>*:last-child{margin-bottom:0}
+.main-sub{font-size:1.5rem;margin-top:2rem}
+.vgroup{font-size:1.15rem;margin:2rem 0 .3rem;padding-bottom:.25rem;border-bottom:1px solid var(--rule)}
+.cta{border:1px solid var(--rule);border-left:5px solid var(--accent);background:var(--surface);padding:.8rem 1.1rem;margin:1.5rem 0;font-weight:600}
+.cta p{margin:0}
+.stamp{border:1px solid var(--rule);border-left:5px solid var(--accent);background:var(--surface);padding:.8rem 1.1rem;margin:1.5rem 0}
+.whatsnew ul{list-style:none;padding:0}
+.whatsnew li{padding:.7rem 0;border-top:1px solid var(--rule)}
+.whatsnew li:last-child{border-bottom:1px solid var(--rule)}
+.chapter-grid ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:.5rem}
+.chapter-grid li{margin:0}
+.chapter-grid a{display:block;text-align:center;padding:.7rem 0;background:var(--tile);color:var(--tile-text);text-decoration:none;font-weight:600;border-bottom:4px solid var(--tile-bar)}
+.chapter-grid a:hover{background:var(--tile-hover)}
+.chapter-grid .off{display:block;text-align:center;padding:.7rem 0;background:var(--tile);color:var(--tile-text);opacity:.4;border-bottom:4px solid var(--tile-bar)}
+.dates{color:var(--meta);font-size:.95rem}
+@media (max-width:640px){.chapter-grid ul{grid-template-columns:repeat(4,1fr)}}

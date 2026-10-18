@@ -1,0 +1,7 @@
+/* Design 1: white page, black text, navy + gold, Noto Sans */
+:root{--bg:#fff;--text:#000;--meta:#000;--accent:#8a6d1f;--rule:#c9ced8;--surface:#fff;--link:#1d4a99;
+ --body-font:'Noto Sans',system-ui,Arial,sans-serif;--head-font:'Noto Sans Display','Noto Sans',system-ui,Arial,sans-serif;
+ --tile:#14213d;--tile-text:#fff;--tile-hover:#2b4c8c;--tile-bar:#d4b45f}
+#quarto-sidebar,.sidebar-navigation{background:#14213d !important;border-right:4px solid #d4b45f}
+#quarto-sidebar a,#quarto-sidebar .sidebar-title,#quarto-sidebar .menu-text,#quarto-sidebar i{color:#fff !important}
+#quarto-sidebar a:hover{color:#d4b45f !important}

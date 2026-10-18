@@ -1,0 +1,9 @@
+/* Design 2: charcoal, cream text, coral accent, Noto Serif */
+:root{--bg:#1b1c18;--text:#f2ede3;--meta:#bdb6a7;--accent:#e58a73;--rule:#3b3c36;--surface:#242520;--link:#e58a73;
+ --body-font:'Noto Serif',Georgia,serif;--head-font:'Noto Serif Display','Noto Serif',Georgia,serif;
+ --tile:#34352d;--tile-text:#f2ede3;--tile-hover:#4d4e45;--tile-bar:#e58a73}
+body,.content,#quarto-content,#quarto-sidebar,.sidebar-navigation{background:var(--bg) !important;color:var(--text)}
+#quarto-sidebar{border-right:1px solid var(--rule)}
+#quarto-sidebar a,#quarto-sidebar .menu-text,.sidebar-title{color:var(--text) !important;font-family:'Noto Sans',system-ui,sans-serif}
+#quarto-sidebar a:hover{color:var(--accent) !important}
+.dates,.sidebar-item,.page-navigation{font-family:'Noto Sans',system-ui,sans-serif}

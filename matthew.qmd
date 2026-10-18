@@ -1,0 +1,10 @@
+---
+title: "Matthew"
+---
+
+::: chapter-grid
+- [24](matthew-24.qmd)
+- [25](matthew-24.qmd)
+:::
+
+*(Placeholder: replace with the full 28-chapter grid; unwritten chapters dimmed.)*

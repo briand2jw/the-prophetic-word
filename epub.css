@@ -1,0 +1,4 @@
+body{font-family:serif;line-height:1.5}
+h1,h2,h3{font-family:sans-serif}
+.overview,.cta,.stamp{border:1px solid #999;border-left:4px solid #8a6d1f;padding:.6em .9em;margin:1em 0}
+.vgroup{border-bottom:1px solid #999;margin-top:1.5em}

@@ -1,0 +1,37 @@
+project:
+  type: book
+
+book:
+  title: "The Truth"
+  language: en
+  date: today
+  date-format: "MMMM D, YYYY"
+  downloads: [epub]
+  search: true
+  chapters:
+    - index.qmd
+    - part: know-the-truth.qmd
+      chapters:
+        - article-sample.qmd
+    - part: prophetic-word.qmd
+      chapters:
+        - daniel.qmd
+        - daniel-11.qmd
+        - matthew.qmd
+        - matthew-24.qmd
+    - part: seek-jehovah.qmd
+      chapters:
+        - article-sample-2.qmd
+
+format:
+  html:
+    toc: false
+    include-in-header:
+      text: |
+        <meta name="robots" content="noindex, nofollow">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Display:wght@500;600;700&family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Noto+Serif+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  epub:
+    css: epub.css
+    toc: true
