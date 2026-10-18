@@ -68,7 +68,20 @@ nav.page-navigation{border-top:1px solid var(--rule);margin-top:2.2rem;padding-t
 .section-list li br{display:none}
 
 /* Sidebar: hide individual Bible chapters (they are reached from each book's grid) */
-#quarto-sidebar li.sidebar-item:has(a.sidebar-link[href*="chapters/"]){display:none}
+#quarto-sidebar li.sidebar-item:has(> .sidebar-item-container > a.sidebar-link[href*="chapters/"]){display:none}
 
 .epub-btn{display:inline-block;margin-top:.5rem;padding:.55rem 1.1rem;border:2px solid var(--text);background:var(--bg);color:var(--text) !important;font-family:var(--body-font);font-weight:600;text-decoration:none !important;border-radius:2px}
 .epub-btn:hover{background:var(--text);color:var(--bg) !important}
+
+/* Sidebar: identical structure in both designs (colours come from each design file) */
+#quarto-sidebar{font-family:'Noto Sans',system-ui,Arial,sans-serif;font-size:1rem}
+#quarto-sidebar .sidebar-title,#quarto-sidebar .sidebar-title a{font-size:1.45rem;font-weight:700}
+#quarto-sidebar .sidebar-item{margin:.1rem 0}
+#quarto-sidebar .sidebar-item-container{padding:.2rem 0}
+#quarto-sidebar .sidebar-link,#quarto-sidebar .menu-text{font-family:'Noto Sans',system-ui,Arial,sans-serif;font-size:1rem;font-weight:400}
+#quarto-sidebar .sidebar-item-section>.sidebar-item-container .menu-text{font-weight:700}
+#quarto-sidebar .sidebar-link.active,#quarto-sidebar .sidebar-link.active .menu-text{font-weight:700;color:var(--side-active) !important}
+#quarto-sidebar .sidebar-search .aa-Form{background:var(--side-search-bg) !important;border:1px solid var(--side-search-edge) !important;border-radius:2px;min-height:2.4rem}
+#quarto-sidebar .aa-Input{color:var(--side-search-text) !important;font-family:'Noto Sans',system-ui,sans-serif}
+#quarto-sidebar .aa-SubmitIcon,#quarto-sidebar .aa-SubmitButton svg{color:var(--side-search-icon) !important;fill:var(--side-search-icon) !important}
+#quarto-sidebar .aa-Input::placeholder{color:var(--side-search-icon);opacity:1}
