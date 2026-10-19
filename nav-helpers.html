@@ -35,20 +35,13 @@ try{
     var wrap=d.createElement("div"); wrap.className="bar-nav";
     wrap.innerHTML='<a class="bar-home" href="'+homeUrl+'" aria-label="Home"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>Home</span></a>'+
       (section?'<span class="bar-section">'+esc(section.text)+'</span>':'');
+    var tg=bar.querySelector("button.quarto-btn-toggle, button[data-bs-toggle]");
+    var ttl=d.createElement("a"); ttl.className="bar-title"; ttl.href=homeUrl; ttl.textContent="The Truth";
+    if(tg&&tg.parentNode===bar) tg.insertAdjacentElement("afterend",ttl); else bar.insertBefore(ttl,bar.firstChild);
     var bc=bar.querySelector('nav[aria-label="breadcrumb"]');
     if(bc&&bc.parentNode===bar) bar.insertBefore(wrap,bc); else bar.appendChild(wrap);
   }
-  /* 2. "You are here" trail at the top of the page */
-  var main=d.querySelector("main.content");
-  if(main && !isHome && crumbs.length){
-    var n=d.createElement("nav"); n.className="site-trail"; n.setAttribute("aria-label","You are here");
-    var full=trail.map(function(c,i){
-      return i<trail.length-1?'<li><a href="'+c.href+'">'+esc(c.text)+'</a></li>':'<li aria-current="page">'+esc(c.text)+'</li>';}).join("");
-    var par=trail[trail.length-2];
-    n.innerHTML='<ol class="trail-full">'+full+'</ol><a class="trail-back" href="'+par.href+'">‹ '+esc(par.text)+'</a>';
-    main.insertBefore(n,main.firstChild);
-  }
-  /* 3. Return links at the bottom of the page */
+  /* Return links at the bottom of the page */
   if(main && !isHome && crumbs.length){
     var links=[];
     if(m){links.push({t:"↑ Back to "+crumbs[crumbs.length-2].text,h:crumbs[crumbs.length-2].href});}

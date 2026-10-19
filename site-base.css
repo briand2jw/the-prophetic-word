@@ -133,17 +133,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[
 
 /* ---- Wayfinding: top-bar Home, trail, return links, back-to-top ---- */
 .nav-enhanced .quarto-page-breadcrumbs,.nav-enhanced .quarto-secondary-nav nav[aria-label="breadcrumb"]{display:none !important}
-.bar-nav{display:flex;align-items:center;gap:.9rem;min-width:0;flex:1 1 auto;margin-left:.4rem}
+.bar-title{flex:1 1 auto;font-family:var(--head-font);font-weight:700;font-size:1.3rem;text-decoration:none;color:var(--bar-text) !important;margin-left:.6rem;line-height:1.2}
+.bar-nav{display:flex;align-items:center;gap:.9rem;min-width:0;flex:0 0 100%;order:5;margin:.35rem 0 .1rem}
 .bar-home{display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .7rem;border:1px solid var(--bar-text);border-radius:2px;text-decoration:none;font-weight:600;font-size:.95rem;white-space:nowrap}
 .bar-section{font-family:'Noto Sans',system-ui,sans-serif;font-weight:600;font-size:.95rem;color:var(--bar-text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #quarto-header{border-bottom-width:4px !important}
-.site-trail{margin:0 0 1.6rem;font-family:'Noto Sans',system-ui,sans-serif;font-size:.95rem}
-.site-trail ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.2rem 0}
-.site-trail li+li::before{content:"\203A";margin:0 .55rem;color:var(--meta)}
-.site-trail a{text-decoration:none;border-bottom:1px solid currentColor}
-.site-trail [aria-current]{color:var(--meta)}
-.site-trail .trail-back{display:none;padding:.5rem 0;font-weight:600;border-bottom:0}
-@media (max-width:640px){.site-trail .trail-full{display:none}.site-trail .trail-back{display:inline-block}}
 .return-links{display:flex;flex-wrap:wrap;gap:.6rem;margin:2.4rem 0 0;padding-top:1.4rem;border-top:1px solid var(--rule);font-family:'Noto Sans',system-ui,sans-serif}
 .return-links a{padding:.6rem .95rem;border:1px solid var(--accent);border-radius:2px;text-decoration:none;font-weight:600;font-size:.95rem;min-height:2.75rem;display:inline-flex;align-items:center}
 .return-links a:hover{background:var(--tile-hover)}
