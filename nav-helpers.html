@@ -10,7 +10,7 @@ function run(){
       root=new URL((at.split("site_libs/")[0])||"./",location.href).href;}
   });
   var homeUrl=root+"index.html";
-  var mark='<svg class="logo-mark" viewBox="0 0 52 52" width="30" height="30" aria-hidden="true" focusable="false"><path d="M26 15v22M26 15c-4-3-9-3-14-2v21c5-1 10-1 14 2M26 15c4-3 9-3 14-2v21c-5-1-10-1-14 2" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+  var lock='<span class="lk-rule" aria-hidden="true"></span><span class="lk-word">The Truth</span><span class="lk-rule" aria-hidden="true"></span>';
   var crumbs=[],section=null,book=null;
   safe(function(){
     var ol=d.querySelector("ol.breadcrumb");
@@ -28,15 +28,15 @@ function run(){
     var bar=d.querySelector(".quarto-secondary-nav > .container-fluid, .quarto-secondary-nav");
     if(bar){
       var a=d.createElement("a");a.className="bar-logo";a.href=homeUrl;a.setAttribute("aria-label","The Truth, go to Home");
-      a.innerHTML=mark+'<span>The Truth</span>';
+      a.innerHTML=lock;
       var tg=bar.querySelector("button.quarto-btn-toggle, button[data-bs-toggle]");
       if(tg&&tg.parentNode===bar)tg.insertAdjacentElement("afterend",a);else bar.insertBefore(a,bar.firstChild);
       d.documentElement.classList.add("nav-enhanced");
     }
   });
   safe(function(){
-    var t=d.querySelector("#quarto-sidebar .sidebar-title");
-    if(t&&!t.querySelector(".logo-mark")){var w=d.createElement("span");w.className="side-mark";w.innerHTML=mark;t.insertBefore(w,t.firstChild);}
+    var t=d.querySelector("#quarto-sidebar .sidebar-title a");
+    if(t&&!t.querySelector(".lk-word")){t.classList.add("logo-lockup");t.setAttribute("aria-label","The Truth, go to Home");t.innerHTML=lock;}
   });
   /* Return links at the bottom of each page */
   safe(function(){

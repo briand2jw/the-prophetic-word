@@ -133,11 +133,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[
 
 /* ---- Wayfinding: top-bar Home, trail, return links, back-to-top ---- */
 .nav-enhanced .quarto-page-breadcrumbs,.nav-enhanced .quarto-secondary-nav nav[aria-label="breadcrumb"]{display:none !important}
-.bar-logo{display:inline-flex;align-items:center;gap:.55rem;margin:0 auto 0 .7rem;text-decoration:none;color:var(--bar-text) !important;min-height:2.75rem}
-.bar-logo .logo-mark{color:var(--accent);flex:none}
-.bar-logo span{font-family:var(--head-font);font-weight:700;font-size:1.3rem;line-height:1;letter-spacing:.01em;white-space:nowrap}
-.side-mark{display:inline-flex;vertical-align:middle;margin-right:.5rem;color:var(--accent)}
-.side-mark svg{width:28px;height:28px}
+/* Logo lockup: title between two thin rules (bar and sidebar) */
+.bar-logo,.logo-lockup{display:inline-flex !important;flex-direction:column;align-items:center;gap:.38rem;text-decoration:none !important;color:var(--text) !important}
+.bar-logo{margin:0 auto 0 .8rem;padding:.35rem 0;min-height:2.75rem;justify-content:center}
+.lk-rule{display:block;width:72%;height:2px;background:var(--accent)}
+.lk-word{display:block;font-family:'Noto Serif Display','Noto Serif',Georgia,serif;font-weight:600;font-size:1.25rem;line-height:1;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.logo-lockup{padding:.3rem 0 .5rem;align-items:flex-start}
+.logo-lockup .lk-rule{width:70%;margin:0 auto}
+.logo-lockup{align-items:center}
+.logo-lockup .lk-word{font-size:1.5rem}
 #quarto-header{border-bottom-width:4px !important}
 .return-links{display:flex;flex-wrap:wrap;gap:.6rem;margin:2.4rem 0 0;padding-top:1.4rem;border-top:1px solid var(--rule);font-family:'Noto Sans',system-ui,sans-serif}
 .return-links a{padding:.6rem .95rem;border:1px solid var(--accent);border-radius:2px;text-decoration:none;font-weight:600;font-size:.95rem;min-height:2.75rem;display:inline-flex;align-items:center}
