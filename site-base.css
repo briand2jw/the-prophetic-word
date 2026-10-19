@@ -150,3 +150,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[
 .to-top.show{opacity:1;visibility:visible}
 @media (prefers-reduced-motion:reduce){.to-top{transition:none}}
 @media (forced-colors:active){.to-top,.bar-home,.return-links a{border:2px solid CanvasText}}
+
+/* EPUB download at the bottom of the menu, set apart from the page links */
+.epub-moved #quarto-sidebar .sidebar-tools-main{display:none !important}
+.epub-side-wrap{position:sticky;bottom:0;margin-top:2rem;padding:1.1rem 0 1.2rem;background:var(--bg);border-top:2px solid var(--rule)}
+.epub-side{display:flex;align-items:center;justify-content:center;gap:.6rem;min-height:3rem;padding:.6rem 1rem;border:2px solid var(--accent);border-radius:2px;color:var(--text) !important;font-family:'Noto Sans',system-ui,sans-serif;font-weight:700;font-size:1rem;text-decoration:none !important}
+.epub-side svg{color:var(--accent);flex:none}
+.epub-side:hover{background:var(--tile-hover)}
+@media (forced-colors:active){.epub-side{border:2px solid CanvasText}}

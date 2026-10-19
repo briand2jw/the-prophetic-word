@@ -38,6 +38,15 @@ function run(){
     var t=d.querySelector("#quarto-sidebar .sidebar-title a");
     if(t&&!t.querySelector(".lk-word")){t.classList.add("logo-lockup");t.setAttribute("aria-label","The Truth, go to Home");t.innerHTML=lock;}
   });
+  /* EPUB download: move to the bottom of the menu, with a label */
+  safe(function(){
+    var host=d.querySelector("#quarto-sidebar .sidebar-menu-container")||d.querySelector("#quarto-sidebar");
+    if(!host||d.querySelector(".epub-side"))return;
+    var a=d.createElement("a");a.className="epub-side";a.href=root+"the-truth.epub";a.setAttribute("download","");
+    a.innerHTML='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M12 3v12M7 11l5 5 5-5M4 20h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Download EPUB</span>';
+    var w=d.createElement("div");w.className="epub-side-wrap";w.appendChild(a);host.appendChild(w);
+    d.documentElement.classList.add("epub-moved");
+  });
   /* Return links at the bottom of each page */
   safe(function(){
     var main=d.querySelector("main.content");
