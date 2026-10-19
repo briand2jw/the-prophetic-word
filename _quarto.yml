@@ -32,6 +32,7 @@ format:
     css: [site-base.css, theme2.css]
     toc: false
     number-sections: false
+    include-after-body: nav-helpers.html
     include-in-header:
       text: |
         <meta name="robots" content="noindex, nofollow">
