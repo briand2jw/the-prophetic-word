@@ -158,4 +158,5 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[
 @media (forced-colors:active){.epub-side{border:2px solid CanvasText}}
 
 /* No underline on the EPUB button */
-#quarto-sidebar a.epub-side,#quarto-sidebar a.epub-side:hover,#quarto-sidebar a.epub-side:focus,.epub-side span{text-decoration:none !important;border-bottom:0 !important;background-image:none !important}
+#quarto-sidebar a.epub-side,#quarto-sidebar a.epub-side:hover,#quarto-sidebar a.epub-side:focus,.epub-side span{text-decoration:none !important;background-image:none !important}
+#quarto-sidebar a.epub-side{border:2px solid var(--accent) !important}
