@@ -53,6 +53,11 @@ function run(){
     r.innerHTML=links.map(function(l){return '<a href="'+l.h+'">'+esc(l.t)+'</a>';}).join("");
     main.appendChild(r);
   });
+  /* Browser-tab icon and home-screen icon */
+  safe(function(){
+    [["icon","image/png"],["apple-touch-icon",""]].forEach(function(r){
+      var l=d.createElement("link");l.rel=r[0];if(r[1])l.type=r[1];l.href=root+"logo.png";d.head.appendChild(l);});
+  });
   /* Back-to-top button */
   safe(function(){
     var b=d.createElement("button");b.type="button";b.className="to-top";b.setAttribute("aria-label","Back to top");b.innerHTML="↑";
