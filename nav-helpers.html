@@ -62,6 +62,19 @@ function run(){
     r.innerHTML=links.map(function(l){return '<a href="'+l.h+'">'+esc(l.t)+'</a>';}).join("");
     main.appendChild(r);
   });
+  /* Menu sections start collapsed; the section holding the current page stays open */
+  safe(function(){
+    [].forEach.call(d.querySelectorAll("#quarto-sidebar li.sidebar-item-section"),function(li){
+      var ul=li.querySelector(":scope > ul.sidebar-section, :scope > ul");
+      var tg=li.querySelector(":scope > .sidebar-item-container .sidebar-item-toggle, :scope > .sidebar-item-container [data-bs-toggle='collapse']");
+      if(!ul||!tg)return;
+      var holdsCurrent=!!ul.querySelector("a.sidebar-link.active");
+      if(holdsCurrent)return;
+      ul.classList.remove("show");
+      tg.classList.add("collapsed");
+      tg.setAttribute("aria-expanded","false");
+    });
+  });
   /* Browser-tab icon and home-screen icon */
   safe(function(){
     [["icon","image/png"],["apple-touch-icon",""]].forEach(function(r){
