@@ -1,5 +1,6 @@
 project:
   type: book
+  output-dir: _site
 
 number-sections: false
 
@@ -28,6 +29,7 @@ book:
 
 format:
   html:
+    css: [site-base.css, theme2.css]
     toc: false
     number-sections: false
     include-in-header:

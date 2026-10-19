@@ -1,5 +1,0 @@
-project:
-  output-dir: _build/design1
-format:
-  html:
-    css: [site-base.css, theme1.css]

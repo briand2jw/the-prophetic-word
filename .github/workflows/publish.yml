@@ -16,18 +16,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: quarto-dev/quarto-actions/setup@v2
-      - name: Render both designs
-        run: |
-          quarto render --profile design1
-          quarto render --profile design2
-          mkdir -p public
-          cp -r _build/design1 public/design1
-          cp -r _build/design2 public/design2
-          cp chooser/index.html public/index.html
+      - name: Render site and EPUB
+        run: quarto render
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: _site
   deploy:
     needs: build
     runs-on: ubuntu-latest
