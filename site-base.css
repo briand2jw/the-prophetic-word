@@ -110,3 +110,23 @@ h1.title,.quarto-title h1.title{margin:0 0 1.2rem;line-height:1.25}
 /* Landing page grids need air under the title */
 .chapter-grid,.book-grid{margin-top:1.4rem}
 nav.page-navigation a,nav.page-navigation .nav-page-text{color:var(--link) !important}
+
+/* ---- Accessibility ---- */
+/* 1. Clear keyboard / switch-control focus */
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--focus,var(--accent)) !important;outline-offset:3px;border-radius:2px}
+#quarto-sidebar a:focus-visible,#quarto-sidebar button:focus-visible{outline-color:var(--side-active) !important}
+
+/* 4. Dimmed tiles: brighter than before, dashed edge, and a text label (not colour alone) */
+.book-grid .off,.chapter-grid .off{opacity:.62;border-bottom-style:dashed;cursor:default}
+.book-grid .off{flex-direction:column;gap:.15rem}
+.book-grid .off::after{content:"Not yet written";font-family:var(--body-font);font-size:.72rem;font-weight:400;letter-spacing:.02em}
+.chapter-grid .off::after{content:" (not yet written)";position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.chapter-grid .off{position:relative}
+
+/* 2. Windows / macOS high-contrast modes: keep shapes and links visible */
+@media (forced-colors:active){
+  .chapter-grid a,.book-grid a,.chapter-grid .off,.book-grid .off,.overview,.cta,.stamp,.epub-btn{border:2px solid CanvasText !important}
+  .chapter-grid .off,.book-grid .off{border-style:dashed !important;opacity:1}
+  a{text-decoration:underline !important}
+  #quarto-sidebar{border-right:2px solid CanvasText !important}
+}
