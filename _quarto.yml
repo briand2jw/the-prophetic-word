@@ -31,7 +31,7 @@ book:
 
 format:
   html:
-    css: [site-base.css, theme2.css]
+    css: [style-main.css, style-dark.css]
     toc: false
     number-sections: false
     include-after-body: nav-helpers.html
