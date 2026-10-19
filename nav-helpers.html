@@ -29,9 +29,6 @@ try{
   }
   var trail=[{text:"Home",href:homeUrl}].concat(crumbs);
   var section=crumbs.length?crumbs[0]:null;
-  /* section colour */
-  if(section){var t=section.text.toLowerCase();
-    d.documentElement.setAttribute("data-section",t.indexOf("know")>-1?"know":t.indexOf("prophetic")>-1?"prophetic":t.indexOf("seek")>-1?"seek":"");}
   /* 1. Home + section in the phone/tablet top bar */
   var bar=d.querySelector(".quarto-secondary-nav > .container-fluid, .quarto-secondary-nav");
   if(bar){

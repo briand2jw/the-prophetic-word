@@ -137,9 +137,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[
 .bar-home{display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .7rem;border:1px solid var(--bar-text);border-radius:2px;text-decoration:none;font-weight:600;font-size:.95rem;white-space:nowrap}
 .bar-section{font-family:'Noto Sans',system-ui,sans-serif;font-weight:600;font-size:.95rem;color:var(--bar-text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #quarto-header{border-bottom-width:4px !important}
-html[data-section="know"]{--bar-edge:#e58a73}
-html[data-section="prophetic"]{--bar-edge:#d9b75f}
-html[data-section="seek"]{--bar-edge:#8fc0ae}
 .site-trail{margin:0 0 1.6rem;font-family:'Noto Sans',system-ui,sans-serif;font-size:.95rem}
 .site-trail ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.2rem 0}
 .site-trail li+li::before{content:"\203A";margin:0 .55rem;color:var(--meta)}
