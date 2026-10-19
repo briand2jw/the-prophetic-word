@@ -1,6 +1,8 @@
 project:
   type: book
   output-dir: _site
+  resources:
+    - logo.png
 
 number-sections: false
 
@@ -36,10 +38,15 @@ format:
     include-in-header:
       text: |
         <meta name="robots" content="noindex, nofollow">
+        <meta property="og:title" content="The Truth">
+        <meta property="og:image" content="https://briand2jw.github.io/the-prophetic-word/logo.png">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:image" content="https://briand2jw.github.io/the-prophetic-word/logo.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Display:wght@500;600;700&family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Noto+Serif+Display:wght@500;600;700&display=swap" rel="stylesheet">
   epub:
     css: epub.css
+    epub-cover-image: logo.png
     toc: true
     number-sections: false
