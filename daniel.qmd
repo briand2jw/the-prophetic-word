@@ -2,7 +2,7 @@
 title: "Daniel"
 ---
 
-Commentary is available on the chapters listed below.
+Information is available on the chapters listed below.
 
 ::: chapter-grid
 - [2](chapters/daniel-2.qmd)

@@ -2,7 +2,7 @@
 title: "Matthew"
 ---
 
-Commentary is available on the chapters listed below.
+Information is available on the chapters listed below.
 
 ::: chapter-grid
 - [24](chapters/matthew-24.qmd)
