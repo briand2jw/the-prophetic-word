@@ -36,9 +36,9 @@ Last updated: {{< meta date >}}
 [The EPUB is in English. Use your reading app's translate feature to read it in another language.]{.epub-note}
 :::
 
-## Install as an app
+## Install as an App
 
-::: {.install-box}
+::: {.stamp .install-box}
 Add this website to your phone or tablet so it opens like an app, with its own icon. Once it has been opened, it can also be read without an internet connection.
 
 <p class="install-actions"><button type="button" id="install-btn" class="translate-btn" hidden>Install the app</button> <button type="button" id="howto-btn" class="translate-btn">How do I install this?</button></p>

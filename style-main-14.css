@@ -255,3 +255,8 @@ main.content h2:not(.main-sub){font-size:calc(1.6rem * var(--read-scale,1))}
 .install-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin:.6rem 0 1rem}
 .install-actions .translate-btn[hidden]{display:none}
 .install-box ol{display:none}
+
+.install-box .install-actions{margin:.7rem 0 0}
+.install-box .install-actions .translate-btn{padding:.55rem 1.1rem;min-height:0;border:2px solid var(--text);background:var(--bg);color:var(--text);font-family:var(--body-font);font-weight:600;font-size:1rem;border-radius:2px}
+.install-box .install-actions .translate-btn:hover{background:var(--text);color:var(--bg)}
+.install-box .epub-note{margin-top:.9rem}
