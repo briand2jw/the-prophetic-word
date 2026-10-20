@@ -84,6 +84,20 @@ function run(){
       if(anchor)bar.insertBefore(tb,anchor);else bar.appendChild(tb);
     }
   });
+  /* Top bar: one row -> menu | logo ........ translate | search */
+  safe(function(){
+    var bar=d.querySelector(".quarto-secondary-nav > .container-fluid, .quarto-secondary-nav");
+    if(!bar)return;
+    bar.style.flexWrap="nowrap";bar.style.alignItems="center";
+    [].forEach.call(bar.children,function(c){
+      var o=3;
+      if(c.classList.contains("bar-logo"))o=2;
+      else if(c.classList.contains("tr-bar"))o=4;
+      else if(c.matches(".quarto-btn-toggle")||c.querySelector(".quarto-btn-toggle"))o=1;
+      else if(/search/i.test(c.id||"")||c.classList.contains("quarto-search")||c.querySelector(".aa-DetachedSearchButton,.aa-Autocomplete,#quarto-search"))o=5;
+      c.style.order=o;
+    });
+  });
   /* Menu sections start collapsed; the section holding the current page stays open */
   safe(function(){
     [].forEach.call(d.querySelectorAll("#quarto-sidebar li.sidebar-item-section"),function(li){

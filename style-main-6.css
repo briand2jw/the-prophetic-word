@@ -178,3 +178,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[
 #translate-dialog .dlg-close{margin-top:1.1rem;padding:.55rem 1.2rem;font:inherit;font-weight:600;color:var(--text);background:transparent;border:2px solid var(--accent);border-radius:2px;cursor:pointer}
 #translate-dialog .dlg-close:hover{background:var(--tile-hover)}
 @media (forced-colors:active){.translate-btn,#translate-dialog .dlg-close{border:2px solid CanvasText}}
+
+/* Top bar stays on a single row */
+.quarto-secondary-nav > .container-fluid{flex-wrap:nowrap !important;align-items:center}
+.quarto-secondary-nav a.flex-grow-1{flex:0 0 0 !important;min-width:0;overflow:hidden}
+.bar-logo{margin-right:auto}
+.quarto-secondary-nav .aa-DetachedSearchButton,.quarto-secondary-nav #quarto-search{margin-left:0}
