@@ -14,6 +14,12 @@ Posted: October 1, 2026 · Updated: October 10, 2026
 
 ### Verses 1-4 {.vgroup}
 
+::: scripture
+“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.”
+
+[Verse 1]{.ref}
+:::
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.
 
 ### Verses 5-9 {.vgroup}
