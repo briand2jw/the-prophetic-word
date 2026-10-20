@@ -414,3 +414,7 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .quarto-secondary-nav #quarto-search{margin:0 !important;padding:0 !important}
 #quarto-header .aa-DetachedSearchButton{width:2.9rem !important;min-width:2.9rem;height:2.75rem;margin:0 !important;padding:0 !important;display:flex !important;align-items:center;justify-content:center}
 .quarto-secondary-nav .translate-btn.tr-bar,.quarto-secondary-nav .translate-btn.bm-bar{width:2.9rem;min-width:2.9rem;height:2.75rem;margin:0 !important;padding:0 !important;justify-content:center}
+
+.nd-confirm{margin:.6rem 0 .4rem;padding:.8rem .9rem;border:1px solid var(--accent);border-radius:2px;background:var(--bg)}
+.nd-confirm[hidden]{display:none}
+.nd-cmsg{margin:0 0 .3rem}

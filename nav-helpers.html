@@ -132,7 +132,7 @@ function run(){
       '<li>Open <strong>My Notes</strong> in the menu to see everything you have saved, with a link back to each passage.</li></ol>'+
       '<h3>Good to know</h3><ul>'+
       '<li>Highlights, notes and bookmarks are saved only on the device and browser you used. They do not sync to other devices, and no one else can see them.</li>'+
-      '<li>Clearing your browser data or deleting the app erases them. In <strong>My Notes</strong>, use <strong>Save a Backup</strong> now and then, and <strong>Restore a Backup</strong> to bring them back.</li>'+
+      '<li>Clearing your browser data or deleting the app erases them. In <strong>My Notes</strong>, use <strong>Save a Backup</strong> now and then, and <strong>Restore a Backup</strong> to bring them back. Restoring replaces everything on that device with the backup, so it is also the way to move your notes from one device to another.</li>'+
       '<li>If the wording of a passage is updated later, a highlight on that passage may no longer appear. Your text is still kept in <strong>My Notes</strong>.</li>'+
       '<li>Safari on iPhone and iPad can erase website data after about a week without a visit. Installed apps are not affected, so installing the app is the safest way to keep your notes.</li></ul>'+
       '<h3>Another option</h3><p>Because of these limitations, you may prefer to download the EPUB file and make highlights and notes in your favorite EPUB reader app. Most readers keep your notes with the book and can back them up or sync them between your devices. You can find the download in the <strong>Download the EPUB</strong> section of the Home page, or in the menu.</p>'+
@@ -593,15 +593,31 @@ function run(){
       try{var a=d.createElement("a"),blob=new Blob([JSON.stringify({v:2,items:db.items,bookmarks:(shared.bm?shared.bm.get():[])})],{type:"application/json"});
         a.href=URL.createObjectURL(blob);var n=new Date(),p2=function(x){return (x<10?"0":"")+x;};a.download="The-Truth_My-Notes_"+n.getFullYear()+"-"+p2(n.getMonth()+1)+"-"+p2(n.getDate())+".json";d.body.appendChild(a);a.click();d.body.removeChild(a);
         setTimeout(function(){URL.revokeObjectURL(a.href);},1000);say("Backup saved to your downloads.");}catch(e){say("The backup could not be saved here.");}});
+    var conf=d.createElement("div");conf.className="nd-confirm";conf.hidden=true;
+    conf.innerHTML='<p class="nd-cmsg"></p><div class="nd-actions"><button type="button" class="dlg-close nd-yes">Replace Everything</button><button type="button" class="dlg-close nd-no">Cancel</button></div>';
+    msg.parentNode.insertBefore(conf,msg.nextSibling);
+    var staged=null;
     dlg.querySelector(".nd-import").addEventListener("change",function(ev){
       var f=ev.target.files&&ev.target.files[0];if(!f)return;
       var fr=new FileReader();fr.onload=function(){
-        try{var v=JSON.parse(fr.result),n=0;
-          (v.items||[]).forEach(function(it){if(it&&it.id&&it.text&&it.page&&!byId(it.id)){db.items.push(it);n++;}});
-          var bn=(shared.bm&&v.bookmarks)?shared.bm.merge(v.bookmarks):0;
-          save(db);render();say(n+" note"+(n===1?"":"s")+" and highlight"+(n===1?"":"s")+" and "+bn+" bookmark"+(bn===1?"":"s")+" restored. Reload the page to see them.");}
-        catch(err){say("That file could not be read.");}};
+        try{
+          var v=JSON.parse(fr.result);
+          var notes=(v.items||[]).filter(function(it){return it&&it.id&&it.text&&it.page&&typeof it.color==="number";});
+          var bms=(v.bookmarks||[]).filter(function(b){return b&&b.id&&b.page&&typeof b.snip==="string"&&typeof b.color==="number";});
+          if(!Array.isArray(v.items)&&!Array.isArray(v.bookmarks))throw new Error("bad");
+          staged={notes:notes,bms:bms};
+          conf.querySelector(".nd-cmsg").textContent="This backup has "+notes.length+" highlight"+(notes.length===1?"":"s")+" and "+bms.length+" bookmark"+(bms.length===1?"":"s")+". Restoring replaces ALL highlights, notes and bookmarks on this device with the ones in the backup.";
+          conf.hidden=false;say("");
+        }catch(err){staged=null;conf.hidden=true;say("That file could not be read.");}};
       fr.readAsText(f);ev.target.value="";});
+    conf.querySelector(".nd-no").addEventListener("click",function(){staged=null;conf.hidden=true;say("Restore cancelled. Nothing was changed.");});
+    conf.querySelector(".nd-yes").addEventListener("click",function(){
+      if(!staged)return;
+      db.items=staged.notes;save(db);
+      if(shared.bm)shared.bm.replace(staged.bms);
+      staged=null;conf.hidden=true;say("Restored. Reloading\u2026");
+      setTimeout(function(){location.reload();},500);
+    });
     function closeD(){if(dlg.close)dlg.close();else dlg.removeAttribute("open");}
     dlg.querySelector(".nd-close").addEventListener("click",closeD);
     dlg.addEventListener("click",function(e){if(e.target===dlg)closeD();});
@@ -724,6 +740,11 @@ function run(){
       remove:function(id){db.items=db.items.filter(function(x){return x.id!==id;});save();flags();render();},
       addAt:function(c,el){var list=blocks(),i=list.indexOf(el);if(i<0)return null;return {was:place(c,{idx:i,snip:snipOf(el)})};},
       get:function(){return db.items.map(function(b){return {id:b.id,color:b.color,page:b.page,title:b.title,idx:b.idx,snip:b.snip,t:b.t};});},
+      replace:function(arr){db.items=[];(arr||[]).forEach(function(b){
+        if(!b||!b.id||!b.page||typeof b.color!=="number"||b.color<0||b.color>14||typeof b.snip!=="string")return;
+        db.items=db.items.filter(function(x){return x.color!==b.color;});
+        db.items.push({id:b.id,color:b.color,page:b.page,title:b.title||b.page,idx:b.idx|0,snip:b.snip,t:b.t||Date.now()});});
+        save();flags();render();},
       merge:function(arr){var n=0;(arr||[]).forEach(function(b){
         if(!b||!b.id||!b.page||typeof b.color!=="number"||b.color<0||b.color>14||typeof b.snip!=="string")return;
         db.items=db.items.filter(function(x){return x.id!==b.id&&x.color!==b.color;});
