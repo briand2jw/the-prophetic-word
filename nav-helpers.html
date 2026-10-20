@@ -126,9 +126,9 @@ function run(){
     var b=d.getElementById("studyhelp-btn");if(!b||typeof HTMLDialogElement==="undefined")return;
     var dlg=d.createElement("dialog");dlg.id="help-dialog";dlg.setAttribute("aria-labelledby","hp-title");
     dlg.innerHTML='<div class="dlg"><h2 id="hp-title">Adding highlights and notes</h2>'+
-      '<ol><li>Select the words you want. On a phone or tablet, touch and hold a word, then drag the handles.</li>'+
-      '<li>A small menu appears beside your selection. Tap a color to highlight, tap <strong>Note</strong> to write your own comment, or tap the bookmark icon to place a bookmark at that paragraph.</li>'+
-      '<li>Tap any highlight or bookmark ribbon to change it. The red trash icon deletes a highlight (and its note) or removes a bookmark.</li>'+
+      '<ol><li>Select the words you want (at least two words). On a phone or tablet, touch and hold a word, then drag the handles. When you pause, the words are highlighted automatically in your most recent color.</li>'+
+      '<li>Tap a highlight to open a small menu. There you can change its color (the new color is used for your next highlights), add a note, place a bookmark at that paragraph, or delete it with the red trash icon.</li>'+
+      '<li>Tap a bookmark ribbon to remove the bookmark. Highlighted something by accident? Tap it and use the trash icon.</li>'+
       '<li>Open <strong>My Notes</strong> in the menu to see everything you have saved, with a link back to each passage.</li></ol>'+
       '<h3>Good to know</h3><ul>'+
       '<li>Highlights, notes and bookmarks are saved only on the device and browser you used. They do not sync to other devices, and no one else can see them.</li>'+
@@ -346,7 +346,6 @@ function run(){
         '<button type="button" class="sp-round sp-bm" aria-label="Add a bookmark here">'+ICO.bm+'</button>'+
         '<button type="button" class="sp-pill sp-list">All bookmarks</button>'+
         '<button type="button" class="sp-round sp-delnote" aria-label="Delete note">'+ICO.trash+'</button>'+
-        '<button type="button" class="sp-round sp-pen" aria-label="Turn on the highlighter. Selected text is highlighted right away.">'+ICO.pen+'</button>'+
         '<button type="button" class="sp-pill sp-note">'+ICO.note+'<span>Note</span></button>'+
         '<button type="button" class="sp-pill sp-done">Done</button>'+
         '<button type="button" class="sp-pill sp-back">Back</button>'+
@@ -354,21 +353,14 @@ function run(){
     d.body.appendChild(pop);
     function q(s){return pop.querySelector(s);}
     var elTitle=q(".sp-title"),elColors=q(".sp-colors"),elNote=q(".sp-notetxt"),elEdit=q(".sb-edit"),ta=q("textarea"),elBmc=q(".sp-bmcolors"),
-        bDel=q(".sp-del"),bRm=q(".sp-rmbm"),bBm=q(".sp-bm"),bList=q(".sp-list"),bDelNote=q(".sp-delnote"),bPen=q(".sp-pen"),bNote=q(".sp-note"),bDone=q(".sp-done"),bBack=q(".sp-back");
+        bDel=q(".sp-del"),bRm=q(".sp-rmbm"),bBm=q(".sp-bm"),bList=q(".sp-list"),bDelNote=q(".sp-delnote"),bNote=q(".sp-note"),bDone=q(".sp-done"),bBack=q(".sp-back");
     var mode=null,pending=null,cur=null,curBm=null,anchor=null,tm=null,toastTm=null;
-    var lastColor=1,quick=false;
-    try{var lc=parseInt(localStorage.getItem("studyColor"),10);if(lc>=1&&lc<=6)lastColor=lc;quick=localStorage.getItem("studyQuick")==="1";}catch(e){}
-    function setLast(c){lastColor=c;try{localStorage.setItem("studyColor",String(c));}catch(e){}paintChip();}
-    var chip=d.createElement("button");chip.type="button";chip.className="hl-chip";chip.hidden=!quick;
-    chip.innerHTML=ICO.pen+'<span>Highlighter on</span><i class="hl-dot"></i>';chip.setAttribute("aria-label","Highlighter is on. Tap to turn it off.");
-    d.body.appendChild(chip);
-    function paintChip(){var dot=chip.querySelector(".hl-dot");dot.className="hl-dot u-c"+lastColor;}
-    function setQuick(on){quick=on;chip.hidden=!on;try{localStorage.setItem("studyQuick",on?"1":"0");}catch(e){}paintChip();}
-    paintChip();
-    chip.addEventListener("click",function(){setQuick(false);});
+    var lastColor=1;
+    try{var lc=parseInt(localStorage.getItem("studyColor"),10);if(lc>=1&&lc<=6)lastColor=lc;}catch(e){}
+    function setLast(c){lastColor=c;try{localStorage.setItem("studyColor",String(c));}catch(e){}}
     function setVis(m){
-      var map={new:[elColors,bBm,bPen,bNote],mark:[elColors,elNote,bDel,bBm,bNote],bmk:[elTitle,bRm,bList],edit:[elEdit,bDelNote,bDone],bmpick:[elTitle,elBmc,bBack],done:[elTitle]};
-      [elTitle,elColors,elNote,elEdit,elBmc,bDel,bRm,bBm,bPen,bList,bDelNote,bNote,bDone,bBack].forEach(function(e){e.hidden=true;});
+      var map={new:[elColors,bBm,bNote],mark:[elColors,elNote,bDel,bBm,bNote],bmk:[elTitle,bRm,bList],edit:[elEdit,bDelNote,bDone],bmpick:[elTitle,elBmc,bBack],done:[elTitle]};
+      [elTitle,elColors,elNote,elEdit,elBmc,bDel,bRm,bBm,bList,bDelNote,bNote,bDone,bBack].forEach(function(e){e.hidden=true;});
       (map[m]||[]).forEach(function(e){e.hidden=false;});
       if(m==="mark"){elNote.hidden=!(cur&&cur.note);}
       pop.classList.toggle("sp-simple",m==="done");
@@ -474,10 +466,10 @@ function run(){
       if(e-s<2||e-s>3000){if(mode==="new")hide();return;}
       pending={s:s,text:txt.slice(s,e),prefix:txt.slice(Math.max(0,s-30),s),suffix:txt.slice(e,e+30),el:blockOf(r.startContainer)};
       cur=null;
-      if(quick){create(lastColor);hide();return;}
-      show("new",lastRect(r.getClientRects(),r.getBoundingClientRect()));setPressed();
+      if(pending.text.split(/\s+/).length<2){pending=null;return;}
+      create(lastColor);hide();
     }
-    d.addEventListener("selectionchange",function(){if(mode&&mode!=="new")return;clearTimeout(tm);tm=setTimeout(check,250);});
+    d.addEventListener("selectionchange",function(){if(mode&&mode!=="new")return;clearTimeout(tm);tm=setTimeout(check,900);});
     pop.addEventListener("mousedown",function(e){if(e.target!==ta)e.preventDefault();});
     [].forEach.call(elColors.querySelectorAll(".sb-c"),function(b){b.addEventListener("click",function(){
       var c=parseInt(b.getAttribute("data-c"),10);
@@ -490,7 +482,6 @@ function run(){
       if(!cur)return;
       var r=anchor;mode="edit";ta.value=cur.note||"";setVis("edit");position();ta.focus();
     });
-    bPen.addEventListener("click",function(){if(mode!=="new"||!pending)return;create(lastColor);setQuick(true);toast("Highlighter on. Select text to highlight it.");});
     bDone.addEventListener("click",function(){saveNote();hide();});
     bDelNote.addEventListener("click",function(){if(cur){cur.note="";save(db);paint(cur);}hide();});
     bDel.addEventListener("click",function(){if(!cur)return;var id=cur.id;db.items=db.items.filter(function(x){return x.id!==id;});save(db);unwrap(id);hide();});
