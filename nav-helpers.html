@@ -245,7 +245,7 @@ function run(){
   /* Personal study: highlights and notes, kept on this device only */
   safe(function(){
     var main=d.querySelector("main.content");if(!main||!d.createTreeWalker)return;
-    var KEY="studyNotes-v1",mem=null,COL={1:"Gold",2:"Green",3:"Blue"};
+    var KEY="studyNotes-v1",mem=null,COL={1:"Gold",2:"Green",3:"Blue",4:"Purple",5:"Orange",6:"Red"};
     var page=(location.href.split(/[?#]/)[0].slice(root.length))||"index.html";
     var titleEl=main.querySelector("h1.title");
     var title=((titleEl&&titleEl.textContent)||d.title||page).replace(/\s+/g," ").trim();
@@ -326,7 +326,7 @@ function run(){
     var bar=d.createElement("div");bar.className="study-bar";bar.hidden=true;bar.setAttribute("role","toolbar");bar.setAttribute("aria-label","Highlights and notes");
     bar.innerHTML=
       '<div class="sb-row"><span class="sb-label" id="sb-label">Highlight</span>'+
-      [1,2,3].map(function(c){return '<button type="button" class="sb-c u-c'+c+'" data-c="'+c+'" aria-label="'+COL[c]+' highlight"></button>';}).join("")+
+      [1,2,3,4,5,6].map(function(c){return '<button type="button" class="sb-c u-c'+c+'" data-c="'+c+'" aria-label="'+COL[c]+' highlight"></button>';}).join("")+
       '<button type="button" class="sb-btn sb-addnote">Add note</button>'+
       '<button type="button" class="sb-x" aria-label="Close">✕</button></div>'+
       '<div class="sb-edit" hidden><label class="sr-only" for="sb-text">Your note</label><textarea id="sb-text" rows="3" placeholder="Write your note here"></textarea>'+

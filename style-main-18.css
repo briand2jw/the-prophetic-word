@@ -282,11 +282,14 @@ mark.u-hl{padding:0;border-radius:2px;color:inherit;box-decoration-break:clone;-
 .u-c1{background:rgba(240,200,90,.34)}
 .u-c2{background:rgba(120,200,130,.32)}
 .u-c3{background:rgba(110,170,240,.36)}
+.u-c4{background:rgba(170,120,230,.42)}
+.u-c5{background:rgba(240,150,60,.40)}
+.u-c6{background:rgba(230,80,80,.42)}
 mark.u-hl[id].has-note::before{content:"\270E\00a0";font-size:.75em;color:var(--accent);font-style:normal;vertical-align:super;line-height:0}
 .study-bar{position:fixed;left:0;right:0;bottom:0;margin:0 auto;max-width:34rem;z-index:1050;box-sizing:border-box;padding:.8rem 1rem calc(.8rem + env(safe-area-inset-bottom,0px));background:var(--surface);border:1px solid var(--rule);border-top:4px solid var(--accent);font-family:'Noto Sans',system-ui,sans-serif;box-shadow:0 -6px 24px rgba(0,0,0,.45)}
 .study-bar[hidden],.sb-edit[hidden],.sb-addnote[hidden]{display:none}
 .study-open .to-top{display:none}
-.sb-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.sb-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .sb-label{font-size:.85rem;font-weight:600;color:var(--meta);margin-right:.1rem}
 .sb-c{width:2.75rem;height:2.75rem;border-radius:50%;border:2px solid var(--rule);cursor:pointer;padding:0}
 .sb-c[aria-pressed="true"]{border-color:var(--text);box-shadow:0 0 0 2px var(--bg) inset}
