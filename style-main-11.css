@@ -200,11 +200,13 @@ main.content h2{margin-top:3.6rem !important;margin-bottom:1rem}
 main.content h2.anchored:first-of-type{margin-top:2.4rem !important}
 .whatsnew,.section-list{margin-bottom:.4rem}
 
-/* ---- Reading: scripture quotations ---- */
-.scripture,main.content blockquote{margin:1.6rem 0;padding:.15rem 0 .15rem 1.3rem;border-left:3px solid var(--accent);border-radius:0;color:var(--text);font-size:.98em;line-height:1.7}
-.scripture p,main.content blockquote p{margin:0 0 .6rem}
+/* ---- Reading: scripture quotations (quiet italic, no box, so it never resembles a button) ---- */
+.scripture,main.content blockquote{position:relative;margin:1.5rem 0 1.5rem 1.2rem;padding:0 0 0 1.6rem;border:0;background:none;color:var(--text);font-style:italic;line-height:1.75}
+.scripture::before,main.content blockquote::before{content:"\201C";position:absolute;left:-.1rem;top:-.35rem;font-family:'Noto Serif Display',Georgia,serif;font-style:normal;font-size:3rem;line-height:1;color:var(--accent);opacity:.8}
+.scripture p,main.content blockquote p{margin:0 0 .5rem}
 .scripture>:last-child,main.content blockquote>:last-child{margin-bottom:0}
-.scripture .ref{display:block;font-family:'Noto Sans',system-ui,sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--meta);font-style:normal}
+.scripture .ref{display:block;margin-top:.15rem;font-family:'Noto Sans',system-ui,sans-serif;font-size:.85em;font-weight:600;font-style:normal;letter-spacing:.04em;color:var(--meta)}
+.scripture .ref::before{content:"\2014\00a0"}
 
 /* ---- Softer links ---- */
 :where(main.content p, main.content li) > a{text-decoration-line:underline;text-decoration-thickness:1px;text-underline-offset:.24em;text-decoration-color:rgba(229,138,115,.5)}
@@ -221,7 +223,12 @@ main.content h2.anchored:first-of-type{margin-top:2.4rem !important}
 .cp-arrow{font-size:1.6rem;line-height:1}
 
 /* ---- Text size control ---- */
-main.content{font-size:calc(1.0625rem * var(--read-scale,1))}
+main.content,main.content p,main.content li,main.content .overview,main.content .cta,main.content .scripture,main.content blockquote{font-size:calc(1.0625rem * var(--read-scale,1))}
+main.content .dates{font-size:calc(.95rem * var(--read-scale,1))}
+main.content .main-sub{font-size:calc(1.5rem * var(--read-scale,1))}
+main.content .vgroup{font-size:calc(1.15rem * var(--read-scale,1))}
+main.content h1.title{font-size:calc(2rem * var(--read-scale,1))}
+main.content h2:not(.main-sub){font-size:calc(1.6rem * var(--read-scale,1))}
 .text-size{display:flex;align-items:center;justify-content:flex-end;gap:.45rem;margin:-.6rem 0 1.4rem;font-family:'Noto Sans',system-ui,sans-serif;font-size:.85rem;color:var(--meta)}
 .ts-label{margin-right:.2rem}
 .ts-btn{min-width:2.75rem;min-height:2.5rem;padding:.2rem .6rem;border:1px solid var(--rule);border-radius:2px;background:transparent;color:var(--text);font:inherit;font-weight:700;font-size:.95rem;cursor:pointer}
