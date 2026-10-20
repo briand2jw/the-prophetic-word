@@ -22,9 +22,14 @@ book:
     - part: prophetic-word.qmd
       chapters:
         - daniel.qmd
+        - chapters/daniel-2.qmd
+        - chapters/daniel-4.qmd
+        - chapters/daniel-8.qmd
         - chapters/daniel-11.qmd
+        - chapters/daniel-12.qmd
         - matthew.qmd
         - chapters/matthew-24.qmd
+        - chapters/matthew-25.qmd
     - part: seek-jehovah.qmd
       chapters:
         - article-sample-2.qmd

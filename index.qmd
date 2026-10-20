@@ -18,8 +18,8 @@ Last updated: {{< meta date >}}
 ## What's new
 
 ::: whatsnew
-- **October 17, 2026.** New information posted on [Matthew 24](chapters/matthew-24.qmd) and 25.
-- **September 15, 2026.** Updated comments posted on [Daniel 4](daniel.qmd).
+- **October 17, 2026.** New information posted on [Matthew 24](chapters/matthew-24.qmd) and [25](chapters/matthew-25.qmd).
+- **September 15, 2026.** Updated comments posted on [Daniel 4](chapters/daniel-4.qmd).
 - **August 12, 2026.** New article on [Seek Righteousness—Why Important Now?](article-sample-2.qmd)
 :::
 

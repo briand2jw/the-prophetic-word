@@ -1,0 +1,25 @@
+---
+title: "Matthew 25"
+---
+
+::: dates
+Posted: October 1, 2026 · Updated: October 10, 2026
+:::
+
+::: overview
+**Overview.** Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+:::
+
+## Main subheading {.main-sub}
+
+### Verses 1-4 {.vgroup}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.
+
+### Verses 5-9 {.vgroup}
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+::: cta
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+:::
