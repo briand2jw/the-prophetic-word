@@ -192,3 +192,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[
 #quarto-sidebar .translate-btn.tr-side{margin-bottom:.7rem}
 
 .epub-note{display:block;margin-top:.9rem;font-size:.92rem;line-height:1.5;color:var(--meta)}
+
+/* Accent words in headings */
+.hl{font-style:italic;color:var(--accent)}
+/* More air between page sections */
+main.content h2{margin-top:3.6rem !important;margin-bottom:1rem}
+main.content h2.anchored:first-of-type{margin-top:2.4rem !important}
+.whatsnew,.section-list{margin-bottom:.4rem}

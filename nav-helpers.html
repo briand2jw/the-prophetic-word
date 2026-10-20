@@ -98,6 +98,21 @@ function run(){
       c.style.order=o;
     });
   });
+  /* Accent: last word of page titles and section headings in coloured italics */
+  safe(function(){
+    [].forEach.call(d.querySelectorAll("main.content h1.title, main.content h2"),function(h){
+      if(h.classList.contains("no-hl")||h.querySelector(".hl"))return;
+      var words=h.textContent.trim().split(/\s+/);if(words.length<2)return;
+      var w=d.createTreeWalker(h,NodeFilter.SHOW_TEXT),last=null,n;
+      while((n=w.nextNode())){if(n.nodeValue.trim())last=n;}
+      if(!last)return;
+      var m=last.nodeValue.match(/^([\s\S]*?)(\S+)(\s*)$/);if(!m)return;
+      last.nodeValue=m[1];
+      var sp=d.createElement("span");sp.className="hl";sp.textContent=m[2];
+      last.parentNode.insertBefore(sp,last.nextSibling);
+      if(m[3])sp.parentNode.insertBefore(d.createTextNode(m[3]),sp.nextSibling);
+    });
+  });
   /* Menu sections start collapsed; the section holding the current page stays open */
   safe(function(){
     [].forEach.call(d.querySelectorAll("#quarto-sidebar li.sidebar-item-section"),function(li){
