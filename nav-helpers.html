@@ -72,6 +72,21 @@ function run(){
     main.appendChild(nav);
     d.documentElement.classList.add("chapter-page");
   });
+  /* Installable web app: manifest, offline script, Android install button */
+  safe(function(){
+    var head=d.head;
+    var l=d.createElement("link");l.rel="manifest";l.href=root+"manifest.webmanifest";head.appendChild(l);
+    [["apple-mobile-web-app-capable","yes"],["apple-mobile-web-app-title","The Truth"],["apple-mobile-web-app-status-bar-style","black-translucent"],["theme-color","#1b1c18"]].forEach(function(p){
+      var m=d.createElement("meta");m.name=p[0];m.content=p[1];head.appendChild(m);});
+    if("serviceWorker" in navigator){window.addEventListener("load",function(){
+      navigator.serviceWorker.register(root+"sw.js",{scope:root}).catch(function(){});});}
+    var deferred=null,btn=d.getElementById("install-btn");
+    window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferred=e;if(btn)btn.hidden=false;});
+    if(btn)btn.addEventListener("click",function(){if(!deferred)return;deferred.prompt();deferred.userChoice.then(function(){deferred=null;btn.hidden=true;});});
+    window.addEventListener("appinstalled",function(){if(btn)btn.hidden=true;});
+    if(window.matchMedia("(display-mode: standalone)").matches||navigator.standalone){
+      [].forEach.call(d.querySelectorAll(".install-box"),function(b){b.hidden=true;});}
+  });
   /* Return links at the bottom of each page */
   safe(function(){
     var main=d.querySelector("main.content");
@@ -154,7 +169,7 @@ function run(){
   /* Browser-tab icon and home-screen icon */
   safe(function(){
     [["icon","image/png"],["apple-touch-icon",""]].forEach(function(r){
-      var l=d.createElement("link");l.rel=r[0];if(r[1])l.type=r[1];l.href=root+"logo.png";d.head.appendChild(l);});
+      var l=d.createElement("link");l.rel=r[0];if(r[1])l.type=r[1];l.href=root+(r[0]==="apple-touch-icon"?"icons/apple-touch-icon.png":"icons/icon-192.png");d.head.appendChild(l);});
   });
   /* Text size control on article and chapter pages (remembered on this device) */
   safe(function(){

@@ -3,6 +3,9 @@ project:
   output-dir: _site
   resources:
     - logo.png
+    - manifest.webmanifest
+    - sw.js
+    - icons
 
 number-sections: false
 
@@ -36,7 +39,7 @@ book:
 
 format:
   html:
-    css: [style-main-11.css, style-dark.css]
+    css: [style-main-12.css, style-dark.css]
     toc: false
     number-sections: false
     include-after-body: nav-helpers.html

@@ -235,3 +235,9 @@ main.content h2:not(.main-sub){font-size:calc(1.6rem * var(--read-scale,1))}
 .ts-btn:hover:not(:disabled){border-color:var(--accent)}
 .ts-btn:disabled{opacity:.35;cursor:default}
 @media (forced-colors:active){.ts-btn{border:2px solid ButtonText}}
+
+/* ---- Install box ---- */
+.install-box ol{margin:.3rem 0 1.1rem;padding-left:1.4rem}
+.install-box li{margin-bottom:.35rem}
+.install-box #install-btn{margin:.4rem 0 1.2rem}
+.install-box #install-btn[hidden]{display:none}
