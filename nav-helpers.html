@@ -425,7 +425,35 @@ function run(){
     function create(color){
       if(!pending)return null;
       var sel=window.getSelection();if(sel)sel.removeAllRanges();
-      return addRange(pending.s,pending.s+pending.text.length,color);
+      var txt=stream(nodes()),s=pending.s,e=pending.s+pending.text.length,note="";
+      function mine(){return db.items.filter(function(x){return x.page===page;});}
+      function drop(o){db.items=db.items.filter(function(x){return x!==o;});unwrap(o.id);}
+      function addItem(a,b2,col,nt){
+        while(a<b2&&/\s/.test(txt.charAt(a)))a++;
+        while(b2>a&&/\s/.test(txt.charAt(b2-1)))b2--;
+        if(b2-a<1)return null;
+        var it={id:uid(),page:page,title:title,color:col,text:txt.slice(a,b2),prefix:txt.slice(Math.max(0,a-30),a),suffix:txt.slice(b2,b2+30),s:a,note:nt||"",t:Date.now()};
+        db.items.push(it);wrapRange(a,b2,it);return it;
+      }
+      /* same color touching or overlapping: join into one highlight */
+      var again=true;
+      while(again){again=false;
+        var same=mine();
+        for(var i=0;i<same.length;i++){var o=same[i],oe=o.s+o.text.length;
+          if(o.color===color&&o.s<=e&&oe>=s){s=Math.min(s,o.s);e=Math.max(e,oe);if(o.note)note=note?note+"\n"+o.note:o.note;drop(o);again=true;break;}}
+      }
+      /* other colors underneath: the new color wins, the rest of the old highlight stays */
+      mine().forEach(function(o){
+        var oe=o.s+o.text.length;
+        if(o.s<e&&oe>s){
+          drop(o);
+          if(o.s<s)addItem(o.s,s,o.color,o.note);
+          if(oe>e)addItem(e,oe,o.color,o.s<s?"":o.note);
+          if(o.s>=s&&oe<=e&&o.note)note=note?note+"\n"+o.note:o.note;
+        }
+      });
+      var it=addItem(s,e,color,note);save(db);
+      return it;
     }
     function blockOf(n){var e=n&&(n.nodeType===3?n.parentNode:n);return e&&e.closest?e.closest(BLK):null;}
     function openMark(id,m){
