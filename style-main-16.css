@@ -170,22 +170,30 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[
 .translate-btn.tr-bar svg{color:var(--bar-text);width:24px;height:24px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 #translate-dialog,
-#install-dialog{border:1px solid var(--rule);border-top:4px solid var(--accent);padding:0;width:100%;max-width:min(32rem,calc(100vw - 2rem));max-height:calc(100vh - 2rem);overflow:auto;color:var(--text);background:var(--surface)}
+#install-dialog,
+#notes-dialog{border:1px solid var(--rule);border-top:4px solid var(--accent);padding:0;width:100%;max-width:min(32rem,calc(100vw - 2rem));max-height:calc(100vh - 2rem);overflow:auto;color:var(--text);background:var(--surface)}
 #translate-dialog::backdrop,
-#install-dialog::backdrop{background:rgba(0,0,0,.65)}
+#install-dialog::backdrop,
+#notes-dialog::backdrop{background:rgba(0,0,0,.65)}
 #translate-dialog .dlg,
-#install-dialog .dlg{padding:1.4rem 1.4rem 1.6rem}
+#install-dialog .dlg,
+#notes-dialog .dlg{padding:1.4rem 1.4rem 1.6rem}
 #translate-dialog h2,
-#install-dialog h2{margin:0 0 .6rem;font-size:1.3rem;border:0}
+#install-dialog h2,
+#notes-dialog h2{margin:0 0 .6rem;font-size:1.3rem;border:0}
 #translate-dialog h3,
-#install-dialog h3{margin:1.1rem 0 .15rem;font-size:1rem;border:0}
+#install-dialog h3,
+#notes-dialog h3{margin:1.1rem 0 .15rem;font-size:1rem;border:0}
 #translate-dialog p,
-#install-dialog p{margin:0 0 .5rem;font-size:.97rem;line-height:1.6}
+#install-dialog p,
+#notes-dialog p{margin:0 0 .5rem;font-size:.97rem;line-height:1.6}
 #translate-dialog .dlg-close,
-#install-dialog .dlg-close{margin-top:1.1rem;padding:.55rem 1.2rem;font:inherit;font-weight:600;color:var(--text);background:transparent;border:2px solid var(--accent);border-radius:2px;cursor:pointer}
+#install-dialog .dlg-close,
+#notes-dialog .dlg-close{margin-top:1.1rem;padding:.55rem 1.2rem;font:inherit;font-weight:600;color:var(--text);background:transparent;border:2px solid var(--accent);border-radius:2px;cursor:pointer}
 #translate-dialog .dlg-close:hover,
-#install-dialog .dlg-close:hover{background:var(--tile-hover)}
-@media (forced-colors:active){.translate-btn,#translate-dialog .dlg-close,#install-dialog .dlg-close{border:2px solid CanvasText}}
+#install-dialog .dlg-close:hover,
+#notes-dialog .dlg-close:hover{background:var(--tile-hover)}
+@media (forced-colors:active){.translate-btn,#translate-dialog .dlg-close,#install-dialog .dlg-close,#notes-dialog .dlg-close{border:2px solid CanvasText}}
 
 /* Top bar stays on a single row */
 .quarto-secondary-nav > .container-fluid{flex-wrap:nowrap !important;align-items:center}
@@ -257,6 +265,47 @@ main.content h2:not(.main-sub){font-size:calc(1.6rem * var(--read-scale,1))}
 .install-box ol{display:none}
 
 .install-box .install-actions{margin:.7rem 0 0}
-.install-box .install-actions .translate-btn{padding:.55rem 1.1rem;min-height:0;border:2px solid var(--text);background:var(--bg);color:var(--text);font-family:var(--body-font);font-weight:600;font-size:1rem;border-radius:2px}
-.install-box .install-actions .translate-btn:hover{background:var(--text);color:var(--bg)}
+.install-box .install-actions .translate-btn,.study-box .install-actions .translate-btn{padding:.55rem 1.1rem;min-height:0;border:2px solid var(--text);background:var(--bg);color:var(--text);font-family:var(--body-font);font-weight:600;font-size:1rem;border-radius:2px}
+.install-box .install-actions .translate-btn:hover,.study-box .install-actions .translate-btn:hover{background:var(--text);color:var(--bg)}
 .install-box .epub-note{margin-top:.9rem}
+
+/* ---- Study: highlights and notes ---- */
+mark.u-hl{padding:0;border-radius:2px;color:inherit;box-decoration-break:clone;-webkit-box-decoration-break:clone;cursor:pointer}
+.u-c1{background:rgba(240,200,90,.34)}
+.u-c2{background:rgba(120,200,130,.32)}
+.u-c3{background:rgba(110,170,240,.36)}
+mark.u-hl[id].has-note::before{content:"\270E\00a0";font-size:.75em;color:var(--accent);font-style:normal;vertical-align:super;line-height:0}
+.study-bar{position:fixed;left:0;right:0;bottom:0;margin:0 auto;max-width:34rem;z-index:1050;box-sizing:border-box;padding:.8rem 1rem calc(.8rem + env(safe-area-inset-bottom,0px));background:var(--surface);border:1px solid var(--rule);border-top:4px solid var(--accent);font-family:'Noto Sans',system-ui,sans-serif;box-shadow:0 -6px 24px rgba(0,0,0,.45)}
+.study-bar[hidden],.sb-edit[hidden],.sb-addnote[hidden]{display:none}
+.study-open .to-top{display:none}
+.sb-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.sb-label{font-size:.85rem;font-weight:600;color:var(--meta);margin-right:.1rem}
+.sb-c{width:2.75rem;height:2.75rem;border-radius:50%;border:2px solid var(--rule);cursor:pointer;padding:0}
+.sb-c[aria-pressed="true"]{border-color:var(--text);box-shadow:0 0 0 2px var(--bg) inset}
+.sb-btn{min-height:2.75rem;padding:.4rem 1rem;border:2px solid var(--accent);border-radius:2px;background:transparent;color:var(--text);font:inherit;font-weight:600;font-size:.95rem;cursor:pointer}
+.sb-btn:hover{background:var(--tile-hover)}
+.sb-x{margin-left:auto;min-width:2.75rem;min-height:2.75rem;border:0;background:transparent;color:var(--text);font-size:1.2rem;cursor:pointer}
+.sb-edit textarea{display:block;width:100%;box-sizing:border-box;margin:.7rem 0;padding:.6rem .7rem;border:1px solid var(--rule);border-radius:2px;background:var(--bg);color:var(--text);font:inherit;font-size:1rem;line-height:1.5;resize:vertical}
+#notes-dialog{max-width:min(40rem,calc(100vw - 2rem))}
+#notes-dialog h3{font-family:var(--head-font)}
+#notes-dialog .nd-intro,#notes-dialog .nd-msg{color:var(--meta)}
+#notes-dialog .nd-msg{min-height:1.4rem;margin-top:.8rem}
+.nd-items{list-style:none;margin:.3rem 0 .6rem;padding:0}
+.nd-items li{display:flex;gap:.7rem;padding:.55rem 0;border-top:1px solid var(--rule)}
+.nd-chip{flex:none;width:.9rem;height:.9rem;margin-top:.3rem;border-radius:50%}
+.nd-items q{font-style:italic;quotes:"\201C" "\201D"}
+#notes-dialog .nd-note{margin:.3rem 0 0;font-style:normal}
+#notes-dialog .nd-links{margin:.3rem 0 0;font-size:.9rem}
+.nd-rm{margin-left:.6rem;padding:0;border:0;background:none;color:var(--meta);font:inherit;text-decoration:underline;cursor:pointer}
+.nd-actions{display:flex;flex-wrap:wrap;gap:.6rem}
+.nd-actions .dlg-close,#notes-dialog .nd-close{margin-top:.6rem}
+.nd-import-l{position:relative;display:inline-block;cursor:pointer}
+.nd-import{position:absolute;inset:0;opacity:0;width:100%;cursor:pointer}
+.study-box ul,.study-box ol{margin:.4rem 0 .9rem;padding-left:1.4rem}
+.study-box li{margin-bottom:.3rem}
+.study-box p{margin:.4rem 0 .5rem}
+.study-box .box-title{font-family:var(--head-font);font-size:1.25rem;font-weight:600;margin:0 0 .3rem}
+.study-box .box-sub{font-weight:600;margin:1rem 0 .2rem}
+.epub-side-wrap > * + *{margin-top:.7rem}
+@media (forced-colors:active){mark.u-hl{background:Mark;color:MarkText}.study-bar,.sb-btn,.sb-c{border:2px solid CanvasText}}
+.study-box .box-title,.study-box .box-sub{display:block}
