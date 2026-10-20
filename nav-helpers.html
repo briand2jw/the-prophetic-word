@@ -87,6 +87,20 @@ function run(){
     if(window.matchMedia("(display-mode: standalone)").matches||navigator.standalone){
       [].forEach.call(d.querySelectorAll(".install-box"),function(b){b.hidden=true;});}
   });
+  /* "How do I install this?" prompt on Home */
+  safe(function(){
+    var b=d.getElementById("howto-btn");if(!b||typeof HTMLDialogElement==="undefined")return;
+    var dlg=d.createElement("dialog");dlg.id="install-dialog";dlg.setAttribute("aria-labelledby","in-title");
+    dlg.innerHTML='<div class="dlg"><h2 id="in-title">Install this website as an app</h2>'+
+      '<h3>iPhone or iPad (Safari)</h3><ol><li>Tap the Share button (the square with an arrow pointing up).</li><li>Scroll down and tap <strong>Add to Home Screen</strong>.</li><li>Tap <strong>Add</strong>.</li></ol>'+
+      '<h3>Android (Chrome)</h3><ol><li>Tap the menu (three dots) at the top right.</li><li>Tap <strong>Install app</strong> or <strong>Add to Home screen</strong>.</li><li>Tap <strong>Install</strong>.</li></ol>'+
+      '<p>The app opens from your home screen like any other app.</p>'+
+      '<button type="button" class="dlg-close">Close</button></div>';
+    d.body.appendChild(dlg);
+    b.addEventListener("click",function(){dlg.showModal();});
+    dlg.querySelector(".dlg-close").addEventListener("click",function(){dlg.close();});
+    dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close();});
+  });
   /* Return links at the bottom of each page */
   safe(function(){
     var main=d.querySelector("main.content");

@@ -6,15 +6,6 @@ title: "Home"
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
-::: stamp
-This EPUB file contains all the information on this website.\
-Last updated: {{< meta date >}}
-
-[Download the EPUB](the-truth.epub){.epub-btn}
-
-[The EPUB is in English. Use your reading app's translate feature to read it in another language.]{.epub-note}
-:::
-
 ## What's new
 
 ::: whatsnew
@@ -34,24 +25,23 @@ Last updated: {{< meta date >}}
   Sample description of this section.
 :::
 
+## Download the EPUB
+
+::: stamp
+This EPUB file contains all the information on this website.\
+Last updated: {{< meta date >}}
+
+[Download the EPUB](the-truth.epub){.epub-btn}
+
+[The EPUB is in English. Use your reading app's translate feature to read it in another language.]{.epub-note}
+:::
+
 ## Install as an app
 
 ::: {.install-box}
 Add this website to your phone or tablet so it opens like an app, with its own icon. Once it has been opened, it can also be read without an internet connection.
 
-<button type="button" id="install-btn" class="translate-btn" hidden>Install the app</button>
-
-**iPhone or iPad (Safari)**
-
-1. Tap the Share button (the square with an arrow pointing up).
-2. Scroll down and tap **Add to Home Screen**.
-3. Tap **Add**.
-
-**Android (Chrome)**
-
-1. Tap the menu (three dots) at the top right.
-2. Tap **Install app** or **Add to Home screen**.
-3. Tap **Install**.
+<p class="install-actions"><button type="button" id="install-btn" class="translate-btn" hidden>Install the app</button> <button type="button" id="howto-btn" class="translate-btn">How do I install this?</button></p>
 
 [Translation works best when you read the website in your browser rather than the installed app.]{.epub-note}
 :::
