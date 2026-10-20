@@ -789,6 +789,22 @@ function run(){
       wrap.insertBefore(sb,wrap.querySelector(".notes-side")||wrap.querySelector("a.epub-side"));
     }
     var o=d.getElementById("bookmarks-open");if(o)o.addEventListener("click",openD);
+    /* make the three header icons exactly evenly spaced, whatever the theme adds around them */
+    function evenIcons(){
+      if(!bar)return;
+      var s=bar.querySelector(".aa-DetachedSearchButton svg,.aa-DetachedSearchButtonIcon,#quarto-search svg,#quarto-search i,.quarto-search svg"),
+          t=bar.querySelector(".tr-bar:not(.bm-bar) svg"),b=bar.querySelector(".bm-bar svg"),bb=bar.querySelector(".bm-bar");
+      if(!s||!t||!b||!bb)return;
+      bb.style.removeProperty("margin-left");
+      function cx(e){var r=e.getBoundingClientRect();return r.left+r.width/2;}
+      var cs=cx(s),ct=cx(t),cb=cx(b),step=ct-cs;
+      if(!(step>20&&step<120)||!isFinite(cb))return;
+      var delta=Math.round(step-(cb-ct));
+      if(Math.abs(delta)>0)bb.style.setProperty("margin-left",delta+"px","important");
+    }
+    [0,300,1200,3000].forEach(function(ms){setTimeout(evenIcons,ms);});
+    window.addEventListener("resize",evenIcons);
+    window.addEventListener("load",evenIcons);
   });
   /* Back-to-top button */
   safe(function(){
