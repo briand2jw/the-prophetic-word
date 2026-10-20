@@ -33,19 +33,9 @@ Take your time with each chapter. Read the overview first, then work through the
 ::: {.stamp .study-box}
 [Adding highlights and notes]{.box-title}
 
-1. Select the words you want. On a phone or tablet, touch and hold a word, then drag the handles.
-2. A bar appears at the bottom of the screen. Tap a color to highlight, or tap **Add note** to write your own comment.
-3. Tap any highlight to change its color, edit its note, or remove it.
-4. Open **My Notes** in the menu to see everything you have saved, with a link back to each passage.
+Mark the words that stand out and write your own comments. They are saved privately on your device.
 
-[Good to know]{.box-sub}
-
-- Highlights and notes are saved only on the device and browser you used. They do not sync to other devices, and no one else can see them.
-- Clearing your browser data or deleting the app erases them. In **My Notes**, use **Save a backup** now and then, and **Restore a backup** to bring them back.
-- If the wording of a passage is updated later, a highlight on that passage may no longer appear. Your text is still kept in **My Notes**.
-- Safari on iPhone and iPad can erase website data after about a week without a visit. Installed apps are not affected, so installing the app is the safest way to keep your notes.
-
-<p class="install-actions"><button type="button" id="notes-open" class="translate-btn">Open My Notes</button></p>
+<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">How do I add highlights and notes?</button> <button type="button" id="notes-open" class="translate-btn">Open My Notes</button></p>
 :::
 :::
 

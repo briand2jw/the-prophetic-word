@@ -120,6 +120,26 @@ function run(){
     dlg.querySelector(".dlg-close").addEventListener("click",function(){dlg.close();});
     dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close();});
   });
+  /* "How do I add highlights and notes?" prompt on Home */
+  safe(function(){
+    var b=d.getElementById("studyhelp-btn");if(!b||typeof HTMLDialogElement==="undefined")return;
+    var dlg=d.createElement("dialog");dlg.id="help-dialog";dlg.setAttribute("aria-labelledby","hp-title");
+    dlg.innerHTML='<div class="dlg"><h2 id="hp-title">Adding highlights and notes</h2>'+
+      '<ol><li>Select the words you want. On a phone or tablet, touch and hold a word, then drag the handles.</li>'+
+      '<li>A bar appears at the bottom of the screen. Tap a color to highlight, or tap <strong>Add note</strong> to write your own comment.</li>'+
+      '<li>Tap any highlight to change its color, edit its note, or remove it.</li>'+
+      '<li>Open <strong>My Notes</strong> in the menu to see everything you have saved, with a link back to each passage.</li></ol>'+
+      '<h3>Good to know</h3><ul>'+
+      '<li>Highlights and notes are saved only on the device and browser you used. They do not sync to other devices, and no one else can see them.</li>'+
+      '<li>Clearing your browser data or deleting the app erases them. In <strong>My Notes</strong>, use <strong>Save a backup</strong> now and then, and <strong>Restore a backup</strong> to bring them back.</li>'+
+      '<li>If the wording of a passage is updated later, a highlight on that passage may no longer appear. Your text is still kept in <strong>My Notes</strong>.</li>'+
+      '<li>Safari on iPhone and iPad can erase website data after about a week without a visit. Installed apps are not affected, so installing the app is the safest way to keep your notes.</li></ul>'+
+      '<button type="button" class="dlg-close">Close</button></div>';
+    d.body.appendChild(dlg);
+    b.addEventListener("click",function(){dlg.showModal();});
+    dlg.querySelector(".dlg-close").addEventListener("click",function(){dlg.close();});
+    dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close();});
+  });
   /* Return links at the bottom of each page */
   safe(function(){
     var main=d.querySelector("main.content");
