@@ -76,10 +76,12 @@ function run(){
     var wrap=d.querySelector(".epub-side-wrap");
     if(wrap){wrap.insertBefore(mk("tr-side"),wrap.firstChild);}
     else{var host=d.querySelector("#quarto-sidebar .sidebar-menu-container")||d.querySelector("#quarto-sidebar");if(host){var w=d.createElement("div");w.className="epub-side-wrap";w.appendChild(mk("tr-side"));host.appendChild(w);}}
-    var here=location.href.split(/[?#]/)[0];
-    if(here===root||here===homeUrl){
-      var h=d.querySelector("h1.title");
-      if(h){var row=d.createElement("div");row.className="home-tools";row.appendChild(mk("tr-home"));h.insertAdjacentElement("afterend",row);}
+    var bar=d.querySelector(".quarto-secondary-nav > .container-fluid, .quarto-secondary-nav");
+    if(bar){
+      var tb=mk("tr-bar");tb.setAttribute("aria-label","Translate this page");tb.querySelector("span").className="sr-only";
+      var sr=bar.querySelector("#quarto-search, .quarto-search, .aa-DetachedSearchButton, button[aria-label*='earch']");
+      var anchor=sr;while(anchor&&anchor.parentNode!==bar)anchor=anchor.parentNode;
+      if(anchor)bar.insertBefore(tb,anchor);else bar.appendChild(tb);
     }
   });
   /* Menu sections start collapsed; the section holding the current page stays open */

@@ -166,7 +166,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[
 .translate-btn svg{color:var(--accent);flex:none}
 .translate-btn:hover{background:var(--tile-hover);border-color:var(--accent)}
 .tr-side{display:flex;width:100%;margin:0 0 .7rem}
-.home-tools{margin:.2rem 0 1.4rem}
+.translate-btn.tr-bar{border:0;min-width:2.75rem;padding:.5rem;color:var(--bar-text);margin:0 .15rem}
+.translate-btn.tr-bar svg{color:var(--bar-text);width:24px;height:24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 #translate-dialog{border:1px solid var(--rule);border-top:4px solid var(--accent);padding:0;width:100%;max-width:min(32rem,calc(100vw - 2rem));max-height:calc(100vh - 2rem);overflow:auto;color:var(--text);background:var(--surface)}
 #translate-dialog::backdrop{background:rgba(0,0,0,.65)}
 #translate-dialog .dlg{padding:1.4rem 1.4rem 1.6rem}
