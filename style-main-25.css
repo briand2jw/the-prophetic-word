@@ -293,7 +293,6 @@ mark.u-hl{padding:0;border-radius:2px;color:inherit;box-decoration-break:clone;-
 .u-c4{background:rgba(170,120,230,.42)}
 .u-c5{background:rgba(240,150,60,.40)}
 .u-c6{background:rgba(230,80,80,.42)}
-mark.u-hl[id].has-note::before{content:"\270E\00a0";font-size:.75em;color:var(--accent);font-style:normal;vertical-align:super;line-height:0}
 .study-bar{position:fixed;left:0;right:0;bottom:0;margin:0 auto;max-width:34rem;z-index:1050;box-sizing:border-box;padding:.8rem 1rem calc(.8rem + env(safe-area-inset-bottom,0px));background:var(--surface);border:1px solid var(--rule);border-top:4px solid var(--accent);font-family:'Noto Sans',system-ui,sans-serif;box-shadow:0 -6px 24px rgba(0,0,0,.45)}
 .study-bar[hidden],.sb-edit[hidden],.sb-addnote[hidden]{display:none}
 .study-open .to-top{display:none}
@@ -387,3 +386,26 @@ mark.u-hl[id].has-note::before{content:"\270E\00a0";font-size:.75em;color:var(--
 .study-pop .sp-notetxt[hidden]{display:none}
 .sp-noteic{flex:none;display:inline-flex;align-items:center;justify-content:center;width:2.7rem;height:2.7rem;border-radius:50%;background:#44453b;color:#e9c34a}
 .sp-notebody{margin:0;font-family:'Noto Sans',system-ui,sans-serif;font-size:1.05rem;font-weight:500;line-height:1.45;color:var(--text);white-space:pre-wrap;overflow-wrap:anywhere;min-width:0}
+
+/* ---- Refined, smaller menu ---- */
+.study-pop{width:min(20.5rem,calc(100vw - 16px));padding:.6rem .65rem .6rem;border-radius:1.25rem}
+.study-pop .sb-c{width:2.25rem;height:2.25rem}
+.study-pop .sb-c svg{width:16px;height:16px}
+.study-pop .sb-c[aria-pressed="true"]{outline-offset:2px}
+.sp-colors{gap:.25rem;padding:.1rem .15rem}
+.sp-round{width:2.3rem;height:2.3rem}
+.sp-round svg{width:19px;height:19px}
+.sp-pill{min-height:2.3rem;padding:.2rem .85rem;font-size:.92rem}
+.sp-pill svg{width:19px;height:19px}
+.sp-actions{margin-top:.55rem;padding-top:.55rem;gap:.45rem}
+.study-pop .sp-notetxt{gap:.6rem;margin-top:.55rem;padding:.45rem .7rem .45rem .45rem;border-radius:1rem}
+.sp-noteic{width:2.3rem;height:2.3rem}
+.sp-noteic svg{width:19px;height:19px}
+.sp-notebody{font-size:1rem;line-height:1.4}
+.sp-title{margin:.15rem .25rem .1rem;font-size:.95rem}
+.sp-undo,.sp-copyu{margin-left:0}
+.sp-undo{margin-left:auto}
+.study-pop .bm-sw{min-height:2.5rem}
+/* noted highlights stand out */
+mark.u-hl.has-note{border-bottom:2px solid #e9c34a}
+mark.u-hl[id].has-note::before{content:"";display:inline-block;width:1.15em;height:1.15em;margin-right:.3em;vertical-align:-.22em;background:#e9c34a;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z'/%3E%3C/svg%3E") center/contain no-repeat}

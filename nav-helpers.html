@@ -126,7 +126,7 @@ function run(){
     var b=d.getElementById("studyhelp-btn");if(!b||typeof HTMLDialogElement==="undefined")return;
     var dlg=d.createElement("dialog");dlg.id="help-dialog";dlg.setAttribute("aria-labelledby","hp-title");
     dlg.innerHTML='<div class="dlg"><h2 id="hp-title">Adding highlights and notes</h2>'+
-      '<ol><li>Select the words you want. On a phone or tablet, touch and hold a word, then drag the handles. When you select two or more words and pause, they are highlighted automatically in your most recent color. If you select just one word, a small menu opens so you can add a note, place a bookmark, or highlight it.</li>'+
+      '<ol><li>Select the words you want. On a phone or tablet, touch and hold a word, then drag the handles. When you select two or more words and pause, they are highlighted automatically in your most recent color. A small bar then appears with <strong>Undo</strong> and <strong>Copy</strong>, so you can copy the text without keeping the highlight. If you select just one word, a small menu opens so you can copy it, add a note, place a bookmark, or highlight it.</li>'+
       '<li>Tap a highlight to open a small menu. There you can change its color (the new color is used for your next highlights), add a note, place a bookmark at that paragraph, or delete it with the red trash icon.</li>'+
       '<li>Tap a bookmark ribbon to remove the bookmark. Highlighted something by accident? Tap it and use the trash icon.</li>'+
       '<li>Open <strong>My Notes</strong> in the menu to see everything you have saved, with a link back to each passage.</li></ol>'+
@@ -315,12 +315,12 @@ function run(){
       }
       return best;
     }
-    function applyAll(){
+    function applyAll(noScroll){
       db.items.filter(function(it){return it.page===page;}).sort(function(a,b){return a.s-b.s;}).forEach(function(it){
         var at=locate(it,stream(nodes()));if(at<0)return;
         it.s=at;wrapRange(at,at+it.text.length,it);
       });
-      if(/^#hl-/.test(location.hash)){var t=d.getElementById(location.hash.slice(1));if(t)setTimeout(function(){t.scrollIntoView({block:"center"});},50);}
+      if(!noScroll&&/^#hl-/.test(location.hash)){var t=d.getElementById(location.hash.slice(1));if(t)setTimeout(function(){t.scrollIntoView({block:"center"});},50);}
     }
     applyAll();
 
@@ -330,6 +330,7 @@ function run(){
       trash:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8H6v11zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>',
       note:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-3 9h-4v4h-2v-4H7V9h4V5h2v4h4v2z"/></svg>',
       bm:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4.5L5 21V4a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
+      copy:'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>',
       pen:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>',
       check:'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'};
     var pop=d.createElement("div");pop.className="study-bar study-pop";pop.hidden=true;pop.setAttribute("role","toolbar");pop.setAttribute("aria-label","Highlights, notes and bookmarks");
@@ -344,6 +345,9 @@ function run(){
         '<button type="button" class="sp-round sp-del" aria-label="Delete highlight">'+ICO.trash+'</button>'+
         '<button type="button" class="sp-round sp-rmbm" aria-label="Remove bookmark">'+ICO.trash+'</button>'+
         '<button type="button" class="sp-round sp-bm" aria-label="Add a bookmark here">'+ICO.bm+'</button>'+
+        '<button type="button" class="sp-round sp-copy" aria-label="Copy text">'+ICO.copy+'</button>'+
+        '<button type="button" class="sp-pill sp-undo">Undo</button>'+
+        '<button type="button" class="sp-pill sp-copyu">Copy</button>'+
         '<button type="button" class="sp-pill sp-list">All bookmarks</button>'+
         '<button type="button" class="sp-round sp-delnote" aria-label="Delete note">'+ICO.trash+'</button>'+
         '<button type="button" class="sp-pill sp-note">'+ICO.note+'<span>Note</span></button>'+
@@ -353,14 +357,14 @@ function run(){
     d.body.appendChild(pop);
     function q(s){return pop.querySelector(s);}
     var elTitle=q(".sp-title"),elColors=q(".sp-colors"),elNote=q(".sp-notetxt"),elEdit=q(".sb-edit"),ta=q("textarea"),elBmc=q(".sp-bmcolors"),
-        bDel=q(".sp-del"),bRm=q(".sp-rmbm"),bBm=q(".sp-bm"),bList=q(".sp-list"),bDelNote=q(".sp-delnote"),bNote=q(".sp-note"),bDone=q(".sp-done"),bBack=q(".sp-back");
+        bDel=q(".sp-del"),bRm=q(".sp-rmbm"),bBm=q(".sp-bm"),bList=q(".sp-list"),bDelNote=q(".sp-delnote"),bNote=q(".sp-note"),bCopy=q(".sp-copy"),bUndo=q(".sp-undo"),bCopyU=q(".sp-copyu"),bDone=q(".sp-done"),bBack=q(".sp-back");
     var mode=null,pending=null,cur=null,curBm=null,anchor=null,tm=null,toastTm=null;
     var lastColor=1;
     try{var lc=parseInt(localStorage.getItem("studyColor"),10);if(lc>=1&&lc<=6)lastColor=lc;}catch(e){}
     function setLast(c){lastColor=c;try{localStorage.setItem("studyColor",String(c));}catch(e){}}
     function setVis(m){
-      var map={new:[elColors,bBm,bNote],mark:[elColors,elNote,bDel,bBm,bNote],bmk:[elTitle,bRm,bList],edit:[elEdit,bDelNote,bDone],bmpick:[elTitle,elBmc,bBack],done:[elTitle]};
-      [elTitle,elColors,elNote,elEdit,elBmc,bDel,bRm,bBm,bList,bDelNote,bNote,bDone,bBack].forEach(function(e){e.hidden=true;});
+      var map={new:[elColors,bBm,bCopy,bNote],hl:[elTitle,bUndo,bCopyU],mark:[elColors,elNote,bDel,bBm,bCopy,bNote],bmk:[elTitle,bRm,bList],edit:[elEdit,bDelNote,bDone],bmpick:[elTitle,elBmc,bBack],done:[elTitle]};
+      [elTitle,elColors,elNote,elEdit,elBmc,bDel,bRm,bBm,bCopy,bUndo,bCopyU,bList,bDelNote,bNote,bDone,bBack].forEach(function(e){e.hidden=true;});
       (map[m]||[]).forEach(function(e){e.hidden=false;});
       if(m==="mark"){elNote.hidden=!(cur&&cur.note);}
       pop.classList.toggle("sp-simple",m==="done");
@@ -469,10 +473,16 @@ function run(){
       if(pending.text.split(/\s+/).length<2){show("new",lastRect(r.getClientRects(),r.getBoundingClientRect()));setPressed();return;}
       var wait=900-(Date.now()-lastSel);
       if(wait>0){clearTimeout(tm);tm=setTimeout(check,wait);return;}
-      create(lastColor);hide();
+      snap=JSON.parse(JSON.stringify(db.items));autoSel=pending.text;
+      var made=create(lastColor);
+      var mk=made&&main.querySelector('mark[data-id="'+made.id+'"]');
+      if(!mk){hide();return;}
+      pending=null;elTitle.textContent="Highlighted";
+      show("hl",lastRect(mk.getClientRects(),mk.getBoundingClientRect()));
+      clearTimeout(toastTm);toastTm=setTimeout(function(){if(mode==="hl")hide();},5000);
     }
     var lastSel=0;
-    d.addEventListener("selectionchange",function(){if(mode&&mode!=="new")return;lastSel=Date.now();clearTimeout(tm);tm=setTimeout(check,250);});
+    d.addEventListener("selectionchange",function(){if(mode==="hl"||mode==="done"){var s0=window.getSelection();if(s0&&!s0.isCollapsed)hide();else return;}if(mode&&mode!=="new")return;lastSel=Date.now();clearTimeout(tm);tm=setTimeout(check,250);});
     pop.addEventListener("mousedown",function(e){if(e.target!==ta)e.preventDefault();});
     [].forEach.call(elColors.querySelectorAll(".sb-c"),function(b){b.addEventListener("click",function(){
       var c=parseInt(b.getAttribute("data-c"),10);
@@ -488,6 +498,26 @@ function run(){
     bDone.addEventListener("click",function(){saveNote();hide();});
     bDelNote.addEventListener("click",function(){if(cur){cur.note="";save(db);paint(cur);}hide();});
     bDel.addEventListener("click",function(){if(!cur)return;var id=cur.id;db.items=db.items.filter(function(x){return x.id!==id;});save(db);unwrap(id);hide();});
+    function copyText(t,done){
+      function fb(){try{var x=d.createElement("textarea");x.value=t;x.setAttribute("readonly","");x.style.cssText="position:fixed;top:0;left:0;opacity:0";d.body.appendChild(x);x.select();var ok=d.execCommand("copy");d.body.removeChild(x);done(ok);}catch(e){done(false);}}
+      try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true);},fb);return;}}catch(e){}
+      fb();
+    }
+    bCopy.addEventListener("click",function(){
+      var t=mode==="new"&&pending?pending.text:(cur?cur.text:"");if(!t)return;
+      copyText(t,function(ok){toast(ok?"Copied.":"Copying is not available here.");});
+    });
+    var snap=null,autoSel=null;
+    function undoAuto(){
+      if(!snap)return;
+      db.items.filter(function(x){return x.page===page;}).forEach(function(x){unwrap(x.id);});
+      db.items=snap;snap=null;save(db);applyAll(true);
+    }
+    bUndo.addEventListener("click",function(){undoAuto();hide();});
+    bCopyU.addEventListener("click",function(){
+      var t=autoSel||"";undoAuto();
+      copyText(t,function(ok){toast(ok?"Copied. Highlight removed.":"Copying is not available here.");});
+    });
     bBm.addEventListener("click",function(){
       if(!shared.bm||!pending||!pending.el)return;
       var C=shared.bm.colors;
