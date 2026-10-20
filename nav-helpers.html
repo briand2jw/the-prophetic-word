@@ -72,6 +72,25 @@ function run(){
     main.appendChild(nav);
     d.documentElement.classList.add("chapter-page");
   });
+  /* Article pages: previous / next stay inside the same section */
+  safe(function(){
+    var main=d.querySelector("main.content"),act=d.querySelector("#quarto-sidebar a.sidebar-link.active");
+    if(!main||!act||d.querySelector(".chapter-pager"))return;
+    var sec=act.closest("li.sidebar-item-section");if(!sec)return;
+    var head=sec.querySelector(":scope > .sidebar-item-container > a.sidebar-link");
+    if(!head||!/(know-the-truth|seek-jehovah)\.html$/.test(head.href.split(/[?#]/)[0]))return;
+    if(head.href.split(/[?#]/)[0]===act.href.split(/[?#]/)[0])return;
+    var links=[].slice.call(sec.querySelectorAll(":scope > ul a.sidebar-link"));
+    var i=-1;links.forEach(function(a,k){if(a.href.split(/[?#]/)[0]===act.href.split(/[?#]/)[0])i=k;});
+    if(i<0)return;
+    function t(a){return esc((a.textContent||"").replace(/\s+/g," ").trim());}
+    var prev=links[i-1],next=links[i+1],sname=esc((head.textContent||"").replace(/\s+/g," ").trim());
+    var nav=d.createElement("nav");nav.className="chapter-pager";nav.setAttribute("aria-label","Articles in "+sname);
+    nav.innerHTML=
+      '<a class="cp-prev" href="'+(prev?prev.href:head.href)+'"><span class="cp-arrow">\u2039</span><span>'+(prev?t(prev):sname)+'</span></a>'+
+      (next?'<a class="cp-next" href="'+next.href+'"><span>'+t(next)+'</span><span class="cp-arrow">\u203A</span></a>':'');
+    main.appendChild(nav);
+  });
   /* Installable web app: manifest, offline script, Android install button */
   safe(function(){
     var head=d.head;
