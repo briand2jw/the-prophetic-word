@@ -1,6 +1,6 @@
 // Offline support. Pages are fetched from the network first, so updates always show;
 // the saved copy is used only when the device is offline.
-const CACHE = "the-truth-v1";
+const CACHE = "the-truth-v2";
 const ROOT = new URL("./", self.location).href;
 
 self.addEventListener("install", (event) => {
@@ -34,7 +34,8 @@ self.addEventListener("fetch", (event) => {
   event.respondWith((async () => {
     const cache = await caches.open(CACHE);
     try {
-      const res = await fetch(req);
+      // Ask the server whether the page changed, instead of trusting the browser's short-term copy.
+      const res = await fetch(url.origin === self.location.origin ? new Request(req, {cache: "no-cache"}) : req);
       if (res && (res.ok || res.type === "opaque")) cache.put(req, res.clone());
       return res;
     } catch (e) {
