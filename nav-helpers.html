@@ -337,7 +337,7 @@ function run(){
       '<p class="sp-title" hidden></p>'+
       '<div class="sp-colors" role="group" aria-label="Highlight color">'+
         [1,2,3,4,5,6].map(function(c){return '<button type="button" class="sb-c u-c'+c+'" data-c="'+c+'" aria-label="'+COL[c]+' highlight">'+ICO.check+'</button>';}).join("")+'</div>'+
-      '<p class="sp-notetxt" hidden></p>'+
+      '<div class="sp-notetxt" hidden><span class="sp-noteic">'+ICO.note+'</span><p class="sp-notebody"></p></div>'+
       '<div class="sb-edit" hidden><label class="sr-only" for="sb-text">Your note</label><textarea id="sb-text" rows="3" placeholder="Write your note here"></textarea></div>'+
       '<div class="sp-bmcolors" hidden></div>'+
       '<div class="sp-actions">'+
@@ -450,7 +450,7 @@ function run(){
     function blockOf(n){var e=n&&(n.nodeType===3?n.parentNode:n);return e&&e.closest?e.closest(BLK):null;}
     function openMark(id,m){
       var it=byId(id);if(!it)return;cur=it;pending={el:blockOf(m)};
-      elNote.textContent=it.note||"";bNote.querySelector("span").textContent=it.note?"Edit note":"Note";
+      elNote.querySelector(".sp-notebody").textContent=it.note||"";bNote.querySelector("span").textContent=it.note?"Edit note":"Note";
       show("mark",lastRect(m.getClientRects(),m.getBoundingClientRect()));setPressed();
     }
     function check(){

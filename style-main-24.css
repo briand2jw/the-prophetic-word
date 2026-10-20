@@ -382,3 +382,8 @@ mark.u-hl[id].has-note::before{content:"\270E\00a0";font-size:.75em;color:var(--
 .study-pop .sb-edit textarea{margin:.6rem 0 0}
 
 .sp-done{margin-left:auto}
+
+.study-pop .sp-notetxt{display:flex;align-items:center;gap:.75rem;margin:.75rem 0 0;padding:.65rem .8rem .65rem .65rem;background:#34352d;border:1px solid #46473e;border-radius:1.2rem}
+.study-pop .sp-notetxt[hidden]{display:none}
+.sp-noteic{flex:none;display:inline-flex;align-items:center;justify-content:center;width:2.7rem;height:2.7rem;border-radius:50%;background:#44453b;color:#e9c34a}
+.sp-notebody{margin:0;font-family:'Noto Sans',system-ui,sans-serif;font-size:1.05rem;font-weight:500;line-height:1.45;color:var(--text);white-space:pre-wrap;overflow-wrap:anywhere;min-width:0}
