@@ -39,7 +39,7 @@ book:
 
 format:
   html:
-    css: [style-main-21.css, style-dark.css]
+    css: [style-main-22.css, style-dark.css]
     toc: false
     number-sections: false
     include-after-body: nav-helpers.html

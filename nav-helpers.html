@@ -330,6 +330,7 @@ function run(){
       trash:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8H6v11zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>',
       note:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-3 9h-4v4h-2v-4H7V9h4V5h2v4h4v2z"/></svg>',
       bm:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4.5L5 21V4a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
+      pen:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>',
       check:'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'};
     var pop=d.createElement("div");pop.className="study-bar study-pop";pop.hidden=true;pop.setAttribute("role","toolbar");pop.setAttribute("aria-label","Highlights, notes and bookmarks");
     pop.innerHTML=
@@ -344,7 +345,8 @@ function run(){
         '<button type="button" class="sp-round sp-rmbm" aria-label="Remove bookmark">'+ICO.trash+'</button>'+
         '<button type="button" class="sp-round sp-bm" aria-label="Add a bookmark here">'+ICO.bm+'</button>'+
         '<button type="button" class="sp-pill sp-list">All bookmarks</button>'+
-        '<button type="button" class="sp-pill sp-delnote">Delete note</button>'+
+        '<button type="button" class="sp-round sp-delnote" aria-label="Delete note">'+ICO.trash+'</button>'+
+        '<button type="button" class="sp-round sp-pen" aria-label="Turn on the highlighter. Selected text is highlighted right away.">'+ICO.pen+'</button>'+
         '<button type="button" class="sp-pill sp-note">'+ICO.note+'<span>Note</span></button>'+
         '<button type="button" class="sp-pill sp-done">Done</button>'+
         '<button type="button" class="sp-pill sp-back">Back</button>'+
@@ -352,11 +354,21 @@ function run(){
     d.body.appendChild(pop);
     function q(s){return pop.querySelector(s);}
     var elTitle=q(".sp-title"),elColors=q(".sp-colors"),elNote=q(".sp-notetxt"),elEdit=q(".sb-edit"),ta=q("textarea"),elBmc=q(".sp-bmcolors"),
-        bDel=q(".sp-del"),bRm=q(".sp-rmbm"),bBm=q(".sp-bm"),bList=q(".sp-list"),bDelNote=q(".sp-delnote"),bNote=q(".sp-note"),bDone=q(".sp-done"),bBack=q(".sp-back");
+        bDel=q(".sp-del"),bRm=q(".sp-rmbm"),bBm=q(".sp-bm"),bList=q(".sp-list"),bDelNote=q(".sp-delnote"),bPen=q(".sp-pen"),bNote=q(".sp-note"),bDone=q(".sp-done"),bBack=q(".sp-back");
     var mode=null,pending=null,cur=null,curBm=null,anchor=null,tm=null,toastTm=null;
+    var lastColor=1,quick=false;
+    try{var lc=parseInt(localStorage.getItem("studyColor"),10);if(lc>=1&&lc<=6)lastColor=lc;quick=localStorage.getItem("studyQuick")==="1";}catch(e){}
+    function setLast(c){lastColor=c;try{localStorage.setItem("studyColor",String(c));}catch(e){}paintChip();}
+    var chip=d.createElement("button");chip.type="button";chip.className="hl-chip";chip.hidden=!quick;
+    chip.innerHTML=ICO.pen+'<span>Highlighter on</span><i class="hl-dot"></i>';chip.setAttribute("aria-label","Highlighter is on. Tap to turn it off.");
+    d.body.appendChild(chip);
+    function paintChip(){var dot=chip.querySelector(".hl-dot");dot.className="hl-dot u-c"+lastColor;}
+    function setQuick(on){quick=on;chip.hidden=!on;try{localStorage.setItem("studyQuick",on?"1":"0");}catch(e){}paintChip();}
+    paintChip();
+    chip.addEventListener("click",function(){setQuick(false);});
     function setVis(m){
-      var map={new:[elColors,bBm,bNote],mark:[elColors,elNote,bDel,bBm,bNote],bmk:[elTitle,bRm,bList],edit:[elEdit,bDelNote,bDone],bmpick:[elTitle,elBmc,bBack],done:[elTitle]};
-      [elTitle,elColors,elNote,elEdit,elBmc,bDel,bRm,bBm,bList,bDelNote,bNote,bDone,bBack].forEach(function(e){e.hidden=true;});
+      var map={new:[elColors,bBm,bPen,bNote],mark:[elColors,elNote,bDel,bBm,bNote],bmk:[elTitle,bRm,bList],edit:[elEdit,bDelNote,bDone],bmpick:[elTitle,elBmc,bBack],done:[elTitle]};
+      [elTitle,elColors,elNote,elEdit,elBmc,bDel,bRm,bBm,bPen,bList,bDelNote,bNote,bDone,bBack].forEach(function(e){e.hidden=true;});
       (map[m]||[]).forEach(function(e){e.hidden=false;});
       if(m==="mark"){elNote.hidden=!(cur&&cur.note);}
       pop.classList.toggle("sp-simple",m==="done");
@@ -376,7 +388,7 @@ function run(){
     function hide(){pop.hidden=true;mode=null;pending=null;cur=null;curBm=null;anchor=null;clearTimeout(toastTm);}
     function toast(t){elTitle.textContent=t;mode="done";setVis("done");pop.hidden=false;position();clearTimeout(toastTm);toastTm=setTimeout(function(){if(mode==="done")hide();},1500);}
     function setPressed(){[].forEach.call(elColors.querySelectorAll(".sb-c"),function(b){
-      b.setAttribute("aria-pressed",cur&&String(cur.color)===b.getAttribute("data-c")?"true":"false");});}
+      b.setAttribute("aria-pressed",String(cur?cur.color:lastColor)===b.getAttribute("data-c")?"true":"false");});}
     function saveNote(){if(cur){cur.note=ta.value.trim();save(db);paint(cur);}}
     function create(color){
       if(!pending)return null;
@@ -404,20 +416,24 @@ function run(){
       while(e>s&&/\s/.test(txt.charAt(e-1)))e--;
       if(e-s<2||e-s>3000){if(mode==="new")hide();return;}
       pending={s:s,text:txt.slice(s,e),prefix:txt.slice(Math.max(0,s-30),s),suffix:txt.slice(e,e+30),el:blockOf(r.startContainer)};
-      cur=null;show("new",lastRect(r.getClientRects(),r.getBoundingClientRect()));setPressed();
+      cur=null;
+      if(quick){create(lastColor);hide();return;}
+      show("new",lastRect(r.getClientRects(),r.getBoundingClientRect()));setPressed();
     }
     d.addEventListener("selectionchange",function(){if(mode&&mode!=="new")return;clearTimeout(tm);tm=setTimeout(check,250);});
     pop.addEventListener("mousedown",function(e){if(e.target!==ta)e.preventDefault();});
     [].forEach.call(elColors.querySelectorAll(".sb-c"),function(b){b.addEventListener("click",function(){
       var c=parseInt(b.getAttribute("data-c"),10);
+      setLast(c);
       if(mode==="new"){create(c);hide();}
       else if(mode==="mark"&&cur){cur.color=c;save(db);paint(cur);setPressed();}
     });});
     bNote.addEventListener("click",function(){
-      if(mode==="new"){var it=create(1);if(!it)return;cur=it;}
+      if(mode==="new"){var it=create(lastColor);if(!it)return;cur=it;}
       if(!cur)return;
       var r=anchor;mode="edit";ta.value=cur.note||"";setVis("edit");position();ta.focus();
     });
+    bPen.addEventListener("click",function(){if(mode!=="new"||!pending)return;create(lastColor);setQuick(true);toast("Highlighter on. Select text to highlight it.");});
     bDone.addEventListener("click",function(){saveNote();hide();});
     bDelNote.addEventListener("click",function(){if(cur){cur.note="";save(db);paint(cur);}hide();});
     bDel.addEventListener("click",function(){if(!cur)return;var id=cur.id;db.items=db.items.filter(function(x){return x.id!==id;});save(db);unwrap(id);hide();});
