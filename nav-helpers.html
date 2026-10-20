@@ -132,7 +132,7 @@ function run(){
       '<li>Open <strong>My Notes</strong> in the menu to see everything you have saved, with a link back to each passage.</li></ol>'+
       '<h3>Good to know</h3><ul>'+
       '<li>Highlights, notes and bookmarks are saved only on the device and browser you used. They do not sync to other devices, and no one else can see them.</li>'+
-      '<li>Clearing your browser data or deleting the app erases them. In <strong>My Notes</strong>, use <strong>Save a backup</strong> now and then, and <strong>Restore a backup</strong> to bring them back.</li>'+
+      '<li>Clearing your browser data or deleting the app erases them. In <strong>My Notes</strong>, use <strong>Save a Backup</strong> now and then, and <strong>Restore a Backup</strong> to bring them back.</li>'+
       '<li>If the wording of a passage is updated later, a highlight on that passage may no longer appear. Your text is still kept in <strong>My Notes</strong>.</li>'+
       '<li>Safari on iPhone and iPad can erase website data after about a week without a visit. Installed apps are not affected, so installing the app is the safest way to keep your notes.</li></ul>'+
       '<h3>Another option</h3><p>Because of these limitations, you may prefer to download the EPUB file and make highlights and notes in your favorite EPUB reader app. Most readers keep your notes with the book and can back them up or sync them between your devices. You can find the download in the <strong>Download the EPUB</strong> section of the Home page, or in the menu.</p>'+
@@ -348,7 +348,7 @@ function run(){
         '<button type="button" class="sp-round sp-copy" aria-label="Copy text">'+ICO.copy+'</button>'+
         '<button type="button" class="sp-pill sp-undo">Undo</button>'+
         '<button type="button" class="sp-pill sp-copyu">Copy</button>'+
-        '<button type="button" class="sp-pill sp-list">All bookmarks</button>'+
+        '<button type="button" class="sp-pill sp-list">All Bookmarks</button>'+
         '<button type="button" class="sp-round sp-delnote" aria-label="Delete note">'+ICO.trash+'</button>'+
         '<button type="button" class="sp-pill sp-note">'+ICO.note+'<span>Note</span></button>'+
         '<button type="button" class="sp-pill sp-done">Done</button>'+
@@ -454,7 +454,7 @@ function run(){
     function blockOf(n){var e=n&&(n.nodeType===3?n.parentNode:n);return e&&e.closest?e.closest(BLK):null;}
     function openMark(id,m){
       var it=byId(id);if(!it)return;cur=it;pending={el:blockOf(m)};
-      elNote.querySelector(".sp-notebody").textContent=it.note||"";bNote.querySelector("span").textContent=it.note?"Edit note":"Note";
+      elNote.querySelector(".sp-notebody").textContent=it.note||"";bNote.querySelector("span").textContent=it.note?"Edit Note":"Note";
       show("mark",lastRect(m.getClientRects(),m.getBoundingClientRect()));setPressed();
     }
     function check(){
@@ -557,7 +557,7 @@ function run(){
     /* My Notes dialog */
     var dlg=d.createElement("dialog");dlg.id="notes-dialog";dlg.setAttribute("aria-labelledby","nd-title");
     dlg.innerHTML='<div class="dlg"><h2 id="nd-title">My notes and highlights</h2><p class="nd-intro">Highlights, notes and bookmarks are saved on this device only. Use Save a backup to keep a copy of all three.</p><div id="nd-list"></div><p class="nd-msg" role="status"></p>'+
-      '<div class="nd-actions"><button type="button" class="dlg-close nd-copy">Copy as text</button><button type="button" class="dlg-close nd-export">Save a backup</button><label class="dlg-close nd-import-l">Restore a backup<input type="file" accept=".json,application/json" class="nd-import"></label></div>'+
+      '<div class="nd-actions"><button type="button" class="dlg-close nd-copy">Copy as Text</button><button type="button" class="dlg-close nd-export">Save a Backup</button><label class="dlg-close nd-import-l">Restore a Backup<input type="file" accept=".json,application/json" class="nd-import"></label></div>'+
       '<button type="button" class="dlg-close nd-close">Close</button></div>';
     d.body.appendChild(dlg);
     var list=dlg.querySelector("#nd-list"),msg=dlg.querySelector(".nd-msg");
@@ -591,7 +591,7 @@ function run(){
       try{navigator.clipboard.writeText(t).then(function(){say("Copied.");},function(){say("Copying is not available here.");});}catch(e){say("Copying is not available here.");}});
     dlg.querySelector(".nd-export").addEventListener("click",function(){
       try{var a=d.createElement("a"),blob=new Blob([JSON.stringify({v:2,items:db.items,bookmarks:(shared.bm?shared.bm.get():[])})],{type:"application/json"});
-        a.href=URL.createObjectURL(blob);a.download="the-truth-notes.json";d.body.appendChild(a);a.click();d.body.removeChild(a);
+        a.href=URL.createObjectURL(blob);var n=new Date(),p2=function(x){return (x<10?"0":"")+x;};a.download="The-Truth_My-Notes_"+n.getFullYear()+"-"+p2(n.getMonth()+1)+"-"+p2(n.getDate())+".json";d.body.appendChild(a);a.click();d.body.removeChild(a);
         setTimeout(function(){URL.revokeObjectURL(a.href);},1000);say("Backup saved to your downloads.");}catch(e){say("The backup could not be saved here.");}});
     dlg.querySelector(".nd-import").addEventListener("change",function(ev){
       var f=ev.target.files&&ev.target.files[0];if(!f)return;
@@ -686,7 +686,7 @@ function run(){
       }).join("")+'</ul>':'<p class="bm-empty">No bookmarks yet. Choose a color above to save your place.</p>';
     }
     var picker=d.createElement("div");picker.className="study-bar bm-picker";picker.hidden=true;picker.setAttribute("role","region");picker.setAttribute("aria-label","Choose where to place the bookmark");
-    picker.innerHTML='<div class="sb-row"><span class="bm-pk-ic"></span><p class="bm-pk-text" role="status">Tap the paragraph or heading where you stopped.</p></div><div class="sb-row"><button type="button" class="sb-btn bm-top">Use top of screen</button><button type="button" class="sb-btn bm-cancel">Cancel</button></div>';
+    picker.innerHTML='<div class="sb-row"><span class="bm-pk-ic"></span><p class="bm-pk-text" role="status">Tap the paragraph or heading where you stopped.</p></div><div class="sb-row"><button type="button" class="sb-btn bm-top">Use Top of Screen</button><button type="button" class="sb-btn bm-cancel">Cancel</button></div>';
     d.body.appendChild(picker);
     var pkIc=picker.querySelector(".bm-pk-ic"),pkTx=picker.querySelector(".bm-pk-text"),picking=false,pickColor=0;
     function place(c,at){

@@ -35,7 +35,7 @@ Take your time with each chapter. Read the overview first, then work through the
 
 Mark the words that stand out and write your own comments. They are saved privately on your device.
 
-<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">How do I add highlights and notes?</button> <button type="button" id="notes-open" class="translate-btn">Open My Notes</button></p>
+<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">How Do I Add Highlights and Notes?</button> <button type="button" id="notes-open" class="translate-btn">Open My Notes</button></p>
 :::
 :::
 
@@ -56,7 +56,7 @@ Last updated: {{< meta date >}}
 ::: {.stamp .install-box}
 Add this website to your phone or tablet so it opens like an app, with its own icon. Once it has been opened, it can also be read without an internet connection.
 
-<p class="install-actions"><button type="button" id="install-btn" class="translate-btn" hidden>Install the app</button> <button type="button" id="howto-btn" class="translate-btn">How do I install this?</button></p>
+<p class="install-actions"><button type="button" id="install-btn" class="translate-btn" hidden>Install the App</button> <button type="button" id="howto-btn" class="translate-btn">How Do I Install This?</button></p>
 
 [Translation works best when you read the website in your browser rather than the installed app.]{.epub-note}
 :::
