@@ -1,6 +1,7 @@
 <script>
 (function(){
 function safe(fn){try{fn();}catch(e){if(window.console)console.warn("nav helper failed",e);}}
+var shared={};
 function run(){
   var d=document, esc=function(t){var e=d.createElement("div");e.textContent=t;return e.innerHTML;};
   var root=location.href.split(/[?#]/)[0].replace(/[^\/]*$/,"");
@@ -130,7 +131,7 @@ function run(){
       '<li>Tap any highlight to change its color, edit its note, or remove it.</li>'+
       '<li>Open <strong>My Notes</strong> in the menu to see everything you have saved, with a link back to each passage.</li></ol>'+
       '<h3>Good to know</h3><ul>'+
-      '<li>Highlights and notes are saved only on the device and browser you used. They do not sync to other devices, and no one else can see them.</li>'+
+      '<li>Highlights, notes and bookmarks are saved only on the device and browser you used. They do not sync to other devices, and no one else can see them.</li>'+
       '<li>Clearing your browser data or deleting the app erases them. In <strong>My Notes</strong>, use <strong>Save a backup</strong> now and then, and <strong>Restore a backup</strong> to bring them back.</li>'+
       '<li>If the wording of a passage is updated later, a highlight on that passage may no longer appear. Your text is still kept in <strong>My Notes</strong>.</li>'+
       '<li>Safari on iPhone and iPad can erase website data after about a week without a visit. Installed apps are not affected, so installing the app is the safest way to keep your notes.</li></ul>'+
@@ -387,7 +388,7 @@ function run(){
 
     /* My Notes dialog */
     var dlg=d.createElement("dialog");dlg.id="notes-dialog";dlg.setAttribute("aria-labelledby","nd-title");
-    dlg.innerHTML='<div class="dlg"><h2 id="nd-title">My notes and highlights</h2><p class="nd-intro">Saved on this device only. Use Save a backup to keep a copy.</p><div id="nd-list"></div><p class="nd-msg" role="status"></p>'+
+    dlg.innerHTML='<div class="dlg"><h2 id="nd-title">My notes and highlights</h2><p class="nd-intro">Highlights, notes and bookmarks are saved on this device only. Use Save a backup to keep a copy of all three.</p><div id="nd-list"></div><p class="nd-msg" role="status"></p>'+
       '<div class="nd-actions"><button type="button" class="dlg-close nd-copy">Copy as text</button><button type="button" class="dlg-close nd-export">Save a backup</button><label class="dlg-close nd-import-l">Restore a backup<input type="file" accept=".json,application/json" class="nd-import"></label></div>'+
       '<button type="button" class="dlg-close nd-close">Close</button></div>';
     d.body.appendChild(dlg);
@@ -414,13 +415,14 @@ function run(){
       db.items.slice().sort(function(a,b){return a.page===b.page?a.s-b.s:(a.t||0)-(b.t||0);}).forEach(function(it){
         if(it.page!==last){out.push("",it.title||it.page);last=it.page;}
         out.push("  “"+it.text+"”");if(it.note)out.push("  Note: "+it.note);});
+      if(shared.bm&&shared.bm.get().length){out.push("","Bookmarks");shared.bm.get().forEach(function(b){out.push("  "+b.title+": \u201C"+b.snip+"\u201D");});}
       return out.join("\n").trim();
     }
     dlg.querySelector(".nd-copy").addEventListener("click",function(){
       var t=plain();if(!t){say("Nothing to copy yet.");return;}
       try{navigator.clipboard.writeText(t).then(function(){say("Copied.");},function(){say("Copying is not available here.");});}catch(e){say("Copying is not available here.");}});
     dlg.querySelector(".nd-export").addEventListener("click",function(){
-      try{var a=d.createElement("a"),blob=new Blob([JSON.stringify(db)],{type:"application/json"});
+      try{var a=d.createElement("a"),blob=new Blob([JSON.stringify({v:2,items:db.items,bookmarks:(shared.bm?shared.bm.get():[])})],{type:"application/json"});
         a.href=URL.createObjectURL(blob);a.download="the-truth-notes.json";d.body.appendChild(a);a.click();d.body.removeChild(a);
         setTimeout(function(){URL.revokeObjectURL(a.href);},1000);say("Backup saved to your downloads.");}catch(e){say("The backup could not be saved here.");}});
     dlg.querySelector(".nd-import").addEventListener("change",function(ev){
@@ -428,7 +430,8 @@ function run(){
       var fr=new FileReader();fr.onload=function(){
         try{var v=JSON.parse(fr.result),n=0;
           (v.items||[]).forEach(function(it){if(it&&it.id&&it.text&&it.page&&!byId(it.id)){db.items.push(it);n++;}});
-          save(db);render();say(n+" item"+(n===1?"":"s")+" restored. Reload the page to see highlights.");}
+          var bn=(shared.bm&&v.bookmarks)?shared.bm.merge(v.bookmarks):0;
+          save(db);render();say(n+" note"+(n===1?"":"s")+" and highlight"+(n===1?"":"s")+" and "+bn+" bookmark"+(bn===1?"":"s")+" restored. Reload the page to see them.");}
         catch(err){say("That file could not be read.");}};
       fr.readAsText(f);ev.target.value="";});
     function closeD(){if(dlg.close)dlg.close();else dlg.removeAttribute("open");}
@@ -496,7 +499,7 @@ function run(){
 
     var dlg=d.createElement("dialog");dlg.id="bookmarks-dialog";dlg.setAttribute("aria-labelledby","bm-title");
     dlg.innerHTML='<div class="dlg"><h2 id="bm-title">Bookmarks</h2>'+
-      '<p class="bm-intro">Save your place and come back to it later. Choose a color to place a bookmark at the spot where you are reading. You can keep up to 15, one for each color.</p>'+
+      '<p class="bm-intro">Save your place and come back to it later. Choose a color, then tap the paragraph or heading where you stopped. You can keep up to 15, one for each color. Tap a color that is already in use to move that bookmark.</p>'+
       '<div class="bm-pick" role="group" aria-label="Place a bookmark here"></div><p class="bm-msg" role="status"></p><div id="bm-list"></div>'+
       '<button type="button" class="dlg-close bm-close">Close</button></div>';
     d.body.appendChild(dlg);
@@ -514,13 +517,46 @@ function run(){
           '<p class="bm-links"><span class="bm-cn">'+COLORS[b.color][0]+'</span><button type="button" class="nd-rm" data-id="'+b.id+'">Remove</button></p></div></li>';
       }).join("")+'</ul>':'<p class="bm-empty">No bookmarks yet. Choose a color above to save your place.</p>';
     }
-    pickEl.addEventListener("click",function(e){
-      var b=e.target.closest&&e.target.closest(".bm-sw");if(!b||!pos)return;
-      var c=parseInt(b.getAttribute("data-c"),10),old=byColor(c),was=!!old;
+    var picker=d.createElement("div");picker.className="study-bar bm-picker";picker.hidden=true;picker.setAttribute("role","region");picker.setAttribute("aria-label","Choose where to place the bookmark");
+    picker.innerHTML='<div class="sb-row"><span class="bm-pk-ic"></span><p class="bm-pk-text" role="status">Tap the paragraph or heading where you stopped.</p></div><div class="sb-row"><button type="button" class="sb-btn bm-top">Use top of screen</button><button type="button" class="sb-btn bm-cancel">Cancel</button></div>';
+    d.body.appendChild(picker);
+    var pkIc=picker.querySelector(".bm-pk-ic"),pkTx=picker.querySelector(".bm-pk-text"),picking=false,pickColor=0;
+    function place(c,at){
+      var old=byColor(c),was=!!old;
       if(old)db.items=db.items.filter(function(x){return x!==old;});
-      db.items.push({id:(Date.now().toString(36)+Math.random().toString(36).slice(2,5)),color:c,page:page,title:title,idx:pos.idx,snip:pos.snip,t:Date.now()});
-      save();flags();render();say(COLORS[c][0]+" bookmark "+(was?"moved here.":"placed here."));
+      db.items.push({id:(Date.now().toString(36)+Math.random().toString(36).slice(2,5)),color:c,page:page,title:title,idx:at.idx,snip:at.snip,t:Date.now()});
+      save();flags();return was;
+    }
+    function endPick(msgText){
+      picking=false;d.documentElement.classList.remove("bm-picking");
+      if(msgText){pkTx.textContent=msgText;pkIc.innerHTML="";setTimeout(function(){picker.hidden=true;},1600);}else picker.hidden=true;
+    }
+    pickEl.addEventListener("click",function(e){
+      var b=e.target.closest&&e.target.closest(".bm-sw");if(!b)return;
+      pickColor=parseInt(b.getAttribute("data-c"),10);
+      pkIc.innerHTML=icon(COLORS[pickColor][1],true,28);pkTx.textContent="Tap the paragraph or heading where you stopped.";
+      closeD();picking=true;picker.hidden=false;d.documentElement.classList.add("bm-picking");
     });
+    picker.querySelector(".bm-top").addEventListener("click",function(){
+      if(!picking)return;var at=here();if(!at){endPick();return;}
+      var was=place(pickColor,at);endPick(COLORS[pickColor][0]+" bookmark "+(was?"moved.":"placed."));
+    });
+    picker.querySelector(".bm-cancel").addEventListener("click",function(){endPick();});
+    d.addEventListener("click",function(e){
+      if(!picking||(e.target.closest&&e.target.closest(".bm-picker")))return;
+      var el=e.target.closest&&e.target.closest("h1,h2,h3,h4,p,li,blockquote");
+      if(!el||!main.contains(el))return;
+      var i=blocks().indexOf(el);if(i<0)return;
+      e.preventDefault();e.stopPropagation();
+      var was=place(pickColor,{idx:i,snip:snipOf(el)});endPick(COLORS[pickColor][0]+" bookmark "+(was?"moved.":"placed."));
+    },true);
+    d.addEventListener("keydown",function(e){if(e.key==="Escape"&&picking)endPick();});
+    shared.bm={get:function(){return db.items.map(function(b){return {id:b.id,color:b.color,page:b.page,title:b.title,idx:b.idx,snip:b.snip,t:b.t};});},
+      merge:function(arr){var n=0;(arr||[]).forEach(function(b){
+        if(!b||!b.id||!b.page||typeof b.color!=="number"||b.color<0||b.color>14||typeof b.snip!=="string")return;
+        db.items=db.items.filter(function(x){return x.id!==b.id&&x.color!==b.color;});
+        db.items.push({id:b.id,color:b.color,page:b.page,title:b.title||b.page,idx:b.idx|0,snip:b.snip,t:b.t||Date.now()});n++;});
+        save();flags();render();return n;}};
     listEl.addEventListener("click",function(e){
       var b=e.target.closest&&e.target.closest(".nd-rm");if(!b)return;
       var id=b.getAttribute("data-id");db.items=db.items.filter(function(x){return x.id!==id;});save();flags();render();say("Bookmark removed.");

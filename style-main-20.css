@@ -350,3 +350,9 @@ mark.u-hl[id].has-note::before{content:"\270E\00a0";font-size:.75em;color:var(--
 .bm-landed{animation:bmflash 2.6s ease-out}
 @keyframes bmflash{0%,40%{background:rgba(229,138,115,.28)}100%{background:transparent}}
 @media (prefers-reduced-motion:reduce){.bm-landed{animation:none;background:rgba(229,138,115,.2)}}
+
+.bm-picking main.content :is(h1,h2,h3,h4,p,li,blockquote){cursor:pointer}
+.bm-picking main.content :is(h1,h2,h3,h4,p,li,blockquote):hover{outline:2px solid var(--accent);outline-offset:3px}
+.bm-picker .sb-row{margin-bottom:.5rem}
+.bm-pk-text{margin:0;font-size:1rem;line-height:1.4}
+.bm-pk-ic{display:inline-flex;min-width:0}
