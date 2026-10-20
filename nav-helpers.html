@@ -618,7 +618,7 @@ function run(){
         var el=findEl(b);if(!el)return;
         var f=d.createElement("button");f.type="button";f.className="bm-flag";f.setAttribute("data-id",b.id);
         f.setAttribute("aria-label",COLORS[b.color][0]+" bookmark. Open bookmarks");
-        f.innerHTML=icon(COLORS[b.color][1],true,22);
+        f.innerHTML=icon(COLORS[b.color][1],true,16);
         f.addEventListener("click",function(ev){if(shared.menuBookmark&&shared.menuBookmark(b.id,f)){ev.stopPropagation();}else openD();});
         el.insertBefore(f,el.firstChild);b.el=el;
       });
