@@ -606,7 +606,7 @@ function run(){
           var bms=(v.bookmarks||[]).filter(function(b){return b&&b.id&&b.page&&typeof b.snip==="string"&&typeof b.color==="number";});
           if(!Array.isArray(v.items)&&!Array.isArray(v.bookmarks))throw new Error("bad");
           staged={notes:notes,bms:bms};
-          conf.querySelector(".nd-cmsg").textContent="This backup has "+notes.length+" highlight"+(notes.length===1?"":"s")+" and "+bms.length+" bookmark"+(bms.length===1?"":"s")+". Restoring replaces ALL highlights, notes and bookmarks on this device with the ones in the backup.";
+          conf.querySelector(".nd-cmsg").textContent="Restoring this backup replaces all highlights, notes and bookmarks on this device with the ones in the backup.";
           conf.hidden=false;say("");
         }catch(err){staged=null;conf.hidden=true;say("That file could not be read.");}};
       fr.readAsText(f);ev.target.value="";});
