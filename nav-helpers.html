@@ -126,7 +126,7 @@ function run(){
     var b=d.getElementById("studyhelp-btn");if(!b||typeof HTMLDialogElement==="undefined")return;
     var dlg=d.createElement("dialog");dlg.id="help-dialog";dlg.setAttribute("aria-labelledby","hp-title");
     dlg.innerHTML='<div class="dlg"><h2 id="hp-title">Adding highlights and notes</h2>'+
-      '<ol><li>Select the words you want (at least two words). On a phone or tablet, touch and hold a word, then drag the handles. When you pause, the words are highlighted automatically in your most recent color.</li>'+
+      '<ol><li>Select the words you want. On a phone or tablet, touch and hold a word, then drag the handles. When you select two or more words and pause, they are highlighted automatically in your most recent color. If you select just one word, a small menu opens so you can add a note, place a bookmark, or highlight it.</li>'+
       '<li>Tap a highlight to open a small menu. There you can change its color (the new color is used for your next highlights), add a note, place a bookmark at that paragraph, or delete it with the red trash icon.</li>'+
       '<li>Tap a bookmark ribbon to remove the bookmark. Highlighted something by accident? Tap it and use the trash icon.</li>'+
       '<li>Open <strong>My Notes</strong> in the menu to see everything you have saved, with a link back to each passage.</li></ol>'+
@@ -466,10 +466,13 @@ function run(){
       if(e-s<2||e-s>3000){if(mode==="new")hide();return;}
       pending={s:s,text:txt.slice(s,e),prefix:txt.slice(Math.max(0,s-30),s),suffix:txt.slice(e,e+30),el:blockOf(r.startContainer)};
       cur=null;
-      if(pending.text.split(/\s+/).length<2){pending=null;return;}
+      if(pending.text.split(/\s+/).length<2){show("new",lastRect(r.getClientRects(),r.getBoundingClientRect()));setPressed();return;}
+      var wait=900-(Date.now()-lastSel);
+      if(wait>0){clearTimeout(tm);tm=setTimeout(check,wait);return;}
       create(lastColor);hide();
     }
-    d.addEventListener("selectionchange",function(){if(mode&&mode!=="new")return;clearTimeout(tm);tm=setTimeout(check,900);});
+    var lastSel=0;
+    d.addEventListener("selectionchange",function(){if(mode&&mode!=="new")return;lastSel=Date.now();clearTimeout(tm);tm=setTimeout(check,250);});
     pop.addEventListener("mousedown",function(e){if(e.target!==ta)e.preventDefault();});
     [].forEach.call(elColors.querySelectorAll(".sb-c"),function(b){b.addEventListener("click",function(){
       var c=parseInt(b.getAttribute("data-c"),10);
