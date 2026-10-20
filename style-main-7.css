@@ -184,3 +184,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[
 .quarto-secondary-nav a.flex-grow-1{flex:0 0 0 !important;min-width:0;overflow:hidden}
 .bar-logo{margin-right:auto}
 .quarto-secondary-nav .aa-DetachedSearchButton,.quarto-secondary-nav #quarto-search{margin-left:0}
+
+/* Menu buttons: Translate and Download EPUB share one look */
+#quarto-sidebar .translate-btn.tr-side,#quarto-sidebar a.epub-side{display:flex !important;align-items:center;justify-content:center;gap:.6rem;width:100%;min-height:3rem;margin:0;padding:.6rem 1rem;box-sizing:border-box;background:transparent;border:2px solid var(--accent) !important;border-radius:2px;color:var(--text) !important;font-family:'Noto Sans',system-ui,sans-serif;font-weight:700;font-size:1rem;line-height:1.2;text-decoration:none !important;cursor:pointer}
+#quarto-sidebar .translate-btn.tr-side svg,#quarto-sidebar a.epub-side svg{width:22px;height:22px;color:var(--accent);flex:none}
+#quarto-sidebar .translate-btn.tr-side:hover,#quarto-sidebar a.epub-side:hover{background:var(--tile-hover)}
+#quarto-sidebar .translate-btn.tr-side{margin-bottom:.7rem}
