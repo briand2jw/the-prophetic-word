@@ -11,6 +11,8 @@ This EPUB file contains all the information on this website.\
 Last updated: {{< meta date >}}
 
 [Download the EPUB](the-truth.epub){.epub-btn}
+
+[The EPUB is in English. Use your reading app's translate feature to read it in another language.]{.epub-note}
 :::
 
 ## What's new
