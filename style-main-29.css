@@ -418,3 +418,43 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .nd-confirm{margin:.6rem 0 .4rem;padding:.8rem .9rem;border:1px solid var(--accent);border-radius:2px;background:var(--bg)}
 .nd-confirm[hidden]{display:none}
 .nd-cmsg{margin:0 0 .3rem}
+
+/* ---- Soft pill buttons, used everywhere ---- */
+.epub-btn,
+.install-actions .translate-btn,
+.install-box .install-actions .translate-btn,
+.study-box .install-actions .translate-btn,
+.dlg-close,
+.nd-import-l,
+.return-links a,
+.chapter-pager a,
+#quarto-sidebar .translate-btn.tr-side,
+#quarto-sidebar a.epub-side,
+.ts-btn,
+.sb-btn{
+  display:inline-flex !important;align-items:center;justify-content:center;gap:.55rem;
+  min-height:2.75rem;box-sizing:border-box;padding:.55rem 1.3rem !important;margin-top:0;
+  border:1px solid #4a4b42 !important;border-radius:999px !important;
+  background:#34352d !important;color:var(--text) !important;
+  font-family:var(--body-font) !important;font-weight:400 !important;font-size:.97rem !important;letter-spacing:.01em;line-height:1.25;
+  text-decoration:none !important;cursor:pointer;
+  transition:background .15s,border-color .15s;
+}
+.epub-btn:hover,.install-actions .translate-btn:hover,.dlg-close:hover,.nd-import-l:hover,.return-links a:hover,.chapter-pager a:hover,
+#quarto-sidebar .translate-btn.tr-side:hover,#quarto-sidebar a.epub-side:hover,.ts-btn:hover:not(:disabled),.sb-btn:hover{
+  background:#44453b !important;border-color:#5a5b50 !important;color:var(--text) !important}
+.epub-btn:active,.install-actions .translate-btn:active,.dlg-close:active,.return-links a:active,.chapter-pager a:active,#quarto-sidebar .translate-btn.tr-side:active,#quarto-sidebar a.epub-side:active{background:#3e3f36 !important}
+#quarto-sidebar .translate-btn.tr-side,#quarto-sidebar a.epub-side{width:100%;justify-content:center}
+#quarto-sidebar .translate-btn.tr-side svg,#quarto-sidebar a.epub-side svg{color:var(--accent)}
+.epub-btn{margin-top:.6rem}
+.chapter-pager a{padding:.5rem 1.1rem .5rem .8rem !important;font-weight:400 !important}
+.chapter-pager .cp-next{padding:.5rem .8rem .5rem 1.1rem !important}
+.chapter-pager a:hover span:not(.cp-arrow){text-decoration:none}
+.cp-arrow{font-size:1.4rem}
+.ts-btn{min-width:2.9rem;padding:.2rem .8rem !important;font-weight:600 !important}
+.ts-btn:disabled{opacity:.4}
+.sp-pill{border:1px solid #4f5046;background:#3a3b34;font-weight:500;font-family:var(--body-font)}
+.sp-pill:hover{background:#4a4b42}
+.to-top{border:1px solid #4a4b42;background:#34352d}
+.return-links a{font-weight:400}
+@media (forced-colors:active){.epub-btn,.install-actions .translate-btn,.dlg-close,.nd-import-l,.return-links a,.chapter-pager a,.ts-btn,.sb-btn,.sp-pill{border:2px solid ButtonText !important}}
