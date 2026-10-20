@@ -356,3 +356,27 @@ mark.u-hl[id].has-note::before{content:"\270E\00a0";font-size:.75em;color:var(--
 .bm-picker .sb-row{margin-bottom:.5rem}
 .bm-pk-text{margin:0;font-size:1rem;line-height:1.4}
 .bm-pk-ic{display:inline-flex;min-width:0}
+
+/* ---- Context menu for highlights, notes and bookmarks ---- */
+.study-pop{position:absolute;left:0;top:0;right:auto;bottom:auto;margin:0;width:min(22.5rem,calc(100vw - 16px));max-width:none;padding:.8rem .8rem .75rem;background:#2a2b26;border:1px solid #46473e;border-radius:1.5rem;box-shadow:0 10px 34px rgba(0,0,0,.6);z-index:1060}
+.study-pop.sp-dock{position:fixed;left:0;right:0;top:auto;bottom:0;margin:0 auto;width:auto;max-width:34rem;border-radius:1.5rem 1.5rem 0 0;padding-bottom:calc(.8rem + env(safe-area-inset-bottom,0px))}
+.study-pop [hidden]{display:none !important}
+.sp-colors{display:flex;justify-content:space-between;gap:.35rem}
+.study-pop .sb-c{position:relative;display:flex;align-items:center;justify-content:center;width:2.7rem;height:2.7rem;border:2px solid rgba(255,255,255,.14);color:#fff;box-sizing:border-box}
+.study-pop .sb-c svg{opacity:0}
+.study-pop .sb-c[aria-pressed="true"]{outline:2px solid #e8e8e0;outline-offset:3px;border-color:transparent}
+.study-pop .sb-c[aria-pressed="true"] svg{opacity:1}
+.sp-notetxt,.sp-title{margin:.1rem .2rem .6rem;font-size:.97rem;line-height:1.45;color:var(--text);font-family:'Noto Sans',system-ui,sans-serif}
+.sp-title{font-weight:600}
+.sp-notetxt{padding-top:.6rem;margin-top:.6rem;border-top:1px solid #46473e}
+.sp-actions{display:flex;align-items:center;gap:.6rem;margin-top:.7rem;padding-top:.7rem;border-top:1px solid #46473e}
+.sp-round{display:inline-flex;align-items:center;justify-content:center;width:2.7rem;height:2.7rem;border:0;border-radius:50%;background:#3a3b34;color:var(--text);cursor:pointer;padding:0}
+.sp-round.sp-del,.sp-round.sp-rmbm{color:#ff6b5f}
+.sp-pill{display:inline-flex;align-items:center;gap:.45rem;min-height:2.7rem;padding:.3rem 1.1rem;border:1px solid rgba(240,200,90,.5);border-radius:1.4rem;background:transparent;color:var(--text);font:inherit;font-weight:700;font-size:.97rem;cursor:pointer;font-family:'Noto Sans',system-ui,sans-serif}
+.sp-pill:hover,.sp-round:hover{background:#4a4b42}
+.sp-note,.sp-done,.sp-list,.sp-back{margin-left:auto}
+.sp-simple .sp-actions{display:none}
+.sp-simple .sp-title{margin:.2rem .3rem}
+.sp-bmcolors{display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem}
+.study-pop .bm-sw{min-height:2.9rem}
+.study-pop .sb-edit textarea{margin:.6rem 0 0}

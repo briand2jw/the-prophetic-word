@@ -127,8 +127,8 @@ function run(){
     var dlg=d.createElement("dialog");dlg.id="help-dialog";dlg.setAttribute("aria-labelledby","hp-title");
     dlg.innerHTML='<div class="dlg"><h2 id="hp-title">Adding highlights and notes</h2>'+
       '<ol><li>Select the words you want. On a phone or tablet, touch and hold a word, then drag the handles.</li>'+
-      '<li>A bar appears at the bottom of the screen. Tap a color to highlight, or tap <strong>Add note</strong> to write your own comment.</li>'+
-      '<li>Tap any highlight to change its color, edit its note, or remove it.</li>'+
+      '<li>A small menu appears beside your selection. Tap a color to highlight, tap <strong>Note</strong> to write your own comment, or tap the bookmark icon to place a bookmark at that paragraph.</li>'+
+      '<li>Tap any highlight or bookmark ribbon to change it. The red trash icon deletes a highlight (and its note) or removes a bookmark.</li>'+
       '<li>Open <strong>My Notes</strong> in the menu to see everything you have saved, with a link back to each passage.</li></ol>'+
       '<h3>Good to know</h3><ul>'+
       '<li>Highlights, notes and bookmarks are saved only on the device and browser you used. They do not sync to other devices, and no one else can see them.</li>'+
@@ -324,67 +324,138 @@ function run(){
     }
     applyAll();
 
-    /* bar */
-    var bar=d.createElement("div");bar.className="study-bar";bar.hidden=true;bar.setAttribute("role","toolbar");bar.setAttribute("aria-label","Highlights and notes");
-    bar.innerHTML=
-      '<div class="sb-row"><span class="sb-label" id="sb-label">Highlight</span>'+
-      [1,2,3,4,5,6].map(function(c){return '<button type="button" class="sb-c u-c'+c+'" data-c="'+c+'" aria-label="'+COL[c]+' highlight"></button>';}).join("")+
-      '<button type="button" class="sb-btn sb-addnote">Add note</button>'+
-      '<button type="button" class="sb-x" aria-label="Close">✕</button></div>'+
-      '<div class="sb-edit" hidden><label class="sr-only" for="sb-text">Your note</label><textarea id="sb-text" rows="3" placeholder="Write your note here"></textarea>'+
-      '<div class="sb-row"><button type="button" class="sb-btn sb-done">Done</button><button type="button" class="sb-btn sb-remove">Remove highlight</button></div></div>';
-    d.body.appendChild(bar);
-    var edit=bar.querySelector(".sb-edit"),ta=bar.querySelector("textarea"),addn=bar.querySelector(".sb-addnote"),lab=bar.querySelector(".sb-label");
-    var mode=null,pending=null,cur=null,tm=null;
-    function hide(){bar.hidden=true;mode=null;pending=null;cur=null;d.documentElement.classList.remove("study-open");}
-    function show(){bar.hidden=false;d.documentElement.classList.add("study-open");}
-    function setPressed(){[].forEach.call(bar.querySelectorAll(".sb-c"),function(b){
-      b.setAttribute("aria-pressed",cur&&String(cur.color)===b.getAttribute("data-c")?"true":"false");});}
-    function pick(){mode="pick";edit.hidden=true;addn.hidden=false;lab.textContent="Highlight";cur=null;setPressed();show();}
-    function openEdit(id){
-      var it=byId(id);if(!it)return;cur=it;mode="edit";edit.hidden=false;addn.hidden=true;lab.textContent="Color";
-      ta.value=it.note||"";setPressed();show();
+    /* context menu (selection, tap on a highlight, tap on a bookmark ribbon) */
+    var BLK="h1,h2,h3,h4,p,li,blockquote";
+    var ICO={
+      trash:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8H6v11zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>',
+      note:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-3 9h-4v4h-2v-4H7V9h4V5h2v4h4v2z"/></svg>',
+      bm:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4.5L5 21V4a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
+      check:'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'};
+    var pop=d.createElement("div");pop.className="study-bar study-pop";pop.hidden=true;pop.setAttribute("role","toolbar");pop.setAttribute("aria-label","Highlights, notes and bookmarks");
+    pop.innerHTML=
+      '<p class="sp-title" hidden></p>'+
+      '<div class="sp-colors" role="group" aria-label="Highlight color">'+
+        [1,2,3,4,5,6].map(function(c){return '<button type="button" class="sb-c u-c'+c+'" data-c="'+c+'" aria-label="'+COL[c]+' highlight">'+ICO.check+'</button>';}).join("")+'</div>'+
+      '<p class="sp-notetxt" hidden></p>'+
+      '<div class="sb-edit" hidden><label class="sr-only" for="sb-text">Your note</label><textarea id="sb-text" rows="3" placeholder="Write your note here"></textarea></div>'+
+      '<div class="sp-bmcolors" hidden></div>'+
+      '<div class="sp-actions">'+
+        '<button type="button" class="sp-round sp-del" aria-label="Delete highlight">'+ICO.trash+'</button>'+
+        '<button type="button" class="sp-round sp-rmbm" aria-label="Remove bookmark">'+ICO.trash+'</button>'+
+        '<button type="button" class="sp-round sp-bm" aria-label="Add a bookmark here">'+ICO.bm+'</button>'+
+        '<button type="button" class="sp-pill sp-list">All bookmarks</button>'+
+        '<button type="button" class="sp-pill sp-delnote">Delete note</button>'+
+        '<button type="button" class="sp-pill sp-note">'+ICO.note+'<span>Note</span></button>'+
+        '<button type="button" class="sp-pill sp-done">Done</button>'+
+        '<button type="button" class="sp-pill sp-back">Back</button>'+
+      '</div>';
+    d.body.appendChild(pop);
+    function q(s){return pop.querySelector(s);}
+    var elTitle=q(".sp-title"),elColors=q(".sp-colors"),elNote=q(".sp-notetxt"),elEdit=q(".sb-edit"),ta=q("textarea"),elBmc=q(".sp-bmcolors"),
+        bDel=q(".sp-del"),bRm=q(".sp-rmbm"),bBm=q(".sp-bm"),bList=q(".sp-list"),bDelNote=q(".sp-delnote"),bNote=q(".sp-note"),bDone=q(".sp-done"),bBack=q(".sp-back");
+    var mode=null,pending=null,cur=null,curBm=null,anchor=null,tm=null,toastTm=null;
+    function setVis(m){
+      var map={new:[elColors,bBm,bNote],mark:[elColors,elNote,bDel,bBm,bNote],bmk:[elTitle,bRm,bList],edit:[elEdit,bDelNote,bDone],bmpick:[elTitle,elBmc,bBack],done:[elTitle]};
+      [elTitle,elColors,elNote,elEdit,elBmc,bDel,bRm,bBm,bList,bDelNote,bNote,bDone,bBack].forEach(function(e){e.hidden=true;});
+      (map[m]||[]).forEach(function(e){e.hidden=false;});
+      if(m==="mark"){elNote.hidden=!(cur&&cur.note);}
+      pop.classList.toggle("sp-simple",m==="done");
     }
+    function position(){
+      pop.classList.remove("sp-dock");pop.style.top="";pop.style.left="";
+      var r=anchor;if(!r){pop.classList.add("sp-dock");return;}
+      var vw=d.documentElement.clientWidth,pw=pop.offsetWidth,ph=pop.offsetHeight,vh=window.innerHeight,gap=(mode==="new")?34:10;
+      var below=r.bottom+gap,above=r.top-ph-gap,fitsB=below+ph<=vh-8,fitsA=above>=8,top;
+      if(mode==="new"){top=fitsB?below:(fitsA?above:null);}else{top=fitsA?above:(fitsB?r.bottom+10:null);}
+      if(top===null){pop.classList.add("sp-dock");return;}
+      var left=Math.min(Math.max(8,r.left+r.width/2-pw/2),vw-pw-8);
+      pop.style.top=(top+window.scrollY)+"px";pop.style.left=(left+window.scrollX)+"px";
+    }
+    function lastRect(rects,fallback){return rects&&rects.length?rects[rects.length-1]:fallback;}
+    function show(m,rect){mode=m;anchor=rect||null;setVis(m);pop.hidden=false;position();}
+    function hide(){pop.hidden=true;mode=null;pending=null;cur=null;curBm=null;anchor=null;clearTimeout(toastTm);}
+    function toast(t){elTitle.textContent=t;mode="done";setVis("done");pop.hidden=false;position();clearTimeout(toastTm);toastTm=setTimeout(function(){if(mode==="done")hide();},1500);}
+    function setPressed(){[].forEach.call(elColors.querySelectorAll(".sb-c"),function(b){
+      b.setAttribute("aria-pressed",cur&&String(cur.color)===b.getAttribute("data-c")?"true":"false");});}
+    function saveNote(){if(cur){cur.note=ta.value.trim();save(db);paint(cur);}}
     function create(color){
       if(!pending)return null;
       var it={id:uid(),page:page,title:title,color:color,text:pending.text,prefix:pending.prefix,suffix:pending.suffix,s:pending.s,note:"",t:Date.now()};
       db.items.push(it);save(db);
       var sel=window.getSelection();if(sel)sel.removeAllRanges();
       wrapRange(pending.s,pending.s+pending.text.length,it);
-      pending=null;return it;
+      return it;
+    }
+    function blockOf(n){var e=n&&(n.nodeType===3?n.parentNode:n);return e&&e.closest?e.closest(BLK):null;}
+    function openMark(id,m){
+      var it=byId(id);if(!it)return;cur=it;pending={el:blockOf(m)};
+      elNote.textContent=it.note||"";bNote.querySelector("span").textContent=it.note?"Edit note":"Note";
+      show("mark",lastRect(m.getClientRects(),m.getBoundingClientRect()));setPressed();
     }
     function check(){
+      if(mode&&mode!=="new")return;
       var sel=window.getSelection();
-      if(!sel||!sel.rangeCount||sel.isCollapsed){if(mode==="pick")hide();return;}
+      if(!sel||!sel.rangeCount||sel.isCollapsed){if(mode==="new")hide();return;}
       var r=sel.getRangeAt(0);
-      if(!main.contains(r.commonAncestorContainer)){if(mode==="pick")hide();return;}
+      if(!main.contains(r.commonAncestorContainer)){if(mode==="new")hide();return;}
       var list=nodes(),txt=stream(list),s=posToOffset(list,r.startContainer,r.startOffset),e=posToOffset(list,r.endContainer,r.endOffset);
-      if(s<0||e<0||e<=s){if(mode==="pick")hide();return;}
+      if(s<0||e<0||e<=s){if(mode==="new")hide();return;}
       while(s<e&&/\s/.test(txt.charAt(s)))s++;
       while(e>s&&/\s/.test(txt.charAt(e-1)))e--;
-      if(e-s<2||e-s>3000){if(mode==="pick")hide();return;}
-      pending={s:s,text:txt.slice(s,e),prefix:txt.slice(Math.max(0,s-30),s),suffix:txt.slice(e,e+30)};
-      pick();
+      if(e-s<2||e-s>3000){if(mode==="new")hide();return;}
+      pending={s:s,text:txt.slice(s,e),prefix:txt.slice(Math.max(0,s-30),s),suffix:txt.slice(e,e+30),el:blockOf(r.startContainer)};
+      cur=null;show("new",lastRect(r.getClientRects(),r.getBoundingClientRect()));setPressed();
     }
-    d.addEventListener("selectionchange",function(){if(mode==="edit")return;clearTimeout(tm);tm=setTimeout(check,250);});
-    bar.addEventListener("mousedown",function(e){if(e.target!==ta)e.preventDefault();});
-    [].forEach.call(bar.querySelectorAll(".sb-c"),function(b){b.addEventListener("click",function(){
+    d.addEventListener("selectionchange",function(){if(mode&&mode!=="new")return;clearTimeout(tm);tm=setTimeout(check,250);});
+    pop.addEventListener("mousedown",function(e){if(e.target!==ta)e.preventDefault();});
+    [].forEach.call(elColors.querySelectorAll(".sb-c"),function(b){b.addEventListener("click",function(){
       var c=parseInt(b.getAttribute("data-c"),10);
-      if(mode==="pick"){create(c);hide();}
-      else if(mode==="edit"&&cur){cur.color=c;save(db);paint(cur);setPressed();}
+      if(mode==="new"){create(c);hide();}
+      else if(mode==="mark"&&cur){cur.color=c;save(db);paint(cur);setPressed();}
     });});
-    addn.addEventListener("click",function(){var it=create(1);if(it){openEdit(it.id);ta.focus();}});
-    bar.querySelector(".sb-x").addEventListener("click",function(){if(mode==="edit"&&cur){cur.note=ta.value.trim();save(db);paint(cur);}hide();});
-    bar.querySelector(".sb-done").addEventListener("click",function(){if(cur){cur.note=ta.value.trim();save(db);paint(cur);}hide();});
-    bar.querySelector(".sb-remove").addEventListener("click",function(){
-      if(!cur)return;var id=cur.id;db.items=db.items.filter(function(x){return x.id!==id;});save(db);unwrap(id);hide();});
+    bNote.addEventListener("click",function(){
+      if(mode==="new"){var it=create(1);if(!it)return;cur=it;}
+      if(!cur)return;
+      var r=anchor;mode="edit";ta.value=cur.note||"";setVis("edit");position();ta.focus();
+    });
+    bDone.addEventListener("click",function(){saveNote();hide();});
+    bDelNote.addEventListener("click",function(){if(cur){cur.note="";save(db);paint(cur);}hide();});
+    bDel.addEventListener("click",function(){if(!cur)return;var id=cur.id;db.items=db.items.filter(function(x){return x.id!==id;});save(db);unwrap(id);hide();});
+    bBm.addEventListener("click",function(){
+      if(!shared.bm||!pending||!pending.el)return;
+      var C=shared.bm.colors;
+      elBmc.innerHTML=C.map(function(c,i){var u=shared.bm.used(i);
+        return '<button type="button" class="bm-sw'+(u?" used":"")+'" data-c="'+i+'" aria-label="'+c[0]+(u?", in use. Move it here":"")+'">'+shared.bm.icon(c[1],!!u,28)+'</button>';}).join("");
+      elTitle.textContent="Choose a bookmark color";mode="bmpick";setVis("bmpick");position();
+    });
+    elBmc.addEventListener("click",function(e){
+      var b=e.target.closest&&e.target.closest(".bm-sw");if(!b||!pending||!pending.el)return;
+      var c=parseInt(b.getAttribute("data-c"),10),el=pending.el,res=shared.bm.addAt(c,el);
+      var sel=window.getSelection();if(sel)sel.removeAllRanges();
+      if(res)toast(shared.bm.colors[c][0]+" bookmark "+(res.was?"moved here.":"placed here."));else hide();
+    });
+    bBack.addEventListener("click",function(){if(cur){mode="mark";show("mark",anchor);setPressed();}else{mode=null;check();}});
+    bRm.addEventListener("click",function(){if(shared.bm&&curBm)shared.bm.remove(curBm);hide();});
+    bList.addEventListener("click",function(){hide();if(shared.bm)shared.bm.openList();});
+    shared.menuBookmark=function(id,flag){
+      var b=shared.bm&&shared.bm.find(id);if(!b)return false;
+      if(mode==="edit")saveNote();
+      curBm=id;cur=null;pending=null;elTitle.textContent=shared.bm.colors[b.color][0]+" bookmark";
+      show("bmk",flag.getBoundingClientRect());return true;
+    };
     main.addEventListener("click",function(e){
       var m=e.target.closest&&e.target.closest("mark.u-hl");if(!m)return;
       var sel=window.getSelection();if(sel&&!sel.isCollapsed)return;
-      if(mode==="edit"&&cur){cur.note=ta.value.trim();save(db);paint(cur);}
-      openEdit(m.getAttribute("data-id"));
+      if(mode==="edit")saveNote();
+      openMark(m.getAttribute("data-id"),m);
     });
-    d.addEventListener("keydown",function(e){if(e.key==="Escape"&&!bar.hidden){if(mode==="edit"&&cur){cur.note=ta.value.trim();save(db);paint(cur);}hide();}});
+    d.addEventListener("click",function(e){
+      if(pop.hidden||mode==="new"||(pop.contains(e.target)))return;
+      if(e.target.closest&&e.target.closest("mark.u-hl,.bm-flag"))return;
+      if(mode==="edit")saveNote();hide();
+    });
+    d.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){if(mode==="edit")saveNote();hide();}});
+    window.addEventListener("resize",function(){if(!pop.hidden)position();});
 
     /* My Notes dialog */
     var dlg=d.createElement("dialog");dlg.id="notes-dialog";dlg.setAttribute("aria-labelledby","nd-title");
@@ -484,7 +555,7 @@ function run(){
         var f=d.createElement("button");f.type="button";f.className="bm-flag";f.setAttribute("data-id",b.id);
         f.setAttribute("aria-label",COLORS[b.color][0]+" bookmark. Open bookmarks");
         f.innerHTML=icon(COLORS[b.color][1],true,22);
-        f.addEventListener("click",openD);
+        f.addEventListener("click",function(ev){if(shared.menuBookmark&&shared.menuBookmark(b.id,f)){ev.stopPropagation();}else openD();});
         el.insertBefore(f,el.firstChild);b.el=el;
       });
     }
@@ -551,7 +622,11 @@ function run(){
       var was=place(pickColor,{idx:i,snip:snipOf(el)});endPick(COLORS[pickColor][0]+" bookmark "+(was?"moved.":"placed."));
     },true);
     d.addEventListener("keydown",function(e){if(e.key==="Escape"&&picking)endPick();});
-    shared.bm={get:function(){return db.items.map(function(b){return {id:b.id,color:b.color,page:b.page,title:b.title,idx:b.idx,snip:b.snip,t:b.t};});},
+    shared.bm={colors:COLORS,icon:icon,used:function(c){return !!byColor(c);},find:function(id){for(var i=0;i<db.items.length;i++)if(db.items[i].id===id)return db.items[i];return null;},
+      openList:function(){openD();},
+      remove:function(id){db.items=db.items.filter(function(x){return x.id!==id;});save();flags();render();},
+      addAt:function(c,el){var list=blocks(),i=list.indexOf(el);if(i<0)return null;return {was:place(c,{idx:i,snip:snipOf(el)})};},
+      get:function(){return db.items.map(function(b){return {id:b.id,color:b.color,page:b.page,title:b.title,idx:b.idx,snip:b.snip,t:b.t};});},
       merge:function(arr){var n=0;(arr||[]).forEach(function(b){
         if(!b||!b.id||!b.page||typeof b.color!=="number"||b.color<0||b.color>14||typeof b.snip!=="string")return;
         db.items=db.items.filter(function(x){return x.id!==b.id&&x.color!==b.color;});
