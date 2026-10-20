@@ -749,8 +749,17 @@ function run(){
     var ic=icon("currentColor",false,24);
     if(bar){
       var tb=d.createElement("button");tb.type="button";tb.className="translate-btn tr-bar bm-bar";tb.setAttribute("aria-haspopup","dialog");
-      tb.innerHTML=ic+'<span class="sr-only">Bookmarks</span>';tb.style.order="3";tb.addEventListener("click",openD);
-      var tr=bar.querySelector(".tr-bar");if(tr)bar.insertBefore(tb,tr);else bar.appendChild(tb);
+      tb.innerHTML=ic+'<span class="sr-only">Bookmarks</span>';tb.addEventListener("click",openD);
+      bar.appendChild(tb);
+      /* left to right: menu | logo ........ search | translate | bookmarks */
+      [].forEach.call(bar.children,function(c){
+        var o=3;
+        if(c.classList.contains("bar-logo"))o=2;
+        else if(c.classList.contains("bm-bar"))o=5;
+        else if(c.classList.contains("tr-bar"))o=4;
+        else if(c.matches(".quarto-btn-toggle")||c.querySelector(".quarto-btn-toggle"))o=1;
+        c.style.order=o;
+      });
     }
     var wrap=d.querySelector(".epub-side-wrap");
     if(wrap){
