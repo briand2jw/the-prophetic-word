@@ -62,6 +62,26 @@ function run(){
     r.innerHTML=links.map(function(l){return '<a href="'+l.h+'">'+esc(l.t)+'</a>';}).join("");
     main.appendChild(r);
   });
+  /* Translate: button in the menu and at the top of Home, opening a how-to dialog */
+  safe(function(){
+    var globe='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></g></svg>';
+    var dlg=d.createElement("dialog");dlg.id="translate-dialog";dlg.setAttribute("aria-labelledby","tr-title");
+    dlg.innerHTML='<div class="dlg"><h2 id="tr-title">Read this page in your language</h2><p>Your web browser can translate this page for you, usually with Google Translate. Choose the steps for your device. The exact wording can vary by browser version.</p><h3>Chrome on a computer</h3><p>Click the translate icon at the right end of the address bar, then choose your language. If you don\u2019t see it, right-click the page and choose \u201cTranslate to\u2026\u201d.</p><h3>Chrome on an iPhone, iPad or Android phone</h3><p>Open the browser menu and tap \u201cTranslate\u2026\u201d, then pick your language.</p><h3>Safari on an iPhone or iPad</h3><p>Tap the \u201caA\u201d button at the left of the address bar and choose \u201cTranslate to\u2026\u201d.</p><h3>Microsoft Edge</h3><p>Click the translate icon in the address bar and choose your language.</p><h3>Any other browser</h3><p>Go to translate.google.com, open the Websites tab, paste this page\u2019s address, and choose your language.</p><button type="button" class="dlg-close">Close</button></div>';
+    d.body.appendChild(dlg);
+    var open=function(){if(typeof dlg.showModal==="function")dlg.showModal();else dlg.setAttribute("open","");};
+    var close=function(){if(typeof dlg.close==="function")dlg.close();else dlg.removeAttribute("open");};
+    dlg.querySelector(".dlg-close").addEventListener("click",close);
+    dlg.addEventListener("click",function(e){if(e.target===dlg)close();});
+    function mk(cls){var b=d.createElement("button");b.type="button";b.className="translate-btn "+cls;b.setAttribute("aria-haspopup","dialog");b.innerHTML=globe+"<span>Translate</span>";b.addEventListener("click",open);return b;}
+    var wrap=d.querySelector(".epub-side-wrap");
+    if(wrap){wrap.insertBefore(mk("tr-side"),wrap.firstChild);}
+    else{var host=d.querySelector("#quarto-sidebar .sidebar-menu-container")||d.querySelector("#quarto-sidebar");if(host){var w=d.createElement("div");w.className="epub-side-wrap";w.appendChild(mk("tr-side"));host.appendChild(w);}}
+    var here=location.href.split(/[?#]/)[0];
+    if(here===root||here===homeUrl){
+      var h=d.querySelector("h1.title");
+      if(h){var row=d.createElement("div");row.className="home-tools";row.appendChild(mk("tr-home"));h.insertAdjacentElement("afterend",row);}
+    }
+  });
   /* Menu sections start collapsed; the section holding the current page stays open */
   safe(function(){
     [].forEach.call(d.querySelectorAll("#quarto-sidebar li.sidebar-item-section"),function(li){
