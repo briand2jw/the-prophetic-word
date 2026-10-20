@@ -25,7 +25,7 @@ function run(){
   });
   /* Logo (links Home) in the phone / tablet top bar, and beside the name in the sidebar */
   safe(function(){
-    var bar=d.querySelector(".quarto-secondary-nav > .container-fluid, .quarto-secondary-nav");
+    var bar=(d.querySelector(".quarto-secondary-nav > .container-fluid")||d.querySelector(".quarto-secondary-nav"));
     if(bar){
       var a=d.createElement("a");a.className="bar-logo";a.href=homeUrl;a.setAttribute("aria-label","The Truth, go to Home");
       a.innerHTML=lock;
@@ -76,7 +76,7 @@ function run(){
     var wrap=d.querySelector(".epub-side-wrap");
     if(wrap){wrap.insertBefore(mk("tr-side"),wrap.firstChild);}
     else{var host=d.querySelector("#quarto-sidebar .sidebar-menu-container")||d.querySelector("#quarto-sidebar");if(host){var w=d.createElement("div");w.className="epub-side-wrap";w.appendChild(mk("tr-side"));host.appendChild(w);}}
-    var bar=d.querySelector(".quarto-secondary-nav > .container-fluid, .quarto-secondary-nav");
+    var bar=(d.querySelector(".quarto-secondary-nav > .container-fluid")||d.querySelector(".quarto-secondary-nav"));
     if(bar){
       var tb=mk("tr-bar");tb.setAttribute("aria-label","Translate this page");tb.querySelector("span").className="sr-only";
       var sr=bar.querySelector("#quarto-search, .quarto-search, .aa-DetachedSearchButton, button[aria-label*='earch']");
@@ -86,7 +86,7 @@ function run(){
   });
   /* Top bar: one row -> menu | logo ........ translate | search */
   safe(function(){
-    var bar=d.querySelector(".quarto-secondary-nav > .container-fluid, .quarto-secondary-nav");
+    var bar=(d.querySelector(".quarto-secondary-nav > .container-fluid")||d.querySelector(".quarto-secondary-nav"));
     if(!bar)return;
     bar.style.flexWrap="nowrap";bar.style.alignItems="center";
     [].forEach.call(bar.children,function(c){
