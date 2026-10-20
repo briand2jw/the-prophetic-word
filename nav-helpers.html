@@ -104,7 +104,7 @@ function run(){
     if(btn)btn.addEventListener("click",function(){if(!deferred)return;deferred.prompt();deferred.userChoice.then(function(){deferred=null;btn.hidden=true;});});
     window.addEventListener("appinstalled",function(){if(btn)btn.hidden=true;});
     if(window.matchMedia("(display-mode: standalone)").matches||navigator.standalone){
-      [].forEach.call(d.querySelectorAll(".install-box"),function(b){b.hidden=true;});}
+      [].forEach.call(d.querySelectorAll(".install-box,.install-head"),function(b){b.style.display="none";});}
   });
   /* "How do I install this?" prompt on Home */
   safe(function(){

@@ -36,7 +36,7 @@ Last updated: {{< meta date >}}
 [The EPUB is in English. Use your reading app's translate feature to read it in another language.]{.epub-note}
 :::
 
-## Install as an App
+## Install as an App {.install-head}
 
 ::: {.stamp .install-box}
 Add this website to your phone or tablet so it opens like an app, with its own icon. Once it has been opened, it can also be read without an internet connection.
