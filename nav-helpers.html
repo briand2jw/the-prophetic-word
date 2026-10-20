@@ -390,13 +390,42 @@ function run(){
     function setPressed(){[].forEach.call(elColors.querySelectorAll(".sb-c"),function(b){
       b.setAttribute("aria-pressed",String(cur?cur.color:lastColor)===b.getAttribute("data-c")?"true":"false");});}
     function saveNote(){if(cur){cur.note=ta.value.trim();save(db);paint(cur);}}
+    /* One color per word: a new highlight overwrites any color it covers and joins same-color neighbors */
+    function addRange(s,e,color){
+      var txt=stream(nodes());
+      var mine=db.items.filter(function(it){
+        if(it.page!==page)return false;
+        if(txt.substr(it.s,it.text.length)!==it.text){var at=locate(it,txt);if(at<0)return false;it.s=at;}
+        return true;});
+      var us=s,ue=e,notes=[],affected=[],keep=[];
+      mine.forEach(function(it){var a=it.s,b=it.s+it.text.length;if(it.color===color&&a<=e&&b>=s){us=Math.min(us,a);ue=Math.max(ue,b);}});
+      mine.forEach(function(it){var a=it.s,b=it.s+it.text.length;if((a<ue&&b>us)||(it.color===color&&a<=ue&&b>=us))affected.push(it);});
+      affected.forEach(function(it){
+        unwrap(it.id);
+        var a=it.s,b=a+it.text.length,pieces=[],given=false;
+        if(it.color===color){if(it.note)notes.push(it.note);}
+        else{if(a<us)pieces.push([a,us]);if(b>ue)pieces.push([ue,b]);}
+        db.items=db.items.filter(function(x){return x!==it;});
+        pieces.forEach(function(pc,k){
+          var ps=pc[0],pe=pc[1];
+          while(ps<pe&&/\s/.test(txt.charAt(ps)))ps++;
+          while(pe>ps&&/\s/.test(txt.charAt(pe-1)))pe--;
+          if(pe<=ps)return;
+          keep.push({id:given?uid():it.id,page:page,title:title,color:it.color,text:txt.slice(ps,pe),prefix:txt.slice(Math.max(0,ps-30),ps),suffix:txt.slice(pe,pe+30),s:ps,note:given?"":(it.note||""),t:it.t});
+          given=true;
+        });
+        if(it.color!==color&&it.note&&!given)notes.push(it.note);
+      });
+      var ni={id:uid(),page:page,title:title,color:color,text:txt.slice(us,ue),prefix:txt.slice(Math.max(0,us-30),us),suffix:txt.slice(ue,ue+30),s:us,note:notes.join("\n"),t:Date.now()};
+      db.items.push(ni);keep.forEach(function(k){db.items.push(k);});
+      save(db);
+      wrapRange(us,ue,ni);keep.forEach(function(k){wrapRange(k.s,k.s+k.text.length,k);});
+      return ni;
+    }
     function create(color){
       if(!pending)return null;
-      var it={id:uid(),page:page,title:title,color:color,text:pending.text,prefix:pending.prefix,suffix:pending.suffix,s:pending.s,note:"",t:Date.now()};
-      db.items.push(it);save(db);
       var sel=window.getSelection();if(sel)sel.removeAllRanges();
-      wrapRange(pending.s,pending.s+pending.text.length,it);
-      return it;
+      return addRange(pending.s,pending.s+pending.text.length,color);
     }
     function blockOf(n){var e=n&&(n.nodeType===3?n.parentNode:n);return e&&e.closest?e.closest(BLK):null;}
     function openMark(id,m){
