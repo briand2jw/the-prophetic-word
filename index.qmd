@@ -28,7 +28,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ::: {.content-visible when-format="html"}
 ## How to study this information
 
-Take your time with each chapter. Read the overview first, then work through the verse groups one at a time. As you read, mark what stands out and write down your own thoughts. Your highlights and notes stay private on your device, so you can study at your own pace and return to them whenever you like.
+Take your time with each chapter. Read the overview first, then work through the verse groups one at a time. As you read, mark what stands out and write down your own thoughts. Use the bookmark icon at the top of any page to save your place and come back to it later. Your bookmarks, highlights and notes stay private on your device, so you can study at your own pace and return to them whenever you like.
 
 ::: {.stamp .study-box}
 [Adding highlights and notes]{.box-title}

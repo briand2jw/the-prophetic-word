@@ -442,6 +442,116 @@ function run(){
     if(wrap)wrap.insertBefore(nb,wrap.querySelector("a.epub-side"));
     var open2=d.getElementById("notes-open");if(open2)open2.addEventListener("click",openD);
   });
+  /* Bookmarks: up to 15, one per color, kept on this device */
+  safe(function(){
+    var main=d.querySelector("main.content");if(!main)return;
+    var KEY="bookmarks-v1",mem=null;
+    var COLORS=[["Red","#e05a5a"],["Orange","#ee8f3c"],["Gold","#e9c34a"],["Lime","#a8cc4f"],["Green","#5cb97a"],["Teal","#3fb5a8"],["Cyan","#4fb7de"],["Blue","#5b8def"],["Indigo","#7a6ee0"],["Purple","#a974dd"],["Magenta","#d661b8"],["Pink","#ef8fb0"],["Brown","#b58463"],["Gray","#a7a79c"],["Cream","#f2ede3"]];
+    var page=(location.href.split(/[?#]/)[0].slice(root.length))||"index.html";
+    var titleEl=main.querySelector("h1.title");
+    var title=((titleEl&&titleEl.textContent)||d.title||page).replace(/\s+/g," ").trim();
+    function load(){try{var v=JSON.parse(localStorage.getItem(KEY)||"null");if(v&&v.items)return v;}catch(e){}return mem||{v:1,items:[]};}
+    function save(){mem=db;try{localStorage.setItem(KEY,JSON.stringify(db));}catch(e){}}
+    var db=load();
+    function icon(c,filled,size){
+      return '<svg viewBox="0 0 24 24" width="'+size+'" height="'+size+'" aria-hidden="true" focusable="false"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4.5L5 21V4a1 1 0 0 1 1-1z" fill="'+(filled?c:"none")+'" stroke="'+c+'" stroke-width="2" stroke-linejoin="round"/></svg>';
+    }
+    function blocks(){
+      return [].filter.call(main.querySelectorAll("h1,h2,h3,h4,p,li,blockquote"),function(el){
+        return !(el.closest("nav,.text-size,.study-bar,dialog,.return-links,.chapter-pager,button"))&&el.textContent.trim().length>0;
+      });
+    }
+    function snipOf(el){var t=(el.textContent||"").replace(/\s+/g," ").replace(/^✎\s*/,"").trim();return t.slice(0,70);}
+    function here(){
+      var list=blocks(),best=list[0],i,top;
+      for(i=0;i<list.length;i++){top=list[i].getBoundingClientRect();if(top.bottom>96){best=list[i];break;}}
+      if(!best)return null;
+      return {idx:list.indexOf(best),snip:snipOf(best)};
+    }
+    function findEl(it){
+      var list=blocks(),el=list[it.idx];
+      if(el&&snipOf(el)===it.snip)return el;
+      for(var i=0;i<list.length;i++)if(snipOf(list[i])===it.snip)return list[i];
+      return el||null;
+    }
+    function flags(){
+      [].forEach.call(main.querySelectorAll(".bm-flag"),function(f){f.parentNode.removeChild(f);});
+      db.items.filter(function(b){return b.page===page;}).forEach(function(b){
+        var el=findEl(b);if(!el)return;
+        var f=d.createElement("button");f.type="button";f.className="bm-flag";f.setAttribute("data-id",b.id);
+        f.setAttribute("aria-label",COLORS[b.color][0]+" bookmark. Open bookmarks");
+        f.innerHTML=icon(COLORS[b.color][1],true,22);
+        f.addEventListener("click",openD);
+        el.insertBefore(f,el.firstChild);b.el=el;
+      });
+    }
+    function flash(el){el.classList.add("bm-landed");setTimeout(function(){el.classList.remove("bm-landed");},2600);}
+    function goHere(b){var el=findEl(b);if(el){el.scrollIntoView({block:"center"});flash(el);}}
+    function applyHash(){
+      var m=location.hash.match(/^#bm-(.+)$/);if(!m)return;
+      var b=null;db.items.forEach(function(x){if(x.id===m[1])b=x;});
+      if(b)setTimeout(function(){goHere(b);},80);
+    }
+    flags();applyHash();
+
+    var dlg=d.createElement("dialog");dlg.id="bookmarks-dialog";dlg.setAttribute("aria-labelledby","bm-title");
+    dlg.innerHTML='<div class="dlg"><h2 id="bm-title">Bookmarks</h2>'+
+      '<p class="bm-intro">Save your place and come back to it later. Choose a color to place a bookmark at the spot where you are reading. You can keep up to 15, one for each color.</p>'+
+      '<div class="bm-pick" role="group" aria-label="Place a bookmark here"></div><p class="bm-msg" role="status"></p><div id="bm-list"></div>'+
+      '<button type="button" class="dlg-close bm-close">Close</button></div>';
+    d.body.appendChild(dlg);
+    var pickEl=dlg.querySelector(".bm-pick"),msg=dlg.querySelector(".bm-msg"),listEl=dlg.querySelector("#bm-list"),pos=null;
+    function say(t){msg.textContent=t;}
+    function byColor(c){for(var i=0;i<db.items.length;i++)if(db.items[i].color===c)return db.items[i];return null;}
+    function render(){
+      pickEl.innerHTML=COLORS.map(function(c,i){
+        var used=byColor(i);
+        return '<button type="button" class="bm-sw'+(used?" used":"")+'" data-c="'+i+'" aria-label="'+c[0]+(used?", in use. Move it here":". Place here")+'">'+icon(c[1],!!used,30)+'</button>';
+      }).join("");
+      var items=db.items.slice().sort(function(a,b){return a.color-b.color;});
+      listEl.innerHTML=items.length?'<ul class="bm-items">'+items.map(function(b){
+        return '<li><span class="bm-ic">'+icon(COLORS[b.color][1],true,26)+'</span><div><a href="'+root+esc(b.page)+'#bm-'+b.id+'">'+esc(b.title)+'</a><p class="bm-snip">“'+esc(b.snip)+(b.snip.length>=70?"…":"")+'”</p>'+
+          '<p class="bm-links"><span class="bm-cn">'+COLORS[b.color][0]+'</span><button type="button" class="nd-rm" data-id="'+b.id+'">Remove</button></p></div></li>';
+      }).join("")+'</ul>':'<p class="bm-empty">No bookmarks yet. Choose a color above to save your place.</p>';
+    }
+    pickEl.addEventListener("click",function(e){
+      var b=e.target.closest&&e.target.closest(".bm-sw");if(!b||!pos)return;
+      var c=parseInt(b.getAttribute("data-c"),10),old=byColor(c),was=!!old;
+      if(old)db.items=db.items.filter(function(x){return x!==old;});
+      db.items.push({id:(Date.now().toString(36)+Math.random().toString(36).slice(2,5)),color:c,page:page,title:title,idx:pos.idx,snip:pos.snip,t:Date.now()});
+      save();flags();render();say(COLORS[c][0]+" bookmark "+(was?"moved here.":"placed here."));
+    });
+    listEl.addEventListener("click",function(e){
+      var b=e.target.closest&&e.target.closest(".nd-rm");if(!b)return;
+      var id=b.getAttribute("data-id");db.items=db.items.filter(function(x){return x.id!==id;});save();flags();render();say("Bookmark removed.");
+    });
+    listEl.addEventListener("click",function(e){
+      var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;
+      var u=a.getAttribute("href").split("#")[0],m=a.getAttribute("href").match(/#bm-(.+)$/);
+      if(m&&a.href.split("#")[0]===location.href.split(/[?#]/)[0]){
+        e.preventDefault();closeD();var bk=null;db.items.forEach(function(x){if(x.id===m[1])bk=x;});if(bk)goHere(bk);}
+    });
+    function closeD(){if(dlg.close)dlg.close();else dlg.removeAttribute("open");}
+    function openD(){pos=here();render();say("");if(dlg.showModal)dlg.showModal();else dlg.setAttribute("open","");}
+    dlg.querySelector(".bm-close").addEventListener("click",closeD);
+    dlg.addEventListener("click",function(e){if(e.target===dlg)closeD();});
+
+    /* buttons: top bar and menu */
+    var bar=(d.querySelector(".quarto-secondary-nav > .container-fluid")||d.querySelector(".quarto-secondary-nav"));
+    var ic=icon("currentColor",false,24);
+    if(bar){
+      var tb=d.createElement("button");tb.type="button";tb.className="translate-btn tr-bar bm-bar";tb.setAttribute("aria-haspopup","dialog");
+      tb.innerHTML=ic+'<span class="sr-only">Bookmarks</span>';tb.style.order="3";tb.addEventListener("click",openD);
+      var tr=bar.querySelector(".tr-bar");if(tr)bar.insertBefore(tb,tr);else bar.appendChild(tb);
+    }
+    var wrap=d.querySelector(".epub-side-wrap");
+    if(wrap){
+      var sb=d.createElement("button");sb.type="button";sb.className="translate-btn tr-side bm-side";sb.setAttribute("aria-haspopup","dialog");
+      sb.innerHTML=icon("currentColor",false,22)+"<span>Bookmarks</span>";sb.addEventListener("click",openD);
+      wrap.insertBefore(sb,wrap.querySelector(".notes-side")||wrap.querySelector("a.epub-side"));
+    }
+    var o=d.getElementById("bookmarks-open");if(o)o.addEventListener("click",openD);
+  });
   /* Back-to-top button */
   safe(function(){
     var b=d.createElement("button");b.type="button";b.className="to-top";b.setAttribute("aria-label","Back to top");b.innerHTML="↑";
