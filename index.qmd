@@ -56,7 +56,7 @@ Last updated: {{< meta date >}}
 ::: {.stamp .install-box}
 Add this website to your phone or tablet so it opens like an app, with its own icon. Once it has been opened, it can also be read without an internet connection.
 
-<p class="install-actions"><button type="button" id="install-btn" class="translate-btn" hidden>Install the App</button> <button type="button" id="howto-btn" class="translate-btn">How Do I Install This?</button></p>
+<p class="install-actions"><button type="button" id="howto-btn" class="translate-btn">How Do I Install This App?</button></p>
 
 [Translation works best when you read the website in your browser rather than the installed app.]{.epub-note}
 :::

@@ -458,3 +458,5 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .to-top{border:1px solid #4a4b42;background:#34352d}
 .return-links a{font-weight:400}
 @media (forced-colors:active){.epub-btn,.install-actions .translate-btn,.dlg-close,.nd-import-l,.return-links a,.chapter-pager a,.ts-btn,.sb-btn,.sp-pill{border:2px solid ButtonText !important}}
+
+.install-actions{align-items:flex-start}
