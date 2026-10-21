@@ -460,3 +460,8 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 @media (forced-colors:active){.epub-btn,.install-actions .translate-btn,.dlg-close,.nd-import-l,.return-links a,.chapter-pager a,.ts-btn,.sb-btn,.sp-pill{border:2px solid ButtonText !important}}
 
 .install-actions{align-items:flex-start}
+
+/* Menu buttons: always stacked, always as wide as the menu (narrow windows, half and third screen, phone) */
+.epub-side-wrap{display:flex !important;flex-direction:column;align-items:stretch;gap:.7rem;box-sizing:border-box;width:100%;max-width:100%;white-space:normal}
+.epub-side-wrap > * + *{margin-top:0 !important}
+#quarto-sidebar .epub-side-wrap .translate-btn.tr-side,#quarto-sidebar .epub-side-wrap a.epub-side{display:flex !important;flex:0 0 auto;width:100% !important;max-width:100%;min-width:0;box-sizing:border-box;white-space:normal;text-align:center}
