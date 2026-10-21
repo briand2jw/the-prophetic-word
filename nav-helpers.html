@@ -800,7 +800,7 @@ function run(){
       var cs=cx(s),ct=cx(t),cb=cx(b),step=ct-cs;
       if(!(step>20&&step<120)||!isFinite(cb))return;
       var delta=Math.round(step-(cb-ct));
-      if(Math.abs(delta)>0)bb.style.setProperty("margin-left",delta+"px","important");
+      if(Math.abs(delta)>1)bb.style.setProperty("margin-left",delta+"px","important");
     }
     [0,300,1200,3000].forEach(function(ms){setTimeout(evenIcons,ms);});
     window.addEventListener("resize",evenIcons);

@@ -489,3 +489,7 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .sp-pill svg,.sb-btn svg{color:var(--accent)}
 .cp-arrow{font-family:'Noto Sans',system-ui,sans-serif;font-size:1.3rem;letter-spacing:0;font-weight:400}
 .ts-btn{font-size:.85rem !important;letter-spacing:.04em !important;text-transform:none}
+
+/* Header search button (Quarto's own #quarto-search button): same size cell as translate and bookmarks */
+.quarto-secondary-nav #quarto-search,.quarto-secondary-nav .quarto-search-button{width:2.9rem !important;min-width:2.9rem !important;height:2.75rem !important;margin:0 !important;padding:0 !important;display:flex !important;align-items:center;justify-content:center;flex:0 0 2.9rem !important;box-sizing:border-box}
+.quarto-secondary-nav #quarto-search i,.quarto-secondary-nav #quarto-search svg{margin:0 !important;font-size:1.35rem;line-height:1}
