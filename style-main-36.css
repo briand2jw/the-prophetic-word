@@ -513,3 +513,12 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .sh-row:hover{color:#f0a48f}
 #share-dialog .sh-msg{min-height:1.4rem;margin:.4rem 0 0;color:var(--meta);font-size:.92rem}
 .sh-side svg{color:var(--accent)}
+
+/* Long titles wrap inside the menu instead of widening it */
+#quarto-sidebar,#quarto-sidebar .sidebar-menu-container,#quarto-sidebar ul.list-unstyled,#quarto-sidebar .sidebar-item,#quarto-sidebar .sidebar-section{max-width:100%;box-sizing:border-box;min-width:0}
+#quarto-sidebar .sidebar-menu-container{overflow-x:hidden !important}
+#quarto-sidebar .sidebar-item-container{display:flex !important;align-items:flex-start;gap:.5rem;min-width:0;max-width:100%}
+#quarto-sidebar .sidebar-item-container > a.sidebar-link,#quarto-sidebar .sidebar-item-container > .sidebar-item-toggle-wrap{min-width:0}
+#quarto-sidebar .sidebar-item-container > a.sidebar-link{flex:1 1 auto;white-space:normal !important;overflow-wrap:anywhere;word-break:normal;text-overflow:clip !important;overflow:visible !important}
+#quarto-sidebar .sidebar-item-container .menu-text{white-space:normal !important;overflow-wrap:anywhere;display:inline;max-width:100%}
+#quarto-sidebar .sidebar-item-container > a.sidebar-item-toggle{flex:0 0 auto;margin-left:auto;padding-left:.4rem;padding-right:.2rem}
