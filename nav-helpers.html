@@ -793,7 +793,7 @@ function run(){
     function evenIcons(){
       if(!bar)return;
       var s=bar.querySelector(".aa-DetachedSearchButton svg,.aa-DetachedSearchButtonIcon,#quarto-search svg,#quarto-search i,.quarto-search svg"),
-          t=bar.querySelector(".tr-bar:not(.bm-bar) svg"),b=bar.querySelector(".bm-bar svg"),bb=bar.querySelector(".bm-bar");
+          t=bar.querySelector(".tr-bar:not(.bm-bar):not(.sh-bar) svg"),b=bar.querySelector(".bm-bar svg"),bb=bar.querySelector(".bm-bar");
       if(!s||!t||!b||!bb)return;
       bb.style.removeProperty("margin-left");
       function cx(e){var r=e.getBoundingClientRect();return r.left+r.width/2;}
@@ -805,6 +805,73 @@ function run(){
     [0,300,1200,3000].forEach(function(ms){setTimeout(evenIcons,ms);});
     window.addEventListener("resize",evenIcons);
     window.addEventListener("load",evenIcons);
+  });
+  /* Share: header button opening a small share window (copy link, email) */
+  safe(function(){
+    if(typeof HTMLDialogElement==="undefined")return;
+    var main=d.querySelector("main.content");
+    var tEl=main&&main.querySelector("h1.title");
+    var title=((tEl&&tEl.textContent)||d.title||"The Truth").replace(/\s+/g," ").trim();
+    function pageUrl(){return location.href.split("#")[0];}
+    var ico={
+      share:'<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M14 4l7 7-7 7v-4.2c-5 0-8.4 1.5-11 5.2 1-5.4 4.2-9.6 11-10.6V4z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>',
+      copy:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>',
+      mail:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+      more:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M12 3v12M7 8l5-5 5 5M5 13v7h14v-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>'};
+    var dlg=d.createElement("dialog");dlg.id="share-dialog";dlg.setAttribute("aria-labelledby","sh-title");
+    dlg.innerHTML='<div class="sh-head"><h2 id="sh-title">Share</h2><button type="button" class="sh-x" aria-label="Close">✕</button></div>'+
+      '<div class="sh-body"><div class="sh-card"><img class="sh-thumb" alt="" width="72" height="72" src="'+root+'icons/icon-192.png"><div><p class="sh-site">The Truth</p><p class="sh-title"></p></div></div>'+
+      '<input type="text" class="sh-url" readonly aria-label="Link to this page">'+
+      '<ul class="sh-actions"><li><button type="button" class="sh-row sh-copy">'+ico.copy+'<span>Copy Link</span></button></li>'+
+      '<li><a class="sh-row sh-mail" href="#">'+ico.mail+'<span>Share via Email</span></a></li>'+
+      '<li class="sh-more-li" hidden><button type="button" class="sh-row sh-more">'+ico.more+'<span>More Sharing Options</span></button></li></ul>'+
+      '<p class="sh-msg" role="status"></p></div>';
+    d.body.appendChild(dlg);
+    var q=function(s){return dlg.querySelector(s);},urlEl=q(".sh-url"),msg=q(".sh-msg"),mailA=q(".sh-mail");
+    function say(t){msg.textContent=t;}
+    function fill(){
+      var u=pageUrl();urlEl.value=u;q(".sh-title").textContent=title;
+      mailA.href="mailto:?subject="+encodeURIComponent(title+" – The Truth")+"&body="+encodeURIComponent(title+"\n"+u);
+      q(".sh-more-li").hidden=!(navigator.share);
+      say("");
+    }
+    function openS(){fill();dlg.showModal();}
+    function closeS(){dlg.close();}
+    q(".sh-x").addEventListener("click",closeS);
+    dlg.addEventListener("click",function(e){if(e.target===dlg)closeS();});
+    urlEl.addEventListener("focus",function(){urlEl.select();});
+    q(".sh-copy").addEventListener("click",function(){
+      var t=urlEl.value;
+      function fb(){try{urlEl.focus();urlEl.select();var ok=d.execCommand("copy");say(ok?"Link copied.":"Press and hold the link to copy it.");}catch(e){say("Press and hold the link to copy it.");}}
+      try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){say("Link copied.");},fb);return;}}catch(e){}
+      fb();
+    });
+    q(".sh-more").addEventListener("click",function(){
+      try{navigator.share({title:title,text:title+" – The Truth",url:urlEl.value}).catch(function(){});}catch(e){}
+    });
+    var bar=(d.querySelector(".quarto-secondary-nav > .container-fluid")||d.querySelector(".quarto-secondary-nav"));
+    if(bar){
+      var b=d.createElement("button");b.type="button";b.className="translate-btn tr-bar sh-bar";b.setAttribute("aria-haspopup","dialog");
+      b.innerHTML=ico.share+'<span class="sr-only">Share</span>';b.style.order="6";b.addEventListener("click",openS);
+      bar.appendChild(b);
+      function evenShare(){
+        var s=bar.querySelector(".aa-DetachedSearchButton svg,.aa-DetachedSearchButtonIcon,#quarto-search svg,#quarto-search i,.quarto-search svg"),
+            t=bar.querySelector(".tr-bar:not(.bm-bar):not(.sh-bar) svg"),m=bar.querySelector(".bm-bar svg"),sv=b.querySelector("svg");
+        if(!s||!t||!m||!sv)return;
+        b.style.removeProperty("margin-left");
+        function cx(e){var r=e.getBoundingClientRect();return r.left+r.width/2;}
+        var step=cx(t)-cx(s),delta=Math.round(step-(cx(sv)-cx(m)));
+        if(step>20&&step<120&&Math.abs(delta)>1)b.style.setProperty("margin-left",delta+"px","important");
+      }
+      [400,1500,3200].forEach(function(ms){setTimeout(evenShare,ms);});
+      window.addEventListener("resize",evenShare);
+    }
+    var side=d.querySelector(".epub-side-wrap");
+    if(side){
+      var sb=d.createElement("button");sb.type="button";sb.className="translate-btn tr-side sh-side";sb.setAttribute("aria-haspopup","dialog");
+      sb.innerHTML=ico.share.replace('width="24" height="24"','width="22" height="22"')+"<span>Share</span>";sb.addEventListener("click",openS);
+      side.insertBefore(sb,side.querySelector(".bm-side")||side.querySelector("a.epub-side"));
+    }
   });
   /* Back-to-top button */
   safe(function(){

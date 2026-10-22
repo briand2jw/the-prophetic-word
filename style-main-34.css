@@ -413,7 +413,7 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 /* Header icons: search, translate, bookmarks in equal, evenly spaced cells */
 .quarto-secondary-nav #quarto-search{margin:0 !important;padding:0 !important}
 #quarto-header .aa-DetachedSearchButton{width:2.9rem !important;min-width:2.9rem;height:2.75rem;margin:0 !important;padding:0 !important;display:flex !important;align-items:center;justify-content:center}
-.quarto-secondary-nav .translate-btn.tr-bar,.quarto-secondary-nav .translate-btn.bm-bar{width:2.9rem;min-width:2.9rem;height:2.75rem;margin:0 !important;padding:0 !important;justify-content:center}
+.quarto-secondary-nav .translate-btn.tr-bar,.quarto-secondary-nav .translate-btn.bm-bar,.quarto-secondary-nav .translate-btn.sh-bar{width:2.9rem;min-width:2.9rem;height:2.75rem;margin:0 !important;padding:0 !important;justify-content:center}
 
 .nd-confirm{margin:.6rem 0 .4rem;padding:.8rem .9rem;border:1px solid var(--accent);border-radius:2px;background:var(--bg)}
 .nd-confirm[hidden]{display:none}
@@ -493,3 +493,23 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 /* Header search button (Quarto's own #quarto-search button): same size cell as translate and bookmarks */
 .quarto-secondary-nav #quarto-search,.quarto-secondary-nav .quarto-search-button{width:2.9rem !important;min-width:2.9rem !important;height:2.75rem !important;margin:0 !important;padding:0 !important;display:flex !important;align-items:center;justify-content:center;flex:0 0 2.9rem !important;box-sizing:border-box}
 .quarto-secondary-nav #quarto-search i,.quarto-secondary-nav #quarto-search svg{margin:0 !important;font-size:1.35rem;line-height:1}
+
+/* ---- Share window ---- */
+#share-dialog{border:1px solid var(--rule);border-top:4px solid var(--accent);padding:0;width:100%;max-width:min(30rem,calc(100vw - 2rem));max-height:calc(100vh - 2rem);overflow:auto;color:var(--text);background:var(--surface)}
+#share-dialog::backdrop{background:rgba(0,0,0,.65)}
+.sh-head{display:flex;align-items:center;justify-content:space-between;padding:.2rem .4rem .2rem 1.3rem;background:#34352d;border-bottom:1px solid var(--rule)}
+#share-dialog h2{margin:0;padding:.7rem 0;font-family:'Noto Sans',system-ui,sans-serif;font-size:1.05rem;font-weight:700;border:0}
+.sh-x{width:2.75rem;height:2.75rem;border:0;background:transparent;color:var(--text);font-size:1.2rem;cursor:pointer}
+.sh-body{padding:1.1rem 1.3rem 1.2rem}
+.sh-card{display:flex;gap:1rem;align-items:center;margin-bottom:1.1rem}
+.sh-thumb{flex:none;width:4.5rem;height:4.5rem;border-radius:2px}
+#share-dialog .sh-site{margin:0;font-family:'Noto Sans',system-ui,sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--meta)}
+#share-dialog .sh-title{margin:.15rem 0 0;font-family:var(--head-font);font-size:1.25rem;font-weight:600;line-height:1.25}
+.sh-url{display:block;width:100%;box-sizing:border-box;padding:.65rem .8rem;border:1px solid var(--rule);border-radius:2px;background:var(--bg);color:var(--text);font:inherit;font-size:.92rem}
+.sh-actions{list-style:none;margin:.9rem 0 0;padding:0}
+.sh-actions li{border-top:1px solid var(--rule)}
+.sh-actions li[hidden]{display:none}
+.sh-row{display:flex;align-items:center;gap:.8rem;width:100%;min-height:3.25rem;padding:.4rem .2rem;border:0;background:none;color:var(--accent);font-family:'Noto Sans',system-ui,sans-serif;font-size:1rem;font-weight:600;text-decoration:none;cursor:pointer;text-align:left}
+.sh-row:hover{color:#f0a48f}
+#share-dialog .sh-msg{min-height:1.4rem;margin:.4rem 0 0;color:var(--meta);font-size:.92rem}
+.sh-side svg{color:var(--accent)}
