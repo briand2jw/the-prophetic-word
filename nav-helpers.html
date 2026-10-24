@@ -126,7 +126,7 @@ function run(){
     var b=d.getElementById("studyhelp-btn");if(!b||typeof HTMLDialogElement==="undefined")return;
     var dlg=d.createElement("dialog");dlg.id="help-dialog";dlg.setAttribute("aria-labelledby","hp-title");
     dlg.innerHTML='<div class="dlg"><h2 id="hp-title">Adding highlights and notes</h2>'+
-      '<ol><li>Select the words you want. On a phone or tablet, touch and hold a word, then drag the handles. When you select two or more words and pause, they are highlighted automatically in your most recent color. A small bar then appears with <strong>Undo</strong> and <strong>Copy</strong>, so you can copy the text without keeping the highlight. If you select just one word, a small menu opens so you can copy it, add a note, place a bookmark, or highlight it.</li>'+
+      '<ol><li>Select the words you want. On a phone or tablet, touch and hold a word, then drag the handles. As soon as you lift your finger, the text is highlighted automatically in your most recent color. A small bar then appears with <strong>Undo</strong> and <strong>Copy</strong>, so you can copy the text without keeping the highlight. To change the color or add a note, tap the highlight.</li>'+
       '<li>Tap a highlight to open a small menu. There you can change its color (the new color is used for your next highlights), add a note, place a bookmark at that paragraph, or delete it with the red trash icon.</li>'+
       '<li>Tap a bookmark ribbon to remove the bookmark. Highlighted something by accident? Tap it and use the trash icon.</li>'+
       '<li>Open <strong>My Notes</strong> in the menu to see everything you have saved, with a link back to each passage.</li></ol>'+
@@ -468,11 +468,9 @@ function run(){
       while(s<e&&/\s/.test(txt.charAt(s)))s++;
       while(e>s&&/\s/.test(txt.charAt(e-1)))e--;
       if(e-s<2||e-s>3000){if(mode==="new")hide();return;}
+      if(touching){return;}
       pending={s:s,text:txt.slice(s,e),prefix:txt.slice(Math.max(0,s-30),s),suffix:txt.slice(e,e+30),el:blockOf(r.startContainer)};
       cur=null;
-      if(pending.text.split(/\s+/).length<2){show("new",lastRect(r.getClientRects(),r.getBoundingClientRect()));setPressed();return;}
-      var wait=900-(Date.now()-lastSel);
-      if(wait>0){clearTimeout(tm);tm=setTimeout(check,wait);return;}
       snap=JSON.parse(JSON.stringify(db.items));autoSel=pending.text;
       var made=create(lastColor);
       var mk=made&&main.querySelector('mark[data-id="'+made.id+'"]');
@@ -481,8 +479,15 @@ function run(){
       show("hl",lastRect(mk.getClientRects(),mk.getBoundingClientRect()));
       clearTimeout(toastTm);toastTm=setTimeout(function(){if(mode==="hl")hide();},5000);
     }
-    var lastSel=0;
-    d.addEventListener("selectionchange",function(){if(mode==="hl"||mode==="done"){var s0=window.getSelection();if(s0&&!s0.isCollapsed)hide();else return;}if(mode&&mode!=="new")return;lastSel=Date.now();clearTimeout(tm);tm=setTimeout(check,250);});
+    var lastSel=0,touching=false;
+    function touchOn(){touching=true;}
+    function touchOff(){touching=false;clearTimeout(tm);tm=setTimeout(check,120);}
+    d.addEventListener("touchstart",touchOn,{passive:true});
+    d.addEventListener("touchend",touchOff,{passive:true});
+    d.addEventListener("touchcancel",touchOff,{passive:true});
+    d.addEventListener("mousedown",touchOn);
+    d.addEventListener("mouseup",touchOff);
+    d.addEventListener("selectionchange",function(){if(mode==="hl"||mode==="done"){var s0=window.getSelection();if(s0&&!s0.isCollapsed)hide();else return;}if(mode&&mode!=="new")return;lastSel=Date.now();clearTimeout(tm);tm=setTimeout(check,200);});
     pop.addEventListener("mousedown",function(e){if(e.target!==ta)e.preventDefault();});
     [].forEach.call(elColors.querySelectorAll(".sb-c"),function(b){b.addEventListener("click",function(){
       var c=parseInt(b.getAttribute("data-c"),10);
