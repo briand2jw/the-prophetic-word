@@ -117,10 +117,10 @@ def para(text, style="Normal", bold_lead=None):
 
 # ----------------------------------------------------------------- page top
 doc.add_paragraph("The Truth: Writer Template", style="Title")
-para("Read this box, then delete nothing. It is not published.", "Writer Note", "How to use this template. ")
+para("The yellow notes are for you and are never published.", "Writer Note", "How to use this template. ")
 para("1. Save a copy of this file first (File > Save a Copy). Name it the book and chapter, such as John 3.docx, "
      "or the article title, such as Why Study the Bible.docx.", "Writer Note")
-para("2. Fill in the grey boxes in the table below. Click a box and choose from the list, pick a date, or type.", "Writer Note")
+para("2. Fill in the right-hand column of the table below. Click each box and choose from the list, pick a date, or type.", "Writer Note")
 para("3. Write your text under the line that says START WRITING BELOW. Replace each line that begins with SAMPLE, "
      "or delete it. Choose a style from the Styles gallery on the Home tab: Heading 2 for a main subheading, "
      "Heading 3 for a verse group such as Verses 1-4, Scripture for a quoted scripture followed by Scripture Reference "
