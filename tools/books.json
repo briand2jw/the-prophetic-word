@@ -1,0 +1,398 @@
+[
+ {
+  "name": "Genesis",
+  "slug": "genesis",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Exodus",
+  "slug": "exodus",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Leviticus",
+  "slug": "leviticus",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Numbers",
+  "slug": "numbers",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Deuteronomy",
+  "slug": "deuteronomy",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Joshua",
+  "slug": "joshua",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Judges",
+  "slug": "judges",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Ruth",
+  "slug": "ruth",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "1 Samuel",
+  "slug": "1-samuel",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "2 Samuel",
+  "slug": "2-samuel",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "1 Kings",
+  "slug": "1-kings",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "2 Kings",
+  "slug": "2-kings",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "1 Chronicles",
+  "slug": "1-chronicles",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "2 Chronicles",
+  "slug": "2-chronicles",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Ezra",
+  "slug": "ezra",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Nehemiah",
+  "slug": "nehemiah",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Esther",
+  "slug": "esther",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Job",
+  "slug": "job",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Psalms",
+  "slug": "psalms",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Proverbs",
+  "slug": "proverbs",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Ecclesiastes",
+  "slug": "ecclesiastes",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Song of Solomon",
+  "slug": "song-of-solomon",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Isaiah",
+  "slug": "isaiah",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Jeremiah",
+  "slug": "jeremiah",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Lamentations",
+  "slug": "lamentations",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Ezekiel",
+  "slug": "ezekiel",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Daniel",
+  "slug": "daniel",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Hosea",
+  "slug": "hosea",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Joel",
+  "slug": "joel",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Amos",
+  "slug": "amos",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Obadiah",
+  "slug": "obadiah",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Jonah",
+  "slug": "jonah",
+  "group": "hebrew",
+  "shown": false
+ },
+ {
+  "name": "Micah",
+  "slug": "micah",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Nahum",
+  "slug": "nahum",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Habakkuk",
+  "slug": "habakkuk",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Zephaniah",
+  "slug": "zephaniah",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Haggai",
+  "slug": "haggai",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Zechariah",
+  "slug": "zechariah",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Malachi",
+  "slug": "malachi",
+  "group": "hebrew",
+  "shown": true
+ },
+ {
+  "name": "Matthew",
+  "slug": "matthew",
+  "group": "greek",
+  "shown": true
+ },
+ {
+  "name": "Mark",
+  "slug": "mark",
+  "group": "greek",
+  "shown": true
+ },
+ {
+  "name": "Luke",
+  "slug": "luke",
+  "group": "greek",
+  "shown": true
+ },
+ {
+  "name": "John",
+  "slug": "john",
+  "group": "greek",
+  "shown": true
+ },
+ {
+  "name": "Acts",
+  "slug": "acts",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "Romans",
+  "slug": "romans",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "1 Corinthians",
+  "slug": "1-corinthians",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "2 Corinthians",
+  "slug": "2-corinthians",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "Galatians",
+  "slug": "galatians",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "Ephesians",
+  "slug": "ephesians",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "Philippians",
+  "slug": "philippians",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "Colossians",
+  "slug": "colossians",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "1 Thessalonians",
+  "slug": "1-thessalonians",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "2 Thessalonians",
+  "slug": "2-thessalonians",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "1 Timothy",
+  "slug": "1-timothy",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "2 Timothy",
+  "slug": "2-timothy",
+  "group": "greek",
+  "shown": true
+ },
+ {
+  "name": "Titus",
+  "slug": "titus",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "Philemon",
+  "slug": "philemon",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "Hebrews",
+  "slug": "hebrews",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "James",
+  "slug": "james",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "1 Peter",
+  "slug": "1-peter",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "2 Peter",
+  "slug": "2-peter",
+  "group": "greek",
+  "shown": true
+ },
+ {
+  "name": "1 John",
+  "slug": "1-john",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "2 John",
+  "slug": "2-john",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "3 John",
+  "slug": "3-john",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "Jude",
+  "slug": "jude",
+  "group": "greek",
+  "shown": false
+ },
+ {
+  "name": "Revelation",
+  "slug": "revelation",
+  "group": "greek",
+  "shown": true
+ }
+]

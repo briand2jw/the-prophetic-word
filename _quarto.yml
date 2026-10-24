@@ -21,9 +21,12 @@ book:
     - index.qmd
     - part: know-the-truth.qmd
       chapters:
-        - article-sample.qmd
+        # AUTO:KT-START
+        - articles/kt-sample-article-title.qmd
+        # AUTO:KT-END
     - part: prophetic-word.qmd
       chapters:
+        # AUTO:PW-START
         - daniel.qmd
         - chapters/daniel-2.qmd
         - chapters/daniel-4.qmd
@@ -33,13 +36,16 @@ book:
         - matthew.qmd
         - chapters/matthew-24.qmd
         - chapters/matthew-25.qmd
+        # AUTO:PW-END
     - part: seek-jehovah.qmd
       chapters:
-        - article-sample-2.qmd
+        # AUTO:SJ-START
+        - articles/sj-seek-righteousness-why-important-now.qmd
+        # AUTO:SJ-END
 
 format:
   html:
-    css: [style-main-36.css, style-dark.css]
+    css: [style-main-37.css, style-dark.css]
     toc: false
     number-sections: false
     include-after-body: nav-helpers.html

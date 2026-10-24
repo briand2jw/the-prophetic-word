@@ -9,9 +9,17 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ## What's new
 
 ::: whatsnew
-- **October 17, 2026.** New information posted on [Matthew 24](chapters/matthew-24.qmd) and [25](chapters/matthew-25.qmd).
-- **September 15, 2026.** Updated comments posted on [Daniel 4](chapters/daniel-4.qmd).
-- **August 12, 2026.** New article on [Seek Righteousness—Why Important Now?](article-sample-2.qmd)
+[auto-news-start]: #
+
+- **October 10, 2026.** Updated comments posted on [Daniel 2](chapters/daniel-2.qmd), [4](chapters/daniel-4.qmd), [8](chapters/daniel-8.qmd), [11](chapters/daniel-11.qmd) and [12](chapters/daniel-12.qmd).
+- **October 10, 2026.** Updated comments posted on [Matthew 24](chapters/matthew-24.qmd) and [25](chapters/matthew-25.qmd).
+- **October 10, 2026.** Updated article on [Sample Article Title](articles/kt-sample-article-title.qmd).
+- **October 1, 2026.** New information posted on [Daniel 2](chapters/daniel-2.qmd), [4](chapters/daniel-4.qmd), [8](chapters/daniel-8.qmd), [11](chapters/daniel-11.qmd) and [12](chapters/daniel-12.qmd).
+- **October 1, 2026.** New information posted on [Matthew 24](chapters/matthew-24.qmd) and [25](chapters/matthew-25.qmd).
+- **October 1, 2026.** New article on [Sample Article Title](articles/kt-sample-article-title.qmd).
+- **August 12, 2026.** New article on [Seek Righteousness—Why Important Now?](articles/sj-seek-righteousness-why-important-now.qmd).
+
+[auto-news-end]: #
 :::
 
 ## Browse by section

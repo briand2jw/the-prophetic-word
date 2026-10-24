@@ -48,6 +48,14 @@ function run(){
     var w=d.createElement("div");w.className="epub-side-wrap";w.appendChild(a);host.appendChild(w);
     d.documentElement.classList.add("epub-moved");
   });
+  /* Menu: sections whose pages are all hidden (articles) show no empty arrow */
+  safe(function(){
+    [].forEach.call(d.querySelectorAll("#quarto-sidebar li.sidebar-item-section"),function(li){
+      var ul=li.querySelector(":scope > ul");if(!ul)return;
+      var shown=[].some.call(ul.querySelectorAll(":scope > li"),function(x){return getComputedStyle(x).display!=="none";});
+      if(!shown)li.classList.add("no-kids");
+    });
+  });
   /* Chapter pages: previous / next stay inside the same Bible book */
   safe(function(){
     var m=location.pathname.match(/\/chapters\/(.+)-(\d+)\.html$/);
@@ -62,7 +70,7 @@ function run(){
     list.sort(function(a,b){return a.n-b.n;});
     var i=-1;list.forEach(function(x,k){if(x.n===cur)i=k;});
     if(i<0)return;
-    var name=slug.split("-").map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(" ");
+    var name=slug.split("-").map(function(w,k){return (k>0&&/^(of|the|and)$/.test(w))?w:w.charAt(0).toUpperCase()+w.slice(1);}).join(" ");
     var bookUrl=new URL("../"+slug+".html",location.href).href;
     var prev=list[i-1],next=list[i+1];
     var nav=d.createElement("nav");nav.className="chapter-pager";nav.setAttribute("aria-label","Chapters in "+name);

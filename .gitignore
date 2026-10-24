@@ -2,3 +2,5 @@ _build/
 .quarto/
 _site/
 _book/
+__pycache__/
+build-problems.txt

@@ -1,5 +1,9 @@
 ---
 title: "Matthew 25"
+book: Matthew
+chapter: 25
+posted: 2026-10-01
+updated: 2026-10-10
 ---
 
 ::: dates

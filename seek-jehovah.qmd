@@ -5,7 +5,11 @@ title: "Seek Jehovah"
 Articles are listed by date, with the newest first.
 
 ::: article-list
-- [Seek Righteousness—Why Important Now?](article-sample-2.qmd)\
+[auto-list-start]: #
+
+- [Seek Righteousness—Why Important Now?](articles/sj-seek-righteousness-why-important-now.qmd)\
   [Posted August 12, 2026 · Updated August 12, 2026]{.meta}\
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+[auto-list-end]: #
 :::

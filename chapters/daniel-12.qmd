@@ -1,5 +1,9 @@
 ---
 title: "Daniel 12"
+book: Daniel
+chapter: 12
+posted: 2026-10-01
+updated: 2026-10-10
 ---
 
 ::: dates

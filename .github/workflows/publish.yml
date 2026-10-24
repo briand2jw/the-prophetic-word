@@ -13,17 +13,34 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      uploaded: ${{ steps.up.outputs.done }}
     steps:
       - uses: actions/checkout@v4
       - uses: quarto-dev/quarto-actions/setup@v2
+      - name: Build pages and lists from the Word files
+        run: python3 tools/build_site.py
+        env:
+          PANDOC: quarto pandoc
       - name: Render site and EPUB
         run: quarto render
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+      - id: up
+        name: Mark the site as ready to publish
+        run: echo "done=true" >> "$GITHUB_OUTPUT"
+      - name: Report any files that were skipped
+        run: |
+          if [ -s build-problems.txt ]; then
+            echo "These files were skipped. Everything else was published:"
+            cat build-problems.txt
+            exit 1
+          fi
   deploy:
     needs: build
+    if: ${{ always() && needs.build.outputs.uploaded == 'true' }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages

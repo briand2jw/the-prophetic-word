@@ -1,9 +1,13 @@
 ---
-title: "Seek Righteousness—Why Important Now?"
+title: "Sample Article Title"
+section: know-the-truth
+summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+posted: 2026-10-01
+updated: 2026-10-10
 ---
 
 ::: dates
-Posted: August 12, 2026 · Updated: August 12, 2026
+Posted: October 1, 2026 · Updated: October 10, 2026
 :::
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
