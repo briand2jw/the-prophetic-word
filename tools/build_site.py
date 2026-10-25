@@ -3,7 +3,7 @@
 Builds the content of The Truth from the writers' Word files.
 
 What it does, every time the site is published:
-  1. Reads every Word file in  submissions/  (the writer's details table at the
+  1. Reads every Word (or LibreOffice) file in  submissions/  (the writer's details table at the
      top says where the page goes) and turns it into a page.
   2. Also reads any hand-made pages in  articles/  and  chapters/  that carry the
      same details in their header.
@@ -20,6 +20,8 @@ import json
 import os
 import re
 import shlex
+import shutil
+import tempfile
 import subprocess
 import sys
 import zipfile
@@ -150,8 +152,24 @@ def tidy_body(md):
 
 # ----------------------------------------------------------------- entries
 
-def entry_from_docx(path):
+def odt_to_docx(path, outdir):
+    """LibreOffice files (.odt) are converted to Word format first. Returns the new path or None."""
+    exe = shutil.which("soffice") or shutil.which("libreoffice")
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
+    if not exe:
+        problem(rel, "This is a LibreOffice file and the converter is not installed. Save it as Word (.docx) instead.")
+        return None
+    subprocess.run([exe, "--headless", "--convert-to", "docx", "--outdir", outdir, path],
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=180)
+    out = os.path.join(outdir, os.path.splitext(os.path.basename(path))[0] + ".docx")
+    if not os.path.exists(out):
+        problem(rel, "This LibreOffice file could not be opened. Try saving it as Word (.docx) instead.")
+        return None
+    return out
+
+
+def entry_from_docx(path, shown=None):
+    rel = shown or os.path.relpath(path, ROOT).replace(os.sep, "/")
     try:
         d = read_details(path)
     except Exception as e:  # not a real Word file
@@ -378,9 +396,16 @@ def main():
     sub = os.path.join(ROOT, "submissions")
     if os.path.isdir(sub):
         for name in sorted(os.listdir(sub)):
-            if not name.lower().endswith(".docx") or name.startswith(("~$", "_", ".")):
+            low = name.lower()
+            if not low.endswith((".docx", ".odt")) or name.startswith(("~$", "_", ".", ".~lock")):
                 continue
-            e = entry_from_docx(os.path.join(sub, name))
+            full = os.path.join(sub, name)
+            if low.endswith(".odt"):
+                tmp = tempfile.mkdtemp()
+                conv = odt_to_docx(full, tmp)
+                e = entry_from_docx(conv, "submissions/" + name) if conv else None
+            else:
+                e = entry_from_docx(full)
             if e == "draft":
                 drafts += 1
             elif e:

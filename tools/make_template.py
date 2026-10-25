@@ -127,6 +127,8 @@ para("3. Write your text under the line that says START WRITING BELOW. Replace e
      "for its verse, Overview for the chapter summary box, Closing Note for a closing line. Everything else is normal text.", "Writer Note")
 para("4. Save the file and upload it to the Truth website's submissions folder. The page appears on the site in about five minutes. "
      "To change a page later, edit your file and upload it again with the same file name.", "Writer Note")
+para("Using LibreOffice? This template works there too. Save with File > Save As and keep the type Word 2007-365 (.docx), "
+     "or save as the default .odt. Either file can be uploaded.", "Writer Note")
 para("To keep a page unpublished while you work, set Status to Keep as draft.", "Writer Note")
 doc.add_paragraph()
 

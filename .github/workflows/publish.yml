@@ -18,6 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: quarto-dev/quarto-actions/setup@v2
+      - name: Install LibreOffice (only if a LibreOffice file was uploaded)
+        run: |
+          if ls submissions/*.odt >/dev/null 2>&1; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq libreoffice-writer
+          fi
       - name: Build pages and lists from the Word files
         run: python3 tools/build_site.py
         env:
