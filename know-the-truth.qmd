@@ -7,6 +7,9 @@ Articles are listed by date, with the newest first.
 ::: article-list
 [auto-list-start]: #
 
+- [Why Study the Bible?](articles/kt-why-study-the-bible.qmd)\
+  [Posted October 25, 2026 · Updated October 25, 2026]{.meta}\
+  Reading the Bible daily takes only a few minutes and changes how you see everything else.
 - [Sample Article Title](articles/kt-sample-article-title.qmd)\
   [Posted October 1, 2026 · Updated October 10, 2026]{.meta}\
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.

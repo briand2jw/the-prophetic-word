@@ -1,0 +1,38 @@
+---
+title: "Daniel 7"
+book: Daniel
+chapter: 7
+posted: 2026-10-25
+updated: 2026-10-25
+source: submissions/Daniel 7 (example chapter).docx
+---
+
+::: dates
+Posted: October 25, 2026 · Updated: October 25, 2026
+:::
+
+::: overview
+**Overview.** Daniel sees four beasts rise from the sea, then a scene in heaven where one “like the son of man” receives a kingdom that will never be destroyed.
+:::
+
+## The vision of the four beasts {.main-sub}
+
+### Verses 1-8 {.vgroup}
+
+Daniel records a dream he had in the first year of Belshazzar. The beasts represent powers that rise and fall, and the chapter moves quickly from the sea to the throne room.
+
+## The kingdom given to the Son of man {.main-sub}
+
+### Verses 13-14 {.vgroup}
+
+::: scripture
+“And there was given him dominion, and glory, and a kingdom, that all people, nations, and languages, should serve him: his dominion is an everlasting dominion, which shall not pass away, and his kingdom that which shall not be destroyed.”
+
+[Daniel 7:14]{.ref}
+:::
+
+The contrast is the point of the chapter. The earthly powers are temporary, but this kingdom is **given by God** *and it does not pass away.*
+
+::: cta
+Take a moment to read Daniel 7:13-14 aloud before moving on to chapter 8.
+:::

@@ -236,16 +236,16 @@ def entry_from_qmd(path):
         return None
     fm = {}
     for line in m.group(1).split("\n"):
-        mm = re.match(r"^([A-Za-z_]+):\s*(.*)$", line)
+        mm = re.match(r"^([A-Za-z_-]+):\s*(.*)$", line)
         if mm:
             fm[mm.group(1)] = mm.group(2).strip().strip('"')
     if "source" in fm:  # a page this script made earlier
         return "stale"
-    if "section" not in fm and "book" in fm:
-        fm["section"] = "prophetic-word"
-    if "section" not in fm:
+    if "site-section" not in fm and "book" in fm:
+        fm["site-section"] = "prophetic-word"
+    if "site-section" not in fm:
         return None
-    section = fm["section"]
+    section = fm["site-section"]
     if section not in SECTIONS:
         problem(rel, "Unknown section %r in the page header." % section)
         return None
@@ -416,7 +416,7 @@ def main():
         if e["kind"] == "chapter":
             fm += ["book: %s" % e["book_name"], "chapter: %d" % e["chapter"]]
         else:
-            fm += ["section: %s" % e["section"]]
+            fm += ["site-section: %s" % e["section"]]
             if e["summary"]:
                 fm += ["summary: %s" % json.dumps(e["summary"], ensure_ascii=False)]
         fm += ["posted: %s" % e["posted"].isoformat(), "updated: %s" % e["updated"].isoformat(),

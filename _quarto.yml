@@ -22,6 +22,7 @@ book:
     - part: know-the-truth.qmd
       chapters:
         # AUTO:KT-START
+        - articles/kt-why-study-the-bible.qmd
         - articles/kt-sample-article-title.qmd
         # AUTO:KT-END
     - part: prophetic-word.qmd
@@ -30,6 +31,7 @@ book:
         - daniel.qmd
         - chapters/daniel-2.qmd
         - chapters/daniel-4.qmd
+        - chapters/daniel-7.qmd
         - chapters/daniel-8.qmd
         - chapters/daniel-11.qmd
         - chapters/daniel-12.qmd

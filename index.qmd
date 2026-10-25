@@ -11,6 +11,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ::: whatsnew
 [auto-news-start]: #
 
+- **October 25, 2026.** New information posted on [Daniel 7](chapters/daniel-7.qmd).
+- **October 25, 2026.** New article on [Why Study the Bible?](articles/kt-why-study-the-bible.qmd).
 - **October 10, 2026.** Updated comments posted on [Daniel 2](chapters/daniel-2.qmd), [4](chapters/daniel-4.qmd), [8](chapters/daniel-8.qmd), [11](chapters/daniel-11.qmd) and [12](chapters/daniel-12.qmd).
 - **October 10, 2026.** Updated comments posted on [Matthew 24](chapters/matthew-24.qmd) and [25](chapters/matthew-25.qmd).
 - **October 10, 2026.** Updated article on [Sample Article Title](articles/kt-sample-article-title.qmd).

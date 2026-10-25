@@ -7,6 +7,7 @@ Information is available on the chapters listed below.
 ::: chapter-grid
 - [2](chapters/daniel-2.qmd)
 - [4](chapters/daniel-4.qmd)
+- [7](chapters/daniel-7.qmd)
 - [8](chapters/daniel-8.qmd)
 - [11](chapters/daniel-11.qmd)
 - [12](chapters/daniel-12.qmd)

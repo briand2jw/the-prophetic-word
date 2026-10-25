@@ -1,6 +1,6 @@
 ---
 title: "Seek Righteousness—Why Important Now?"
-section: seek-jehovah
+site-section: seek-jehovah
 summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
 posted: 2026-08-12
 updated: 2026-08-12

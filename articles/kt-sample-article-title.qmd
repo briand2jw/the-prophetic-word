@@ -1,6 +1,6 @@
 ---
 title: "Sample Article Title"
-section: know-the-truth
+site-section: know-the-truth
 summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
 posted: 2026-10-01
 updated: 2026-10-10
