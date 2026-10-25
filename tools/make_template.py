@@ -84,21 +84,6 @@ shade(ov, "EAF0F6")
 left_border(ov, "4A7BA6")
 ov.paragraph_format.left_indent = Inches(0.2)
 
-sc = pstyle("Scripture")
-sc.font.italic = True
-sc.font.size = Pt(13)
-left_border(sc, "B55A42")
-sc.paragraph_format.left_indent = Inches(0.3)
-sc.paragraph_format.space_after = Pt(2)
-
-sr = pstyle("Scripture Reference")
-sr.font.size = Pt(10.5)
-sr.font.bold = True
-sr.font.color.rgb = ACCENT
-left_border(sr, "B55A42")
-sr.paragraph_format.left_indent = Inches(0.3)
-sr.paragraph_format.space_after = Pt(10)
-
 cn = pstyle("Closing Note")
 cn.font.bold = True
 shade(cn, "F3EDE3")
@@ -123,8 +108,8 @@ para("1. Save a copy of this file first (File > Save a Copy). Name it the book a
 para("2. Fill in the right-hand column of the table below. Click each box and choose from the list, pick a date, or type.", "Writer Note")
 para("3. Write your text under the line that says START WRITING BELOW. Replace each line that begins with SAMPLE, "
      "or delete it. Choose a style from the Styles gallery on the Home tab: Heading 2 for a main subheading, "
-     "Heading 3 for a verse group such as Verses 1-4, Scripture for a quoted scripture followed by Scripture Reference "
-     "for its verse, Overview for the chapter summary box, Closing Note for a closing line. Everything else is normal text.", "Writer Note")
+     "Heading 3 for a verse group such as Verses 1-4, Overview for the chapter summary box, "
+     "Closing Note for a closing line. Everything else is normal text. Do not copy out scripture text: refer to it by book, chapter and verse (such as Daniel 7:14).", "Writer Note")
 para("4. Save the file and upload it to the Truth website's submissions folder. The page appears on the site in about five minutes. "
      "To change a page later, edit your file and upload it again with the same file name.", "Writer Note")
 para("Using LibreOffice? This template works there too. Save with File > Save As and keep the type Word 2007-365 (.docx), "
@@ -203,9 +188,7 @@ line.add_run("START WRITING BELOW THIS LINE").bold = True
 para("SAMPLE: Overview. Write two or three sentences that sum up the chapter. (Bible chapters only. Delete this line if you do not want a summary box.)", "Overview")
 doc.add_paragraph("SAMPLE: Main subheading (Heading 2)", style="Heading 2")
 doc.add_paragraph("SAMPLE: Verses 1-4 (Heading 3, for Bible chapters)", style="Heading 3")
-para("SAMPLE: “Type the scripture here, in quotation marks.”", "Scripture")
-para("SAMPLE: Verse 1", "Scripture Reference")
-para("SAMPLE: Type your comments on those verses here, as normal paragraphs. Bold, italic and links all carry over.", "Normal")
+para("SAMPLE: Type your comments on those verses here, as normal paragraphs. Refer to scripture by reference only (Daniel 7:14), never by quoting it. Bold, italic and links all carry over.", "Normal")
 para("SAMPLE: An optional closing line for the reader.", "Closing Note")
 
 os.makedirs(os.path.dirname(OUT), exist_ok=True)

@@ -1,6 +1,6 @@
 -- Turns the body of a writer's Word file into page text for the site.
 -- Drops the template's title, notes and details table; maps the Word
--- styles (Overview, Scripture, Scripture Reference, Closing Note) to the
+-- styles (Overview, Closing Note) to the
 -- site's boxes; marks chapter subheadings and verse groups.
 
 local kind = "article"
@@ -41,17 +41,8 @@ function Pandoc(doc)
       local st = style_of(b)
       if st == "Writer Note" then
         -- dropped
-      elseif st == "Scripture" then
-        scripture = scripture or {}
-        for _, p in ipairs(plain_blocks(b)) do scripture[#scripture + 1] = p end
-      elseif st == "Scripture Reference" then
-        scripture = scripture or {}
-        for _, p in ipairs(plain_blocks(b)) do
-          if p.t == "Para" or p.t == "Plain" then
-            scripture[#scripture + 1] = pandoc.Para({ pandoc.Span(p.content, pandoc.Attr("", { "ref" })) })
-          end
-        end
-        flush()
+      elseif st == "Scripture" or st == "Scripture Reference" then
+        -- scripture text is never published; refer to it by chapter and verse
       elseif st == "Overview" then
         flush()
         local paras = {}
