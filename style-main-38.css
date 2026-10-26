@@ -527,3 +527,17 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 #quarto-sidebar li.sidebar-item:has(> .sidebar-item-container > a.sidebar-link[href*="articles/"]){display:none}
 #quarto-sidebar li.no-kids > ul{display:none}
 #quarto-sidebar li.no-kids > .sidebar-item-container > a.sidebar-item-toggle{display:none}
+
+/* ---- What's new: one compact line per item (date | New/Updated | what) ---- */
+.whatsnew li{display:flex;flex-wrap:wrap;align-items:baseline;gap:.15rem .6rem;padding:.55rem 0}
+.whatsnew .wn-date{flex:0 0 3.9rem;font-size:.85rem;font-weight:600;color:var(--meta)}
+.whatsnew .wn-tag{flex:0 0 4.4rem;font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--meta)}
+.whatsnew .wn-tag.is-new{color:var(--accent)}
+.whatsnew li>:not(.wn-date):not(.wn-tag){flex:1 1 8rem;min-width:0}
+.whatsnew .wn-more summary{cursor:pointer}
+.whatsnew .wn-more[open] summary{margin-bottom:.35rem}
+.whatsnew .wn-all{display:inline-block;margin-top:.7rem;font-weight:600}
+.whatsnew h2{font-size:1.15rem;margin:1.8rem 0 .4rem}
+.whatsnew .wn-more{margin:0}
+.whatsnew .wn-more summary{color:var(--accent)}
+.whatsnew .wn-more p{margin:0}

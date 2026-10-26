@@ -19,6 +19,7 @@ book:
   search: true
   chapters:
     - index.qmd
+    - whats-new.qmd
     - part: know-the-truth.qmd
       chapters:
         # AUTO:KT-START
@@ -47,7 +48,7 @@ book:
 
 format:
   html:
-    css: [style-main-37.css, style-dark.css]
+    css: [style-main-38.css, style-dark.css]
     toc: false
     number-sections: false
     include-after-body: nav-helpers.html

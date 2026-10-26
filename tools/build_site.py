@@ -30,7 +30,7 @@ import xml.etree.ElementTree as ET
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
-NEWS_LIMIT = 10
+NEWS_LIMIT = 5
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 PANDOC = shlex.split(os.environ.get("PANDOC", "pandoc"))
 DOT = "·"
@@ -335,34 +335,99 @@ def join_names(parts):
     return ", ".join(parts[:-1]) + " and " + parts[-1]
 
 
-def news_lines(entries):
-    events = {}  # (date, kind, group) -> entries
+def add_months(d, n):
+    m = d.month - 1 + n
+    y, m = d.year + m // 12, m % 12 + 1
+    day = min(d.day, [31, 29 if y % 4 == 0 and (y % 100 or y % 400 == 0) else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1])
+    return datetime.date(y, m, day)
+
+
+def short_date(d):
+    if d.year == datetime.date.today().year:
+        return "%s %d" % (d.strftime("%b"), d.day)
+    return "%s %d, %d" % (d.strftime("%b"), d.day, d.year)
+
+
+def news_events(entries, since=None):
+    """One event per (date, new/updated, book) for chapters, one per article."""
+    groups = {}
     for e in entries:
-        events.setdefault((e["posted"], "new", e["kind"], e.get("book", e["path"])), []).append(e)
+        groups.setdefault((e["posted"], "new", e["kind"], e.get("book", e["path"])), []).append(e)
         if e["updated"] > e["posted"]:
-            events.setdefault((e["updated"], "upd", e["kind"], e.get("book", e["path"])), []).append(e)
-    rows = []
-    for (date, what, kind, _), items in events.items():
+            groups.setdefault((e["updated"], "upd", e["kind"], e.get("book", e["path"])), []).append(e)
+    events = []
+    for (date, what, kind, _), items in groups.items():
+        if since and date < since:
+            continue
         if kind == "chapter":
             items = sorted(items, key=lambda x: x["chapter"])
             first = items[0]
             parts = ["[%s %d](%s)" % (first["book_name"], first["chapter"], first["path"])]
             parts += ["[%d](%s)" % (x["chapter"], x["path"]) for x in items[1:]]
-            verb = "New information posted on" if what == "new" else "Updated comments posted on"
-            text = "%s %s." % (verb, join_names(parts))
-            order = (1, BOOK_ORDER[first["book"]])
+            events.append({"date": date, "what": what, "kind": "chapter", "text": join_names(parts),
+                           "count": len(items), "book": first["book_name"],
+                           "order": (1, BOOK_ORDER[first["book"]])})
         else:
-            items = sorted(items, key=lambda x: x["title"].lower())
-            for x in items:
-                verb = "New article on" if what == "new" else "Updated article on"
-                rows.append((date, (SECTIONS[x["section"]]["order"] + 10, x["title"].lower()),
-                             "%s [%s](%s)." % (verb, x["title"], x["path"])))
-            continue
-        rows.append((date, order, text))
-    rows.sort(key=lambda r: (-r[0].toordinal(), r[1]))
+            for x in sorted(items, key=lambda x: x["title"].lower()):
+                events.append({"date": date, "what": what, "kind": "article",
+                               "text": "[%s](%s)" % (x["title"], x["path"]), "count": 1, "book": "",
+                               "order": (SECTIONS[x["section"]]["order"] + 10, x["title"].lower())})
+    events.sort(key=lambda r: (-r["date"].toordinal(), r["order"]))
+    return events
+
+
+def news_line(date, what, body):
+    return "- [%s]{.wn-date} [%s]{.wn-tag .is-%s} %s" % (
+        short_date(date), "New" if what == "new" else "Updated", what,
+        body if body.startswith("<details") else "[%s]{.wn-what}" % body)
+
+
+def news_home(entries):
+    """Home page: the newest few lines. A busy day with many pages becomes one expandable line."""
+    events = news_events(entries)
+    rolled, seen = [], set()
+    for ev in events:
+        key = (ev["date"], ev["what"], ev["kind"])
+        same = [x for x in events if (x["date"], x["what"], x["kind"]) == key]
+        total = sum(x["count"] for x in same)
+        if total > 3 and len(same) > 0 and (ev["kind"] == "chapter" or len(same) > 3):
+            if key in seen:
+                continue
+            seen.add(key)
+            if ev["kind"] == "chapter":
+                books = []
+                for x in same:
+                    if x["book"] not in books:
+                        books.append(x["book"])
+                label = "%s (%d chapters)" % (join_names(books) if len(books) <= 3 else "%d books" % len(books), total)
+                inner = "<br>".join(x["text"] for x in same)
+            else:
+                label = "%d articles" % total
+                inner = "<br>".join(x["text"] for x in same)
+            body = '<details class="wn-more"><summary>%s</summary>%s</details>' % (label, inner)
+            rolled.append((ev["date"], ev["what"], body))
+        else:
+            rolled.append((ev["date"], ev["what"], ev["text"]))
     out = [""]
-    for date, _, text in rows[:NEWS_LIMIT]:
-        out.append("- **%s.** %s" % (long_date(date), text))
+    for date, what, body in rolled[:NEWS_LIMIT]:
+        out.append(news_line(date, what, body))
+    out.append("")
+    return "\n".join(out) + "\n"
+
+
+def news_all(entries):
+    """What's new page: the last three months, newest first, grouped by month."""
+    since = add_months(datetime.date.today(), -3)
+    events = news_events(entries, since)
+    if not events:
+        return "\nNo updates in the last three months.\n"
+    out, month = [""], None
+    for ev in events:
+        m = (ev["date"].year, ev["date"].month)
+        if m != month:
+            month = m
+            out += ["", "## %s %d" % (ev["date"].strftime("%B"), ev["date"].year), ""]
+        out.append(news_line(ev["date"], ev["what"], ev["text"]))
     out.append("")
     return "\n".join(out) + "\n"
 
@@ -481,7 +546,8 @@ def main():
         write(slug + ".qmd", '---\ntitle: %s\n---\n\nInformation is available on the chapters listed below.\n\n::: chapter-grid\n%s:::\n'
               % (json.dumps(b["name"]), grid))
     # home
-    replace_between("index.qmd", md_marker("news", "start"), md_marker("news", "end"), news_lines(good))
+    replace_between("index.qmd", md_marker("news", "start"), md_marker("news", "end"), news_home(good))
+    replace_between("whats-new.qmd", md_marker("all", "start"), md_marker("all", "end"), news_all(good))
 
     print("Pages: %d articles, %d chapters, %d drafts held back, %d problems."
           % (sum(len(v) for v in articles.values()), len(chapters), drafts, len(problems)))

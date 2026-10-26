@@ -1,0 +1,27 @@
+---
+title: "What's new"
+---
+
+Everything added or updated in the last three months, newest first.
+
+::: whatsnew
+[auto-all-start]: #
+
+
+## October 2026
+
+- [Oct 25]{.wn-date} [New]{.wn-tag .is-new} [[Daniel 7](chapters/daniel-7.qmd)]{.wn-what}
+- [Oct 25]{.wn-date} [New]{.wn-tag .is-new} [[Why Study the Bible?](articles/kt-why-study-the-bible.qmd)]{.wn-what}
+- [Oct 10]{.wn-date} [Updated]{.wn-tag .is-upd} [[Daniel 2](chapters/daniel-2.qmd), [4](chapters/daniel-4.qmd), [8](chapters/daniel-8.qmd), [11](chapters/daniel-11.qmd) and [12](chapters/daniel-12.qmd)]{.wn-what}
+- [Oct 10]{.wn-date} [Updated]{.wn-tag .is-upd} [[Matthew 24](chapters/matthew-24.qmd) and [25](chapters/matthew-25.qmd)]{.wn-what}
+- [Oct 10]{.wn-date} [Updated]{.wn-tag .is-upd} [[Sample Article Title](articles/kt-sample-article-title.qmd)]{.wn-what}
+- [Oct 1]{.wn-date} [New]{.wn-tag .is-new} [[Daniel 2](chapters/daniel-2.qmd), [4](chapters/daniel-4.qmd), [8](chapters/daniel-8.qmd), [11](chapters/daniel-11.qmd) and [12](chapters/daniel-12.qmd)]{.wn-what}
+- [Oct 1]{.wn-date} [New]{.wn-tag .is-new} [[Matthew 24](chapters/matthew-24.qmd) and [25](chapters/matthew-25.qmd)]{.wn-what}
+- [Oct 1]{.wn-date} [New]{.wn-tag .is-new} [[Sample Article Title](articles/kt-sample-article-title.qmd)]{.wn-what}
+
+## August 2026
+
+- [Aug 12]{.wn-date} [New]{.wn-tag .is-new} [[Seek Righteousness—Why Important Now?](articles/sj-seek-righteousness-why-important-now.qmd)]{.wn-what}
+
+[auto-all-end]: #
+:::
