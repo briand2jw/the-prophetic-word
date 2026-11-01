@@ -1,6 +1,6 @@
 // Offline support. Pages are fetched from the network first, so updates always show;
 // the saved copy is used only when the device is offline.
-const CACHE = "the-truth-v2";
+const CACHE = "the-pure-language-v1";
 const ROOT = new URL("./", self.location).href;
 
 self.addEventListener("install", (event) => {
@@ -15,7 +15,7 @@ self.addEventListener("install", (event) => {
       const pages = [...new Set(items.map((i) => i.href.split("#")[0]))];
       await Promise.all(pages.map((p) => cache.add(new Request(ROOT + p, {cache: "reload"})).catch(() => {})));
     } catch (e) {}
-    try { await cache.add(new Request(ROOT + "the-truth.epub", {cache: "reload"})); } catch (e) {}
+    try { await cache.add(new Request(ROOT + "the-pure-language.epub", {cache: "reload"})); } catch (e) {}
   })());
 });
 

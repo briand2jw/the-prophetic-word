@@ -53,7 +53,7 @@ Mark the words that stand out and write your own comments. They are saved privat
 This EPUB file contains all the information on this website.\
 Last updated: {{< meta date >}}
 
-[Download the EPUB](the-truth.epub){.epub-btn}
+[Download the EPUB](the-pure-language.epub){.epub-btn}
 
 [The EPUB is in English. Use your reading app's translate feature to read it in another language.]{.epub-note}
 :::

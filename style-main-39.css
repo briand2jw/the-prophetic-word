@@ -541,3 +541,9 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .whatsnew .wn-more{margin:0}
 .whatsnew .wn-more summary{color:var(--accent)}
 .whatsnew .wn-more p{margin:0}
+
+/* ---- Logo: "Pure" in coral italic; three lines in the side menu, two in the top bar ---- */
+.lk-word .w1,.lk-word .w2,.lk-word .w3{display:block}
+.lk-word .w2{font-style:italic;color:var(--accent)}
+.bar-logo .lk-word{display:block}
+.bar-logo .lk-word .w1,.bar-logo .lk-word .w2{display:inline}

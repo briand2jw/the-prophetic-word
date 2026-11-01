@@ -10,11 +10,11 @@ project:
 number-sections: false
 
 book:
-  title: "The Truth"
+  title: "The Pure Language"
   language: en
   date: today
   date-format: "MMMM D, YYYY"
-  output-file: "the-truth"
+  output-file: "the-pure-language"
   downloads: [epub]
   search: true
   chapters:
@@ -48,14 +48,14 @@ book:
 
 format:
   html:
-    css: [style-main-38.css, style-dark.css]
+    css: [style-main-39.css, style-dark.css]
     toc: false
     number-sections: false
     include-after-body: nav-helpers.html
     include-in-header:
       text: |
         <meta name="robots" content="noindex, nofollow">
-        <meta property="og:title" content="The Truth">
+        <meta property="og:title" content="The Pure Language">
         <meta property="og:image" content="https://briand2jw.github.io/the-prophetic-word/logo.png">
         <meta name="twitter:card" content="summary">
         <meta name="twitter:image" content="https://briand2jw.github.io/the-prophetic-word/logo.png">

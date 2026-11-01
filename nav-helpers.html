@@ -11,7 +11,7 @@ function run(){
       root=new URL((at.split("site_libs/")[0])||"./",location.href).href;}
   });
   var homeUrl=root+"index.html";
-  var lock='<span class="lk-rule" aria-hidden="true"></span><span class="lk-word"><span>The</span><span>Truth</span></span><span class="lk-rule" aria-hidden="true"></span>';
+  var lock='<span class="lk-rule" aria-hidden="true"></span><span class="lk-word"><span class="w1">The</span> <em class="w2">Pure</em> <span class="w3">Language</span></span><span class="lk-rule" aria-hidden="true"></span>';
   var crumbs=[],section=null,book=null;
   safe(function(){
     var ol=d.querySelector("ol.breadcrumb");
@@ -28,7 +28,7 @@ function run(){
   safe(function(){
     var bar=(d.querySelector(".quarto-secondary-nav > .container-fluid")||d.querySelector(".quarto-secondary-nav"));
     if(bar){
-      var a=d.createElement("a");a.className="bar-logo";a.href=homeUrl;a.setAttribute("aria-label","The Truth, go to Home");
+      var a=d.createElement("a");a.className="bar-logo";a.href=homeUrl;a.setAttribute("aria-label","The Pure Language, go to Home");
       a.innerHTML=lock;
       var tg=bar.querySelector("button.quarto-btn-toggle, button[data-bs-toggle]");
       if(tg&&tg.parentNode===bar)tg.insertAdjacentElement("afterend",a);else bar.insertBefore(a,bar.firstChild);
@@ -37,13 +37,13 @@ function run(){
   });
   safe(function(){
     var t=d.querySelector("#quarto-sidebar .sidebar-title a");
-    if(t&&!t.querySelector(".lk-word")){t.classList.add("logo-lockup");t.setAttribute("aria-label","The Truth, go to Home");t.innerHTML=lock;}
+    if(t&&!t.querySelector(".lk-word")){t.classList.add("logo-lockup");t.setAttribute("aria-label","The Pure Language, go to Home");t.innerHTML=lock;}
   });
   /* EPUB download: move to the bottom of the menu, with a label */
   safe(function(){
     var host=d.querySelector("#quarto-sidebar .sidebar-menu-container")||d.querySelector("#quarto-sidebar");
     if(!host||d.querySelector(".epub-side"))return;
-    var a=d.createElement("a");a.className="epub-side";a.href=root+"the-truth.epub";a.setAttribute("download","");
+    var a=d.createElement("a");a.className="epub-side";a.href=root+"the-pure-language.epub";a.setAttribute("download","");
     a.innerHTML='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M12 3v12M7 11l5 5 5-5M4 20h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Download EPUB</span>';
     var w=d.createElement("div");w.className="epub-side-wrap";w.appendChild(a);host.appendChild(w);
     d.documentElement.classList.add("epub-moved");
@@ -104,7 +104,7 @@ function run(){
   safe(function(){
     var head=d.head;
     var l=d.createElement("link");l.rel="manifest";l.href=root+"manifest.webmanifest";head.appendChild(l);
-    [["apple-mobile-web-app-capable","yes"],["apple-mobile-web-app-title","The Truth"],["apple-mobile-web-app-status-bar-style","black-translucent"],["theme-color","#1b1c18"]].forEach(function(p){
+    [["apple-mobile-web-app-capable","yes"],["apple-mobile-web-app-title","The Pure Language"],["apple-mobile-web-app-status-bar-style","black-translucent"],["theme-color","#1b1c18"]].forEach(function(p){
       var m=d.createElement("meta");m.name=p[0];m.content=p[1];head.appendChild(m);});
     if("serviceWorker" in navigator){window.addEventListener("load",function(){
       navigator.serviceWorker.register(root+"sw.js",{scope:root}).catch(function(){});});}
@@ -604,7 +604,7 @@ function run(){
       try{navigator.clipboard.writeText(t).then(function(){say("Copied.");},function(){say("Copying is not available here.");});}catch(e){say("Copying is not available here.");}});
     dlg.querySelector(".nd-export").addEventListener("click",function(){
       try{var a=d.createElement("a"),blob=new Blob([JSON.stringify({v:2,items:db.items,bookmarks:(shared.bm?shared.bm.get():[])})],{type:"application/json"});
-        a.href=URL.createObjectURL(blob);var n=new Date(),p2=function(x){return (x<10?"0":"")+x;};a.download="The-Truth_My-Notes_"+n.getFullYear()+"-"+p2(n.getMonth()+1)+"-"+p2(n.getDate())+".json";d.body.appendChild(a);a.click();d.body.removeChild(a);
+        a.href=URL.createObjectURL(blob);var n=new Date(),p2=function(x){return (x<10?"0":"")+x;};a.download="The-Pure-Language_My-Notes_"+n.getFullYear()+"-"+p2(n.getMonth()+1)+"-"+p2(n.getDate())+".json";d.body.appendChild(a);a.click();d.body.removeChild(a);
         setTimeout(function(){URL.revokeObjectURL(a.href);},1000);say("Backup saved to your downloads.");}catch(e){say("The backup could not be saved here.");}});
     var conf=d.createElement("div");conf.className="nd-confirm";conf.hidden=true;
     conf.innerHTML='<p class="nd-cmsg"></p><div class="nd-actions"><button type="button" class="dlg-close nd-yes">Replace Everything</button><button type="button" class="dlg-close nd-no">Cancel</button></div>';
@@ -824,7 +824,7 @@ function run(){
     if(typeof HTMLDialogElement==="undefined")return;
     var main=d.querySelector("main.content");
     var tEl=main&&main.querySelector("h1.title");
-    var title=((tEl&&tEl.textContent)||d.title||"The Truth").replace(/\s+/g," ").trim();
+    var title=((tEl&&tEl.textContent)||d.title||"The Pure Language").replace(/\s+/g," ").trim();
     function pageUrl(){return location.href.split("#")[0];}
     var ico={
       share:'<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M14 4l7 7-7 7v-4.2c-5 0-8.4 1.5-11 5.2 1-5.4 4.2-9.6 11-10.6V4z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>',
@@ -833,7 +833,7 @@ function run(){
       more:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M12 3v12M7 8l5-5 5 5M5 13v7h14v-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>'};
     var dlg=d.createElement("dialog");dlg.id="share-dialog";dlg.setAttribute("aria-labelledby","sh-title");
     dlg.innerHTML='<div class="sh-head"><h2 id="sh-title">Share</h2><button type="button" class="sh-x" aria-label="Close">✕</button></div>'+
-      '<div class="sh-body"><div class="sh-card"><img class="sh-thumb" alt="" width="72" height="72" src="'+root+'icons/icon-192.png"><div><p class="sh-site">The Truth</p><p class="sh-title"></p></div></div>'+
+      '<div class="sh-body"><div class="sh-card"><img class="sh-thumb" alt="" width="72" height="72" src="'+root+'icons/icon-192.png"><div><p class="sh-site">The Pure Language</p><p class="sh-title"></p></div></div>'+
       '<input type="text" class="sh-url" readonly aria-label="Link to this page">'+
       '<ul class="sh-actions"><li><button type="button" class="sh-row sh-copy">'+ico.copy+'<span>Copy Link</span></button></li>'+
       '<li><a class="sh-row sh-mail" href="#">'+ico.mail+'<span>Share via Email</span></a></li>'+
@@ -844,7 +844,7 @@ function run(){
     function say(t){msg.textContent=t;}
     function fill(){
       var u=pageUrl();urlEl.value=u;q(".sh-title").textContent=title;
-      mailA.href="mailto:?subject="+encodeURIComponent(title+" – The Truth")+"&body="+encodeURIComponent(title+"\n"+u);
+      mailA.href="mailto:?subject="+encodeURIComponent(title+" – The Pure Language")+"&body="+encodeURIComponent(title+"\n"+u);
       q(".sh-more-li").hidden=!(navigator.share);
       say("");
     }
@@ -860,7 +860,7 @@ function run(){
       fb();
     });
     q(".sh-more").addEventListener("click",function(){
-      try{navigator.share({title:title,text:title+" – The Truth",url:urlEl.value}).catch(function(){});}catch(e){}
+      try{navigator.share({title:title,text:title+" – The Pure Language",url:urlEl.value}).catch(function(){});}catch(e){}
     });
     var bar=(d.querySelector(".quarto-secondary-nav > .container-fluid")||d.querySelector(".quarto-secondary-nav"));
     if(bar){

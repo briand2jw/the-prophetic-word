@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Makes the writer template (templates/The-Truth_Writer-Template.docx).
+"""Makes the writer template (templates/The-Pure-Language_Writer-Template.docx).
 Run:  python3 tools/make_template.py [output.docx]
 Needs python-docx. Writers never run this; it is here so the template can be rebuilt."""
 import json
@@ -13,7 +13,7 @@ from docx.oxml.ns import nsdecls, qn
 from docx.shared import Inches, Pt, RGBColor
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "templates", "The-Truth_Writer-Template.docx")
+OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "templates", "The-Pure-Language_Writer-Template.docx")
 BOOKS = [b["name"] for b in json.load(open(os.path.join(ROOT, "tools", "books.json"), encoding="utf-8"))]
 
 INK = RGBColor(0x1B, 0x1C, 0x18)
@@ -101,7 +101,7 @@ def para(text, style="Normal", bold_lead=None):
 
 
 # ----------------------------------------------------------------- page top
-doc.add_paragraph("The Truth: Writer Template", style="Title")
+doc.add_paragraph("The Pure Language: Writer Template", style="Title")
 para("The yellow notes are for you and are never published.", "Writer Note", "How to use this template. ")
 para("1. Save a copy of this file first (File > Save a Copy). Name it the book and chapter, such as John 3.docx, "
      "or the article title, such as Why Study the Bible.docx.", "Writer Note")

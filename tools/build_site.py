@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Builds the content of The Truth from the writers' Word files.
+Builds the content of The Pure Language from the writers' Word files.
 
 What it does, every time the site is published:
   1. Reads every Word (or LibreOffice) file in  submissions/  (the writer's details table at the

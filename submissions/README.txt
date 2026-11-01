@@ -1,6 +1,6 @@
 SUBMISSIONS: drop the writers' Word files here.
 
-Each Word file starts from templates/The-Truth_Writer-Template.docx.
+Each Word file starts from templates/The-Pure-Language_Writer-Template.docx.
 The details table at the top of the file says where the page goes,
 so nothing here needs sorting into folders.
 
