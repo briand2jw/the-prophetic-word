@@ -48,7 +48,7 @@ book:
 
 format:
   html:
-    css: [style-main-39.css, style-dark.css]
+    css: [style-main-40.css, style-dark.css]
     toc: false
     number-sections: false
     include-after-body: nav-helpers.html

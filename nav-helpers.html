@@ -205,6 +205,7 @@ function run(){
   safe(function(){
     [].forEach.call(d.querySelectorAll("main.content h1.title, main.content h2"),function(h){
       if(h.classList.contains("no-hl")||h.querySelector(".hl"))return;
+      if(h.matches("h1.title")&&/^\s*The Pure Language\s*$/i.test(h.textContent)){h.innerHTML='The <span class="hl">Pure</span> Language';return;}
       var words=h.textContent.trim().split(/\s+/);if(words.length<2)return;
       var w=d.createTreeWalker(h,NodeFilter.SHOW_TEXT),last=null,n;
       while((n=w.nextNode())){if(n.nodeValue.trim())last=n;}
