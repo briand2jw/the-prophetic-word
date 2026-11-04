@@ -5,3 +5,5 @@ _book/
 __pycache__/
 build-problems.txt
 redirect-site/
+
+/.quarto/
