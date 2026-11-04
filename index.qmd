@@ -69,3 +69,9 @@ Add this website to your phone or tablet so it opens like an app, with its own i
 [Translation works best when you read the website in your browser rather than the installed app.]{.epub-note}
 :::
 :::
+
+::: {.content-visible when-format="html"}
+::: privacy-note
+We count visits without cookies and do not track individuals.
+:::
+:::

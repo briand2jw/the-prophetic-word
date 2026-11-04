@@ -17,8 +17,6 @@ book:
   output-file: "the-pure-language"
   downloads: [epub]
   search: true
-  page-footer:
-    center: "We count visits without cookies and do not track individuals."
   chapters:
     - index.qmd
     - whats-new.qmd
@@ -50,7 +48,7 @@ book:
 
 format:
   html:
-    css: [style-main-41.css, style-dark.css]
+    css: [style-main-42.css, style-dark.css]
     toc: false
     number-sections: false
     include-after-body: nav-helpers.html

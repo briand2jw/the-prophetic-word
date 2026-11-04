@@ -548,3 +548,6 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .bar-logo .lk-word{font-size:.86rem;line-height:1.04}
 .bar-logo{gap:.3rem;padding:.3rem 0}
 .lk-word .w2{font-weight:700}
+
+.privacy-note{margin-top:2.4rem;font-size:.85rem;color:var(--meta);font-family:'Noto Sans',system-ui,sans-serif}
+.privacy-note p{margin:0}
