@@ -71,9 +71,5 @@ Add this website to your phone or tablet so it opens like an app, with its own i
 :::
 
 ::: {.content-visible when-format="html"}
-::: privacy-note
-While we count the number of visits without cookies, we do not track personal information.
-
-[Privacy](privacy.qmd){.epub-btn}
-:::
+<p class="install-actions"><button type="button" id="privacy-btn" class="epub-btn">Privacy</button></p>
 :::

@@ -129,6 +129,25 @@ function run(){
     dlg.querySelector(".dlg-close").addEventListener("click",function(){dlg.close();});
     dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close();});
   });
+  /* Privacy notice: a window on Home */
+  safe(function(){
+    var b=d.getElementById("privacy-btn");if(!b||typeof HTMLDialogElement==="undefined")return;
+    var dlg=d.createElement("dialog");dlg.id="privacy-dialog";dlg.setAttribute("aria-labelledby","pv-title");
+    dlg.innerHTML='<div class="dlg"><h2 id="pv-title">Privacy</h2><p><em>Last updated: November 4, 2026</em></p>'+
+      '<p>This website is free to read. It has no accounts, no advertising, and nothing for sale. This notice explains, in plain words, what information is involved when you visit.</p>'+
+      '<h3>What we count</h3><p>We count visits to learn how many people read the site and which pages they open. The counter does not use cookies, and it does not build a profile of you or follow you from site to site. We see totals only, such as pages viewed, the country, the type of device and browser, and which site sent you here.</p>'+
+      '<h3>What we do not collect</h3><p>We do not ask for your name, email address or any other personal details. We do not sell or share information about visitors, and we do not show ads.</p>'+
+      '<h3>What stays on your device</h3><p>The study tools on this site are saved only in your own browser. This covers your highlights, notes, bookmarks, text size and any pages saved for offline reading. This information is not sent to us. To remove it, clear this site\u2019s data in your browser settings.</p>'+
+      '<h3>The service that delivers this site</h3><p>Like any website, the service that sends pages to your device handles technical details, such as your internet address, in order to deliver pages and keep the site secure.</p>'+
+      '<h3>Translation</h3><p>If you use your browser\u2019s translate feature, the text of the page is sent to your browser\u2019s translation provider under their rules, not ours.</p>'+
+      '<h3>If you share a page</h3><p>The Share button uses your own device\u2019s sharing options. We do not receive what you share or who you send it to.</p>'+
+      '<h3>Changes</h3><p>If we change how the site works in a way that affects this notice, we will update it and change the date at the top.</p>'+
+      '<button type="button" class="dlg-close">Close</button></div>';
+    d.body.appendChild(dlg);
+    b.addEventListener("click",function(){dlg.showModal();});
+    dlg.querySelector(".dlg-close").addEventListener("click",function(){dlg.close();});
+    dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close();});
+  });
   /* "How do I add highlights and notes?" prompt on Home */
   safe(function(){
     var b=d.getElementById("studyhelp-btn");if(!b||typeof HTMLDialogElement==="undefined")return;
