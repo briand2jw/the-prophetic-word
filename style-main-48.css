@@ -114,6 +114,7 @@ nav.page-navigation a,nav.page-navigation .nav-page-text{color:var(--link) !impo
 /* ---- Accessibility ---- */
 /* 1. Clear keyboard / switch-control focus */
 a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--focus,var(--accent)) !important;outline-offset:3px;border-radius:2px}
+[tabindex="-1"]:focus,[tabindex="-1"]:focus-visible,main:focus,main:focus-visible,#quarto-document-content:focus-visible{outline:none !important}
 #quarto-sidebar a:focus-visible,#quarto-sidebar button:focus-visible{outline-color:var(--side-active) !important}
 
 /* 4. Dimmed tiles: brighter than before, dashed edge, and a text label (not colour alone) */
