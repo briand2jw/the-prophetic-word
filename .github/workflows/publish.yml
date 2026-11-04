@@ -30,9 +30,11 @@ jobs:
       - name: Render site and EPUB
         run: quarto render
       - uses: actions/configure-pages@v5
+      - name: Make the redirect page for the old GitHub address
+        run: python3 tools/make_redirect.py redirect-site
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: redirect-site
       - uses: actions/upload-artifact@v4
         with:
           name: site
