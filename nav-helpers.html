@@ -589,34 +589,66 @@ function run(){
 
     /* My Notes dialog */
     var dlg=d.createElement("dialog");dlg.id="notes-dialog";dlg.setAttribute("aria-labelledby","nd-title");
-    dlg.innerHTML='<div class="dlg"><h2 id="nd-title">My notes and highlights</h2><p class="nd-intro">Highlights, notes and bookmarks are saved on this device only. Use Save a backup to keep a copy of all three.</p><div id="nd-list"></div><p class="nd-msg" role="status"></p>'+
+    dlg.innerHTML='<div class="dlg"><h2 id="nd-title">My notes and highlights</h2><p class="nd-intro">Highlights, notes and bookmarks are saved on this device only. Use Save a backup to keep a copy of all three.</p>'+
+      '<div class="nd-tools"><div class="nd-views" role="group" aria-label="What to show"><button type="button" class="nd-view is-on" data-v="page" aria-pressed="true">This page</button><button type="button" class="nd-view" data-v="all" aria-pressed="false">Everything</button></div>'+
+      '<label class="sr-only" for="nd-q">Search your notes</label><input type="search" id="nd-q" class="nd-q" placeholder="Search your notes and highlights" autocomplete="off">'+
+      '<div class="nd-filters"><label class="sr-only" for="nd-type">Type</label><select id="nd-type" class="nd-sel"><option value="">All types</option><option value="note">With a note</option><option value="hl">Highlight only</option></select>'+
+      '<label class="sr-only" for="nd-col">Color</label><select id="nd-col" class="nd-sel"><option value="">Any color</option><option value="1">Gold</option><option value="2">Green</option><option value="3">Blue</option><option value="4">Purple</option><option value="5">Orange</option><option value="6">Red</option></select></div>'+
+      '<p class="nd-count" role="status" aria-live="polite"></p></div><div id="nd-list"></div><p class="nd-msg" role="status"></p>'+
       '<div class="nd-actions"><button type="button" class="dlg-close nd-copy">Copy as Text</button><button type="button" class="dlg-close nd-export">Save a Backup</button><label class="dlg-close nd-import-l">Restore a Backup<input type="file" accept=".json,application/json" class="nd-import"></label></div>'+
       '<button type="button" class="dlg-close nd-close">Close</button></div>';
     d.body.appendChild(dlg);
     var list=dlg.querySelector("#nd-list"),msg=dlg.querySelector(".nd-msg");
     function say(t){msg.textContent=t;}
+    var view="page",fq="",ftype="",fcol="",openG={},elQ=dlg.querySelector("#nd-q"),elT=dlg.querySelector("#nd-type"),elC=dlg.querySelector("#nd-col"),elCount=dlg.querySelector(".nd-count");
+    function shown(){
+      var q=fq.trim().toLowerCase();
+      return db.items.filter(function(it){
+        if(view==="page"&&it.page!==page)return false;
+        if(ftype==="note"&&!it.note)return false;
+        if(ftype==="hl"&&it.note)return false;
+        if(fcol&&String(it.color)!==fcol)return false;
+        if(q&&((it.text||"")+" "+(it.note||"")+" "+(it.title||"")).toLowerCase().indexOf(q)<0)return false;
+        return true;});
+    }
+    function itemHtml(it){
+      return '<li><span class="nd-chip u-c'+it.color+'" aria-hidden="true"></span><div><q>'+esc(it.text.length>220?it.text.slice(0,220)+"…":it.text)+'</q>'+
+        (it.note?'<p class="nd-note">'+esc(it.note)+'</p>':'')+
+        '<p class="nd-links"><a href="'+root+esc(it.page)+'#hl-'+it.id+'">Open</a> <button type="button" class="nd-rm" data-id="'+it.id+'">Remove</button></p></div></li>';
+    }
     function render(){
       say("");
+      [].forEach.call(dlg.querySelectorAll(".nd-view"),function(b){var on=b.getAttribute("data-v")===view;b.classList.toggle("is-on",on);b.setAttribute("aria-pressed",on?"true":"false");});
+      var items=shown(),filtering=!!(fq.trim()||ftype||fcol);
+      elCount.textContent=items.length+(items.length===1?" item":" items")+(view==="page"?" on this page":" in total");
       if(!db.items.length){list.innerHTML='<p>Nothing saved yet. Select any text on a page to highlight it or add a note.</p>';return;}
+      if(!items.length){
+        var other=view==="page"&&db.items.length;
+        list.innerHTML='<p>'+(filtering?"Nothing matches.":"Nothing saved on this page yet.")+(other?' Choose <strong>Everything</strong> to see your other pages.':'')+'</p>';return;}
+      if(view==="page"){
+        list.innerHTML='<ul class="nd-items">'+items.slice().sort(function(a,b){return a.s-b.s;}).map(itemHtml).join("")+'</ul>';return;}
       var groups={},order=[];
-      db.items.slice().sort(function(a,b){return a.page===b.page?a.s-b.s:(a.t||0)-(b.t||0);}).forEach(function(it){
-        if(!groups[it.page]){groups[it.page]=[];order.push(it.page);}groups[it.page].push(it);});
+      items.forEach(function(it){if(!groups[it.page]){groups[it.page]={items:[],t:0};order.push(it.page);}groups[it.page].items.push(it);groups[it.page].t=Math.max(groups[it.page].t,it.t||0);});
+      order.sort(function(a,b){return groups[b].t-groups[a].t;});
       list.innerHTML=order.map(function(p){
-        return '<h3><a href="'+root+esc(p)+'">'+esc(groups[p][0].title||p)+'</a></h3><ul class="nd-items">'+groups[p].map(function(it){
-          return '<li><span class="nd-chip u-c'+it.color+'" aria-hidden="true"></span><div><q>'+esc(it.text.length>220?it.text.slice(0,220)+"…":it.text)+'</q>'+
-            (it.note?'<p class="nd-note">'+esc(it.note)+'</p>':'')+
-            '<p class="nd-links"><a href="'+root+esc(p)+'#hl-'+it.id+'">Open</a> <button type="button" class="nd-rm" data-id="'+it.id+'">Remove</button></p></div></li>';
-        }).join("")+'</ul>';}).join("");
+        var g=groups[p],isOpen=filtering||openG[p];
+        return '<details class="nd-group" data-p="'+esc(p)+'"'+(isOpen?" open":"")+'><summary><span class="nd-gt">'+esc(g.items[0].title||p)+'</span><span class="nd-gn">'+g.items.length+'</span></summary>'+
+          '<p class="nd-gopen"><a href="'+root+esc(p)+'">Go to this page</a></p><ul class="nd-items">'+g.items.sort(function(a,b){return a.s-b.s;}).map(itemHtml).join("")+'</ul></details>';}).join("");
     }
+    list.addEventListener("toggle",function(e){var t=e.target;if(t&&t.classList&&t.classList.contains("nd-group"))openG[t.getAttribute("data-p")]=t.open;},true);
+    dlg.querySelector(".nd-views").addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".nd-view");if(!b)return;view=b.getAttribute("data-v");render();});
+    elQ.addEventListener("input",function(){fq=elQ.value;render();});
+    elT.addEventListener("change",function(){ftype=elT.value;render();});
+    elC.addEventListener("change",function(){fcol=elC.value;render();});
     list.addEventListener("click",function(e){
       var b=e.target.closest&&e.target.closest(".nd-rm");if(!b)return;
       var id=b.getAttribute("data-id");db.items=db.items.filter(function(x){return x.id!==id;});save(db);unwrap(id);render();});
     function plain(){
-      var out=[],last=null;
-      db.items.slice().sort(function(a,b){return a.page===b.page?a.s-b.s:(a.t||0)-(b.t||0);}).forEach(function(it){
+      var out=[],last=null,all=(view==="all"&&!(fq.trim()||ftype||fcol));
+      shown().sort(function(a,b){return a.page===b.page?a.s-b.s:(a.t||0)-(b.t||0);}).forEach(function(it){
         if(it.page!==last){out.push("",it.title||it.page);last=it.page;}
         out.push("  “"+it.text+"”");if(it.note)out.push("  Note: "+it.note);});
-      if(shared.bm&&shared.bm.get().length){out.push("","Bookmarks");shared.bm.get().forEach(function(b){out.push("  "+b.title+": \u201C"+b.snip+"\u201D");});}
+      if(all&&shared.bm&&shared.bm.get().length){out.push("","Bookmarks");shared.bm.get().forEach(function(b){out.push("  "+b.title+": “"+b.snip+"”");});}
       return out.join("\n").trim();
     }
     dlg.querySelector(".nd-copy").addEventListener("click",function(){
@@ -654,7 +686,7 @@ function run(){
     function closeD(){if(dlg.close)dlg.close();else dlg.removeAttribute("open");}
     dlg.querySelector(".nd-close").addEventListener("click",closeD);
     dlg.addEventListener("click",function(e){if(e.target===dlg)closeD();});
-    function openD(){render();if(dlg.showModal)dlg.showModal();else dlg.setAttribute("open","");}
+    function openD(){view="page";fq="";ftype="";fcol="";elQ.value="";elT.value="";elC.value="";render();if(dlg.showModal)dlg.showModal();else dlg.setAttribute("open","");}
     var pen='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>';
     var nb=d.createElement("button");nb.type="button";nb.className="translate-btn tr-side notes-side";nb.setAttribute("aria-haspopup","dialog");
     nb.innerHTML=pen+"<span>My Notes</span>";nb.addEventListener("click",openD);

@@ -561,3 +561,22 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .privacy-note p{margin:0}
 #privacy-dialog p{font-size:.97rem;line-height:1.6}
 #privacy-dialog h3{margin-top:1.1rem}
+
+/* My Notes: views, search, grouped list */
+.nd-tools{margin:.8rem 0 .4rem}
+.nd-views{display:flex;gap:0;margin-bottom:.7rem}
+.nd-view{flex:1;padding:.55rem .8rem;border:1px solid var(--rule);background:var(--bg);color:var(--text);font:inherit;font-size:.92rem;font-weight:600;cursor:pointer}
+.nd-view+.nd-view{border-left:0}
+.nd-view.is-on{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.nd-q,.nd-sel{width:100%;box-sizing:border-box;padding:.55rem .7rem;border:1px solid var(--rule);border-radius:2px;background:var(--bg);color:var(--text);font:inherit;font-size:.95rem}
+.nd-filters{display:flex;gap:.6rem;margin-top:.6rem}
+.nd-filters .nd-sel{flex:1}
+.nd-count{margin:.6rem 0 0;font-size:.88rem;color:var(--meta)}
+.nd-group{border-top:1px solid var(--rule)}
+.nd-group summary{color:var(--text);display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.7rem 0;cursor:pointer;font-family:var(--head-font);font-size:1.05rem}
+.nd-gn{flex:none;min-width:1.6rem;padding:.05rem .5rem;border:1px solid var(--rule);border-radius:1rem;text-align:center;font-size:.82rem;color:var(--meta)}
+.nd-gopen{margin:0 0 .2rem;font-size:.9rem}
+.nd-group .nd-items{margin-top:0}
+.nd-view:focus-visible,.nd-q:focus-visible,.nd-sel:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (forced-colors:active){.nd-view{border:2px solid ButtonText}.nd-view.is-on{outline:3px solid Highlight}}
+.nd-gt{color:var(--text)}
