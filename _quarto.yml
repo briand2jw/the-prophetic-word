@@ -45,10 +45,11 @@ book:
         # AUTO:SJ-START
         - articles/sj-seek-righteousness-why-important-now.qmd
         # AUTO:SJ-END
+    - privacy.qmd
 
 format:
   html:
-    css: [style-main-42.css, style-dark.css]
+    css: [style-main-44.css, style-dark.css]
     toc: false
     number-sections: false
     include-after-body: nav-helpers.html

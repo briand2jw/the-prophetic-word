@@ -549,5 +549,6 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .bar-logo{gap:.3rem;padding:.3rem 0}
 .lk-word .w2{font-weight:700}
 
-.privacy-note{margin-top:2.4rem;font-size:.85rem;color:var(--meta);font-family:'Noto Sans',system-ui,sans-serif}
+.privacy-note{margin-top:2.4rem;font-size:.95rem;color:var(--meta)}
 .privacy-note p{margin:0}
+#quarto-sidebar li.sidebar-item:has(> .sidebar-item-container > a.sidebar-link[href$="privacy.html"]){display:none}
