@@ -49,7 +49,7 @@ book:
 
 format:
   html:
-    css: [fonts.css, style-main-52.css, style-dark.css]
+    css: [fonts.css, style-main-53.css, style-dark.css]
     toc: false
     number-sections: false
     include-after-body: nav-helpers.html

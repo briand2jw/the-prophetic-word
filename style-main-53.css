@@ -597,3 +597,32 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .nd-ask-btns{display:flex;gap:.6rem;flex-wrap:wrap}
 .nd-ask-btns button{padding:.6rem 1rem;border:1px solid var(--accent);border-radius:2rem;background:none;color:var(--accent);font:inherit;font-size:.9rem;font-weight:700;cursor:pointer}
 .nd-ask-btns .nd-yes-del{background:var(--accent);color:var(--bg)}
+
+/* ---- One look for every window: rounded panel, Noto Sans text, pill buttons (matches the highlight popup) ---- */
+#translate-dialog,#install-dialog,#notes-dialog,#help-dialog,#privacy-dialog,#bookmarks-dialog,#share-dialog{
+  background:#2a2b26;border:1px solid #46473e !important;border-radius:1.5rem;box-shadow:0 10px 34px rgba(0,0,0,.6);
+  font-family:'Noto Sans',system-ui,sans-serif;color:var(--text);overflow:auto}
+#translate-dialog .dlg,#install-dialog .dlg,#notes-dialog .dlg,#help-dialog .dlg,#privacy-dialog .dlg,#bookmarks-dialog .dlg{padding:1.4rem 1.4rem 1.5rem}
+#translate-dialog h2,#install-dialog h2,#notes-dialog h2,#help-dialog h2,#privacy-dialog h2,#bookmarks-dialog h2{font-family:'Noto Sans',system-ui,sans-serif;font-size:1.2rem;font-weight:700;margin:0 0 .7rem}
+#translate-dialog h3,#install-dialog h3,#notes-dialog h3,#help-dialog h3,#privacy-dialog h3,#bookmarks-dialog h3{font-family:'Noto Sans',system-ui,sans-serif;font-size:1rem;font-weight:700}
+#translate-dialog p,#install-dialog p,#notes-dialog p,#help-dialog p,#privacy-dialog p,#bookmarks-dialog p,
+#translate-dialog li,#install-dialog li,#notes-dialog li,#help-dialog li,#privacy-dialog li,#bookmarks-dialog li,
+#translate-dialog label,#bookmarks-dialog label,#notes-dialog label{font-family:'Noto Sans',system-ui,sans-serif;font-size:.97rem;line-height:1.5}
+#notes-dialog q{font-family:'Noto Serif',Georgia,serif}
+/* dividers use the popup's line color */
+#notes-dialog .nd-items li,.nd-group,#share-dialog .sh-actions li{border-top-color:#46473e}
+/* buttons: soft rounded pills */
+.dlg-close,.nd-import-l,.nd-ask-btns button{border-radius:1.5rem !important}
+#share-dialog .sh-head{background:#34352d;border-bottom:1px solid #46473e;border-radius:1.5rem 1.5rem 0 0}
+#share-dialog .sh-thumb{border-radius:.9rem}
+/* fields and groups: rounded to match */
+.nd-q,.sh-url,#translate-dialog select,#translate-dialog input,#bookmarks-dialog input,#bookmarks-dialog select{border-radius:1.2rem;border-color:#4f5046;background:#34352d}
+.nd-q{padding:.65rem 1rem}
+.nd-views{border-radius:1.5rem;overflow:hidden;border:1px solid #4f5046}
+.nd-view{border:0 !important;background:#34352d;font-family:'Noto Sans',system-ui,sans-serif}
+.nd-view.is-on{background:var(--accent)}
+.nd-ask,.nd-menu,.nd-confirm{border-radius:1.2rem}
+.nd-confirm{background:#34352d}
+.nd-dots{border-radius:50%}
+.nd-count,.nd-msg,.nd-intro{font-family:'Noto Sans',system-ui,sans-serif}
+.bm-sw{border-radius:50%}
