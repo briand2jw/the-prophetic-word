@@ -915,6 +915,7 @@ function run(){
       share:'<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M14 4l7 7-7 7v-4.2c-5 0-8.4 1.5-11 5.2 1-5.4 4.2-9.6 11-10.6V4z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>',
       copy:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>',
       mail:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+      print:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M7 8V3h10v5M7 17H4v-7h16v7h-3M7 14h10v7H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
       more:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M12 3v12M7 8l5-5 5 5M5 13v7h14v-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>'};
     var dlg=d.createElement("dialog");dlg.id="share-dialog";dlg.setAttribute("aria-labelledby","sh-title");
     dlg.innerHTML='<div class="sh-head"><h2 id="sh-title">Share</h2><button type="button" class="sh-x" aria-label="Close">✕</button></div>'+
@@ -922,6 +923,7 @@ function run(){
       '<input type="text" class="sh-url" readonly aria-label="Link to this page">'+
       '<ul class="sh-actions"><li><button type="button" class="sh-row sh-copy">'+ico.copy+'<span>Copy Link</span></button></li>'+
       '<li><a class="sh-row sh-mail" href="#">'+ico.mail+'<span>Share via Email</span></a></li>'+
+      '<li><button type="button" class="sh-row sh-print">'+ico.print+'<span>Print this Page</span></button></li>'+
       '<li class="sh-more-li" hidden><button type="button" class="sh-row sh-more">'+ico.more+'<span>More Sharing Options</span></button></li></ul>'+
       '<p class="sh-msg" role="status"></p></div>';
     d.body.appendChild(dlg);
@@ -944,6 +946,18 @@ function run(){
       try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){say("Link copied.");},fb);return;}}catch(e){}
       fb();
     });
+    /* Print: the page prints on its own clean, light layout (see the print rules in the stylesheet) */
+    var mainEl=d.querySelector("main.content");
+    if(mainEl){
+      var ph=d.createElement("p");ph.className="print-head";ph.textContent="The Pure Language \u00b7 thepurelanguage.org";mainEl.insertBefore(ph,mainEl.firstChild);
+      var pf=d.createElement("p");pf.className="print-foot";mainEl.appendChild(pf);
+    }
+    function doPrint(){
+      var f=d.querySelector(".print-foot");if(f)f.textContent=title+" \u00b7 "+pageUrl();
+      [].forEach.call(d.querySelectorAll("#quarto-sidebar details,.nd-group"),function(x){});
+      try{window.print();}catch(e){}
+    }
+    q(".sh-print").addEventListener("click",function(){closeS();setTimeout(doPrint,250);});
     q(".sh-more").addEventListener("click",function(){
       try{navigator.share({title:title,text:title+" – The Pure Language",url:urlEl.value}).catch(function(){});}catch(e){}
     });
@@ -969,6 +983,9 @@ function run(){
       var sb=d.createElement("button");sb.type="button";sb.className="translate-btn tr-side sh-side";sb.setAttribute("aria-haspopup","dialog");
       sb.innerHTML=ico.share.replace('width="24" height="24"','width="22" height="22"')+"<span>Share</span>";sb.addEventListener("click",openS);
       side.insertBefore(sb,side.querySelector(".bm-side")||side.querySelector("a.epub-side"));
+      var pb=d.createElement("button");pb.type="button";pb.className="translate-btn tr-side pr-side";
+      pb.innerHTML=ico.print+"<span>Print</span>";pb.addEventListener("click",doPrint);
+      side.insertBefore(pb,sb.nextSibling);
     }
   });
   /* Every window gets the same round X (short windows have no Close button; long ones keep both) */

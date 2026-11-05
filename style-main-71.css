@@ -716,3 +716,34 @@ main mark:not(.u-hl){background:#f2a08b;color:#1b1c18;border-radius:3px;padding:
 .aa-Item[aria-selected="true"] .search-result-title-container,.aa-Item[aria-selected="true"] .search-result-text-container{background:transparent !important}
 .aa-Item{margin:.1rem 0;overflow:hidden}
 .aa-DetachedOverlay li.aa-Item .search-item,.aa-DetachedOverlay li.aa-Item .search-item *:not(mark),#quarto-search-results li.aa-Item .search-item *:not(mark){background-color:transparent !important;color:var(--text) !important}
+
+/* ---- Printing: a clean, light, readable page ---- */
+.print-head,.print-foot{display:none}
+@media print{
+  @page{margin:18mm 16mm}
+  :root,:root *{--bg:#fff;--text:#000;--meta:#444;--accent:#000;--link:#000;--rule:#999;--surface:#fff}
+  html{color-scheme:light !important}
+  html,body{background:#fff !important;color:#000 !important}
+  #quarto-header,#quarto-sidebar,#quarto-margin-sidebar,.quarto-secondary-nav,.page-navigation,.nav-footer,footer.footer,
+  .epub-btn,.text-size,.epub-side-wrap,.translate-btn,.study-bar,.study-pop,.sb-btn,.sb-c,dialog,.aa-DetachedOverlay,
+  .page-columns > .column-margin,.return-links,.chapter-pager,#quarto-back-to-top,button{display:none !important}
+  .page-columns,.page-columns.page-full{display:block !important;margin:0 !important}
+  main.content,#quarto-content,.content{width:auto !important;max-width:none !important;margin:0 !important;padding:0 !important;display:block !important;grid-column:auto !important}
+  body{font-family:'Noto Serif',Georgia,serif !important;font-size:11.5pt !important;line-height:1.55 !important}
+  .print-head{display:block;margin:0 0 .9rem;padding-bottom:.4rem;border-bottom:1px solid #999;font:600 9pt 'Noto Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#444}
+  .print-foot{display:block;margin:1.6rem 0 0;padding-top:.4rem;border-top:1px solid #999;font:9pt 'Noto Sans',sans-serif;color:#444;word-break:break-all}
+  h1,h2,h3,h4{color:#000 !important;page-break-after:avoid;break-after:avoid;font-family:'Noto Serif',Georgia,serif !important}
+  h1.title{font-size:22pt;margin:.2rem 0 .3rem}
+  h2{font-size:15pt;margin-top:1.4rem}h3{font-size:12.5pt}
+  p,li,blockquote{orphans:3;widows:3}
+  blockquote,pre,table,figure,img{page-break-inside:avoid;break-inside:avoid}
+  blockquote{border-left:3px solid #999;padding-left:.8rem;color:#222}
+  img{max-width:100% !important;height:auto !important}
+  a,a:visited{color:#000 !important;text-decoration:underline !important;background:none !important}
+  .quarto-title-meta,.date,.quarto-title .date,.dates-line{color:#444 !important}
+  mark.u-hl{background:#fff3a3 !important;color:#000 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  mark.u-hl.has-note{border-bottom:2px solid #b8860b}
+  mark.u-hl[id].has-note::before{display:none}
+  .find-hit,main mark:not(.u-hl){background:none !important;color:inherit !important}
+  details{display:block}
+}
