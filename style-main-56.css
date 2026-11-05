@@ -626,3 +626,20 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .nd-dots{border-radius:50%}
 .nd-count,.nd-msg,.nd-intro{font-family:'Noto Sans',system-ui,sans-serif}
 .bm-sw{border-radius:50%}
+
+/* ---- Close X on every window; Close button only on the long ones ---- */
+.dlg-x{width:2.5rem;height:2.5rem;display:inline-flex;align-items:center;justify-content:center;padding:0;border:0 !important;border-radius:50% !important;background:#3a3b34 !important;color:var(--text);cursor:pointer;flex:none}
+.dlg-x:hover{background:#4a4b42 !important}
+.dlg>.dlg-x{position:sticky;top:.2rem;float:right;margin:-.5rem -.5rem .3rem .6rem;z-index:3}
+#share-dialog .sh-x{width:2.5rem;height:2.5rem;margin:.4rem .5rem .4rem 0;font-size:0}
+#share-dialog .sh-head{padding-right:0}
+/* short windows: X only */
+#install-dialog .dlg-close{display:none !important}
+/* no yellow focus outline on window and popup buttons; keyboard users still see a lighter fill */
+dialog button:focus-visible,dialog a:focus-visible,dialog summary:focus-visible,dialog label:focus-within,.study-pop button:focus-visible,.study-pop a:focus-visible,.study-pop .sb-c:focus-visible{outline:none !important}
+dialog button:focus-visible,.study-pop button:focus-visible{background:#4a4b42}
+dialog .nd-view.is-on:focus-visible{background:var(--accent);filter:brightness(1.08)}
+dialog .nd-ask-btns .nd-yes-del:focus-visible{background:var(--accent);filter:brightness(1.08)}
+dialog .nd-open:focus-visible q{text-decoration:underline;text-decoration-color:var(--accent)}
+.nd-q:focus-visible,.sh-url:focus-visible,dialog input:focus-visible,dialog select:focus-visible{outline:none !important;border-color:var(--accent) !important}
+#share-dialog .sh-x{border-radius:50% !important;background:#3a3b34 !important;border:0 !important}

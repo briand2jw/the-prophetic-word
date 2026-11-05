@@ -964,6 +964,19 @@ function run(){
       side.insertBefore(sb,side.querySelector(".bm-side")||side.querySelector("a.epub-side"));
     }
   });
+  /* Every window gets the same round X (short windows have no Close button; long ones keep both) */
+  safe(function(){
+    var X='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+    [].forEach.call(d.querySelectorAll("dialog"),function(dg){
+      var old=dg.querySelector(".sh-x");
+      if(old){old.innerHTML=X;old.classList.add("dlg-x");return;}
+      var host=dg.querySelector(".dlg");if(!host||host.querySelector(".dlg-x"))return;
+      var b=d.createElement("button");b.type="button";b.className="dlg-x";b.setAttribute("aria-label","Close");b.innerHTML=X;
+      b.addEventListener("click",function(){if(dg.close)dg.close();else dg.removeAttribute("open");});
+      host.insertBefore(b,host.firstChild);
+    });
+    [].forEach.call(d.querySelectorAll("dialog"),function(dg){var t=dg.querySelector(".dlg,.sh-head");if(t&&!t.hasAttribute("tabindex")){t.setAttribute("tabindex","-1");t.setAttribute("autofocus","");}});
+  });
   /* Back-to-top button */
   safe(function(){
     var b=d.createElement("button");b.type="button";b.className="to-top";b.setAttribute("aria-label","Back to top");b.innerHTML="↑";
