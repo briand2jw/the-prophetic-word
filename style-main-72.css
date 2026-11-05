@@ -720,7 +720,10 @@ main mark:not(.u-hl){background:#f2a08b;color:#1b1c18;border-radius:3px;padding:
 /* ---- Printing: a clean, light, readable page ---- */
 .print-head,.print-foot{display:none}
 @media print{
-  @page{margin:18mm 16mm}
+  @page{margin:14mm 16mm}
+  body,#quarto-content,main.content,.quarto-container,#quarto-document-content,header#title-block-header{padding-top:0 !important;margin-top:0 !important}
+  header#title-block-header{margin-bottom:.6rem !important}
+  hr:last-of-type{display:none}
   :root,:root *{--bg:#fff;--text:#000;--meta:#444;--accent:#000;--link:#000;--rule:#999;--surface:#fff}
   html{color-scheme:light !important}
   html,body{background:#fff !important;color:#000 !important}
@@ -730,8 +733,8 @@ main mark:not(.u-hl){background:#f2a08b;color:#1b1c18;border-radius:3px;padding:
   .page-columns,.page-columns.page-full{display:block !important;margin:0 !important}
   main.content,#quarto-content,.content{width:auto !important;max-width:none !important;margin:0 !important;padding:0 !important;display:block !important;grid-column:auto !important}
   body{font-family:'Noto Serif',Georgia,serif !important;font-size:11.5pt !important;line-height:1.55 !important}
-  .print-head{display:block;margin:0 0 .9rem;padding-bottom:.4rem;border-bottom:1px solid #999;font:600 9pt 'Noto Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#444}
-  .print-foot{display:block;margin:1.6rem 0 0;padding-top:.4rem;border-top:1px solid #999;font:9pt 'Noto Sans',sans-serif;color:#444;word-break:break-all}
+  .print-head{display:block;margin:0 0 .6rem;padding:0 0 .3rem;border-bottom:1px solid #bbb;font:600 8.5pt 'Noto Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#555}
+  .print-foot{display:block;margin:1rem 0 0;padding-top:.2rem;border-top:0;font:9pt 'Noto Sans',sans-serif;color:#444;word-break:break-all}
   h1,h2,h3,h4{color:#000 !important;page-break-after:avoid;break-after:avoid;font-family:'Noto Serif',Georgia,serif !important}
   h1.title{font-size:22pt;margin:.2rem 0 .3rem}
   h2{font-size:15pt;margin-top:1.4rem}h3{font-size:12.5pt}

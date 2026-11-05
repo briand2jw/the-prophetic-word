@@ -949,7 +949,7 @@ function run(){
     /* Print: the page prints on its own clean, light layout (see the print rules in the stylesheet) */
     var mainEl=d.querySelector("main.content");
     if(mainEl){
-      var ph=d.createElement("p");ph.className="print-head";ph.textContent="The Pure Language \u00b7 thepurelanguage.org";mainEl.insertBefore(ph,mainEl.firstChild);
+      var ph=d.createElement("p");ph.className="print-head";ph.textContent="The Pure Language";mainEl.insertBefore(ph,mainEl.firstChild);
       var pf=d.createElement("p");pf.className="print-foot";mainEl.appendChild(pf);
     }
     function doPrint(){
