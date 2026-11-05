@@ -113,7 +113,7 @@ nav.page-navigation a,nav.page-navigation .nav-page-text{color:var(--link) !impo
 
 /* ---- Accessibility ---- */
 /* 1. Clear keyboard / switch-control focus */
-a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--focus,var(--accent)) !important;outline-offset:3px;border-radius:2px}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--focus,var(--accent)) !important;outline-offset:3px}
 [tabindex="-1"]:focus,[tabindex="-1"]:focus-visible,main:focus,main:focus-visible,#quarto-document-content:focus-visible{outline:none !important}
 #quarto-sidebar a:focus-visible,#quarto-sidebar button:focus-visible{outline-color:var(--side-active) !important}
 
@@ -680,3 +680,9 @@ h1,h2,h3,h4,.title,.quarto-title h1,.article-list li a{font-weight:650}
 
 /* Date line: stays on one line on narrow phones */
 @media (max-width:400px){main.content .dates{font-size:calc(.84rem * var(--read-scale,1))}main.content .meta{font-size:.84rem}}
+
+/* ---- Found words: bright, readable on the dark page (site search and My Notes search) ---- */
+.find-hit{background:#f2a08b;color:#1b1c18;border-radius:3px;padding:0 .12em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+@media (forced-colors:active){.find-hit{background:Mark;color:MarkText}}
+/* the site's own search mark is replaced by the highlight above */
+main mark:not(.u-hl){background:#f2a08b;color:#1b1c18;border-radius:3px;padding:0 .12em}

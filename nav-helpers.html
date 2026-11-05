@@ -621,11 +621,19 @@ function run(){
         if(q&&it.note.toLowerCase().indexOf(q)<0)return false;
         return true;});
     }
+    function hilite(t,q){
+      if(!q)return esc(t);
+      var re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"ig"),out="",i=0,m;
+      while((m=re.exec(t))){
+        if(!m[0].length){re.lastIndex++;continue;}
+        out+=esc(t.slice(i,m.index))+'<span class="find-hit">'+esc(m[0])+'</span>';i=m.index+m[0].length;}
+      return out+esc(t.slice(i));
+    }
     function itemHtml(it){
       var href=root+esc(it.page)+'#hl-'+it.id;
       return '<li><span class="nd-chip u-c'+it.color+'" aria-hidden="true"></span>'+
         '<a class="nd-open" href="'+href+'" data-id="'+it.id+'" data-p="'+esc(it.page)+'"><q>'+esc(it.text.length>220?it.text.slice(0,220)+"\u2026":it.text)+'</q>'+
-        (it.note?'<span class="nd-note">'+esc(it.note)+'</span>':'')+'</a>'+
+        (it.note?'<span class="nd-note">'+hilite(it.note,fq.trim())+'</span>':'')+'</a>'+
         '<div class="nd-more"><button type="button" class="nd-dots" aria-label="More options for this note" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="19" cy="12" r="2" fill="currentColor"/></svg></button>'+
         '<div class="nd-menu" hidden><button type="button" class="nd-del" data-id="'+it.id+'">Delete</button></div></div>'+
         '<div class="nd-ask" hidden><p>Delete this note and its highlight? This cannot be undone.</p><div class="nd-ask-btns"><button type="button" class="nd-yes-del" data-id="'+it.id+'">Delete note</button><button type="button" class="nd-no-del">Cancel</button></div></div></li>';
@@ -976,6 +984,41 @@ function run(){
     });
     [].forEach.call(d.querySelectorAll("dialog"),function(dg){var t=dg.querySelector(".dlg,.sh-head");if(t&&!t.hasAttribute("tabindex")){t.setAttribute("tabindex","-1");t.setAttribute("autofocus","");}});
   });
+  /* Words found by the site search stay highlighted on the page until you tap or press Escape */
+  safe(function(){
+    var q=shared.findQ;if(!q)return;
+    var main=d.querySelector("main.content")||d.querySelector("main");if(!main||!d.createTreeWalker)return;
+    var terms=[q];
+    function esc2(t){return t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");}
+    function walk(list){
+      var re=new RegExp("("+list.map(esc2).join("|")+")","ig"),hits=[];
+      var w=d.createTreeWalker(main,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
+        var p=n.parentNode;
+        if(!n.nodeValue||!n.nodeValue.trim()||(p&&p.closest&&p.closest("nav,button,script,style,textarea,dialog,.study-pop,.find-hit")))return NodeFilter.FILTER_REJECT;
+        re.lastIndex=0;return re.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
+      var nodes=[];while(w.nextNode())nodes.push(w.currentNode);
+      nodes.forEach(function(n){
+        var t=n.nodeValue,frag=d.createDocumentFragment(),i=0,m;re.lastIndex=0;
+        while((m=re.exec(t))){
+          if(!m[0].length){re.lastIndex++;continue;}
+          if(m.index>i)frag.appendChild(d.createTextNode(t.slice(i,m.index)));
+          var sp=d.createElement("span");sp.className="find-hit";sp.textContent=m[0];frag.appendChild(sp);hits.push(sp);i=m.index+m[0].length;}
+        if(i<t.length)frag.appendChild(d.createTextNode(t.slice(i)));
+        n.parentNode.replaceChild(frag,n);
+      });
+      return hits;
+    }
+    var hits=walk(terms);
+    if(!hits.length){var words=q.split(/\s+/).filter(function(x){return x.length>1;});if(words.length>1)hits=walk(words);}
+    if(!hits.length)return;
+    if(!location.hash)setTimeout(function(){hits[0].scrollIntoView({block:"center"});},80);
+    function clear(){
+      d.removeEventListener("click",clear,true);d.removeEventListener("keydown",onKey,true);
+      [].forEach.call(d.querySelectorAll("span.find-hit"),function(h){var p=h.parentNode;if(!p)return;p.replaceChild(d.createTextNode(h.textContent),h);p.normalize();});
+    }
+    function onKey(e){if(e.key==="Escape")clear();}
+    setTimeout(function(){d.addEventListener("click",clear,true);d.addEventListener("keydown",onKey,true);},400);
+  });
   /* Back-to-top button */
   safe(function(){
     var b=d.createElement("button");b.type="button";b.className="to-top";b.setAttribute("aria-label","Back to top");b.innerHTML="↑";
@@ -985,6 +1028,10 @@ function run(){
     window.addEventListener("scroll",function(){if(!tick){tick=true;requestAnimationFrame(chk);}},{passive:true});chk();
   });
 }
+try{
+  var u=new URL(location.href),fq=u.searchParams.get("q");
+  if(fq&&fq.trim()){shared.findQ=fq.trim();u.searchParams.delete("q");history.replaceState({},"",u);}
+}catch(e){}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
 })();
 </script>
