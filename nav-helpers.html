@@ -608,8 +608,7 @@ function run(){
       '<div class="nd-tools"><div class="nd-views" role="group" aria-label="Which notes to show"><button type="button" class="nd-view is-on" data-v="page" aria-pressed="true">This page</button><button type="button" class="nd-view" data-v="all" aria-pressed="false">Everything</button></div>'+
       '<label class="sr-only" for="nd-q">Search your notes</label><input type="search" id="nd-q" class="nd-q" placeholder="Search your notes" autocomplete="off">'+
       '<p class="nd-count" role="status" aria-live="polite"></p></div><div id="nd-list"></div><p class="nd-msg" role="status"></p>'+
-      '<div class="nd-actions"><button type="button" class="dlg-close nd-copy">Copy as Text</button><button type="button" class="dlg-close nd-export">Save a Backup</button><label class="dlg-close nd-import-l">Restore a Backup<input type="file" accept=".json,application/json" class="nd-import"></label></div>'+
-      '<button type="button" class="dlg-close nd-close">Close</button></div>';
+      '<div class="nd-actions"><button type="button" class="dlg-close nd-copy">Copy as Text</button><button type="button" class="dlg-close nd-export">Save a Backup</button><label class="dlg-close nd-import-l">Restore a Backup<input type="file" accept=".json,application/json" class="nd-import"></label><button type="button" class="dlg-close nd-close">Close</button></div></div>';
     d.body.appendChild(dlg);
     var list=dlg.querySelector("#nd-list"),msg=dlg.querySelector(".nd-msg");
     function say(t){msg.textContent=t;}

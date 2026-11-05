@@ -643,3 +643,18 @@ dialog .nd-ask-btns .nd-yes-del:focus-visible{background:var(--accent);filter:br
 dialog .nd-open:focus-visible q{text-decoration:underline;text-decoration-color:var(--accent)}
 .nd-q:focus-visible,.sh-url:focus-visible,dialog input:focus-visible,dialog select:focus-visible{outline:none !important;border-color:var(--accent) !important}
 #share-dialog .sh-x{border-radius:50% !important;background:#3a3b34 !important;border:0 !important}
+
+/* ---- My Notes: calmer spacing and a tidy button grid ---- */
+#notes-dialog .nd-intro{margin:0 0 1rem;font-size:.9rem;line-height:1.5}
+#notes-dialog .nd-tools{display:flex;flex-direction:column;gap:.8rem;margin:0 0 .5rem}
+#notes-dialog .nd-views{margin:0}
+#notes-dialog .nd-q{margin:0}
+#notes-dialog .nd-count{margin:.1rem .3rem 0;font-size:.85rem}
+#notes-dialog .nd-count:empty{display:none}
+#nd-list{margin:.4rem 0 0}
+#nd-list>p{margin:.4rem .3rem 0;color:var(--meta)}
+#notes-dialog .nd-msg{margin:.8rem .3rem 0;min-height:0}
+#notes-dialog .nd-msg:empty{display:none}
+#notes-dialog .dlg>.nd-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.7rem;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid #46473e}
+#notes-dialog .dlg>.nd-actions .dlg-close{margin:0;width:100%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:.6rem .6rem;min-height:2.9rem;font-size:.76rem;letter-spacing:.04em;line-height:1.2;text-align:center;white-space:normal}
+#notes-dialog .dlg>.nd-actions .nd-import-l{position:relative}
