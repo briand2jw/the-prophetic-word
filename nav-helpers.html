@@ -608,9 +608,13 @@ function run(){
         return true;});
     }
     function itemHtml(it){
-      return '<li><span class="nd-chip u-c'+it.color+'" aria-hidden="true"></span><div><q>'+esc(it.text.length>220?it.text.slice(0,220)+"…":it.text)+'</q>'+
-        (it.note?'<p class="nd-note">'+esc(it.note)+'</p>':'')+
-        '<p class="nd-links"><a href="'+root+esc(it.page)+'#hl-'+it.id+'">Open</a> <button type="button" class="nd-rm" data-id="'+it.id+'">Remove</button></p></div></li>';
+      var href=root+esc(it.page)+'#hl-'+it.id;
+      return '<li><span class="nd-chip u-c'+it.color+'" aria-hidden="true"></span>'+
+        '<a class="nd-open" href="'+href+'" data-id="'+it.id+'" data-p="'+esc(it.page)+'"><q>'+esc(it.text.length>220?it.text.slice(0,220)+"\u2026":it.text)+'</q>'+
+        (it.note?'<span class="nd-note">'+esc(it.note)+'</span>':'')+'</a>'+
+        '<div class="nd-more"><button type="button" class="nd-dots" aria-label="More options for this note" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="19" cy="12" r="2" fill="currentColor"/></svg></button>'+
+        '<div class="nd-menu" hidden><button type="button" class="nd-del" data-id="'+it.id+'">Delete</button></div></div>'+
+        '<div class="nd-ask" hidden><p>Delete this note and its highlight? This cannot be undone.</p><div class="nd-ask-btns"><button type="button" class="nd-yes-del" data-id="'+it.id+'">Delete note</button><button type="button" class="nd-no-del">Cancel</button></div></div></li>';
     }
     function render(){
       say("");
@@ -634,9 +638,22 @@ function run(){
     list.addEventListener("toggle",function(e){var t=e.target;if(t&&t.classList&&t.classList.contains("nd-group"))openG[t.getAttribute("data-p")]=t.open;},true);
     dlg.querySelector(".nd-views").addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".nd-view");if(!b)return;view=b.getAttribute("data-v");render();});
     elQ.addEventListener("input",function(){fq=elQ.value;render();});
+    function closeMenus(){[].forEach.call(list.querySelectorAll(".nd-menu"),function(m){m.hidden=true;});[].forEach.call(list.querySelectorAll(".nd-dots"),function(x){x.setAttribute("aria-expanded","false");});}
     list.addEventListener("click",function(e){
-      var b=e.target.closest&&e.target.closest(".nd-rm");if(!b)return;
-      var id=b.getAttribute("data-id");db.items=db.items.filter(function(x){return x.id!==id;});save(db);unwrap(id);render();});
+      var t=e.target,c=t.closest?t.closest.bind(t):null;if(!c)return;
+      var dots=c(".nd-dots");
+      if(dots){var m=dots.parentNode.querySelector(".nd-menu"),was=!m.hidden;closeMenus();m.hidden=was;dots.setAttribute("aria-expanded",was?"false":"true");return;}
+      var del=c(".nd-del");
+      if(del){var li=c("li");closeMenus();li.querySelector(".nd-ask").hidden=false;li.querySelector(".nd-more").hidden=true;li.querySelector(".nd-yes-del").focus();return;}
+      if(c(".nd-no-del")){var l2=c("li");l2.querySelector(".nd-ask").hidden=true;l2.querySelector(".nd-more").hidden=false;return;}
+      var yes=c(".nd-yes-del");
+      if(yes){var id=yes.getAttribute("data-id");db.items=db.items.filter(function(x){return x.id!==id;});save(db);unwrap(id);render();say("Note deleted.");return;}
+      var op=c(".nd-open");
+      if(op){
+        if(op.getAttribute("data-p")===page){e.preventDefault();var id2=op.getAttribute("data-id");closeD();setTimeout(function(){var el=d.getElementById("hl-"+id2);if(el)el.scrollIntoView({block:"center"});},60);}
+        return;}
+      closeMenus();
+    });
     function plain(){
       var out=[],last=null,all=(view==="all"&&!fq.trim());
       shown().sort(function(a,b){return a.page===b.page?a.s-b.s:(a.t||0)-(b.t||0);}).forEach(function(it){

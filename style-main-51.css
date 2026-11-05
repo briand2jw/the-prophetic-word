@@ -579,3 +579,21 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .nd-view:focus-visible,.nd-q:focus-visible,.nd-sel:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media (forced-colors:active){.nd-view{border:2px solid ButtonText}.nd-view.is-on{outline:3px solid Highlight}}
 .nd-gt{color:var(--text)}
+
+/* My Notes: tap a note to open it; options menu */
+#notes-dialog .nd-items li{display:flex;align-items:flex-start;gap:.7rem;flex-wrap:wrap;position:relative}
+.nd-open,#notes-dialog .nd-open:hover{flex:1 1 0;min-width:0;display:block;color:inherit !important;text-decoration:none !important;background-image:none !important;padding:.1rem 0}
+.nd-open:hover q{text-decoration:underline;text-decoration-color:var(--accent)}
+.nd-open .nd-note{display:block;margin-top:.35rem;font-style:normal}
+.nd-more{flex:none;position:relative;margin-left:auto}
+.nd-dots{width:2.75rem;height:2.75rem;display:flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:50%;background:none;color:var(--meta);cursor:pointer}
+.nd-dots:hover,.nd-dots[aria-expanded="true"]{border-color:var(--rule);background:var(--bg);color:var(--text)}
+.nd-menu{position:absolute;right:0;top:100%;z-index:3;min-width:9rem;border:1px solid var(--rule);border-radius:2px;background:var(--bg);box-shadow:0 6px 18px rgba(0,0,0,.45)}
+.nd-menu[hidden],.nd-ask[hidden],.nd-more[hidden]{display:none}
+.nd-menu button{display:block;width:100%;padding:.8rem 1rem;border:0;background:none;color:var(--text);font:inherit;text-align:left;cursor:pointer}
+.nd-menu button:hover{background:var(--surface,var(--rule))}
+.nd-ask{flex:1 0 calc(100% - 1.6rem);box-sizing:border-box;max-width:calc(100% - 1.6rem);margin:.2rem 0 .3rem 1.6rem;padding:.8rem .9rem;border:1px solid var(--accent);border-radius:2px;background:var(--bg)}
+.nd-ask p{margin:0 0 .6rem}
+.nd-ask-btns{display:flex;gap:.6rem;flex-wrap:wrap}
+.nd-ask-btns button{padding:.6rem 1rem;border:1px solid var(--accent);border-radius:2rem;background:none;color:var(--accent);font:inherit;font-size:.9rem;font-weight:700;cursor:pointer}
+.nd-ask-btns .nd-yes-del{background:var(--accent);color:var(--bg)}
