@@ -68,6 +68,16 @@ def long_date(d):
     return "%s %d, %d" % (d.strftime("%B"), d.day, d.year)
 
 
+def dates_text(posted, updated):
+    """One short line: just the posting date for a new page; the update first, then the posting date, once changed."""
+    nb = "\u00a0"  # a date never splits across two lines
+    def fmt(d):
+        return "%s%s%d,%s%d" % (d.strftime("%b"), nb, d.day, nb, d.year)
+    if updated and updated > posted:
+        return "Updated%s%s %s Posted%s%s" % (nb, fmt(updated), DOT, nb, fmt(posted))
+    return "Posted%s%s" % (nb, fmt(posted))
+
+
 def parse_date(text, fullDate=None):
     if fullDate:
         try:
@@ -274,6 +284,7 @@ def entry_from_qmd(path):
         return None
     e = {"src": rel, "section": section, "posted": posted, "updated": updated, "title": fm.get("title", ""),
          "summary": fm.get("summary", ""), "generated": False, "path": rel}
+    refresh_dates_line(rel, dates_text(posted, updated))
     if SECTIONS[section]["kind"] == "chapter":
         book = BOOK_BY_NAME.get(fm.get("book", "").lower())
         if not book or not fm.get("chapter", "").isdigit():
@@ -286,6 +297,19 @@ def entry_from_qmd(path):
 
 
 # ------------------------------------------------------------- generation
+
+def refresh_dates_line(rel, line):
+    """Keep the date line shown at the top of a hand-made page in step with its page header."""
+    path = os.path.join(ROOT, rel)
+    try:
+        text = open(path, encoding="utf-8").read()
+    except OSError:
+        return
+    new = re.sub(r"(::: dates\n)[^\n]*(\n:::)", lambda m: m.group(1) + line + m.group(2), text, count=1)
+    if new != text:
+        with open(path, "w", encoding="utf-8", newline="\n") as f:
+            f.write(new)
+
 
 def write(path, text):
     os.makedirs(os.path.dirname(os.path.join(ROOT, path)) or ".", exist_ok=True)
@@ -318,7 +342,7 @@ def yaml_marker(name, which):
 def article_list(entries):
     lines = [""]
     for e in sorted(entries, key=lambda x: (x["posted"], x["title"].lower()), reverse=True):
-        meta = "Posted %s %s Updated %s" % (long_date(e["posted"]), DOT, long_date(e["updated"]))
+        meta = dates_text(e["posted"], e["updated"])
         lines.append("- [%s](%s)\\" % (e["title"].replace("]", "\\]"), e["path"]))
         if e["summary"]:
             lines.append("  [%s]{.meta}\\" % meta)
@@ -511,7 +535,7 @@ def main():
                 fm += ["summary: %s" % json.dumps(e["summary"], ensure_ascii=False)]
         fm += ["posted: %s" % e["posted"].isoformat(), "updated: %s" % e["updated"].isoformat(),
                "source: %s" % e["src"], "---", ""]
-        dates = "::: dates\nPosted: %s %s Updated: %s\n:::\n\n" % (long_date(e["posted"]), DOT, long_date(e["updated"]))
+        dates = "::: dates\n%s\n:::\n\n" % dates_text(e["posted"], e["updated"])
         write(e["path"], "\n".join(fm) + "\n" + dates + e["body"])
 
     # 5. lists

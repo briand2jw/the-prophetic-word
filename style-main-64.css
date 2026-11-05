@@ -677,3 +677,6 @@ h1,h2,h3,h4,.title,.quarto-title h1,.article-list li a{font-weight:650}
 #quarto-sidebar .sidebar-menu-container > ul > li.sidebar-item > .sidebar-item-container > a.sidebar-link,
 #quarto-sidebar .sidebar-menu-container > ul > li.sidebar-item > .sidebar-item-container > a.sidebar-link .chapter-title,
 #quarto-sidebar .sidebar-menu-container > ul > li.sidebar-item > .sidebar-item-container > a.sidebar-link .menu-text{font-weight:700}
+
+/* Date line: stays on one line on narrow phones */
+@media (max-width:400px){main.content .dates{font-size:calc(.84rem * var(--read-scale,1))}main.content .meta{font-size:.84rem}}

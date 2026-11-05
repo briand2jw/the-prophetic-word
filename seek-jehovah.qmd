@@ -8,7 +8,7 @@ Articles are listed by date, with the newest first.
 [auto-list-start]: #
 
 - [Seek Righteousness—Why Important Now?](articles/sj-seek-righteousness-why-important-now.qmd)\
-  [Posted August 12, 2026 · Updated August 12, 2026]{.meta}\
+  [Posted Aug 12, 2026]{.meta}\
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
 
 [auto-list-end]: #

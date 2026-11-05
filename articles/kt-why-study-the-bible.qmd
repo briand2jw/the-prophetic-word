@@ -8,7 +8,7 @@ source: submissions/Why Study the Bible (example article).docx
 ---
 
 ::: dates
-Posted: October 25, 2026 · Updated: October 25, 2026
+Posted Oct 25, 2026
 :::
 
 Many people mean to read the Bible and never get started. The good news is that you do not need an hour a day. A few unhurried minutes, repeated, will take you further than you expect.

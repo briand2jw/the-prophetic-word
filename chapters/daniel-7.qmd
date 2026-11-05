@@ -8,7 +8,7 @@ source: submissions/Daniel 7 (example chapter).docx
 ---
 
 ::: dates
-Posted: October 25, 2026 · Updated: October 25, 2026
+Posted Oct 25, 2026
 :::
 
 ::: overview
