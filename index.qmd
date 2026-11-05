@@ -71,5 +71,5 @@ Add this website to your phone or tablet so it opens like an app, with its own i
 :::
 
 ::: {.content-visible when-format="html"}
-<p class="install-actions"><button type="button" id="privacy-btn" class="epub-btn">Privacy</button></p>
+<p class="install-actions"><button type="button" id="privacy-btn" class="epub-btn">Privacy Information</button></p>
 :::
