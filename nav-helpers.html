@@ -952,12 +952,20 @@ function run(){
       var ph=d.createElement("p");ph.className="print-head";ph.textContent="The Pure Language";mainEl.insertBefore(ph,mainEl.firstChild);
       var pf=d.createElement("p");pf.className="print-foot";mainEl.appendChild(pf);
     }
-    function doPrint(){
+    var printed=false;
+    window.addEventListener("beforeprint",function(){printed=true;});
+    function doPrint(fromDialog){
       var f=d.querySelector(".print-foot");if(f)f.textContent=title+" \u00b7 "+pageUrl();
-      [].forEach.call(d.querySelectorAll("#quarto-sidebar details,.nd-group"),function(x){});
+      printed=false;
       try{window.print();}catch(e){}
+      setTimeout(function(){
+        if(printed)return;
+        var m="Printing isn\u2019t available in the installed app on this device. Open this page in Safari or Chrome, then use that browser\u2019s Share or menu button and choose Print.";
+        if(fromDialog===true){say(m);}
+        else{fill();say(m);dlg.showModal();}
+      },900);
     }
-    q(".sh-print").addEventListener("click",function(){closeS();setTimeout(doPrint,250);});
+    q(".sh-print").addEventListener("click",function(){say("");doPrint(true);});
     q(".sh-more").addEventListener("click",function(){
       try{navigator.share({title:title,text:title+" – The Pure Language",url:urlEl.value}).catch(function(){});}catch(e){}
     });
@@ -984,7 +992,7 @@ function run(){
       sb.innerHTML=ico.share.replace('width="24" height="24"','width="22" height="22"')+"<span>Share</span>";sb.addEventListener("click",openS);
       side.insertBefore(sb,side.querySelector(".bm-side")||side.querySelector("a.epub-side"));
       var pb=d.createElement("button");pb.type="button";pb.className="translate-btn tr-side pr-side";
-      pb.innerHTML=ico.print+"<span>Print</span>";pb.addEventListener("click",doPrint);
+      pb.innerHTML=ico.print+"<span>Print</span>";pb.addEventListener("click",function(){doPrint(false);});
       side.insertBefore(pb,sb.nextSibling);
     }
   });
