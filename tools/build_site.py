@@ -573,8 +573,6 @@ def main():
         write(slug + ".qmd", '---\ntitle: %s\n---\n\nInformation is available on the chapters listed below.\n\n::: chapter-grid\n%s:::\n'
               % (json.dumps(b["name"]), grid))
     # home
-    replace_between("index.qmd", md_marker("news", "start"), md_marker("news", "end"), news_home(good, "new", NEWS_LIMIT))
-    replace_between("index.qmd", md_marker("upd", "start"), md_marker("upd", "end"), news_home(good, "upd", UPDATED_LIMIT))
     replace_between("whats-new.qmd", md_marker("all", "start"), md_marker("all", "end"), news_all(good))
 
     print("Pages: %d articles, %d chapters, %d drafts held back, %d problems."
