@@ -31,7 +31,7 @@ Take your time with each chapter. Read the overview first, then work through the
 
 Mark the words that stand out and write your own comments. They are saved privately on your device.
 
-<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">How Do I Add Highlights and Notes?</button> <button type="button" id="notes-open" class="translate-btn">Open My Notes</button></p>
+<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">How Do I Highlight?</button> <button type="button" id="notes-open" class="translate-btn">Open My Notes</button></p>
 :::
 :::
 
