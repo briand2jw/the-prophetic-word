@@ -672,3 +672,8 @@ h1,h2,h3,h4,.title,.quarto-title h1,.article-list li a{font-weight:650}
 #quarto-sidebar li.sidebar-item-section:has(> .sidebar-item-container > a[href$="seek-jehovah.html"]) > .sidebar-item-container > .sidebar-item-toggle,
 #quarto-sidebar li.sidebar-item-section:has(> .sidebar-item-container > a[href$="know-the-truth.html"]) > ul,
 #quarto-sidebar li.sidebar-item-section:has(> .sidebar-item-container > a[href$="seek-jehovah.html"]) > ul{display:none !important}
+
+/* Menu: every top-level heading is bold, including Home and What's new */
+#quarto-sidebar .sidebar-menu-container > ul > li.sidebar-item > .sidebar-item-container > a.sidebar-link,
+#quarto-sidebar .sidebar-menu-container > ul > li.sidebar-item > .sidebar-item-container > a.sidebar-link .chapter-title,
+#quarto-sidebar .sidebar-menu-container > ul > li.sidebar-item > .sidebar-item-container > a.sidebar-link .menu-text{font-weight:700}
