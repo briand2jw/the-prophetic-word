@@ -31,6 +31,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
 NEWS_LIMIT = 5
+UPDATED_LIMIT = 3
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 PANDOC = shlex.split(os.environ.get("PANDOC", "pandoc"))
 DOT = "·"
@@ -406,9 +407,9 @@ def news_line(date, what, body):
         body if body.startswith("<details") else "[%s]{.wn-what}" % body)
 
 
-def news_home(entries):
-    """Home page: the newest few lines. A busy day with many pages becomes one expandable line."""
-    events = news_events(entries)
+def news_home(entries, what="new", limit=None):
+    """Home page: the newest few lines of one kind (new, or updated). A busy day with many pages becomes one expandable line."""
+    events = [x for x in news_events(entries) if x["what"] == what]
     rolled, seen = [], set()
     for ev in events:
         key = (ev["date"], ev["what"], ev["kind"])
@@ -432,8 +433,10 @@ def news_home(entries):
             rolled.append((ev["date"], ev["what"], body))
         else:
             rolled.append((ev["date"], ev["what"], ev["text"]))
+    if not rolled:
+        return "\nNothing has been %s yet.\n" % ("posted" if what == "new" else "updated")
     out = [""]
-    for date, what, body in rolled[:NEWS_LIMIT]:
+    for date, what, body in rolled[:limit or NEWS_LIMIT]:
         out.append(news_line(date, what, body))
     out.append("")
     return "\n".join(out) + "\n"
@@ -570,7 +573,8 @@ def main():
         write(slug + ".qmd", '---\ntitle: %s\n---\n\nInformation is available on the chapters listed below.\n\n::: chapter-grid\n%s:::\n'
               % (json.dumps(b["name"]), grid))
     # home
-    replace_between("index.qmd", md_marker("news", "start"), md_marker("news", "end"), news_home(good))
+    replace_between("index.qmd", md_marker("news", "start"), md_marker("news", "end"), news_home(good, "new", NEWS_LIMIT))
+    replace_between("index.qmd", md_marker("upd", "start"), md_marker("upd", "end"), news_home(good, "upd", UPDATED_LIMIT))
     replace_between("whats-new.qmd", md_marker("all", "start"), md_marker("all", "end"), news_all(good))
 
     print("Pages: %d articles, %d chapters, %d drafts held back, %d problems."
