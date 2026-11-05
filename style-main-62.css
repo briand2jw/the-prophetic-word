@@ -666,3 +666,9 @@ h1,h2,h3,h4,.title,.quarto-title h1,.article-list li a{font-weight:650}
 .whatsnew .wn-date{font-size:.95rem}
 .whatsnew .wn-tag{font-size:.78rem;letter-spacing:.06em}
 .whatsnew .wn-tag.is-new{color:var(--link)}
+
+/* Menu: Know the Truth and Seek Jehovah are plain links (no arrow, no list of articles); their articles are listed on their own pages */
+#quarto-sidebar li.sidebar-item-section:has(> .sidebar-item-container > a[href$="know-the-truth.html"]) > .sidebar-item-container > .sidebar-item-toggle,
+#quarto-sidebar li.sidebar-item-section:has(> .sidebar-item-container > a[href$="seek-jehovah.html"]) > .sidebar-item-container > .sidebar-item-toggle,
+#quarto-sidebar li.sidebar-item-section:has(> .sidebar-item-container > a[href$="know-the-truth.html"]) > ul,
+#quarto-sidebar li.sidebar-item-section:has(> .sidebar-item-container > a[href$="seek-jehovah.html"]) > ul{display:none !important}
