@@ -381,18 +381,20 @@ function run(){
         '<button type="button" class="sp-pill sp-note">'+ICO.note+'<span>Note</span></button>'+
         '<button type="button" class="sp-pill sp-done">Done</button>'+
         '<button type="button" class="sp-pill sp-back">Back</button>'+
+        '<button type="button" class="sp-pill sp-yes">Delete</button>'+
+        '<button type="button" class="sp-pill sp-no">Cancel</button>'+
       '</div>';
     d.body.appendChild(pop);
     function q(s){return pop.querySelector(s);}
     var elTitle=q(".sp-title"),elColors=q(".sp-colors"),elNote=q(".sp-notetxt"),elEdit=q(".sb-edit"),ta=q("textarea"),elBmc=q(".sp-bmcolors"),
-        bDel=q(".sp-del"),bRm=q(".sp-rmbm"),bBm=q(".sp-bm"),bList=q(".sp-list"),bDelNote=q(".sp-delnote"),bNote=q(".sp-note"),bCopy=q(".sp-copy"),bUndo=q(".sp-undo"),bCopyU=q(".sp-copyu"),bDone=q(".sp-done"),bBack=q(".sp-back");
+        bDel=q(".sp-del"),bRm=q(".sp-rmbm"),bBm=q(".sp-bm"),bList=q(".sp-list"),bDelNote=q(".sp-delnote"),bNote=q(".sp-note"),bCopy=q(".sp-copy"),bUndo=q(".sp-undo"),bCopyU=q(".sp-copyu"),bDone=q(".sp-done"),bBack=q(".sp-back"),bYes=q(".sp-yes"),bNo=q(".sp-no"),askBack=null,askDo=null;
     var mode=null,pending=null,cur=null,curBm=null,anchor=null,tm=null,toastTm=null;
     var lastColor=1;
     try{var lc=parseInt(localStorage.getItem("studyColor"),10);if(lc>=1&&lc<=6)lastColor=lc;}catch(e){}
     function setLast(c){lastColor=c;try{localStorage.setItem("studyColor",String(c));}catch(e){}}
     function setVis(m){
-      var map={new:[elColors,bBm,bCopy,bNote],hl:[elTitle,bUndo,bCopyU],mark:[elColors,elNote,bDel,bBm,bCopy,bNote],bmk:[elTitle,bRm,bList],edit:[elEdit,bDelNote,bDone],bmpick:[elTitle,elBmc,bBack],done:[elTitle]};
-      [elTitle,elColors,elNote,elEdit,elBmc,bDel,bRm,bBm,bCopy,bUndo,bCopyU,bList,bDelNote,bNote,bDone,bBack].forEach(function(e){e.hidden=true;});
+      var map={new:[elColors,bBm,bCopy,bNote],hl:[elTitle,bUndo,bCopyU],mark:[elColors,elNote,bDel,bBm,bCopy,bNote],bmk:[elTitle,bRm,bList],edit:[elEdit,bDelNote,bDone],bmpick:[elTitle,elBmc,bBack],done:[elTitle],ask:[elTitle,bYes,bNo]};
+      [elTitle,elColors,elNote,elEdit,elBmc,bDel,bRm,bBm,bCopy,bUndo,bCopyU,bList,bDelNote,bNote,bDone,bBack,bYes,bNo].forEach(function(e){e.hidden=true;});
       (map[m]||[]).forEach(function(e){e.hidden=false;});
       if(m==="mark"){elNote.hidden=!(cur&&cur.note);}
       pop.classList.toggle("sp-simple",m==="done");
@@ -529,8 +531,21 @@ function run(){
       var r=anchor;mode="edit";ta.value=cur.note||"";setVis("edit");position();ta.focus();
     });
     bDone.addEventListener("click",function(){saveNote();hide();});
-    bDelNote.addEventListener("click",function(){if(cur){cur.note="";save(db);paint(cur);}hide();});
-    bDel.addEventListener("click",function(){if(!cur)return;var id=cur.id;db.items=db.items.filter(function(x){return x.id!==id;});save(db);unwrap(id);hide();});
+    function ask(msg,back,run){askBack=back;askDo=run;elTitle.textContent=msg;mode="ask";setVis("ask");position();bYes.focus();}
+    bDelNote.addEventListener("click",function(){
+      if(!cur)return;
+      ask("Delete this note? The highlight stays. This cannot be undone.","edit",function(){cur.note="";save(db);paint(cur);hide();});
+    });
+    bDel.addEventListener("click",function(){
+      if(!cur)return;var id=cur.id;
+      ask(cur.note?"Delete this highlight and its note? This cannot be undone.":"Delete this highlight? This cannot be undone.","mark",function(){db.items=db.items.filter(function(x){return x.id!==id;});save(db);unwrap(id);hide();});
+    });
+    bYes.addEventListener("click",function(){var f=askDo;askDo=null;if(f)f();});
+    bNo.addEventListener("click",function(){
+      askDo=null;
+      if(askBack==="edit"){mode="edit";setVis("edit");position();ta.focus();}
+      else{mode="mark";setVis("mark");position();setPressed();}
+    });
     function copyText(t,done){
       function fb(){try{var x=d.createElement("textarea");x.value=t;x.setAttribute("readonly","");x.style.cssText="position:fixed;top:0;left:0;opacity:0";d.body.appendChild(x);x.select();var ok=d.execCommand("copy");d.body.removeChild(x);done(ok);}catch(e){done(false);}}
       try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true);},fb);return;}}catch(e){}
