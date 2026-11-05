@@ -570,8 +570,6 @@ mark.u-hl[id].has-note::before{content:"";display:inline-block;width:.85em;heigh
 .nd-view+.nd-view{border-left:0}
 .nd-view.is-on{background:var(--accent);border-color:var(--accent);color:var(--bg)}
 .nd-q,.nd-sel{width:100%;box-sizing:border-box;padding:.55rem .7rem;border:1px solid var(--rule);border-radius:2px;background:var(--bg);color:var(--text);font:inherit;font-size:.95rem}
-.nd-filters{display:flex;gap:.6rem;margin-top:.6rem}
-.nd-filters .nd-sel{flex:1}
 .nd-count{margin:.6rem 0 0;font-size:.88rem;color:var(--meta)}
 .nd-group{border-top:1px solid var(--rule)}
 .nd-group summary{color:var(--text);display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.7rem 0;cursor:pointer;font-family:var(--head-font);font-size:1.05rem}

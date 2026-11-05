@@ -156,11 +156,11 @@ function run(){
       '<ol><li>Select the words you want. On a phone or tablet, touch and hold a word, then drag the handles. As soon as you lift your finger, the text is highlighted automatically in your most recent color. A small bar then appears with <strong>Undo</strong> and <strong>Copy</strong>, so you can copy the text without keeping the highlight. To change the color or add a note, tap the highlight.</li>'+
       '<li>Tap a highlight to open a small menu. There you can change its color (the new color is used for your next highlights), add a note, place a bookmark at that paragraph, or delete it with the red trash icon.</li>'+
       '<li>Tap a bookmark ribbon to remove the bookmark. Highlighted something by accident? Tap it and use the trash icon.</li>'+
-      '<li>Open <strong>My Notes</strong> in the menu to see everything you have saved, with a link back to each passage.</li></ol>'+
+      '<li>Open <strong>My Notes</strong> in the menu to see the notes you have written, with a link back to each passage. You can search them there. Highlights stay on the page and are kept in your backup.</li></ol>'+
       '<h3>Good to know</h3><ul>'+
       '<li>Highlights, notes and bookmarks are saved only on the device and browser you used. They do not sync to other devices, and no one else can see them.</li>'+
       '<li>Clearing your browser data or deleting the app erases them. In <strong>My Notes</strong>, use <strong>Save a Backup</strong> now and then, and <strong>Restore a Backup</strong> to bring them back. Restoring replaces everything on that device with the backup, so it is also the way to move your notes from one device to another.</li>'+
-      '<li>If the wording of a passage is updated later, a highlight on that passage may no longer appear. Your text is still kept in <strong>My Notes</strong>.</li>'+
+      '<li>If the wording of a passage is updated later, a highlight on that passage may no longer appear. Your text is still kept, and a note stays in <strong>My Notes</strong>.</li>'+
       '<li>Safari on iPhone and iPad can erase website data after about a week without a visit. Installed apps are not affected, so installing the app is the safest way to keep your notes.</li></ul>'+
       '<h3>Another option</h3><p>Because of these limitations, you may prefer to download the EPUB file and make highlights and notes in your favorite EPUB reader app. Most readers keep your notes with the book and can back them up or sync them between your devices. You can find the download in the <strong>Download the EPUB</strong> section of the Home page, or in the menu.</p>'+
       '<button type="button" class="dlg-close">Close</button></div>';
@@ -589,26 +589,22 @@ function run(){
 
     /* My Notes dialog */
     var dlg=d.createElement("dialog");dlg.id="notes-dialog";dlg.setAttribute("aria-labelledby","nd-title");
-    dlg.innerHTML='<div class="dlg"><h2 id="nd-title">My notes and highlights</h2><p class="nd-intro">Highlights, notes and bookmarks are saved on this device only. Use Save a backup to keep a copy of all three.</p>'+
-      '<div class="nd-tools"><div class="nd-views" role="group" aria-label="What to show"><button type="button" class="nd-view is-on" data-v="page" aria-pressed="true">This page</button><button type="button" class="nd-view" data-v="all" aria-pressed="false">Everything</button></div>'+
-      '<label class="sr-only" for="nd-q">Search your notes</label><input type="search" id="nd-q" class="nd-q" placeholder="Search your notes and highlights" autocomplete="off">'+
-      '<div class="nd-filters"><label class="sr-only" for="nd-type">Type</label><select id="nd-type" class="nd-sel"><option value="">All types</option><option value="note">With a note</option><option value="hl">Highlight only</option></select>'+
-      '<label class="sr-only" for="nd-col">Color</label><select id="nd-col" class="nd-sel"><option value="">Any color</option><option value="1">Gold</option><option value="2">Green</option><option value="3">Blue</option><option value="4">Purple</option><option value="5">Orange</option><option value="6">Red</option></select></div>'+
+    dlg.innerHTML='<div class="dlg"><h2 id="nd-title">My notes</h2><p class="nd-intro">Your notes are listed here. Highlights and bookmarks are saved too, but only notes appear in this list. Everything is kept on this device only. Use Save a backup to keep a copy of all of it.</p>'+
+      '<div class="nd-tools"><div class="nd-views" role="group" aria-label="Which notes to show"><button type="button" class="nd-view is-on" data-v="page" aria-pressed="true">This page</button><button type="button" class="nd-view" data-v="all" aria-pressed="false">Everything</button></div>'+
+      '<label class="sr-only" for="nd-q">Search your notes</label><input type="search" id="nd-q" class="nd-q" placeholder="Search your notes" autocomplete="off">'+
       '<p class="nd-count" role="status" aria-live="polite"></p></div><div id="nd-list"></div><p class="nd-msg" role="status"></p>'+
       '<div class="nd-actions"><button type="button" class="dlg-close nd-copy">Copy as Text</button><button type="button" class="dlg-close nd-export">Save a Backup</button><label class="dlg-close nd-import-l">Restore a Backup<input type="file" accept=".json,application/json" class="nd-import"></label></div>'+
       '<button type="button" class="dlg-close nd-close">Close</button></div>';
     d.body.appendChild(dlg);
     var list=dlg.querySelector("#nd-list"),msg=dlg.querySelector(".nd-msg");
     function say(t){msg.textContent=t;}
-    var view="page",fq="",ftype="",fcol="",openG={},elQ=dlg.querySelector("#nd-q"),elT=dlg.querySelector("#nd-type"),elC=dlg.querySelector("#nd-col"),elCount=dlg.querySelector(".nd-count");
+    var view="page",fq="",openG={},elQ=dlg.querySelector("#nd-q"),elCount=dlg.querySelector(".nd-count");
     function shown(){
       var q=fq.trim().toLowerCase();
       return db.items.filter(function(it){
+        if(!it.note)return false;
         if(view==="page"&&it.page!==page)return false;
-        if(ftype==="note"&&!it.note)return false;
-        if(ftype==="hl"&&it.note)return false;
-        if(fcol&&String(it.color)!==fcol)return false;
-        if(q&&((it.text||"")+" "+(it.note||"")+" "+(it.title||"")).toLowerCase().indexOf(q)<0)return false;
+        if(q&&it.note.toLowerCase().indexOf(q)<0)return false;
         return true;});
     }
     function itemHtml(it){
@@ -619,12 +615,12 @@ function run(){
     function render(){
       say("");
       [].forEach.call(dlg.querySelectorAll(".nd-view"),function(b){var on=b.getAttribute("data-v")===view;b.classList.toggle("is-on",on);b.setAttribute("aria-pressed",on?"true":"false");});
-      var items=shown(),filtering=!!(fq.trim()||ftype||fcol);
-      elCount.textContent=items.length+(items.length===1?" item":" items")+(view==="page"?" on this page":" in total");
-      if(!db.items.length){list.innerHTML='<p>Nothing saved yet. Select any text on a page to highlight it or add a note.</p>';return;}
+      var items=shown(),filtering=!!fq.trim();
+      elCount.textContent=items.length+(items.length===1?" note":" notes")+(view==="page"?" on this page":" in total");
+      if(!db.items.some(function(x){return x.note;})){list.innerHTML='<p>No notes yet. Select any text on a page and add a note to it.</p>';return;}
       if(!items.length){
-        var other=view==="page"&&db.items.length;
-        list.innerHTML='<p>'+(filtering?"Nothing matches.":"Nothing saved on this page yet.")+(other?' Choose <strong>Everything</strong> to see your other pages.':'')+'</p>';return;}
+        var other=view==="page"&&db.items.some(function(x){return x.note;});
+        list.innerHTML='<p>'+(filtering?"No notes match.":"No notes on this page yet.")+(other?' Choose <strong>Everything</strong> to see your other pages.':'')+'</p>';return;}
       if(view==="page"){
         list.innerHTML='<ul class="nd-items">'+items.slice().sort(function(a,b){return a.s-b.s;}).map(itemHtml).join("")+'</ul>';return;}
       var groups={},order=[];
@@ -638,13 +634,11 @@ function run(){
     list.addEventListener("toggle",function(e){var t=e.target;if(t&&t.classList&&t.classList.contains("nd-group"))openG[t.getAttribute("data-p")]=t.open;},true);
     dlg.querySelector(".nd-views").addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".nd-view");if(!b)return;view=b.getAttribute("data-v");render();});
     elQ.addEventListener("input",function(){fq=elQ.value;render();});
-    elT.addEventListener("change",function(){ftype=elT.value;render();});
-    elC.addEventListener("change",function(){fcol=elC.value;render();});
     list.addEventListener("click",function(e){
       var b=e.target.closest&&e.target.closest(".nd-rm");if(!b)return;
       var id=b.getAttribute("data-id");db.items=db.items.filter(function(x){return x.id!==id;});save(db);unwrap(id);render();});
     function plain(){
-      var out=[],last=null,all=(view==="all"&&!(fq.trim()||ftype||fcol));
+      var out=[],last=null,all=(view==="all"&&!fq.trim());
       shown().sort(function(a,b){return a.page===b.page?a.s-b.s:(a.t||0)-(b.t||0);}).forEach(function(it){
         if(it.page!==last){out.push("",it.title||it.page);last=it.page;}
         out.push("  “"+it.text+"”");if(it.note)out.push("  Note: "+it.note);});
@@ -686,7 +680,7 @@ function run(){
     function closeD(){if(dlg.close)dlg.close();else dlg.removeAttribute("open");}
     dlg.querySelector(".nd-close").addEventListener("click",closeD);
     dlg.addEventListener("click",function(e){if(e.target===dlg)closeD();});
-    function openD(){view="page";fq="";ftype="";fcol="";elQ.value="";elT.value="";elC.value="";render();if(dlg.showModal)dlg.showModal();else dlg.setAttribute("open","");}
+    function openD(){view="page";fq="";elQ.value="";render();if(dlg.showModal)dlg.showModal();else dlg.setAttribute("open","");}
     var pen='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>';
     var nb=d.createElement("button");nb.type="button";nb.className="translate-btn tr-side notes-side";nb.setAttribute("aria-haspopup","dialog");
     nb.innerHTML=pen+"<span>My Notes</span>";nb.addEventListener("click",openD);
