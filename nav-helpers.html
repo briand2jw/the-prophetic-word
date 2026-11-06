@@ -11,17 +11,23 @@ function run(){
       root=new URL((at.split("site_libs/")[0])||"./",location.href).href;}
   });
   var homeUrl=root+"index.html";
+  /* Fill {0} in a sentence template. Whole sentences are kept together so they can be translated properly. */
+  function fmt(t){var a=arguments;return t.replace(/\{(\d)\}/g,function(m,i){return a[+i+1];});}
+  /* A book's name as shown in the menu (so translated pages use the translated name) */
+  function bookLabel(slug,fallback){
+    var a=d.querySelector('#quarto-sidebar a.sidebar-link[href$="/'+slug+'.html"],#quarto-sidebar a.sidebar-link[href="'+slug+'.html"]');
+    var t=a&&(a.textContent||"").replace(/\s+/g," ").trim();return t||fallback;}
   var lock='<span class="lk-rule" aria-hidden="true"></span><span class="lk-word"><span class="w1">The</span> <em class="w2">Pure</em> <span class="w3">Language</span></span><span class="lk-rule" aria-hidden="true"></span>';
   var crumbs=[],section=null,book=null;
   safe(function(){
     var ol=d.querySelector("ol.breadcrumb");
     if(ol){[].forEach.call(ol.querySelectorAll("li.breadcrumb-item"),function(li){
       var a=li.querySelector("a");crumbs.push({text:li.textContent.replace(/\s+/g," ").trim(),href:a?a.href:null});});}
-    crumbs=crumbs.filter(function(c){return c.text&&c.text!=="Home";});
+    crumbs=crumbs.filter(function(c){return c.text&&c.href!==homeUrl;});
     var m=location.pathname.match(/\/chapters\/([^\/]+)\.html$/);
     if(m){var mm=m[1].match(/^(.*)-(\d+)$/);
       if(mm){var name=mm[1].split("-").map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(" ");
-        book={text:name,href:new URL("../"+mm[1]+".html",location.href).href};}}
+        book={text:bookLabel(mm[1],name),href:new URL("../"+mm[1]+".html",location.href).href};}}
     section=crumbs.length?crumbs[0]:null;
   });
   /* Logo (links Home) in the phone / tablet top bar, and beside the name in the sidebar */
@@ -70,13 +76,13 @@ function run(){
     list.sort(function(a,b){return a.n-b.n;});
     var i=-1;list.forEach(function(x,k){if(x.n===cur)i=k;});
     if(i<0)return;
-    var name=slug.split("-").map(function(w,k){return (k>0&&/^(of|the|and)$/.test(w))?w:w.charAt(0).toUpperCase()+w.slice(1);}).join(" ");
+    var name=bookLabel(slug,slug.split("-").map(function(w,k){return (k>0&&/^(of|the|and)$/.test(w))?w:w.charAt(0).toUpperCase()+w.slice(1);}).join(" "));
     var bookUrl=new URL("../"+slug+".html",location.href).href;
     var prev=list[i-1],next=list[i+1];
-    var nav=d.createElement("nav");nav.className="chapter-pager";nav.setAttribute("aria-label","Chapters in "+name);
+    var nav=d.createElement("nav");nav.className="chapter-pager";nav.setAttribute("aria-label",fmt("Chapters in {0}",name));
     nav.innerHTML=
       (prev?'<a class="cp-prev" href="'+prev.href+'"><span class="cp-arrow">\u2039</span><span>'+esc(name+" "+prev.n)+'</span></a>'
-           :'<a class="cp-prev" href="'+bookUrl+'"><span class="cp-arrow">\u2039</span><span>All of '+esc(name)+'</span></a>')+
+           :'<a class="cp-prev" href="'+bookUrl+'"><span class="cp-arrow">\u2039</span><span>'+esc(fmt("All of {0}",name))+'</span></a>')+
       (next?'<a class="cp-next" href="'+next.href+'"><span>'+esc(name+" "+next.n)+'</span><span class="cp-arrow">\u203A</span></a>':'');
     main.appendChild(nav);
     d.documentElement.classList.add("chapter-page");
@@ -94,7 +100,7 @@ function run(){
     if(i<0)return;
     function t(a){return esc((a.textContent||"").replace(/\s+/g," ").trim());}
     var prev=links[i-1],next=links[i+1],sname=esc((head.textContent||"").replace(/\s+/g," ").trim());
-    var nav=d.createElement("nav");nav.className="chapter-pager";nav.setAttribute("aria-label","Articles in "+sname);
+    var nav=d.createElement("nav");nav.className="chapter-pager";nav.setAttribute("aria-label",fmt("Articles in {0}",sname));
     nav.innerHTML=
       '<a class="cp-prev" href="'+(prev?prev.href:head.href)+'"><span class="cp-arrow">\u2039</span><span>'+(prev?t(prev):sname)+'</span></a>'+
       (next?'<a class="cp-next" href="'+next.href+'"><span>'+t(next)+'</span><span class="cp-arrow">\u203A</span></a>':'');
@@ -175,7 +181,7 @@ function run(){
     var here=location.href.split(/[?#]/)[0];
     if(!main||here===root||here===homeUrl)return;
     var links=[];
-    if(book)links.push({t:"↑ Back to "+book.text,h:book.href});
+    if(book)links.push({t:fmt("↑ Back to {0}",book.text),h:book.href});
     if(section)links.push({t:section.text,h:section.href});
     links.push({t:"Home",h:homeUrl});
     var seen={};links=links.filter(function(l){if(!l.h||seen[l.h]||l.h===here)return false;seen[l.h]=1;return true;});
@@ -398,7 +404,7 @@ function run(){
     pop.innerHTML=
       '<p class="sp-title" hidden></p>'+
       '<div class="sp-colors" role="group" aria-label="Highlight color">'+
-        [1,2,3,4,5,6].map(function(c){return '<button type="button" class="sb-c u-c'+c+'" data-c="'+c+'" aria-label="'+COL[c]+' highlight">'+ICO.check+'</button>';}).join("")+'</div>'+
+        [1,2,3,4,5,6].map(function(c){return '<button type="button" class="sb-c u-c'+c+'" data-c="'+c+'" aria-label="'+fmt("{0} highlight",COL[c])+'">'+ICO.check+'</button>';}).join("")+'</div>'+
       '<div class="sp-notetxt" hidden><span class="sp-noteic">'+ICO.note+'</span><p class="sp-notebody"></p></div>'+
       '<div class="sb-edit" hidden><label class="sr-only" for="sb-text">Your note</label><textarea id="sb-text" rows="3" placeholder="Write your note here"></textarea></div>'+
       '<div class="sp-bmcolors" hidden></div>'+
@@ -603,14 +609,14 @@ function run(){
       if(!shared.bm||!pending||!pending.el)return;
       var C=shared.bm.colors;
       elBmc.innerHTML=C.map(function(c,i){var u=shared.bm.used(i);
-        return '<button type="button" class="bm-sw'+(u?" used":"")+'" data-c="'+i+'" aria-label="'+c[0]+(u?", in use. Move it here":"")+'">'+shared.bm.icon(c[1],!!u,28)+'</button>';}).join("");
+        return '<button type="button" class="bm-sw'+(u?" used":"")+'" data-c="'+i+'" aria-label="'+(u?fmt("{0}, in use. Move it here",c[0]):c[0])+'">'+shared.bm.icon(c[1],!!u,28)+'</button>';}).join("");
       elTitle.textContent="Choose a bookmark color";mode="bmpick";setVis("bmpick");position();
     });
     elBmc.addEventListener("click",function(e){
       var b=e.target.closest&&e.target.closest(".bm-sw");if(!b||!pending||!pending.el)return;
       var c=parseInt(b.getAttribute("data-c"),10),el=pending.el,res=shared.bm.addAt(c,el);
       var sel=window.getSelection();if(sel)sel.removeAllRanges();
-      if(res)toast(shared.bm.colors[c][0]+" bookmark "+(res.was?"moved here.":"placed here."));else hide();
+      if(res)toast(fmt(res.was?"{0} bookmark moved here.":"{0} bookmark placed here.",shared.bm.colors[c][0]));else hide();
     });
     bBack.addEventListener("click",function(){if(cur){mode="mark";show("mark",anchor);setPressed();}else{mode=null;check();}});
     bRm.addEventListener("click",function(){if(shared.bm&&curBm)shared.bm.remove(curBm);hide();});
@@ -797,7 +803,7 @@ function run(){
       db.items.filter(function(b){return b.page===page;}).forEach(function(b){
         var el=findEl(b);if(!el)return;
         var f=d.createElement("button");f.type="button";f.className="bm-flag";f.setAttribute("data-id",b.id);
-        f.setAttribute("aria-label",COLORS[b.color][0]+" bookmark. Open bookmarks");
+        f.setAttribute("aria-label",fmt("{0} bookmark. Open bookmarks",COLORS[b.color][0]));
         f.innerHTML=icon(COLORS[b.color][1],true,16);
         f.addEventListener("click",function(ev){if(shared.menuBookmark&&shared.menuBookmark(b.id,f)){ev.stopPropagation();}else openD();});
         el.insertBefore(f,el.firstChild);b.el=el;
@@ -824,7 +830,7 @@ function run(){
     function render(){
       pickEl.innerHTML=COLORS.map(function(c,i){
         var used=byColor(i);
-        return '<button type="button" class="bm-sw'+(used?" used":"")+'" data-c="'+i+'" aria-label="'+c[0]+(used?", in use. Move it here":". Place here")+'">'+icon(c[1],!!used,30)+'</button>';
+        return '<button type="button" class="bm-sw'+(used?" used":"")+'" data-c="'+i+'" aria-label="'+fmt(used?"{0}, in use. Move it here":"{0}. Place here",c[0])+'">'+icon(c[1],!!used,30)+'</button>';
       }).join("");
       var items=db.items.slice().sort(function(a,b){return a.color-b.color;});
       listEl.innerHTML=items.length?'<ul class="bm-items">'+items.map(function(b){
@@ -854,7 +860,7 @@ function run(){
     });
     picker.querySelector(".bm-top").addEventListener("click",function(){
       if(!picking)return;var at=here();if(!at){endPick();return;}
-      var was=place(pickColor,at);endPick(COLORS[pickColor][0]+" bookmark "+(was?"moved.":"placed."));
+      var was=place(pickColor,at);endPick(fmt(was?"{0} bookmark moved.":"{0} bookmark placed.",COLORS[pickColor][0]));
     });
     picker.querySelector(".bm-cancel").addEventListener("click",function(){endPick();});
     d.addEventListener("click",function(e){
@@ -863,7 +869,7 @@ function run(){
       if(!el||!main.contains(el))return;
       var i=blocks().indexOf(el);if(i<0)return;
       e.preventDefault();e.stopPropagation();
-      var was=place(pickColor,{idx:i,snip:snipOf(el)});endPick(COLORS[pickColor][0]+" bookmark "+(was?"moved.":"placed."));
+      var was=place(pickColor,{idx:i,snip:snipOf(el)});endPick(fmt(was?"{0} bookmark moved.":"{0} bookmark placed.",COLORS[pickColor][0]));
     },true);
     d.addEventListener("keydown",function(e){if(e.key==="Escape"&&picking)endPick();});
     shared.bm={colors:COLORS,icon:icon,used:function(c){return !!byColor(c);},find:function(id){for(var i=0;i<db.items.length;i++)if(db.items[i].id===id)return db.items[i];return null;},
