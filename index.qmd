@@ -8,7 +8,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## What's new
 
-[See all new and updated articles](whats-new.qmd){.epub-btn}
+[See New and Updated Articles](whats-new.qmd){.epub-btn}
 
 ## Browse by section
 
