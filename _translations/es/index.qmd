@@ -8,7 +8,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## Novedades
 
-[Ver todos los artículos nuevos y actualizados](whats-new.qmd){.epub-btn}
+[Ver artículos nuevos y actualizados](whats-new.qmd){.epub-btn}
 
 ## Explorar por sección
 
@@ -24,14 +24,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ::: {.content-visible when-format="html"}
 ## Cómo estudiar esta información
 
-Tómese su tiempo con cada capítulo. Lea primero la introducción y luego avance por los grupos de versículos uno por uno. Mientras lee, marque lo que le llame la atención y escriba sus propios pensamientos. Use el ícono de marcador que aparece en la parte superior de cualquier página para guardar el lugar donde va y volver a él más tarde. Sus marcadores, resaltados y notas permanecen privados en su dispositivo, de modo que puede estudiar a su propio ritmo y volver a ellos cuando quiera.
+Tómese su tiempo con cada capítulo. Lea primero la introducción y luego avance por los grupos de versículos de uno en uno. Mientras lee, marque lo que le llame la atención y escriba sus propias reflexiones. Use el icono de marcador que aparece en la parte superior de cualquier página para guardar el lugar donde va y volver a él más tarde. Sus marcadores, resaltados y notas son privados y permanecen en su dispositivo, de modo que puede estudiar a su propio ritmo y volver a ellos cuando quiera.
 
 ::: {.stamp .study-box}
-[Cómo agregar resaltados y notas]{.box-title}
+[Cómo añadir resaltados y notas]{.box-title}
 
 Marque las palabras que le llamen la atención y escriba sus propios comentarios. Se guardan de forma privada en su dispositivo.
 
-<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">Agregar resaltados</button> <button type="button" id="notes-open" class="translate-btn">Abrir mis notas</button></p>
+<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">Añadir resaltados</button> <button type="button" id="notes-open" class="translate-btn">Abrir mis notas</button></p>
 :::
 :::
 
@@ -50,7 +50,7 @@ Este archivo EPUB contiene toda la información de este sitio web.\
 ## Instalar como aplicación {.install-head}
 
 ::: {.stamp .install-box}
-Agregue este sitio web a su teléfono o tableta para que se abra como una aplicación, con su propio ícono. Una vez que se haya abierto, también se puede leer sin conexión a internet.
+Añada este sitio web a su teléfono o tableta para que se abra como una aplicación, con su propio icono. Una vez que se haya abierto, también se puede leer sin conexión a internet.
 
 <p class="install-actions"><button type="button" id="howto-btn" class="translate-btn">Instalar la aplicación</button></p>
 

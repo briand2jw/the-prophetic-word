@@ -1,5 +1,5 @@
 ---
-title: "मुखपृष्ठ"
+title: "मुख पृष्ठ"
 ---
 
 ## इस वेबसाइट का उद्देश्य
@@ -8,14 +8,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## नया क्या है
 
-[सभी नए और अद्यतन लेख देखें](whats-new.qmd){.epub-btn}
+[नए और अद्यतन किए गए लेख देखें](whats-new.qmd){.epub-btn}
 
 ## विभाग के अनुसार खोजें
 
 ::: section-list
 - [सत्य को जानें](know-the-truth.qmd)\
   इस विभाग का नमूना विवरण।
-- [भविष्यसूचक वचन](prophetic-word.qmd)\
+- [भविष्यवाणी का वचन](prophetic-word.qmd)\
   इस विभाग का नमूना विवरण।
 - [यहोवा को खोजें](seek-jehovah.qmd)\
   इस विभाग का नमूना विवरण।
@@ -24,14 +24,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ::: {.content-visible when-format="html"}
 ## इस जानकारी का अध्ययन कैसे करें
 
-हर अध्याय को आराम से पढ़ें। पहले सारांश पढ़ें, फिर एक-एक करके पदों के समूहों को देखें। पढ़ते समय जो बातें आपको महत्वपूर्ण लगें उन्हें चिह्नित करें और अपने विचार लिख लें। किसी भी पृष्ठ के ऊपर दिए गए बुकमार्क आइकन से अपना स्थान सहेजें और बाद में वहीं लौट आएँ। आपके बुकमार्क, हाइलाइट और नोट्स आपके उपकरण पर निजी रहते हैं, इसलिए आप अपनी गति से अध्ययन कर सकते हैं और जब चाहें उन पर लौट सकते हैं।
+हर अध्याय को धीरे-धीरे और ध्यान से पढ़ें। पहले अवलोकन पढ़ें, फिर एक-एक करके पदों के समूहों का अध्ययन करें। पढ़ते समय जो बातें आपको विशेष लगें उन पर निशान लगाएँ और अपने विचार लिख लें। किसी भी पृष्ठ के ऊपर दिए गए बुकमार्क चिह्न की सहायता से अपना स्थान सहेजें और बाद में वहीं लौट आएँ। आपके बुकमार्क, हाइलाइट और टिप्पणियाँ आपके डिवाइस पर निजी रहते हैं, इसलिए आप अपनी गति से अध्ययन कर सकते हैं और जब चाहें उन पर लौट सकते हैं।
 
 ::: {.stamp .study-box}
-[हाइलाइट और नोट्स जोड़ना]{.box-title}
+[हाइलाइट और टिप्पणियाँ जोड़ना]{.box-title}
 
-जो शब्द आपको महत्वपूर्ण लगें उन्हें चिह्नित करें और अपनी टिप्पणियाँ लिखें। वे आपके उपकरण पर निजी रूप से सहेजी जाती हैं।
+जो शब्द आपको विशेष लगें उन पर निशान लगाएँ और अपनी टिप्पणियाँ लिखें। वे आपके डिवाइस पर निजी रूप से सहेजी जाती हैं।
 
-<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">हाइलाइट जोड़ना</button> <button type="button" id="notes-open" class="translate-btn">मेरे नोट्स खोलें</button></p>
+<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">हाइलाइट जोड़ना</button> <button type="button" id="notes-open" class="translate-btn">मेरी टिप्पणियाँ खोलें</button></p>
 :::
 :::
 
@@ -54,10 +54,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 <p class="install-actions"><button type="button" id="howto-btn" class="translate-btn">ऐप इंस्टॉल करना</button></p>
 
-[अनुवाद तब सबसे अच्छा काम करता है जब आप वेबसाइट को इंस्टॉल किए गए ऐप के बजाय अपने ब्राउज़र में पढ़ते हैं।]{.epub-note}
+[अनुवाद की सुविधा तब सबसे अच्छी तरह काम करती है जब आप वेबसाइट को इंस्टॉल किए गए ऐप के बजाय अपने ब्राउज़र में पढ़ते हैं।]{.epub-note}
 :::
 :::
 
 ::: {.content-visible when-format="html"}
-<p class="install-actions"><button type="button" id="privacy-btn" class="epub-btn">गोपनीयता की जानकारी</button></p>
+<p class="install-actions"><button type="button" id="privacy-btn" class="epub-btn">गोपनीयता संबंधी जानकारी</button></p>
 :::
