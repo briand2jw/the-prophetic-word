@@ -4,14 +4,14 @@ site-section: know-the-truth
 summary: "Reading the Bible daily takes only a few minutes and changes how you see everything else."
 posted: 2026-10-25
 updated: 2026-10-25
-source: submissions/Why Study the Bible (example article).docx
+source: "submissions/Why Study the Bible (example article).docx"
 ---
 
 ::: dates
 Publicado el 25 de octubre de 2026
 :::
 
-Muchas personas piensan leer la Biblia y nunca comienzan. La buena noticia es que no necesitas una hora al día. Unos pocos minutos sin prisa, repetidos cada día, te llevarán más lejos de lo que imaginas.
+Muchas personas quieren leer la Biblia y nunca empiezan. La buena noticia es que no necesitas una hora al día. Unos pocos minutos sin prisa, repetidos cada día, te llevarán más lejos de lo que imaginas.
 
 ## Ofrece una guía confiable
 
@@ -19,7 +19,7 @@ Lee 2 Timoteo 3:16 en tu propia Biblia.
 
 Fíjate en la palabra **útil***. La Biblia está hecha para usarse, no solo para admirarla.*
 
-## Cómo comenzar
+## Cómo empezar
 
 Elige un libro y lee una sección corta cada día. Anota una cosa que te haya llamado la atención.
 

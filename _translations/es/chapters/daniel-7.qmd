@@ -4,7 +4,7 @@ book: Daniel
 chapter: 7
 posted: 2026-10-25
 updated: 2026-10-25
-source: submissions/Daniel 7 (example chapter).docx
+source: "submissions/Daniel 7 (example chapter).docx"
 ---
 
 ::: dates
@@ -12,14 +12,14 @@ Publicado el 25 de oct. de 2026
 :::
 
 ::: overview
-**Resumen.** Daniel ve cuatro bestias que suben del mar, y luego una escena en el cielo donde uno “como un hijo de hombre” recibe un reino que nunca será destruido.
+**Resumen.** Daniel ve cuatro bestias que suben del mar, y luego una escena en el cielo donde uno «como hijo de hombre» recibe un reino que nunca será destruido.
 :::
 
 ## La visión de las cuatro bestias {.main-sub}
 
 ### Versículos 1-8 {.vgroup}
 
-Daniel registra un sueño que tuvo en el primer año de Belsasar. Las bestias representan potencias que surgen y caen, y el capítulo pasa rápidamente del mar a la sala del trono.
+Daniel registra un sueño que tuvo en el primer año de Belsasar. Las bestias representan potencias que se levantan y caen, y el capítulo pasa rápidamente del mar a la sala del trono.
 
 ## El reino dado al Hijo del hombre {.main-sub}
 
@@ -30,5 +30,5 @@ Lee Daniel 7:14 en tu propia Biblia.
 El contraste es el punto central del capítulo. Los poderes terrenales son temporales, pero este reino es **dado por Dios** *y no pasa.*
 
 ::: cta
-Tómate un momento para leer Daniel 7:13-14 en voz alta antes de pasar al capítulo 8.
+Tómate un momento para leer Daniel 7:13-14 en voz alta antes de continuar con el capítulo 8.
 :::
