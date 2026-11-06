@@ -1,0 +1,19 @@
+/* Extra fonts and rules for translated pages (Hindi and Arabic). The browser only downloads a
+   font file when a page really contains letters from it. */
+@font-face{font-family:'Noto Sans';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/noto-sans-devanagari.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CFF,U+200C-200D,U+20B9,U+25CC,U+A830-A839}
+@font-face{font-family:'Noto Serif';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/noto-serif-devanagari.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CFF,U+200C-200D,U+20B9,U+25CC,U+A830-A839}
+@font-face{font-family:'Noto Sans';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/noto-sans-arabic.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF,U+200C-200F,U+060C,U+061B,U+061F}
+@font-face{font-family:'Noto Serif';font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/noto-naskh-arabic.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF,U+200C-200F,U+060C,U+061B,U+061F}
+
+/* These scripts have no italics, and spacing between letters breaks joined Arabic letters */
+html[lang="hi"] *,html[lang="ar"] *{letter-spacing:0 !important;text-transform:none !important}
+html[lang="hi"] *,html[lang="ar"] *{font-style:normal !important}
+html[lang="hi"] em,html[lang="hi"] i,html[lang="ar"] em,html[lang="ar"] i,
+html[lang="hi"] h1 em,html[lang="hi"] h2 em,html[lang="ar"] h1 em,html[lang="ar"] h2 em{font-style:normal}
+html[lang="hi"] body{line-height:1.9}
+html[lang="ar"] body{line-height:2;font-size:1.2rem}
+html[lang="hi"] h1,html[lang="hi"] h2,html[lang="hi"] h3,html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{line-height:1.5}
+html[lang="ar"] h1.title{font-size:2rem}
+
+/* Windows are still in English, so keep each paragraph reading left to right until they are translated too */
+html[dir="rtl"] dialog *{unicode-bidi:plaintext}

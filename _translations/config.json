@@ -1,0 +1,14 @@
+{
+  "model": "claude-sonnet-5-5",
+  "languages": {
+    "es": {"name": "Spanish", "native": "Español", "dir": "ltr", "bible": "",
+           "notice": "Esta página se tradujo con ayuda de inteligencia artificial y puede contener errores.",
+           "original": "Leer el original en inglés"},
+    "hi": {"name": "Hindi", "native": "हिन्दी", "dir": "ltr", "bible": "",
+           "notice": "यह पृष्ठ कृत्रिम बुद्धिमत्ता की सहायता से अनुवादित है और इसमें त्रुटियाँ हो सकती हैं।",
+           "original": "अंग्रेज़ी मूल पढ़ें"},
+    "ar": {"name": "Arabic", "native": "العربية", "dir": "rtl", "bible": "",
+           "notice": "تمت ترجمة هذه الصفحة بمساعدة الذكاء الاصطناعي وقد تحتوي على أخطاء.",
+           "original": "اقرأ النص الأصلي بالإنجليزية"}
+  }
+}

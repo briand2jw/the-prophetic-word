@@ -188,8 +188,41 @@ function run(){
   safe(function(){
     var globe='<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>';
     var dlg=d.createElement("dialog");dlg.id="translate-dialog";dlg.setAttribute("aria-labelledby","tr-title");
-    dlg.innerHTML='<div class="dlg"><h2 id="tr-title">Read this page in your language</h2><p>Your web browser can translate this page for you, usually with Google Translate. Choose the steps for your device. The exact wording can vary by browser version.</p><h3>Chrome on a computer</h3><p>Click the translate icon at the right end of the address bar, then choose your language. If you don\u2019t see it, right-click the page and choose \u201cTranslate to\u2026\u201d.</p><h3>Chrome on an iPhone, iPad or Android phone</h3><p>Open the browser menu and tap \u201cTranslate\u2026\u201d, then pick your language.</p><h3>Safari on an iPhone or iPad</h3><p>Tap the \u201caA\u201d button at the left of the address bar and choose \u201cTranslate to\u2026\u201d.</p><h3>Microsoft Edge</h3><p>Click the translate icon in the address bar and choose your language.</p><h3>Any other browser</h3><p>Go to translate.google.com, open the Websites tab, paste this page\u2019s address, and choose your language.</p><button type="button" class="dlg-close">Close</button></div>';
+    dlg.innerHTML='<div class="dlg"><h2 id="tr-title">Read this page in your language</h2><div class="lang-pick" hidden><h3>Choose a language</h3><div class="lang-list"></div></div><p>Other languages: your web browser can translate this page for you, usually with Google Translate. Choose the steps for your device. The exact wording can vary by browser version.</p><h3>Chrome on a computer</h3><p>Click the translate icon at the right end of the address bar, then choose your language. If you don\u2019t see it, right-click the page and choose \u201cTranslate to\u2026\u201d.</p><h3>Chrome on an iPhone, iPad or Android phone</h3><p>Open the browser menu and tap \u201cTranslate\u2026\u201d, then pick your language.</p><h3>Safari on an iPhone or iPad</h3><p>Tap the \u201caA\u201d button at the left of the address bar and choose \u201cTranslate to\u2026\u201d.</p><h3>Microsoft Edge</h3><p>Click the translate icon in the address bar and choose your language.</p><h3>Any other browser</h3><p>Go to translate.google.com, open the Websites tab, paste this page\u2019s address, and choose your language.</p><button type="button" class="dlg-close">Close</button></div>';
     d.body.appendChild(dlg);
+    /* Languages: pages written in other languages live in folders (/es/, /hi/, /ar/) beside the English site */
+    safe(function(){
+      var cur=(d.documentElement.getAttribute("lang")||"en").split("-")[0];
+      var base=root;if(cur!=="en"){base=base.replace(new RegExp("/"+cur+"/$"),"/");}
+      var path=location.href.split(/[?#]/)[0].slice(root.length)||"index.html";
+      if(/\/$/.test(path))path+="index.html";
+      fetch(base+"languages.json",{cache:"no-cache"}).then(function(r){return r.ok?r.json():null;}).then(function(list){
+        if(!list)return;
+        var codes=Object.keys(list);if(codes.length<2)return;
+        var box=dlg.querySelector(".lang-pick"),wrap=box.querySelector(".lang-list");
+        function target(c){return base+(c==="en"?"":c+"/")+path;}
+        codes.forEach(function(c){
+          var a=d.createElement("a");a.className="lang-row";a.lang=c;a.hreflang=c;a.dir=list[c].dir||"ltr";
+          a.textContent=list[c].native;a.href=target(c);
+          if(c===cur){a.setAttribute("aria-current","true");a.removeAttribute("href");}
+          else{fetch(a.href,{method:"HEAD"}).then(function(r){if(!r.ok)a.href=base+(c==="en"?"":c+"/")+"index.html";}).catch(function(){});}
+          wrap.appendChild(a);
+        });
+        box.hidden=false;
+        if(cur!=="en"&&list[cur]&&list[cur].notice){
+          var host=d.querySelector("main.content");var h1=host&&host.querySelector("h1.title");
+          if(host){
+            var n=d.createElement("p");n.className="mt-notice";
+            n.appendChild(d.createTextNode(list[cur].notice+" "));
+            var en=d.createElement("a");en.href=target("en");en.lang="en";en.dir="ltr";en.textContent=list[cur].original||"English";
+            fetch(en.href,{method:"HEAD"}).then(function(r){if(!r.ok)en.remove();}).catch(function(){});
+            n.appendChild(en);
+            var dts=host.querySelector(".dates"),hdr=h1&&h1.closest("header");
+            if(dts)dts.insertAdjacentElement("afterend",n);else if(hdr)hdr.insertAdjacentElement("afterend",n);else if(h1)h1.insertAdjacentElement("afterend",n);else host.insertBefore(n,host.firstChild);
+          }
+        }
+      }).catch(function(){});
+    });
     var open=function(){if(typeof dlg.showModal==="function")dlg.showModal();else dlg.setAttribute("open","");};
     var close=function(){if(typeof dlg.close==="function")dlg.close();else dlg.removeAttribute("open");};
     dlg.querySelector(".dlg-close").addEventListener("click",close);

@@ -750,3 +750,12 @@ main mark:not(.u-hl){background:#f2a08b;color:#1b1c18;border-radius:3px;padding:
   .find-hit,main mark:not(.u-hl){background:none !important;color:inherit !important}
   details{display:block}
 }
+
+/* ---- Languages ---- */
+.lang-pick h3{margin-top:.2rem}
+.lang-list{display:flex;flex-wrap:wrap;gap:.55rem;margin:.5rem 0 1.1rem}
+.lang-row{display:inline-flex;align-items:center;min-height:2.6rem;padding:.45rem 1.1rem;border:1px solid #4f5046;border-radius:1.5rem;background:#3a3b34;color:var(--accent) !important;font:600 .95rem 'Noto Sans',system-ui,sans-serif;text-decoration:none !important}
+a.lang-row:hover{background:#4a4b42}
+.lang-row[aria-current]{background:transparent;color:var(--text) !important;border-color:var(--accent)}
+.mt-notice{margin:0 0 1.2rem;padding:.7rem 1rem;border:1px solid var(--rule);border-radius:1rem;background:var(--surface);color:var(--meta);font:.85rem/1.6 'Noto Sans',system-ui,sans-serif}
+.mt-notice a{color:var(--link);font-weight:600}

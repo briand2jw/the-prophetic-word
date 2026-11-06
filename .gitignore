@@ -7,3 +7,6 @@ build-problems.txt
 redirect-site/
 
 /.quarto/
+_build-lang/
+_translations_mock/
+translation-problems.txt
