@@ -1,0 +1,29 @@
+---
+title: "دانيال 8"
+book: Daniel
+chapter: 8
+posted: 2026-10-01
+updated: 2026-10-10
+---
+
+::: dates
+آخر تحديث ١٠ أكتوبر ٢٠٢٦ · تاريخ النشر ١ أكتوبر ٢٠٢٦
+:::
+
+::: overview
+**نظرة عامة.** Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+:::
+
+## العنوان الفرعي الرئيسي {.main-sub}
+
+### الآيات 1-4 {.vgroup}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.
+
+### الآيات 5-9 {.vgroup}
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+::: cta
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+:::

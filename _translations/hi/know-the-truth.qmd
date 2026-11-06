@@ -1,0 +1,18 @@
+---
+title: "सत्य को जानो"
+---
+
+लेख तारीख़ के अनुसार सूचीबद्ध हैं, सबसे नया लेख सबसे ऊपर है।
+
+::: article-list
+[auto-list-start]: #
+
+- [बाइबल का अध्ययन क्यों करें?](articles/kt-why-study-the-bible.qmd)\
+  [प्रकाशित 25 अक्टूबर 2026]{.meta}\
+  प्रतिदिन बाइबल पढ़ने में केवल कुछ ही मिनट लगते हैं, और यह बदल देती है कि आप बाकी सब कुछ को कैसे देखते हैं।
+- [Sample Article Title](articles/kt-sample-article-title.qmd)\
+  [अद्यतन 10 अक्टूबर 2026 · प्रकाशित 1 अक्टूबर 2026]{.meta}\
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+[auto-list-end]: #
+:::

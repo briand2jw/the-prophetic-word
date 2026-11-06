@@ -1,0 +1,27 @@
+---
+title: "नया क्या है"
+---
+
+पिछले तीन महीनों में जो कुछ जोड़ा या अद्यतन किया गया है, सबसे नया पहले।
+
+::: whatsnew
+[auto-all-start]: #
+
+
+## अक्तूबर 2026
+
+- [25 अक्तू॰]{.wn-date} [नया]{.wn-tag .is-new} [[दानिय्येल 7](chapters/daniel-7.qmd)]{.wn-what}
+- [25 अक्तू॰]{.wn-date} [नया]{.wn-tag .is-new} [[बाइबल का अध्ययन क्यों करें?](articles/kt-why-study-the-bible.qmd)]{.wn-what}
+- [10 अक्तू॰]{.wn-date} [अद्यतन]{.wn-tag .is-upd} [[दानिय्येल 2](chapters/daniel-2.qmd), [4](chapters/daniel-4.qmd), [8](chapters/daniel-8.qmd), [11](chapters/daniel-11.qmd) और [12](chapters/daniel-12.qmd)]{.wn-what}
+- [10 अक्तू॰]{.wn-date} [अद्यतन]{.wn-tag .is-upd} [[मत्ती 24](chapters/matthew-24.qmd) और [25](chapters/matthew-25.qmd)]{.wn-what}
+- [10 अक्तू॰]{.wn-date} [अद्यतन]{.wn-tag .is-upd} [[नमूना लेख शीर्षक](articles/kt-sample-article-title.qmd)]{.wn-what}
+- [1 अक्तू॰]{.wn-date} [नया]{.wn-tag .is-new} [[दानिय्येल 2](chapters/daniel-2.qmd), [4](chapters/daniel-4.qmd), [8](chapters/daniel-8.qmd), [11](chapters/daniel-11.qmd) और [12](chapters/daniel-12.qmd)]{.wn-what}
+- [1 अक्तू॰]{.wn-date} [नया]{.wn-tag .is-new} [[मत्ती 24](chapters/matthew-24.qmd) और [25](chapters/matthew-25.qmd)]{.wn-what}
+- [1 अक्तू॰]{.wn-date} [नया]{.wn-tag .is-new} [[नमूना लेख शीर्षक](articles/kt-sample-article-title.qmd)]{.wn-what}
+
+## अगस्त 2026
+
+- [12 अग॰]{.wn-date} [नया]{.wn-tag .is-new} [[धार्मिकता की खोज करें—अभी यह क्यों ज़रूरी है?](articles/sj-seek-righteousness-why-important-now.qmd)]{.wn-what}
+
+[auto-all-end]: #
+:::

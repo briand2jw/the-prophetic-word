@@ -1,0 +1,15 @@
+---
+title: "اطلبوا يهوه"
+---
+
+المقالات مرتبة حسب التاريخ، من الأحدث إلى الأقدم.
+
+::: article-list
+[auto-list-start]: #
+
+- [اطلبوا البر—لماذا هو مهم الآن؟](articles/sj-seek-righteousness-why-important-now.qmd)\
+  [نُشر في 12 أغسطس 2026]{.meta}\
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+[auto-list-end]: #
+:::

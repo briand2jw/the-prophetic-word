@@ -1,0 +1,10 @@
+---
+title: "إنجيل متى"
+---
+
+تتوفر معلومات عن الأصحاحات المدرجة أدناه.
+
+::: chapter-grid
+- [24](chapters/matthew-24.qmd)
+- [25](chapters/matthew-25.qmd)
+:::

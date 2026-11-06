@@ -1,0 +1,27 @@
+---
+title: "Novedades"
+---
+
+Todo lo que se ha añadido o actualizado en los últimos tres meses, lo más reciente primero.
+
+::: whatsnew
+[auto-all-start]: #
+
+
+## Octubre de 2026
+
+- [25 oct]{.wn-date} [Nuevo]{.wn-tag .is-new} [[Daniel 7](chapters/daniel-7.qmd)]{.wn-what}
+- [25 oct]{.wn-date} [Nuevo]{.wn-tag .is-new} [[¿Por qué estudiar la Biblia?](articles/kt-why-study-the-bible.qmd)]{.wn-what}
+- [10 oct]{.wn-date} [Actualizado]{.wn-tag .is-upd} [[Daniel 2](chapters/daniel-2.qmd), [4](chapters/daniel-4.qmd), [8](chapters/daniel-8.qmd), [11](chapters/daniel-11.qmd) y [12](chapters/daniel-12.qmd)]{.wn-what}
+- [10 oct]{.wn-date} [Actualizado]{.wn-tag .is-upd} [[Mateo 24](chapters/matthew-24.qmd) y [25](chapters/matthew-25.qmd)]{.wn-what}
+- [10 oct]{.wn-date} [Actualizado]{.wn-tag .is-upd} [[Título de artículo de ejemplo](articles/kt-sample-article-title.qmd)]{.wn-what}
+- [1 oct]{.wn-date} [Nuevo]{.wn-tag .is-new} [[Daniel 2](chapters/daniel-2.qmd), [4](chapters/daniel-4.qmd), [8](chapters/daniel-8.qmd), [11](chapters/daniel-11.qmd) y [12](chapters/daniel-12.qmd)]{.wn-what}
+- [1 oct]{.wn-date} [Nuevo]{.wn-tag .is-new} [[Mateo 24](chapters/matthew-24.qmd) y [25](chapters/matthew-25.qmd)]{.wn-what}
+- [1 oct]{.wn-date} [Nuevo]{.wn-tag .is-new} [[Título de artículo de ejemplo](articles/kt-sample-article-title.qmd)]{.wn-what}
+
+## Agosto de 2026
+
+- [12 ago]{.wn-date} [Nuevo]{.wn-tag .is-new} [[Busquen la justicia: ¿por qué es importante ahora?](articles/sj-seek-righteousness-why-important-now.qmd)]{.wn-what}
+
+[auto-all-end]: #
+:::

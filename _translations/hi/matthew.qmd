@@ -1,0 +1,10 @@
+---
+title: "मत्ती"
+---
+
+नीचे दिए गए अध्यायों के बारे में जानकारी उपलब्ध है।
+
+::: chapter-grid
+- [24](chapters/matthew-24.qmd)
+- [25](chapters/matthew-25.qmd)
+:::

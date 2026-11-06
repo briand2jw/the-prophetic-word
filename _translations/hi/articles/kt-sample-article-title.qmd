@@ -1,0 +1,21 @@
+---
+title: "नमूना लेख का शीर्षक"
+site-section: know-the-truth
+summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+posted: 2026-10-01
+updated: 2026-10-10
+---
+
+::: dates
+अद्यतन 10 अक्टूबर 2026 · प्रकाशित 1 अक्टूबर 2026
+:::
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+## नमूना उपशीर्षक
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+::: cta
+Lorem ipsum dolor sit amet: consectetur adipiscing elit.
+:::

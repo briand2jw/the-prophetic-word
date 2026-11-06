@@ -1,0 +1,21 @@
+---
+title: "Título de artículo de muestra"
+site-section: know-the-truth
+summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+posted: 2026-10-01
+updated: 2026-10-10
+---
+
+::: dates
+Actualizado el 10 de oct de 2026 · Publicado el 1 de oct de 2026
+:::
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+## Subtítulo de muestra
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+::: cta
+Lorem ipsum dolor sit amet: consectetur adipiscing elit.
+:::

@@ -1,0 +1,27 @@
+---
+title: "الجديد"
+---
+
+كل ما أُضيف أو حُدِّث خلال الأشهر الثلاثة الأخيرة، مرتبًا من الأحدث إلى الأقدم.
+
+::: whatsnew
+[auto-all-start]: #
+
+
+## أكتوبر 2026
+
+- [25 أكتوبر]{.wn-date} [جديد]{.wn-tag .is-new} [[دانيال 7](chapters/daniel-7.qmd)]{.wn-what}
+- [25 أكتوبر]{.wn-date} [جديد]{.wn-tag .is-new} [[لماذا ندرس الكتاب المقدس؟](articles/kt-why-study-the-bible.qmd)]{.wn-what}
+- [10 أكتوبر]{.wn-date} [محدَّث]{.wn-tag .is-upd} [[دانيال 2](chapters/daniel-2.qmd) و[4](chapters/daniel-4.qmd) و[8](chapters/daniel-8.qmd) و[11](chapters/daniel-11.qmd) و[12](chapters/daniel-12.qmd)]{.wn-what}
+- [10 أكتوبر]{.wn-date} [محدَّث]{.wn-tag .is-upd} [[متى 24](chapters/matthew-24.qmd) و[25](chapters/matthew-25.qmd)]{.wn-what}
+- [10 أكتوبر]{.wn-date} [محدَّث]{.wn-tag .is-upd} [[عنوان مقالة نموذجية](articles/kt-sample-article-title.qmd)]{.wn-what}
+- [1 أكتوبر]{.wn-date} [جديد]{.wn-tag .is-new} [[دانيال 2](chapters/daniel-2.qmd) و[4](chapters/daniel-4.qmd) و[8](chapters/daniel-8.qmd) و[11](chapters/daniel-11.qmd) و[12](chapters/daniel-12.qmd)]{.wn-what}
+- [1 أكتوبر]{.wn-date} [جديد]{.wn-tag .is-new} [[متى 24](chapters/matthew-24.qmd) و[25](chapters/matthew-25.qmd)]{.wn-what}
+- [1 أكتوبر]{.wn-date} [جديد]{.wn-tag .is-new} [[عنوان مقالة نموذجية](articles/kt-sample-article-title.qmd)]{.wn-what}
+
+## أغسطس 2026
+
+- [12 أغسطس]{.wn-date} [جديد]{.wn-tag .is-new} [[اطلبوا البر—لماذا هو مهم الآن؟](articles/sj-seek-righteousness-why-important-now.qmd)]{.wn-what}
+
+[auto-all-end]: #
+:::

@@ -1,0 +1,15 @@
+---
+title: "Buscad a Jehová"
+---
+
+Los artículos están ordenados por fecha, con los más recientes primero.
+
+::: article-list
+[auto-list-start]: #
+
+- [Buscad la justicia: ¿por qué es importante ahora?](articles/sj-seek-righteousness-why-important-now.qmd)\
+  [Publicado el 12 de agosto de 2026]{.meta}\
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+[auto-list-end]: #
+:::

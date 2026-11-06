@@ -1,0 +1,78 @@
+{
+ "_language.yml": {
+  "out": "71473ecda4039e20",
+  "src": "1c8ac4f58fab05cb"
+ },
+ "articles/kt-sample-article-title.qmd": {
+  "out": "64659eacdb8670cf",
+  "src": "532ee4cab6481fe2"
+ },
+ "articles/kt-why-study-the-bible.qmd": {
+  "out": "a8b1b2ce669e7464",
+  "src": "0993ae794a516e9a"
+ },
+ "articles/sj-seek-righteousness-why-important-now.qmd": {
+  "out": "baf452ee0ae61466",
+  "src": "1255e29789a35cda"
+ },
+ "chapters/daniel-11.qmd": {
+  "out": "b301314f63bb71f6",
+  "src": "cab6dfee50c949e2"
+ },
+ "chapters/daniel-12.qmd": {
+  "out": "a968c683f1604fd4",
+  "src": "03fbdc9798c57b2a"
+ },
+ "chapters/daniel-2.qmd": {
+  "out": "6a01669bfef90f21",
+  "src": "1a358f3e5323ebaa"
+ },
+ "chapters/daniel-4.qmd": {
+  "out": "d8f7fc33e9dbee7b",
+  "src": "5d5b66d241a3c0bb"
+ },
+ "chapters/daniel-7.qmd": {
+  "out": "244257fe47a5964e",
+  "src": "f2bb4e85aeee20b7"
+ },
+ "chapters/daniel-8.qmd": {
+  "out": "c30eee67cbd69e7a",
+  "src": "debf4ffaa2e4f6b0"
+ },
+ "chapters/matthew-24.qmd": {
+  "out": "9e350282513930e4",
+  "src": "35e2f2eff9a31caf"
+ },
+ "chapters/matthew-25.qmd": {
+  "out": "e90f268b3af21dc6",
+  "src": "f8a722a0edc004a9"
+ },
+ "daniel.qmd": {
+  "out": "379c5afb2d33d095",
+  "src": "ce122fc733578025"
+ },
+ "index.qmd": {
+  "out": "67b62d99a1087645",
+  "src": "56f24f88ad854dde"
+ },
+ "know-the-truth.qmd": {
+  "out": "7108d76d8511b696",
+  "src": "a902e3b6a73871c6"
+ },
+ "matthew.qmd": {
+  "out": "24857ad9030343c2",
+  "src": "0d03174b19b64dfa"
+ },
+ "prophetic-word.qmd": {
+  "out": "6fbbc289a662c12b",
+  "src": "4c54c613469eae0f"
+ },
+ "seek-jehovah.qmd": {
+  "out": "fb00041480981012",
+  "src": "98cad0f114dc2ad4"
+ },
+ "whats-new.qmd": {
+  "out": "41620f70f6200faf",
+  "src": "37edfb29bb1d8889"
+ }
+}

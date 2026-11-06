@@ -1,0 +1,10 @@
+---
+title: "Mateo"
+---
+
+Hay información disponible sobre los capítulos que se enumeran a continuación.
+
+::: chapter-grid
+- [24](chapters/matthew-24.qmd)
+- [25](chapters/matthew-25.qmd)
+:::

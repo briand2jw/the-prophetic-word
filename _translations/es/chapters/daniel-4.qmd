@@ -1,0 +1,29 @@
+---
+title: "Daniel 4"
+book: Daniel
+chapter: 4
+posted: 2026-10-01
+updated: 2026-10-10
+---
+
+::: dates
+Actualizado el 10 de oct. de 2026 · Publicado el 1 de oct. de 2026
+:::
+
+::: overview
+**Resumen.** Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+:::
+
+## Subtítulo principal {.main-sub}
+
+### Versículos 1-4 {.vgroup}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.
+
+### Versículos 5-9 {.vgroup}
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+::: cta
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+:::

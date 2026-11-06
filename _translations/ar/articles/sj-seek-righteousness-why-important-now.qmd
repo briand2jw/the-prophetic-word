@@ -1,0 +1,21 @@
+---
+title: "اطلبوا البرّ—لماذا هو مهم الآن؟"
+site-section: seek-jehovah
+summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+posted: 2026-08-12
+updated: 2026-08-12
+---
+
+::: dates
+نُشر في 12 أغسطس 2026
+:::
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+## عنوان فرعي تجريبي
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+::: cta
+Lorem ipsum dolor sit amet: consectetur adipiscing elit.
+:::

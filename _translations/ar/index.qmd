@@ -1,0 +1,63 @@
+---
+title: "الرئيسية"
+---
+
+## الغرض من هذا الموقع
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+## الجديد
+
+[عرض جميع المقالات الجديدة والمحدَّثة](whats-new.qmd){.epub-btn}
+
+## تصفح حسب القسم
+
+::: section-list
+- [اعرف الحق](know-the-truth.qmd)\
+  وصف تجريبي لهذا القسم.
+- [الكلمة النبوية](prophetic-word.qmd)\
+  وصف تجريبي لهذا القسم.
+- [اطلب يهوه](seek-jehovah.qmd)\
+  وصف تجريبي لهذا القسم.
+:::
+
+::: {.content-visible when-format="html"}
+## كيف تدرس هذه المعلومات
+
+خذ وقتك مع كل فصل. اقرأ النظرة العامة أولًا، ثم اعمل على مجموعات الآيات واحدة تلو الأخرى. وأثناء القراءة، ضع علامة على ما يلفت انتباهك، واكتب أفكارك الخاصة. استخدم أيقونة العلامة المرجعية في أعلى أي صفحة لحفظ موضعك والعودة إليه لاحقًا. تبقى علاماتك المرجعية وتمييزاتك وملاحظاتك خاصة على جهازك، فيمكنك أن تدرس بالسرعة التي تناسبك وأن ترجع إليها متى شئت.
+
+::: {.stamp .study-box}
+[إضافة التمييزات والملاحظات]{.box-title}
+
+ضع علامة على الكلمات التي تلفت انتباهك واكتب تعليقاتك الخاصة. تُحفظ بشكل خاص على جهازك.
+
+<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">إضافة التمييزات</button> <button type="button" id="notes-open" class="translate-btn">فتح ملاحظاتي</button></p>
+:::
+:::
+
+## تحميل ملف EPUB
+
+::: stamp
+يحتوي ملف EPUB هذا على جميع المعلومات الموجودة في هذا الموقع.\
+آخر تحديث: {{< meta date >}}
+
+[تحميل ملف EPUB](the-pure-language.epub){.epub-btn}
+
+[ملف EPUB باللغة الإنجليزية. استخدم ميزة الترجمة في تطبيق القراءة لديك لقراءته بلغة أخرى.]{.epub-note}
+:::
+
+::: {.content-visible when-format="html"}
+## التثبيت كتطبيق {.install-head}
+
+::: {.stamp .install-box}
+أضف هذا الموقع إلى هاتفك أو جهازك اللوحي ليفتح مثل التطبيق، مع أيقونة خاصة به. وبعد فتحه مرة واحدة، يمكن قراءته أيضًا بدون اتصال بالإنترنت.
+
+<p class="install-actions"><button type="button" id="howto-btn" class="translate-btn">تثبيت التطبيق</button></p>
+
+[تعمل الترجمة بشكل أفضل عندما تقرأ الموقع في المتصفح بدلًا من التطبيق المثبَّت.]{.epub-note}
+:::
+:::
+
+::: {.content-visible when-format="html"}
+<p class="install-actions"><button type="button" id="privacy-btn" class="epub-btn">معلومات الخصوصية</button></p>
+:::

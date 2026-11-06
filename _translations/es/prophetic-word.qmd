@@ -1,0 +1,44 @@
+---
+title: "La Palabra Profética"
+---
+
+Seleccione un libro de la Biblia. Los libros atenuados aún no se han escrito.
+
+## Escrituras Hebreo-Arameas
+
+::: book-grid
+[auto-hebrew-start]: #
+
+- [Salmos]{.off}
+- [Isaías]{.off}
+- [Jeremías]{.off}
+- [Ezequiel]{.off}
+- [Daniel](daniel.qmd)
+- [Joel]{.off}
+- [Amós]{.off}
+- [Miqueas]{.off}
+- [Nahúm]{.off}
+- [Habacuc]{.off}
+- [Sofonías]{.off}
+- [Hageo]{.off}
+- [Zacarías]{.off}
+- [Malaquías]{.off}
+
+[auto-hebrew-end]: #
+:::
+
+## Escrituras Griegas Cristianas
+
+::: book-grid
+[auto-greek-start]: #
+
+- [Mateo](matthew.qmd)
+- [Marcos]{.off}
+- [Lucas]{.off}
+- [Juan]{.off}
+- [2 Timoteo]{.off}
+- [2 Pedro]{.off}
+- [Apocalipsis]{.off}
+
+[auto-greek-end]: #
+:::

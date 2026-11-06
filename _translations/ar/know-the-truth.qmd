@@ -1,0 +1,18 @@
+---
+title: "اعرف الحق"
+---
+
+المقالات مرتبة حسب التاريخ، والأحدث أولاً.
+
+::: article-list
+[auto-list-start]: #
+
+- [لماذا ندرس الكتاب المقدس؟](articles/kt-why-study-the-bible.qmd)\
+  [نُشر في 25 أكتوبر 2026]{.meta}\
+  قراءة الكتاب المقدس يومياً لا تستغرق سوى بضع دقائق، لكنها تغيّر نظرتك إلى كل شيء آخر.
+- [عنوان مقال تجريبي](articles/kt-sample-article-title.qmd)\
+  [حُدّث في 10 أكتوبر 2026 · نُشر في 1 أكتوبر 2026]{.meta}\
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+[auto-list-end]: #
+:::

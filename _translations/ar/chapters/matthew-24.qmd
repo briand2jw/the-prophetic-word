@@ -1,0 +1,29 @@
+---
+title: "متى 24"
+book: Matthew
+chapter: 24
+posted: 2026-10-01
+updated: 2026-10-10
+---
+
+::: dates
+آخر تحديث 10 أكتوبر 2026 · تاريخ النشر 1 أكتوبر 2026
+:::
+
+::: overview
+**نظرة عامة.** Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+:::
+
+## العنوان الفرعي الرئيسي {.main-sub}
+
+### الآيات 1-4 {.vgroup}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.
+
+### الآيات 5-9 {.vgroup}
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+::: cta
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+:::

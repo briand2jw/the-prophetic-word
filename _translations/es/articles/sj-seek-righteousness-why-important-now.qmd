@@ -1,0 +1,21 @@
+---
+title: "Buscar la justicia—¿por qué es importante ahora?"
+site-section: seek-jehovah
+summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+posted: 2026-08-12
+updated: 2026-08-12
+---
+
+::: dates
+Publicado el 12 de agosto de 2026
+:::
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+## Subtítulo de ejemplo
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+::: cta
+Lorem ipsum dolor sit amet: consectetur adipiscing elit.
+:::

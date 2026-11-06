@@ -1,0 +1,18 @@
+---
+title: "Conoce la verdad"
+---
+
+Los artículos están ordenados por fecha, con los más recientes primero.
+
+::: article-list
+[auto-list-start]: #
+
+- [¿Por qué estudiar la Biblia?](articles/kt-why-study-the-bible.qmd)\
+  [Publicado el 25 de octubre de 2026]{.meta}\
+  Leer la Biblia a diario toma solo unos minutos y cambia la manera en que ves todo lo demás.
+- [Título de artículo de ejemplo](articles/kt-sample-article-title.qmd)\
+  [Actualizado el 10 de octubre de 2026 · Publicado el 1 de octubre de 2026]{.meta}\
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+[auto-list-end]: #
+:::

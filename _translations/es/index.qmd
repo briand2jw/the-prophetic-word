@@ -1,0 +1,63 @@
+---
+title: "Inicio"
+---
+
+## Propósito de este sitio web
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+## Novedades
+
+[Ver todos los artículos nuevos y actualizados](whats-new.qmd){.epub-btn}
+
+## Explorar por sección
+
+::: section-list
+- [Conocer la verdad](know-the-truth.qmd)\
+  Descripción de ejemplo de esta sección.
+- [La palabra profética](prophetic-word.qmd)\
+  Descripción de ejemplo de esta sección.
+- [Buscar a Jehová](seek-jehovah.qmd)\
+  Descripción de ejemplo de esta sección.
+:::
+
+::: {.content-visible when-format="html"}
+## Cómo estudiar esta información
+
+Tómese su tiempo con cada capítulo. Lea primero la introducción y luego avance por los grupos de versículos uno por uno. Mientras lee, marque lo que le llame la atención y escriba sus propios pensamientos. Use el ícono de marcador que aparece en la parte superior de cualquier página para guardar el lugar donde va y volver a él más tarde. Sus marcadores, resaltados y notas permanecen privados en su dispositivo, de modo que puede estudiar a su propio ritmo y volver a ellos cuando quiera.
+
+::: {.stamp .study-box}
+[Cómo agregar resaltados y notas]{.box-title}
+
+Marque las palabras que le llamen la atención y escriba sus propios comentarios. Se guardan de forma privada en su dispositivo.
+
+<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">Agregar resaltados</button> <button type="button" id="notes-open" class="translate-btn">Abrir mis notas</button></p>
+:::
+:::
+
+## Descargar el EPUB
+
+::: stamp
+Este archivo EPUB contiene toda la información de este sitio web.\
+Última actualización: {{< meta date >}}
+
+[Descargar el EPUB](the-pure-language.epub){.epub-btn}
+
+[El EPUB está en inglés. Use la función de traducción de su aplicación de lectura para leerlo en otro idioma.]{.epub-note}
+:::
+
+::: {.content-visible when-format="html"}
+## Instalar como aplicación {.install-head}
+
+::: {.stamp .install-box}
+Agregue este sitio web a su teléfono o tableta para que se abra como una aplicación, con su propio ícono. Una vez que se haya abierto, también se puede leer sin conexión a internet.
+
+<p class="install-actions"><button type="button" id="howto-btn" class="translate-btn">Instalar la aplicación</button></p>
+
+[La traducción funciona mejor cuando lee el sitio web en su navegador y no en la aplicación instalada.]{.epub-note}
+:::
+:::
+
+::: {.content-visible when-format="html"}
+<p class="install-actions"><button type="button" id="privacy-btn" class="epub-btn">Información de privacidad</button></p>
+:::
