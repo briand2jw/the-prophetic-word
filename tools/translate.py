@@ -205,6 +205,10 @@ Rules for every string
 def ui_check(src, out):
     if not isinstance(out, str) or not out.strip():
         return ["empty"]
+    if "<" not in src and ("<" in out or ">" in out):
+        return ["a plain message gained tags"]
+    if re.search(r"(?i)<\s*/?\s*(script|style|iframe|object|embed|link|meta|base)\b|javascript:|\bon\w+\s*=", out):
+        return ["unsafe markup"]
     return [] if ui_strings.skeleton(src) == ui_strings.skeleton(out) else ["tags or placeholders changed"]
 
 

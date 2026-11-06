@@ -4,7 +4,7 @@ book: Daniel
 chapter: 7
 posted: 2026-10-25
 updated: 2026-10-25
-source: submissions/Daniel 7 (example chapter).docx
+source: "submissions/Daniel 7 (example chapter).docx"
 ---
 
 ::: dates

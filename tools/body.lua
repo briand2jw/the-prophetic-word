@@ -18,7 +18,26 @@ local function plain_blocks(b)
   return { b }
 end
 
+-- A writer's plain text must never be able to act as page-layout code. Text that would start a
+-- fenced box (":::") or an attribute block ("{...}") gets an invisible zero-width space in front.
+local function neutralize(s)
+  local t = s.text
+  if t:find("^:::") or t:find("[{}]") then
+    t = t:gsub("^:::", "\u{200B}:::"):gsub("([{}])", "\u{200B}%1")
+    return pandoc.Str(t)
+  end
+  return nil
+end
+
 function Pandoc(doc)
+  doc = doc:walk({
+    Str = neutralize,
+    -- inline code that starts with "{" would be a code cell in Quarto, so it gets the same treatment
+    Code = function(c)
+      if c.text:find("^%s*{") then c.text = "\u{200B}" .. c.text; return c end
+      return nil
+    end,
+  })
   if doc.meta.kind then kind = pandoc.utils.stringify(doc.meta.kind) end
   local out, scripture = {}, nil
   local seen_table = false

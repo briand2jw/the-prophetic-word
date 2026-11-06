@@ -3,7 +3,7 @@
 function safe(fn){try{fn();}catch(e){if(window.console)console.warn("nav helper failed",e);}}
 var shared={};
 function run(){
-  var d=document, esc=function(t){var e=d.createElement("div");e.textContent=t;return e.innerHTML;};
+  var d=document, esc=function(t){var e=d.createElement("div");e.textContent=t;return e.innerHTML.replace(/"/g,"&quot;").replace(/'/g,"&#39;");};
   var root=location.href.split(/[?#]/)[0].replace(/[^\/]*$/,"");
   safe(function(){
     var s=d.querySelector('script[src*="site_libs/"],link[href*="site_libs/"]');
@@ -14,6 +14,24 @@ function run(){
   /* Fill {0} in a sentence template. Whole sentences are kept together so they can be translated properly. */
   function fmt(t){var a=arguments;return t.replace(/\{(\d)\}/g,function(m,i){return a[+i+1];});}
   /* A book's name as shown in the menu (so translated pages use the translated name) */
+  /* Saved notes and bookmarks are checked every time they are loaded or restored from a backup, so a damaged or
+     hand-made file can never put code into the page. Only plain, expected values are kept. */
+  var ID_OK=/^[A-Za-z0-9_-]{1,40}$/, PAGE_OK=/^[A-Za-z0-9_\-\/]{1,200}\.html$/;
+  function str(v,max){return typeof v==="string"?v.slice(0,max):"";}
+  function num(v,lo,hi){v=+v;return (v>=lo&&v<=hi&&v%1===0)?v:null;}
+  function cleanNote(it){
+    if(!it||typeof it!=="object"||!ID_OK.test(it.id)||!PAGE_OK.test(it.page))return null;
+    var c=num(it.color,1,6),text=str(it.text,20000);if(c===null||!text)return null;
+    return {id:it.id,page:it.page,title:str(it.title,300),color:c,text:text,prefix:str(it.prefix,100),suffix:str(it.suffix,100),
+      s:num(it.s,0,1e7)||0,note:str(it.note,5000),t:+it.t>0?Math.floor(+it.t):0};
+  }
+  function cleanBm(b){
+    if(!b||typeof b!=="object"||!ID_OK.test(b.id)||!PAGE_OK.test(b.page))return null;
+    var c=num(b.color,0,14);if(c===null||typeof b.snip!=="string")return null;
+    return {id:b.id,color:c,page:b.page,title:str(b.title,300)||b.page,idx:num(b.idx,0,1e6)||0,snip:str(b.snip,200),t:+b.t>0?Math.floor(+b.t):Date.now()};
+  }
+  /* each language keeps its own notes and bookmarks, because the pages are different */
+  var LANG=((d.documentElement.getAttribute("lang")||"en").split("-")[0]),KSUF=(LANG==="en"||!/^[a-z]{2,3}$/.test(LANG))?"":"-"+LANG;
   function bookLabel(slug,fallback){
     var a=d.querySelector('#quarto-sidebar a.sidebar-link[href$="/'+slug+'.html"],#quarto-sidebar a.sidebar-link[href="'+slug+'.html"]');
     var t=a&&(a.textContent||"").replace(/\s+/g," ").trim();return t||fallback;}
@@ -314,11 +332,11 @@ function run(){
   /* Personal study: highlights and notes, kept on this device only */
   safe(function(){
     var main=d.querySelector("main.content");if(!main||!d.createTreeWalker)return;
-    var KEY="studyNotes-v1",mem=null,COL={1:"Gold",2:"Green",3:"Blue",4:"Purple",5:"Orange",6:"Red"};
+    var KEY="studyNotes-v1"+KSUF,mem=null,COL={1:"Gold",2:"Green",3:"Blue",4:"Purple",5:"Orange",6:"Red"};
     var page=(location.href.split(/[?#]/)[0].slice(root.length))||"index.html";
     var titleEl=main.querySelector("h1.title");
     var title=((titleEl&&titleEl.textContent)||d.title||page).replace(/\s+/g," ").trim();
-    function load(){try{var v=JSON.parse(localStorage.getItem(KEY)||"null");if(v&&v.items)return v;}catch(e){}return mem||{v:1,items:[]};}
+    function load(){try{var v=JSON.parse(localStorage.getItem(KEY)||"null");if(v&&Array.isArray(v.items)){v.items=v.items.map(cleanNote).filter(Boolean);return v;}}catch(e){}return mem||{v:1,items:[]};}
     function save(db){mem=db;try{localStorage.setItem(KEY,JSON.stringify(db));}catch(e){}}
     var db=load();
     function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
@@ -669,13 +687,13 @@ function run(){
       return out+esc(t.slice(i));
     }
     function itemHtml(it){
-      var href=root+esc(it.page)+'#hl-'+it.id;
+      var href=root+esc(it.page)+'#hl-'+esc(it.id);
       return '<li><span class="nd-chip u-c'+it.color+'" aria-hidden="true"></span>'+
-        '<a class="nd-open" href="'+href+'" data-id="'+it.id+'" data-p="'+esc(it.page)+'"><q>'+esc(it.text.length>220?it.text.slice(0,220)+"\u2026":it.text)+'</q>'+
+        '<a class="nd-open" href="'+href+'" data-id="'+esc(it.id)+'" data-p="'+esc(it.page)+'"><q>'+esc(it.text.length>220?it.text.slice(0,220)+"\u2026":it.text)+'</q>'+
         (it.note?'<span class="nd-note">'+hilite(it.note,fq.trim())+'</span>':'')+'</a>'+
         '<div class="nd-more"><button type="button" class="nd-dots" aria-label="More options for this note" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="19" cy="12" r="2" fill="currentColor"/></svg></button>'+
-        '<div class="nd-menu" hidden><button type="button" class="nd-del" data-id="'+it.id+'">Delete</button></div></div>'+
-        '<div class="nd-ask" hidden><p>Delete this note and its highlight? This cannot be undone.</p><div class="nd-ask-btns"><button type="button" class="nd-yes-del" data-id="'+it.id+'">Delete note</button><button type="button" class="nd-no-del">Cancel</button></div></div></li>';
+        '<div class="nd-menu" hidden><button type="button" class="nd-del" data-id="'+esc(it.id)+'">Delete</button></div></div>'+
+        '<div class="nd-ask" hidden><p>Delete this note and its highlight? This cannot be undone.</p><div class="nd-ask-btns"><button type="button" class="nd-yes-del" data-id="'+esc(it.id)+'">Delete note</button><button type="button" class="nd-no-del">Cancel</button></div></div></li>';
     }
     function render(){
       say("");
@@ -739,8 +757,8 @@ function run(){
       var fr=new FileReader();fr.onload=function(){
         try{
           var v=JSON.parse(fr.result);
-          var notes=(v.items||[]).filter(function(it){return it&&it.id&&it.text&&it.page&&typeof it.color==="number";});
-          var bms=(v.bookmarks||[]).filter(function(b){return b&&b.id&&b.page&&typeof b.snip==="string"&&typeof b.color==="number";});
+          var notes=(Array.isArray(v.items)?v.items:[]).slice(0,5000).map(cleanNote).filter(Boolean);
+          var bms=(Array.isArray(v.bookmarks)?v.bookmarks:[]).slice(0,100).map(cleanBm).filter(Boolean);
           if(!Array.isArray(v.items)&&!Array.isArray(v.bookmarks))throw new Error("bad");
           staged={notes:notes,bms:bms};
           conf.querySelector(".nd-cmsg").textContent="Restoring this backup replaces all highlights, notes and bookmarks on this device with the ones in the backup.";
@@ -769,12 +787,12 @@ function run(){
   /* Bookmarks: up to 15, one per color, kept on this device */
   safe(function(){
     var main=d.querySelector("main.content");if(!main)return;
-    var KEY="bookmarks-v1",mem=null;
+    var KEY="bookmarks-v1"+KSUF,mem=null;
     var COLORS=[["Red","#e05a5a"],["Orange","#ee8f3c"],["Gold","#e9c34a"],["Lime","#a8cc4f"],["Green","#5cb97a"],["Teal","#3fb5a8"],["Cyan","#4fb7de"],["Blue","#5b8def"],["Indigo","#7a6ee0"],["Purple","#a974dd"],["Magenta","#d661b8"],["Pink","#ef8fb0"],["Brown","#b58463"],["Gray","#a7a79c"],["Cream","#f2ede3"]];
     var page=(location.href.split(/[?#]/)[0].slice(root.length))||"index.html";
     var titleEl=main.querySelector("h1.title");
     var title=((titleEl&&titleEl.textContent)||d.title||page).replace(/\s+/g," ").trim();
-    function load(){try{var v=JSON.parse(localStorage.getItem(KEY)||"null");if(v&&v.items)return v;}catch(e){}return mem||{v:1,items:[]};}
+    function load(){try{var v=JSON.parse(localStorage.getItem(KEY)||"null");if(v&&Array.isArray(v.items)){v.items=v.items.map(cleanBm).filter(Boolean);return v;}}catch(e){}return mem||{v:1,items:[]};}
     function save(){mem=db;try{localStorage.setItem(KEY,JSON.stringify(db));}catch(e){}}
     var db=load();
     function icon(c,filled,size){
@@ -834,8 +852,8 @@ function run(){
       }).join("");
       var items=db.items.slice().sort(function(a,b){return a.color-b.color;});
       listEl.innerHTML=items.length?'<ul class="bm-items">'+items.map(function(b){
-        return '<li><span class="bm-ic">'+icon(COLORS[b.color][1],true,26)+'</span><div><a href="'+root+esc(b.page)+'#bm-'+b.id+'">'+esc(b.title)+'</a><p class="bm-snip">“'+esc(b.snip)+(b.snip.length>=70?"…":"")+'”</p>'+
-          '<p class="bm-links"><span class="bm-cn">'+COLORS[b.color][0]+'</span><button type="button" class="nd-rm" data-id="'+b.id+'">Remove</button></p></div></li>';
+        return '<li><span class="bm-ic">'+icon(COLORS[b.color][1],true,26)+'</span><div><a href="'+root+esc(b.page)+'#bm-'+esc(b.id)+'">'+esc(b.title)+'</a><p class="bm-snip">“'+esc(b.snip)+(b.snip.length>=70?"…":"")+'”</p>'+
+          '<p class="bm-links"><span class="bm-cn">'+COLORS[b.color][0]+'</span><button type="button" class="nd-rm" data-id="'+esc(b.id)+'">Remove</button></p></div></li>';
       }).join("")+'</ul>':'<p class="bm-empty">No bookmarks yet. Choose a color above to save your place.</p>';
     }
     var picker=d.createElement("div");picker.className="study-bar bm-picker";picker.hidden=true;picker.setAttribute("role","region");picker.setAttribute("aria-label","Choose where to place the bookmark");
@@ -878,14 +896,14 @@ function run(){
       addAt:function(c,el){var list=blocks(),i=list.indexOf(el);if(i<0)return null;return {was:place(c,{idx:i,snip:snipOf(el)})};},
       get:function(){return db.items.map(function(b){return {id:b.id,color:b.color,page:b.page,title:b.title,idx:b.idx,snip:b.snip,t:b.t};});},
       replace:function(arr){db.items=[];(arr||[]).forEach(function(b){
-        if(!b||!b.id||!b.page||typeof b.color!=="number"||b.color<0||b.color>14||typeof b.snip!=="string")return;
+        b=cleanBm(b);if(!b)return;
         db.items=db.items.filter(function(x){return x.color!==b.color;});
-        db.items.push({id:b.id,color:b.color,page:b.page,title:b.title||b.page,idx:b.idx|0,snip:b.snip,t:b.t||Date.now()});});
+        db.items.push(b);});
         save();flags();render();},
       merge:function(arr){var n=0;(arr||[]).forEach(function(b){
-        if(!b||!b.id||!b.page||typeof b.color!=="number"||b.color<0||b.color>14||typeof b.snip!=="string")return;
+        b=cleanBm(b);if(!b)return;
         db.items=db.items.filter(function(x){return x.id!==b.id&&x.color!==b.color;});
-        db.items.push({id:b.id,color:b.color,page:b.page,title:b.title||b.page,idx:b.idx|0,snip:b.snip,t:b.t||Date.now()});n++;});
+        db.items.push(b);n++;});
         save();flags();render();return n;}};
     listEl.addEventListener("click",function(e){
       var b=e.target.closest&&e.target.closest(".nd-rm");if(!b)return;

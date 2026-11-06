@@ -4,7 +4,7 @@ site-section: know-the-truth
 summary: "Reading the Bible daily takes only a few minutes and changes how you see everything else."
 posted: 2026-10-25
 updated: 2026-10-25
-source: submissions/Why Study the Bible (example article).docx
+source: "submissions/Why Study the Bible (example article).docx"
 ---
 
 ::: dates

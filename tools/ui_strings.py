@@ -51,7 +51,8 @@ def decode(raw):
 
 def encode(text, quote):
     t = text.replace("\\", "\\\\").replace(quote, "\\" + quote)
-    return t.replace("\r", "\\r").replace("\n", "\\n")
+    t = t.replace("\r", "\\r").replace("\n", "\\n")
+    return t.replace("</", "<\\/").replace("<!--", "<\\!--")   # a translation can never close the script tag
 
 
 def tag_text(t):

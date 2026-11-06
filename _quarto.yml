@@ -7,6 +7,7 @@ project:
     - sw.js
     - icons
     - fonts
+    - _headers
 
 number-sections: false
 

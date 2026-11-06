@@ -4,19 +4,24 @@ on:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read
 concurrency:
   group: pages
   cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Only this job may save translations back to the repository. The other jobs can only read.
+    permissions:
+      contents: write
+      pages: write
     outputs:
       uploaded: ${{ steps.up.outputs.done }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The access token is not left on disk while Word files are converted; it is used only to save translations.
+          persist-credentials: false
       - uses: quarto-dev/quarto-actions/setup@v2
       - name: Install LibreOffice (only if a LibreOffice file was uploaded)
         run: |
@@ -34,15 +39,18 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       - name: Save new translations in the repository
         continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add _translations
           if ! git diff --cached --quiet; then
             git commit -m "Update translations [skip ci]"
+            URL="https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
             # If another build saved translations at the same time, keep this build's newest ones.
-            if ! git pull --rebase -X theirs origin main; then git rebase --abort || true; fi
-            git push origin HEAD:main || true
+            if ! git pull --rebase -X theirs "$URL" main; then git rebase --abort || true; fi
+            git push "$URL" HEAD:main || true
           fi
       - name: Render site and EPUB
         run: quarto render
@@ -79,6 +87,9 @@ jobs:
           fi
           exit $bad
   deploy:
+    permissions:
+      pages: write
+      id-token: write
     needs: build
     if: ${{ always() && needs.build.outputs.uploaded == 'true' }}
     runs-on: ubuntu-latest
@@ -89,6 +100,8 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
   cloudflare:
+    permissions:
+      contents: read
     needs: build
     if: ${{ always() && needs.build.outputs.uploaded == 'true' }}
     runs-on: ubuntu-latest

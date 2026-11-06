@@ -143,7 +143,7 @@ def read_details(path):
 
 def run_pandoc(path, kind):
     cmd = PANDOC + [
-        path, "-f", "docx+styles", "-t", "markdown-smart+fenced_divs-raw_html-native_divs-native_spans",
+        "--sandbox", path, "-f", "docx+styles", "-t", "markdown-smart+fenced_divs-raw_html-native_divs-native_spans",
         "--wrap=none", "--lua-filter", os.path.join(ROOT, "tools", "body.lua"),
         "-M", "kind=" + kind,
     ]
@@ -158,7 +158,22 @@ def tidy_body(md):
     md = re.sub(r"\n{3,}", "\n\n", md)
     # headings: drop auto ids
     md = re.sub(r"^(#{1,6} .*?)\s*\{#[^}]*\}\s*$", r"\1", md, flags=re.M)
-    return md
+    return safe_links(md)
+
+
+SAFE_SCHEMES = {"http", "https", "mailto", "tel"}
+
+
+def safe_links(md):
+    """Links in a writer's file may only go to the web, an email address or a phone number.
+    Anything else (javascript:, data:, file: and so on) is replaced by a harmless link."""
+    def fix(m):
+        url = m.group(2)
+        sm = re.match(r"^\s*([A-Za-z][A-Za-z0-9+.\-]*):", url)
+        if sm and sm.group(1).lower() not in SAFE_SCHEMES:
+            return m.group(1) + "#)"
+        return m.group(0)
+    return re.sub(r"(\]\()([^)\n]*)\)", fix, md)
 
 
 # ----------------------------------------------------------------- entries
@@ -537,7 +552,7 @@ def main():
             if e["summary"]:
                 fm += ["summary: %s" % json.dumps(e["summary"], ensure_ascii=False)]
         fm += ["posted: %s" % e["posted"].isoformat(), "updated: %s" % e["updated"].isoformat(),
-               "source: %s" % e["src"], "---", ""]
+               "source: %s" % json.dumps(e["src"], ensure_ascii=False), "---", ""]
         dates = "::: dates\n%s\n:::\n\n" % dates_text(e["posted"], e["updated"])
         write(e["path"], "\n".join(fm) + "\n" + dates + e["body"])
 
