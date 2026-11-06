@@ -12,4 +12,10 @@ Every translation reads this file, so a correction here carries into new transla
 - Verse references (for example Daniel 7:14) = keep the numbers and the colon; translate only the book name.
 - Posted / Updated dates = write the date in that language's usual form.
 
+## Names of buttons and windows (the same word must be used everywhere on the site)
+
+My Notes, Bookmarks, Share, Print, Translate, Copy Link, Save a Backup, Everything, Text size,
+Highlights, Notes, Privacy Information, Adding Highlights, Installing the App,
+See New and Updated Articles, What's new.
+
 ## Terms to add after reviewers read the first pages

@@ -12,6 +12,9 @@ Usage:  python3 tools/build_lang.py [--lang es] [--mock]
 import argparse, copy, json, os, re, shutil, subprocess, sys
 import yaml
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import ui_strings
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS = ["fonts", "icons", "logo.png", "manifest.webmanifest", "sw.js", "epub.css",
           "nav-helpers.html", "templates"]
@@ -78,6 +81,12 @@ def main():
         for f in os.listdir(ROOT):
             if re.match(r"^(style-.*|fonts)\.css$", f):
                 shutil.copy(os.path.join(ROOT, f), os.path.join(work, f))
+        uipath = os.path.join(src, "ui.json")
+        if os.path.exists(uipath):
+            cat = json.load(open(uipath, encoding="utf-8"))
+            html_src = open(os.path.join(ROOT, "nav-helpers.html"), encoding="utf-8").read()
+            with open(os.path.join(work, "nav-helpers.html"), "w", encoding="utf-8") as f:
+                f.write(ui_strings.apply(html_src, cat))
         if os.path.exists(os.path.join(src, "_language.yml")):
             shutil.copy(os.path.join(src, "_language.yml"), os.path.join(work, "_language.yml"))
         y = copy.deepcopy(base)

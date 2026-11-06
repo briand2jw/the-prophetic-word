@@ -22,6 +22,9 @@ Usage
 """
 import argparse, hashlib, json, os, re, sys, time, urllib.error, urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import ui_strings
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TR = os.path.join(ROOT, "_translations")
 PROMPT_VERSION = "1"
@@ -178,6 +181,110 @@ def mock_translate(text, lang):
     return "---\n" + "\n".join(out_fm) + "\n---\n" + "\n".join(tr_line(l) for l in body.split("\n"))
 
 
+
+# ---------- buttons, windows and messages (the text inside nav-helpers.html) ----------
+def ui_system(lang, lc, glossary):
+    return f"""You translate the buttons, windows and messages of a Bible commentary website from English into {lc['name']} ({lang}).
+Write short, natural, reverent {lc['name']} that ordinary readers understand. Buttons and labels must stay short.
+
+You receive a JSON object. Each key is an id and each value is one English string. Return ONE JSON object with the same ids and the translated strings, and nothing else.
+
+Rules for every string
+- Some strings are pieces of HTML. Keep every tag, every attribute and every attribute value EXACTLY as written
+  (class, id, data-*, type, role, href, for, and so on). Translate only the words between tags and the words inside
+  aria-label, placeholder, title and alt attributes. Keep &entities; and characters such as ✕ and arrows as they are.
+- Keep placeholders such as {{0}} exactly, and put them where the sentence needs them.
+- Do not translate the site name "The Pure Language".
+- Names of buttons and windows are used in several places and must always be translated the same way:
+  My Notes, Bookmarks, Share, Print, Translate, Copy Link, Save a Backup, Everything, Text size, Highlights, Notes.
+- Never add, remove or soften meaning. Warnings such as "This cannot be undone" must stay clear.
+- Follow this glossary exactly:
+{glossary}"""
+
+
+def ui_check(src, out):
+    if not isinstance(out, str) or not out.strip():
+        return ["empty"]
+    return [] if ui_strings.skeleton(src) == ui_strings.skeleton(out) else ["tags or placeholders changed"]
+
+
+def mock_ui(text, lang):
+    words = MOCK.get(lang, MOCK["es"])
+    i = [0]
+
+    def sub_words(seg):
+        def rep(m):
+            w = words[i[0] % len(words)]; i[0] += 1
+            return w
+        return re.sub(r"(?<!\{)[A-Za-z][A-Za-z’']*", rep, seg)
+    parts = re.split(r'(<[^>]*>|\{\d\}|(?:aria-label|placeholder|title|alt)="[^"]*")', text)
+    out = []
+    for p in parts:
+        m = re.match(r'^((?:aria-label|placeholder|title|alt)=")([^"]*)(")$', p)
+        if m:
+            out.append(m.group(1) + sub_words(m.group(2)) + m.group(3))
+        elif p.startswith("<") or re.match(r"^\{\d\}$", p):
+            out.append(p)
+        else:
+            out.append(sub_words(p))
+    # attribute values sit inside tags, so translate them in place
+    res = "".join(out)
+    return re.sub(r'((?:aria-label|placeholder|title|alt)=")([^"]*)(")', lambda m: m.group(1) + sub_words(m.group(2)) + m.group(3), res) if False else res
+
+
+def translate_ui(lang, lc, ldir, cfg, key, glossary, mock, force, problems):
+    src = open(os.path.join(ROOT, "nav-helpers.html"), encoding="utf-8").read()
+    items = ui_strings.collect(src)
+    path = os.path.join(ldir, "ui.json")
+    cat = json.load(open(path, encoding="utf-8")) if os.path.exists(path) else {}
+    if force:
+        cat = {}
+    todo = [t for t in items if t not in cat]
+    t_in = t_out = 0
+    if not todo:
+        return 0, 0, 0
+    done = 0
+    system = ui_system(lang, lc, glossary)
+    for k in range(0, len(todo), 20):
+        batch = todo[k:k + 20]
+        if mock:
+            for t in batch:
+                cat[t] = mock_ui(t, lang)
+            done += len(batch)
+            continue
+        payload = {str(n + 1): t for n, t in enumerate(batch)}
+        result = {}
+        for attempt in range(2):
+            try:
+                text, usage = call_model(cfg["model"], system, json.dumps(payload, ensure_ascii=False), key)
+                t_in += usage.get("input_tokens", 0); t_out += usage.get("output_tokens", 0)
+                m = re.search(r"\{.*\}", text, re.S)
+                result = json.loads(m.group(0)) if m else {}
+                break
+            except Exception as e:
+                last = str(e)
+        for n, t in enumerate(batch):
+            out = result.get(str(n + 1))
+            bad = ui_check(t, out)
+            if bad:
+                try:   # one more try, on its own
+                    text, usage = call_model(cfg["model"], system, json.dumps({"1": t}, ensure_ascii=False), key)
+                    t_in += usage.get("input_tokens", 0); t_out += usage.get("output_tokens", 0)
+                    m = re.search(r"\{.*\}", text, re.S)
+                    out = json.loads(m.group(0)).get("1") if m else None
+                    bad = ui_check(t, out)
+                except Exception as e:
+                    bad = [str(e)]
+            if bad:
+                problems.append(f"{lang}/ui.json: kept English for \"{t[:50]}\" ({', '.join(bad)})")
+            else:
+                cat[t] = out
+                done += 1
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(cat, f, ensure_ascii=False, indent=1, sort_keys=True)
+    return done, t_in, t_out
+
+
 # ---------- main ----------
 def main():
     ap = argparse.ArgumentParser()
@@ -243,6 +350,13 @@ def main():
             except Exception as e:
                 problems.append(f"{lang}/{out_rel}: {e}")
                 print(f"FAILED {lang}/{out_rel}: {e}")
+        try:
+            n, ti, to = translate_ui(lang, lc, ldir, cfg, key, glossary, args.mock, args.force, problems)
+            total_in += ti; total_out += to; done += n
+            if n:
+                print(f"translated {n} button/window texts for {lang}")
+        except Exception as e:
+            problems.append(f"{lang}/ui.json: {e}")
         with open(hpath, "w", encoding="utf-8") as f:
             json.dump(hashes, f, indent=1, sort_keys=True, ensure_ascii=False)
     print(f"Done. {done} file(s) translated. Tokens used: {total_in} in, {total_out} out.")

@@ -15,5 +15,3 @@ html[lang="ar"] body{line-height:2;font-size:1.2rem}
 html[lang="hi"] h1,html[lang="hi"] h2,html[lang="hi"] h3,html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{line-height:1.5}
 html[lang="ar"] h1.title{font-size:2rem}
 
-/* Windows are still in English, so keep each paragraph reading left to right until they are translated too */
-html[dir="rtl"] dialog *{unicode-bidi:plaintext}
