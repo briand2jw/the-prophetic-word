@@ -40,8 +40,9 @@ jobs:
           git add _translations
           if ! git diff --cached --quiet; then
             git commit -m "Update translations [skip ci]"
-            git pull --rebase origin main || true
-            git push origin HEAD:main
+            # If another build saved translations at the same time, keep this build's newest ones.
+            if ! git pull --rebase -X theirs origin main; then git rebase --abort || true; fi
+            git push origin HEAD:main || true
           fi
       - name: Render site and EPUB
         run: quarto render

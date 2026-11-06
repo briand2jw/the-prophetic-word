@@ -54,7 +54,11 @@ def main():
         for dp, _, fs in os.walk(src):
             for f in fs:
                 if f.endswith(".qmd") and ".new." not in f:
-                    have.add(os.path.relpath(os.path.join(dp, f), src))
+                    rel = os.path.relpath(os.path.join(dp, f), src)
+                    if re.search(r"^(<<<<<<<|>>>>>>>)", open(os.path.join(dp, f), encoding="utf-8").read(), re.M):
+                        problems.append(f"{lang}/{rel}: contains unfinished merge marks, so this page was left out")
+                        continue
+                    have.add(rel)
         if "index.qmd" not in have:
             print(f"{lang}: no translated home page yet, skipped")
             continue
