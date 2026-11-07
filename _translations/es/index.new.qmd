@@ -1,0 +1,70 @@
+---
+title: "Inicio"
+---
+
+## Propósito de este sitio web
+
+En Sofonías 3:9, Jehová Dios profetizó que durante el tiempo del fin cambiaría el idioma de su pueblo fiel a un idioma puro. Este cambio a un idioma puro ayudaría a su pueblo a invocar su nombre en verdadera justicia y a adorarlo en unidad. Además, Jehová prometió a su pueblo en Amós 3:7 que no haría nada sin antes revelar su asunto confidencial a sus siervos. Hoy, los asuntos más confidenciales que podrían revelarse son los acontecimientos que conducen al fin de este sistema de cosas. Ahora es el momento de que el pueblo de Dios hable el idioma puro acerca de las profundas verdades de la Biblia sobre el fin de este sistema de cosas y la adoración pura. (Juan 16:13)
+
+Por lo tanto, el propósito de este sitio web es arrojar luz sobre la verdadera comprensión de la Palabra de Dios que nos llega por medio de su Hijo y de sus fieles discípulos aquí en la tierra. Esta verdadera comprensión da a la persona discernimiento sobre lo que está sucediendo hoy en la tierra, lo que traerá el futuro cercano y lo que cada persona puede hacer para prepararse. La luz de la verdad se encuentra en la Biblia, la palabra profética de Dios, que da esperanza a los sinceros. (2 Pedro 1:19)
+
+Te animamos a estudiar esta información con oración. Haz todo lo que puedas por aplicarla en tu vida, para que tu adoración a Dios le resulte aceptable cuando él llegue pronto a juzgar a la humanidad. (Romanos 12:1-2; Hebreos 12:5-7) Compártela con otros para que puedan estar preparados para el fin de este sistema de cosas. (Mateo 24:14)
+
+## Qué hay de nuevo
+
+[Ver artículos nuevos y actualizados](whats-new.qmd){.epub-btn}
+
+## Explorar por sección
+
+::: section-list
+- [Conozca la verdad](know-the-truth.qmd)
+- [La palabra profética](prophetic-word.qmd)
+- [Busque a Jehová](seek-jehovah.qmd)
+:::
+
+::: {.content-visible when-format="html"}
+## Cómo estudiar esta información
+
+Si es la primera vez que visitas este sitio web, te animamos a leer el artículo titulado: *Cómo puede conocer la verdad (provisional)*. Este artículo describe con más detalle el propósito de este sitio web y cómo usar esta información para ayudarte a ti y a tu familia a adorar a Jehová de manera aceptable.
+
+Como se indica en el artículo mencionado, te animamos a usar tu propio ejemplar de la Biblia y a comenzar tu estudio leyendo los artículos de la sección Conozca la verdad del sitio web. Luego recomendamos que leas los artículos sobre los libros bíblicos de Daniel y Apocalipsis, que se encuentran en La palabra profética. ¿Por qué leer primero los artículos disponibles sobre Daniel y Apocalipsis? Porque estos artículos te ayudarán a entender lo que está sucediendo ahora en el mundo y en sus gobiernos, lo que está por suceder y cómo podemos estar preparados espiritualmente para permanecer fieles a Jehová con un corazón completo.
+
+Usa las funciones básicas de este sitio web para resaltar y tomar notas para tu estudio personal. Sigue leyendo y estudiando cada uno de los artículos sobre los diversos libros proféticos de la Biblia y los de la sección Busque a Jehová. Hazlo con oración y de manera repetida, con un corazón sincero, y esfuérzate al máximo por aplicar en tu vida lo que aprendas.
+
+Cada mes, hasta el fin de este sistema de cosas, se añadirán a este sitio web nuevos artículos o explicaciones ampliadas sobre la Palabra profética de Dios. Por favor, mantente al tanto de la sección Qué hay de nuevo mientras estudias esta información.
+
+::: {.stamp .study-box}
+[Cómo añadir resaltados y notas]{.box-title}
+
+Marca las palabras que te llamen la atención y escribe tus propios comentarios. Se guardan de forma privada en tu dispositivo.
+
+<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">Adding Highlights</button> <button type="button" id="notes-open" class="translate-btn">Abrir Mis notas</button></p>
+:::
+:::
+
+## Descargar el EPUB
+
+::: stamp
+Este archivo EPUB contiene todos los artículos en inglés de este sitio web.\
+Última actualización: {{< meta date >}}
+
+[Descargar el EPUB](the-pure-language.epub){.epub-btn}
+
+[El EPUB está solo en inglés. Para leer esta información en otro idioma, usa el botón Traducir del sitio web o la función de traducción de tu aplicación de lectura.]{.epub-note}
+:::
+
+::: {.content-visible when-format="html"}
+## Instalar como aplicación {.install-head}
+
+::: {.stamp .install-box}
+Añade este sitio web a tu teléfono o tableta para que se abra como una aplicación, con su propio ícono. Una vez abierto, también se puede leer sin conexión a internet.
+
+<p class="install-actions"><button type="button" id="howto-btn" class="translate-btn">Installing the App</button></p>
+
+[La traducción funciona mejor cuando lees el sitio web en tu navegador y no en la aplicación instalada.]{.epub-note}
+:::
+:::
+
+::: {.content-visible when-format="html"}
+<p class="install-actions"><button type="button" id="privacy-btn" class="epub-btn">Privacy Information</button></p>
+:::
