@@ -16,6 +16,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ui_strings
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Fonts put inside the EPUB for languages whose letters many reading apps lack (static copies in epub-fonts/)
+EPUB_FONTS = {"hi": ("NotoSerifDevanagari", "Noto Serif Devanagari"), "ar": ("NotoNaskhArabic", "Noto Naskh Arabic")}
 ASSETS = ["fonts", "icons", "logo.png", "manifest.webmanifest", "sw.js", "epub.css",
           "nav-helpers.html", "templates"]
 
@@ -106,6 +108,25 @@ def main():
         text += f'<meta name="pl-lang" content="{lang}">\n'
         html["include-in-header"] = {"text": text}
         shutil.copy(os.path.join(ROOT, "_translations", "lang.css"), os.path.join(work, "lang.css"))
+        if lang in EPUB_FONTS and isinstance(y["format"].get("epub"), dict):
+            stem, family = EPUB_FONTS[lang]
+            os.makedirs(os.path.join(work, "epub-fonts"))
+            files = []
+            for wt in ("Regular", "Bold"):
+                fn = f"{stem}-{wt}.ttf"
+                shutil.copy(os.path.join(ROOT, "epub-fonts", fn), os.path.join(work, "epub-fonts", fn))
+                files.append(f"epub-fonts/{fn}")
+            rtl = lc.get("dir") == "rtl"
+            with open(os.path.join(work, "epub-lang.css"), "w", encoding="utf-8") as f:
+                f.write(f"@font-face{{font-family:'{family}';font-weight:normal;src:url(epub-fonts/{stem}-Regular.ttf)}}\n"
+                        f"@font-face{{font-family:'{family}';font-weight:bold;src:url(epub-fonts/{stem}-Bold.ttf)}}\n"
+                        f"body,h1,h2,h3,h4,p,li{{font-family:'{family}',serif;font-style:normal;letter-spacing:0;line-height:1.8}}\n"
+                        + ("body{direction:rtl;text-align:right}\n" if rtl else ""))
+            ep = y["format"]["epub"]
+            ep["css"] = ["epub.css", "epub-lang.css"]
+            ep["epub-fonts"] = files
+            if rtl:
+                ep["dir"] = "rtl"
         with open(os.path.join(work, "_quarto.yml"), "w", encoding="utf-8") as f:
             yaml.safe_dump(y, f, allow_unicode=True, sort_keys=False)
         r = subprocess.run(["quarto", "render"], cwd=work, capture_output=True, text=True)

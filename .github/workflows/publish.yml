@@ -61,6 +61,7 @@ jobs:
         run: |
           python3 -c "import yaml" 2>/dev/null || pip install --quiet pyyaml
           python3 tools/build_lang.py
+          for l in hi ar; do echo "fonts inside $l EPUB:"; unzip -l _site/$l/the-pure-language.epub | grep -i ttf || echo NONE; done
       - uses: actions/configure-pages@v5
       - name: Make the redirect page for the old GitHub address
         run: python3 tools/make_redirect.py redirect-site
