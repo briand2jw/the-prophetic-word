@@ -17,12 +17,9 @@ We encourage you to study this information prayerfully. Do all you can to apply 
 ## Browse by section
 
 ::: section-list
-- [Know the Truth](know-the-truth.qmd)\
-  Sample description of this section.
-- [The Prophetic Word](prophetic-word.qmd)\
-  Sample description of this section.
-- [Seek Jehovah](seek-jehovah.qmd)\
-  Sample description of this section.
+- [Know the Truth](know-the-truth.qmd)
+- [The Prophetic Word](prophetic-word.qmd)
+- [Seek Jehovah](seek-jehovah.qmd)
 :::
 
 ::: {.content-visible when-format="html"}
