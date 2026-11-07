@@ -4,60 +4,64 @@ title: "الصفحة الرئيسية"
 
 ## هدف هذا الموقع
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+في صفنيا 3:9، تنبّأ يهوه الله بأنه في وقت النهاية سيحوّل لغة شعبه الأمين إلى لغة نقية. وهذا التحويل إلى لغة نقية يساعد شعبه على أن يدعوا باسمه بالبرّ الحقيقي وأن يعبدوه بوحدة. وفضلًا عن ذلك، وعد يهوه شعبه في عاموس 3:7 بأنه لا يفعل شيئًا إلا إذا كشف سرّه لعبيده. واليوم، إن أخطر الأمور السرّية التي يمكن أن تُكشف هي الأحداث التي تؤدي إلى نهاية نظام الأشياء هذا. والآن هو وقت أن يتكلم شعب الله اللغة النقية عن حقائق الكتاب المقدس العميقة المتعلقة بنهاية نظام الأشياء هذا وبالعبادة النقية. (يوحنا 16:13)
 
-## الجديد
+لذلك، فإن هدف هذا الموقع هو إلقاء الضوء على الفهم الحقيقي لكلمة الله الذي يصلنا بواسطة ابنه وتلاميذه الأمناء هنا على الأرض. وهذا الفهم الحقيقي يمنح الإنسان بصيرة بشأن ما يحدث على الأرض اليوم، وما سيأتي به المستقبل القريب، وما يستطيع كل شخص أن يفعله ليهيّئ نفسه. ونور الحق موجود في الكتاب المقدس، كلمة الله النبوية، التي تمنح الرجاء للمخلصين. (2 بطرس 1:19)
 
-[اطّلع على المقالات الجديدة والمحدَّثة](whats-new.qmd){.epub-btn}
+نشجعك على أن تدرس هذه المعلومات بصلاة. وابذل كل جهدك لتطبيقها في حياتك لكي تكون عبادتك لله مقبولة لديه حين يأتي قريبًا ليدين البشر. (رومية 12:1-2؛ عبرانيين 12:5-7) وأخبر بها الآخرين لكي يستعدّوا لنهاية نظام الأشياء هذا. (متى 24:14)
+
+## What's new
+
+[See New and Updated Articles](whats-new.qmd){.epub-btn}
 
 ## تصفّح حسب القسم
 
 ::: section-list
-- [اعرف الحق](know-the-truth.qmd)\
+- [Know the Truth](know-the-truth.qmd)\
   وصف تجريبي لهذا القسم.
-- [الكلمة النبوية](prophetic-word.qmd)\
+- [The Prophetic Word](prophetic-word.qmd)\
   وصف تجريبي لهذا القسم.
-- [اطلب يهوه](seek-jehovah.qmd)\
+- [Seek Jehovah](seek-jehovah.qmd)\
   وصف تجريبي لهذا القسم.
 :::
 
 ::: {.content-visible when-format="html"}
 ## كيف تدرس هذه المعلومات
 
-خذ وقتك مع كل فصل. اقرأ النظرة العامة أولًا، ثم انتقل بين مجموعات الآيات واحدةً تلو الأخرى. وأثناء القراءة، علّم على ما يلفت انتباهك ودوّن أفكارك الخاصة. استخدم أيقونة العلامة المرجعية في أعلى أي صفحة لحفظ موضعك والعودة إليه لاحقًا. تبقى علاماتك المرجعية وتمييزاتك وملاحظاتك خاصة على جهازك، فيمكنك أن تدرس بحسب وتيرتك وتعود إليها متى شئت.
+خذ وقتك مع كل فصل. اقرأ النظرة العامة أولًا، ثم تابع مجموعات الآيات واحدة واحدة. وأثناء القراءة، ضع علامة على ما يلفت انتباهك ودوّن أفكارك الخاصة. استخدم أيقونة الإشارة المرجعية في أعلى أي صفحة لحفظ موضعك والعودة إليه لاحقًا. إن إشاراتك المرجعية وتمييزاتك وملاحظاتك تبقى خاصة على جهازك، فيمكنك أن تدرس بالوتيرة التي تناسبك وأن ترجع إليها متى شئت.
 
 ::: {.stamp .study-box}
-[إضافة التمييزات والملاحظات]{.box-title}
+[Adding highlights and notes]{.box-title}
 
-علّم على الكلمات التي تلفت انتباهك واكتب تعليقاتك الخاصة. تُحفظ بشكل خاص على جهازك.
+ضع علامة على الكلمات التي تلفت انتباهك واكتب تعليقاتك الخاصة. تُحفظ بشكل خاص على جهازك.
 
-<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">إضافة التمييزات</button> <button type="button" id="notes-open" class="translate-btn">فتح ملاحظاتي</button></p>
+<p class="install-actions"><button type="button" id="studyhelp-btn" class="translate-btn">Adding Highlights</button> <button type="button" id="notes-open" class="translate-btn">Open My Notes</button></p>
 :::
 :::
 
 ## تنزيل ملف EPUB
 
 ::: stamp
-يحتوي ملف EPUB هذا على جميع المعلومات الموجودة في هذا الموقع.\
+يحتوي ملف EPUB هذا على كل المعلومات الموجودة في هذا الموقع.\
 آخر تحديث: {{< meta date >}}
 
-[تنزيل ملف EPUB](the-pure-language.epub){.epub-btn}
+[Download the EPUB](the-pure-language.epub){.epub-btn}
 
 [ملف EPUB باللغة الإنكليزية. استخدم ميزة الترجمة في تطبيق القراءة لديك لقراءته بلغة أخرى.]{.epub-note}
 :::
 
 ::: {.content-visible when-format="html"}
-## التثبيت كتطبيق {.install-head}
+## Install as an App {.install-head}
 
 ::: {.stamp .install-box}
-أضف هذا الموقع إلى هاتفك أو جهازك اللوحي ليُفتح كأنه تطبيق، وله أيقونته الخاصة. وبعد فتحه مرة واحدة، يمكن قراءته أيضًا دون اتصال بالإنترنت.
+أضف هذا الموقع إلى هاتفك أو جهازك اللوحي ليفتح مثل التطبيق، وله أيقونته الخاصة. وبعد فتحه مرة واحدة، يمكن قراءته أيضًا بدون اتصال بالإنترنت.
 
-<p class="install-actions"><button type="button" id="howto-btn" class="translate-btn">تثبيت التطبيق</button></p>
+<p class="install-actions"><button type="button" id="howto-btn" class="translate-btn">Installing the App</button></p>
 
-[تعمل الترجمة بأفضل شكل عند قراءة الموقع في متصفحك بدلًا من التطبيق المثبَّت.]{.epub-note}
+[تعمل الترجمة بأفضل شكل عندما تقرأ الموقع في المتصفح بدلًا من التطبيق المثبّت.]{.epub-note}
 :::
 :::
 
 ::: {.content-visible when-format="html"}
-<p class="install-actions"><button type="button" id="privacy-btn" class="epub-btn">معلومات الخصوصية</button></p>
+<p class="install-actions"><button type="button" id="privacy-btn" class="epub-btn">Privacy Information</button></p>
 :::
