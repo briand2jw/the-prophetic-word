@@ -720,7 +720,7 @@ main mark:not(.u-hl){background:#f2a08b;color:#1b1c18;border-radius:3px;padding:
 /* ---- Printing: a clean, light, readable page ---- */
 .print-head,.print-foot{display:none}
 @media print{
-  @page{margin:12mm 14mm}
+  @page{size:letter;margin:.5in .55in}
   body,#quarto-content,main.content,.quarto-container,#quarto-document-content,header#title-block-header{padding-top:0 !important;margin-top:0 !important}
   header#title-block-header{margin-bottom:.6rem !important}
   hr:last-of-type{display:none}
@@ -732,9 +732,9 @@ main mark:not(.u-hl){background:#f2a08b;color:#1b1c18;border-radius:3px;padding:
   .page-columns > .column-margin,.return-links,.chapter-pager,#quarto-back-to-top,button{display:none !important}
   .page-columns,.page-columns.page-full{display:block !important;margin:0 !important}
   main.content,#quarto-content,.content{width:auto !important;max-width:none !important;margin:0 !important;padding:0 !important;display:block !important;grid-column:auto !important}
-  html{font-size:11pt !important}
-  body{font-family:'Noto Serif',Georgia,serif !important;font-size:11pt !important;line-height:1.4 !important}
-  p,li{font-size:11pt !important;line-height:1.4 !important;margin:0 0 .5em !important;text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+  html{font-size:10.5pt !important}
+  body{font-family:'Noto Serif',Georgia,serif !important;font-size:10.5pt !important;line-height:1.4 !important}
+  p,li{font-size:10.5pt !important;line-height:1.4 !important;margin:0 0 .5em !important}
   ul,ol{margin:0 0 .6em !important;padding-left:1.4em !important}
   li{margin-bottom:.2em !important}
   .section-list li,.chapter-grid li,.article-list li{padding:.25em 0 !important;margin:0 !important}
@@ -742,10 +742,10 @@ main mark:not(.u-hl){background:#f2a08b;color:#1b1c18;border-radius:3px;padding:
   .print-head{display:block;margin:0 0 .6rem;padding:0 0 .3rem;border-bottom:1px solid #bbb;font:600 8.5pt 'Noto Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#555}
   .print-foot{display:block;margin:.8rem 0 0;padding-top:.2rem;border-top:0;font:8pt 'Noto Sans',sans-serif;color:#444;word-break:break-all}
   h1,h2,h3,h4{color:#000 !important;page-break-after:avoid;break-after:avoid;font-family:'Noto Serif',Georgia,serif !important}
-  h1.title{font-size:18pt !important;line-height:1.2 !important;margin:.1rem 0 .2rem !important}
-  h2{font-size:13pt !important;line-height:1.25 !important;margin:.9em 0 .3em !important}
-  h3{font-size:11.5pt !important;line-height:1.25 !important;margin:.8em 0 .25em !important}
-  h4{font-size:11pt !important;margin:.7em 0 .2em !important}
+  h1.title{font-size:17pt !important;line-height:1.2 !important;margin:.1rem 0 .2rem !important}
+  h2{font-size:12.5pt !important;line-height:1.25 !important;margin:.9em 0 .3em !important}
+  h3{font-size:11pt !important;line-height:1.25 !important;margin:.8em 0 .25em !important}
+  h4{font-size:10.5pt !important;margin:.7em 0 .2em !important}
   .quarto-title-meta,.quarto-title-meta *,.date,.dates-line{font-size:8.5pt !important;margin:0 !important}
   blockquote{margin:.5em 0 .7em 0 !important}
   p,li,blockquote{orphans:3;widows:3}
