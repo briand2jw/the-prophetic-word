@@ -759,3 +759,6 @@ a.lang-row:hover{background:#4a4b42}
 .lang-row[aria-current]{background:transparent;color:var(--text) !important;border-color:var(--accent)}
 .mt-notice{margin:0 0 1.2rem;padding:.7rem 1rem;border:1px solid var(--rule);border-radius:1rem;background:var(--surface);color:var(--meta);font:.85rem/1.6 'Noto Sans',system-ui,sans-serif}
 .mt-notice a{color:var(--link);font-weight:600}
+/* Automatic links to sections and Bible books */
+a.autolink{font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+a.autolink:hover{text-decoration-thickness:2px}

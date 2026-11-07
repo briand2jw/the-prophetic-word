@@ -54,6 +54,8 @@ jobs:
           fi
       - name: Render site and EPUB
         run: quarto render
+      - name: Check the automatic links point to real pages
+        run: python3 tools/check_autolinks.py _site >> build-problems.txt
       - name: Build the translated copies of the site (/es/, /hi/, /ar/)
         continue-on-error: true
         run: |

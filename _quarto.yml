@@ -53,6 +53,8 @@ format:
     css: [fonts.css, style-main-73.css, style-dark-2.css]
     toc: false
     number-sections: false
+    filters:
+      - tools/autolink.lua
     include-after-body: nav-helpers.html
     include-in-header:
       text: |

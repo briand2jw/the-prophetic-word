@@ -96,6 +96,7 @@ def main():
             y["language"] = "_language.yml"
         y["book"]["chapters"] = filter_chapters(y["book"]["chapters"], have)
         html = y["format"]["html"]
+        html.pop("filters", None)  # automatic name links are English only for now
         html["css"] = list(html["css"]) + ["lang.css"]
         y["lang"] = lang
         if lc.get("dir") == "rtl":
