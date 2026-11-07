@@ -1,5 +1,5 @@
 -- Links the first mention of each section name or Bible book on a page to its page.
--- English pages only. To keep a name from being linked, wrap it: [Daniel]{.no-autolink}
+-- English pages only. Names inside italics or quotation marks (article titles) are not linked. To keep a name from being linked, wrap it: [Daniel]{.no-autolink}
 local NAMES = {
   {"Know the Truth", "know-the-truth"},
   {"The Prophetic Word", "prophetic-word"},
@@ -121,6 +121,9 @@ if FORMAT:match("html") then
     Header = function() return nil, false end,
     Link = function() return nil, false end,
     Code = function() return nil, false end,
+    -- article titles are written in italics or quotation marks
+    Emph = function() return nil, false end,
+    Quoted = function() return nil, false end,
     CodeBlock = function() return nil, false end,
     Div = function(d) if skipped(d) then return nil, false end end,
     Span = function(s) if skipped(s) then return nil, false end end,
