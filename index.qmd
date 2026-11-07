@@ -45,12 +45,12 @@ Mark the words that stand out and write your own comments. They are saved privat
 ## Download the EPUB
 
 ::: stamp
-This EPUB file contains all the information on this website.\
+This EPUB file contains all the English articles on this website.\
 Last updated: {{< meta date >}}
 
 [Download the EPUB](the-pure-language.epub){.epub-btn}
 
-[The EPUB is in English. Use your reading app's translate feature to read it in another language.]{.epub-note}
+[The EPUB is in English only. To read this information in another language, use the Translate button on the website, or your reading app's translate feature.]{.epub-note}
 :::
 
 ::: {.content-visible when-format="html"}
