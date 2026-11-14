@@ -11,6 +11,14 @@ function run(){
       root=new URL((at.split("site_libs/")[0])||"./",location.href).href;}
   });
   var homeUrl=root+"index.html";
+  /* Keyboard and screen-reader users can jump past the menu straight to the page text */
+  safe(function(){
+    var main=d.getElementById("quarto-document-content");if(!main||d.querySelector(".skip-link"))return;
+    main.setAttribute("tabindex","-1");
+    var a=d.createElement("a");a.className="skip-link";a.href="#quarto-document-content";a.textContent="Skip to main content";
+    a.addEventListener("click",function(){setTimeout(function(){main.focus();},0);});
+    d.body.insertBefore(a,d.body.firstChild);
+  });
   /* Fill {0} in a sentence template. Whole sentences are kept together so they can be translated properly. */
   function fmt(t){var a=arguments;return t.replace(/\{(\d)\}/g,function(m,i){return a[+i+1];});}
   /* A book's name as shown in the menu (so translated pages use the translated name) */

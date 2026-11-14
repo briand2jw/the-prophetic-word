@@ -780,3 +780,12 @@ main.content p a:not(.epub-btn):not(.btn),main.content blockquote a,main.content
 main.content p a:not(.epub-btn):not(.btn):hover,main.content blockquote a:hover,main.content li a:not(.epub-btn):hover{color:var(--text-link-hover)}
 main.content :is(.section-list,.chapter-grid,.article-list,.whatsnew,nav) a:not(.epub-btn):not(.btn):not(.autolink){color:var(--link)}
 @media print{main.content a,main.content p a,main.content li a{color:#000 !important}}
+
+/* Accessibility: skip link, bigger touch targets, clear focus on search, and no motion for people who ask for none */
+.skip-link{position:absolute;left:.5rem;top:-4rem;z-index:10000;padding:.6rem 1rem;background:#f2ede3;color:#1b1c18 !important;font:600 1rem 'Noto Sans',system-ui,sans-serif;border-radius:.4rem;text-decoration:none}
+.skip-link:focus{top:.5rem;outline:3px solid #e58a73;outline-offset:2px}
+main.content:focus{outline:none}
+#quarto-sidebar .sidebar-item a.sidebar-link{display:block;padding-top:.3rem;padding-bottom:.3rem;min-height:24px}
+.aa-SubmitButton{min-height:24px;min-width:28px}
+.aa-Form:focus-within{outline:2px solid var(--accent) !important;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
