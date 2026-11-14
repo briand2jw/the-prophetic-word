@@ -772,3 +772,11 @@ a.lang-row:hover{background:#4a4b42}
 /* Automatic links to sections and Bible books */
 a.autolink{font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
 a.autolink:hover{text-decoration-thickness:2px}
+
+/* Links inside article text are warm gold, so they are not mistaken for the coral accent text */
+:root{--text-link:#e6c27a;--text-link-hover:#f4dba4}
+@media (prefers-contrast:more){:root{--text-link:#f4dba4;--text-link-hover:#ffeec7}}
+main.content p a:not(.epub-btn):not(.btn),main.content blockquote a,main.content li a:not(.epub-btn){color:var(--text-link)}
+main.content p a:not(.epub-btn):not(.btn):hover,main.content blockquote a:hover,main.content li a:not(.epub-btn):hover{color:var(--text-link-hover)}
+main.content :is(.section-list,.chapter-grid,.article-list,.whatsnew,nav) a:not(.epub-btn):not(.btn):not(.autolink){color:var(--link)}
+@media print{main.content a,main.content p a,main.content li a{color:#000 !important}}
