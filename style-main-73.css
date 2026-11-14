@@ -789,3 +789,7 @@ main.content:focus{outline:none}
 .aa-SubmitButton{min-height:24px;min-width:28px}
 .aa-Form:focus-within{outline:2px solid var(--accent) !important;outline-offset:2px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
+
+/* The search results list under the sidebar search box needs a solid background (the full-screen search keeps its own) */
+.aa-Panel{background:#2a2b26 !important;border:1px solid #46473e !important;border-radius:1.2rem !important;box-shadow:0 10px 34px rgba(0,0,0,.6) !important;overflow:hidden}
+.aa-DetachedContainer .aa-Panel{background:transparent !important;border:0 !important;border-radius:0 !important;box-shadow:none !important}
