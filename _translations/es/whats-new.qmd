@@ -19,9 +19,5 @@ Todo lo que se ha añadido o actualizado en los últimos tres meses, lo más rec
 - [1 oct]{.wn-date} [Nuevo]{.wn-tag .is-new} [[Mateo 24](chapters/matthew-24.qmd) y [25](chapters/matthew-25.qmd)]{.wn-what}
 - [1 oct]{.wn-date} [Nuevo]{.wn-tag .is-new} [[Título de artículo de ejemplo](articles/kt-sample-article-title.qmd)]{.wn-what}
 
-## Agosto de 2026
-
-- [12 ago]{.wn-date} [Nuevo]{.wn-tag .is-new} [[Busquen la justicia: ¿por qué es importante ahora?](articles/sj-seek-righteousness-why-important-now.qmd)]{.wn-what}
-
 [auto-all-end]: #
 :::
