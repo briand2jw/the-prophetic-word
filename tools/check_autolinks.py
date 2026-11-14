@@ -9,6 +9,9 @@ for dp, _, fs in os.walk(root):
             continue
         path = os.path.join(dp, f)
         html = open(path, encoding="utf-8", errors="ignore").read()
+        for m in re.finditer(r'(?:chapter-title|nav-page-text|menu-text)"></span></a><a[^>]*autolink', html):
+            print(f"{os.path.relpath(path, root)}: an automatic link ended up in the menu or the previous/next links")
+            break
         for m in re.finditer(r'<a\b[^>]*>', html):
             tag = m.group(0)
             if "autolink" not in tag:

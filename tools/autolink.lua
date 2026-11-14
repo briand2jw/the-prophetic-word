@@ -10,7 +10,7 @@ local NAMES = {
 }
 local SKIP_CLASS = {["section-list"]=true, ["chapter-grid"]=true, ["article-list"]=true,
   ["meta"]=true, ["no-autolink"]=true, ["epub-btn"]=true, ["translate-btn"]=true,
-  ["box-title"]=true, ["epub-note"]=true}
+  ["box-title"]=true, ["chapter-title"]=true, ["nav-page-text"]=true, ["nav-page-previous"]=true, ["nav-page-next"]=true, ["breadcrumb-item"]=true, ["menu-text"]=true, ["chapter-number"]=true, ["epub-note"]=true}
 
 local input = (PANDOC_STATE.input_files or {})[1] or ""
 -- Quarto knows the real page path and project folder; use them when available
@@ -116,8 +116,14 @@ if FORMAT:match("html") then
       local lang = m.lang and pandoc.utils.stringify(m.lang) or "en"
       english = lang:match("^en") ~= nil
     end,
+    -- Quarto also runs filters on a bare page title (for the menu): one short line, never linked
+    Pandoc = function(doc)
+      if #doc.blocks <= 1 and (not doc.blocks[1] or #doc.blocks[1].content <= 12) then english = false end
+    end,
   }, {
     traverse = "topdown",
+    -- page titles and other metadata (they also feed the menu) are never linked
+    Meta = function() return nil, false end,
     Header = function() return nil, false end,
     Link = function() return nil, false end,
     Code = function() return nil, false end,
@@ -127,7 +133,8 @@ if FORMAT:match("html") then
     CodeBlock = function() return nil, false end,
     Div = function(d) if skipped(d) then return nil, false end end,
     Span = function(s) if skipped(s) then return nil, false end end,
-    Inlines = function(inls) if english then return process(inls) end end,
+    -- only running paragraphs of text (Para); the menu and previous/next links are built from other blocks
+    Para = function(p) if english then p.content = process(p.content); return p end end,
   }}
 else
   return {}

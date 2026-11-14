@@ -19,9 +19,5 @@ Everything added or updated in the last three months, newest first.
 - [Oct 1]{.wn-date} [New]{.wn-tag .is-new} [[Matthew 24](chapters/matthew-24.qmd) and [25](chapters/matthew-25.qmd)]{.wn-what}
 - [Oct 1]{.wn-date} [New]{.wn-tag .is-new} [[Sample Article Title](articles/kt-sample-article-title.qmd)]{.wn-what}
 
-## August 2026
-
-- [Aug 12]{.wn-date} [New]{.wn-tag .is-new} [[Seek Righteousness—Why Important Now?](articles/sj-seek-righteousness-why-important-now.qmd)]{.wn-what}
-
 [auto-all-end]: #
 :::
